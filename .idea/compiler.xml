@@ -10,5 +10,9 @@
         <module name="highcare.main" />
       </profile>
     </annotationProcessing>
+<<<<<<< HEAD
+=======
+    <bytecodeTargetLevel target="11" />
+>>>>>>> kimng
   </component>
 </project>
