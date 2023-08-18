@@ -26,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 1. 토큰 풀기
         String jwt = tokenProvider.resolveToken(request);
-        log.info("[JwtTokenFilter] doFilterInternal jwt ==== {}", jwt);
+        log.info("[JwtFilter] doFilterInternal jwt ==== {}", jwt);
 
 
         // 2. 추출한 토큰의 유효성 검사 후 인증을 위해 Authentication 객체를 SecurityContextHolder에 담는다.

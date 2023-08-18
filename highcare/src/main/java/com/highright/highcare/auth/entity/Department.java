@@ -20,4 +20,11 @@ public class Department {
     @Column(name="NAME")
     private String deptName;
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "deptCode=" + deptCode +
+                ", deptName='" + deptName + '\'' +
+                '}';
+    }
 }

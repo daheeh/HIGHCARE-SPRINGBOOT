@@ -24,6 +24,13 @@ public class Employee {
     @JoinColumn(name="JOB_CODE")
     private Job jobCode;
 
-
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empNo=" + empNo +
+                ", name='" + name + '\'' +
+                ", deptCode=" + deptCode +
+                ", jobCode=" + jobCode +
+                '}';
+    }
 }

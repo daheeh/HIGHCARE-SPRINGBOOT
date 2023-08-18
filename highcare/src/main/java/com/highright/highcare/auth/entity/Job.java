@@ -19,4 +19,11 @@ public class Job {
     @Column(name="NAME")
     private String jobName;
 
+    @Override
+    public String toString() {
+        return "Job{" +
+                "jobCode=" + jobCode +
+                ", jobName='" + jobName + '\'' +
+                '}';
+    }
 }

@@ -25,7 +25,7 @@ public class ApprovalController {
 
 //    public ResponseEntity<ResponseDTO> insertApv(@ResponseBody ApvFormDTO apvFormDTO){
     public ResponseEntity<ResponseDTO> insertApv(ApvFormDTO apvFormDTO){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "서류 등록 성공", approvalService.insertApvForm(apvFormDTO)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "서류 등록 성공", approvalService.insertApvForm(apvFormDTO)));
 
 
     }

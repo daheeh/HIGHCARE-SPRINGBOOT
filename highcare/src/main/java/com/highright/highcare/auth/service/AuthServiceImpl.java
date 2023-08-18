@@ -38,11 +38,19 @@ public class AuthServiceImpl implements AuthService {
 
         // 비번 조회
         if(!passwordEncoder.matches(member.getPassword(), loginInfo.getPassword())){
-            // 비번 실패 예외
+        // 비번 실패 예외
         }
 
         // 성공시 token 발급
         LoginMemberDTO loginMemberDTO = modelMapper.map(member, LoginMemberDTO.class);
+        log.info("[AuthServiceImpl] login : loginMemberDTO======{}", loginMemberDTO);
+
+
+        loginMemberDTO.setEmpNo(member.getEmployee().getEmpNo());
+        loginMemberDTO.setName(member.getEmployee().getName());
+        loginMemberDTO.setDeptName(member.getEmployee().getDeptCode().getDeptName());
+        loginMemberDTO.setJobName(member.getEmployee().getJobCode().getJobName());
+
         TokenDTO token = tokenProvider.generateTokenDTO(loginMemberDTO);
 
         log.info("[AuthServiceImpl] login : token======{}", token);
@@ -58,6 +66,12 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public void refreshTokenSave(RefreshToken refreshToken) {
 
+        log.info("[AuthServiceImpl] refreshTokenSave : refreshToken ==== {}", refreshToken);
         refreshTokenRepository.save(refreshToken);
+
+
+        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user01"));
+        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user03"));
+        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user02"));
     }
 }
