@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b9bd601-0532-4c07-a151-956e2e2459e7" name="Changes" comment="apv DTO 루트 수정">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/controller/ApprovalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/controller/ApprovalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/http/approval.http" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/http/approval.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
