@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: C##HIGH
+    password: HIGH
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    resources:
+      static-locations: classpath:/images/
+  # redis cache config
+  redis:
+    host: localhost
+    port: 6379
+# jpa config
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    database: oracle
+    properties:
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate:
+        '[format_sql]': true
+# jwt secret key
+jwt:
+  secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
+  expire-time: 3600000 # 1시간(밀리초 단위)
+# logging config
+  logging:
+    level:
+      root: info
+image:
+  add-resource-locations: classpath:/static/images/
+  add-resource-handler: /images/**
+
+  image-dir: src/main/resources/static/images
+  image-url: http://localhost:8080/images/
+
