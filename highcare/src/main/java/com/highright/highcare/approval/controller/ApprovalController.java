@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/approval")
@@ -23,9 +21,10 @@ public class ApprovalController {
         this.approvalService = approvalService;
     }
 
-//    public ResponseEntity<ResponseDTO> insertApv(@ResponseBody ApvFormDTO apvFormDTO){
-    public ResponseEntity<ResponseDTO> insertApv(ApvFormDTO apvFormDTO){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "서류 등록 성공", approvalService.insertApvForm(apvFormDTO)));
+    @PostMapping("/insert")
+    public ResponseEntity<ResponseDTO> insertApv(@RequestBody ApvFormDTO apvFormDTO){
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
 
 
     }

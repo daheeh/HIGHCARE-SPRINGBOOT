@@ -14,6 +14,7 @@ public class ApvFormDTO {
     private Date writeDate;
     private String apvStatus;
     private char isUrgency;
+    private String category;
     private String contents1;
     private String contents2;
     private Number empNo;

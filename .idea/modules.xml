@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/highcare-springboot.iml" filepath="$PROJECT_DIR$/.idea/highcare-springboot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/highcare.main.iml" filepath="$PROJECT_DIR$/.idea/modules/highcare.main.iml" />
     </modules>
   </component>
 </project>
