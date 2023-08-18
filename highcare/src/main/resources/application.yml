@@ -29,9 +29,9 @@ spring:
       hibernate:
         '[format_sql]': true
 # jwt secret key
-  jwt:
-    secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
-
+jwt:
+  secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
+  expire-time: 3600000 # 1시간(밀리초 단위)
 # logging config
   logging:
     level:
@@ -42,3 +42,4 @@ image:
 
   image-dir: src/main/resources/static/images
   image-url: http://localhost:8080/images/
+
