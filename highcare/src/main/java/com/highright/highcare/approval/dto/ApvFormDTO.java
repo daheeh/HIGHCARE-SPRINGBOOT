@@ -7,7 +7,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-public class ApvForm {
+public class ApvFormDTO {
 
     private String apvNo;
     private String title;

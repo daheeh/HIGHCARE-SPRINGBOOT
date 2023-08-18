@@ -1,4 +1,4 @@
-package com.greedy.bootrestapi.config;
+package com.highright.highcare.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

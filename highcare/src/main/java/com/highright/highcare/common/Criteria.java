@@ -1,4 +1,4 @@
-package com.greedy.bootrestapi.common;
+package com.highright.highcare.common;
 
 
 import lombok.Getter;
