@@ -1,2 +1,10 @@
 ### 전자결재
-GET http://localhost:8002/
+GET http://localhost:8002//api/approval
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+{
+
+
+}
