@@ -1,4 +1,4 @@
-package com.highright.highcare.approval.dto;
+package com.highright.highcare.approval.entity;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @ToString
-public class ApvCorpCardDetailDTO {
+public class ApvCorpCardDetail {
 
     @Id
     @Column(name = "ITEMS_NO")

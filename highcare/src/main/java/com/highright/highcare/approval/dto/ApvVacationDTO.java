@@ -10,12 +10,12 @@ import java.sql.Time;
 @Getter
 @Setter
 @ToString
-public class ApvOvertimeDTO {
+public class ApvVacationDTO {
 
     private String apvNo;
-    private Date workingDate;
-    private Time startTime;
-    private Time endTime;
-    private String reason;
+    private Date startDate;
+    private Date endDate;
+    private String type;
+    private String comment;
 
 }

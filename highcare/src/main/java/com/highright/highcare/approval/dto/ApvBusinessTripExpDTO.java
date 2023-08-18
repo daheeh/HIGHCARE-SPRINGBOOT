@@ -9,11 +9,11 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-public class ApvBusinessTripDTO {
+public class ApvBusinessTripExpDTO {
 
     private String apvNo;
-    private String purpose;
-    private Date startDate;
-    private Date endDate;
-    private String location;
+    private Number location;
+    private Number personNum;
+    private String period;
+    private String refApvNo;
 }

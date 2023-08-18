@@ -1,4 +1,4 @@
-package com.highright.highcare.approval.dto;
+package com.highright.highcare.approval.entity;
 
 import lombok.*;
 
@@ -15,7 +15,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-public class ApvMeetingLogDTO {
+public class ApvMeetingLog {
 
     @Id
     @Column(name = "APV_NO")

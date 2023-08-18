@@ -5,10 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b9bd601-0532-4c07-a151-956e2e2459e7" name="Changes" comment="apv DTO 루트 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvBusinessTripDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvBusinessTripExpDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvCorpCardDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvCorpCardDetailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvExpenseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvExpenseDetailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvFamilyEventDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvFileDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvIssuanceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvLineDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvMeetingLogDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvOvertimeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvVacationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvBusinessTrip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvBusinessTripExp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvCorpCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvCorpCardDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvExpense.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvExpenseDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvFamilyEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvIssuance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvMeetingLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvOvertime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvVacation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/bin/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/controller/ApprovalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/controller/ApprovalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/dto/ApvFormDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/dto/ApvFormDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/entity/ApvForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/entity/ApvForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/jwt/JwtFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/jwt/JwtFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/http/approval.http" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/http/approval.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvFormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvFormDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/service/ApprovalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/service/ApprovalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/jwt/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/jwt/JwtFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +64,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="highcare" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -48,12 +92,32 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KIM/Desktop/교육/final/highcare-springboot/highcare/src/main/java/com/highright/highcare/common&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="ProjectId" id="2U9PPe427RWvqR6U6bFQLBZpvDR" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/KIM/Desktop/교육/final/highcare-springboot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.highright.highcare.approval.repository" />
@@ -63,10 +127,15 @@
       <recent name="C:\Users\KIM\Desktop\교육\final\highcare-springboot\highcare\src\main\java\com\highright\highcare\common" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.highright.highcare.approval.entity" />
+      <recent name="com.highright.highcare.approval.dto" />
       <recent name="com.highright.highcare.config" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.HighcareApplication">
+    <configuration name="approval | 기안 상신" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/approval.http" requestIdentifier="기안 상신" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="HighcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="highcare.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.HighcareApplication" />
@@ -74,7 +143,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.approval | 기안 상신" />
+      </list>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="apv DTO 루트 수정">
       <created>1692324477418</created>
@@ -83,8 +158,30 @@
       <option name="project" value="LOCAL" />
       <updated>1692324477418</updated>
     </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b9bd601-0532-4c07-a151-956e2e2459e7" name="Changes" comment="apv DTO 루트 수정" />
+      <created>1692348801435</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692348801435</updated>
+      <workItem from="1692348803013" duration="437000" />
+    </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="apv DTO 루트 수정" />

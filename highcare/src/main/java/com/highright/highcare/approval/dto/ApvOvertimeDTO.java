@@ -2,23 +2,20 @@ package com.highright.highcare.approval.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Date;
+import java.sql.Time;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class ApvMeetingLogDTO {
-
+public class ApvOvertimeDTO {
 
     private String apvNo;
-    private Date meetingDate;
-    private String location;
-    private char participants;
+    private Date workingDate;
+    private Time startTime;
+    private Time endTime;
+    private String reason;
 
 }

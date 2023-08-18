@@ -2,17 +2,20 @@ package com.highright.highcare.approval.dto;
 
 import lombok.*;
 
-import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class ApvCorpCardDTO {
+public class ApvCorpCardDetailDTO {
 
+    private String itemsNo;
     private String apvNo;
-    private String cardNo;
-    private Number paymentMonth;
+    private String details;
+    private String account;
+    private Number amount;
+    private String cardComment;
+
 
 }

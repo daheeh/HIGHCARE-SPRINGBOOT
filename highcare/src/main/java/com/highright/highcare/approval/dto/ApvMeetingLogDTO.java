@@ -2,17 +2,34 @@ package com.highright.highcare.approval.dto;
 
 import lombok.*;
 
+import java.sql.Date;
+import java.sql.Time;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class ApvLineDTO {
+public class ApvMeetingLogDTO {
 
-    private String apvLineNo;
-    private String degree;
-    private char isApproval;
+
     private String apvNo;
-    private String empNo;
+    private Date meetingDate;
+    private String location;
+    private char participants;
 
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Setter
+    @ToString
+    public static class ApvVacationDTO {
+
+        private String apvNo;
+        private Date workingDate;
+        private Time startTime;
+        private Time endTime;
+        private String reason;
+
+    }
 }
