@@ -4,26 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13f0a515-eebc-46ef-b12e-e7afef76b731" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/http/approval.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/entity/ApvForm.java" afterDir="false" />
+    <list default="true" id="2b9bd601-0532-4c07-a151-956e2e2459e7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/apvFormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvFormDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/dto/ApvFormDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/com/highright/highcare/approval/dto/ApvFormDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/apvFormDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/dto/ApvForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$/highcare">
-      <ProjectState />
-    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -50,76 +41,19 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2U6Rx9FDhrTSptgSv3nf8XuBPfv" />
-  <component name="ProjectViewState">
-    <option name="autoscrollFromSource" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KIM/Desktop/교육/final/highcare-springboot&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;4fa16f21e564532b0cb5825ea3a6a998&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
-    ]
-  }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.highright.highcare.approval.entity" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="HighcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="highcare.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.HighcareApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="13f0a515-eebc-46ef-b12e-e7afef76b731" name="Changes" comment="" />
-      <created>1692258288412</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1692258288412</updated>
-      <workItem from="1692258290002" duration="2578000" />
-      <workItem from="1692261342581" duration="1782000" />
-      <workItem from="1692319156422" duration="210000" />
-    </task>
-    <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <servers />
   </component>
 </project>
