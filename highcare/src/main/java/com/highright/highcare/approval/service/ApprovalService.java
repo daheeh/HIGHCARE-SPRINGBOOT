@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class ApprovalService {
@@ -27,14 +30,23 @@ public class ApprovalService {
     public Object insertApvForm(ApvFormDTO apvFormDTO) {
         log.info("[ApprovalService] insertApvForm --------------- start ");
 
-        int result = 0;
+        try {
+            ApvForm insertApvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+            approvalRepository.save(insertApvForm);
+            log.info("[ApprovalService] insertApvForm --------------- end ");
+            return "기안 상신 성공";
+        } catch (Exception e){
+            log.error("[ApprovalService] Error insertApvForm : " + e.getMessage());
+            return "기안 상신 실패";
+        }
+    }
 
-        ApvForm insertApvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-        approvalRepository.save(insertApvForm);
-        result = 1;
+    public List<ApvFormDTO> selectWriteApvList(int empNo) {
+        log.info("[ApprovalService] selectWriteApvList --------------- start ");
 
+        List<ApvForm> writeApvList = approvalRepository.findByEmpNo(empNo);
 
-        log.info("[ApprovalService] insertApvForm --------------- end ");
-        return (result > 0)? "기안 상신 성공" : "기안 상신 실패";
+        log.info("[ApprovalService] selectWriteApvList --------------- end ");
+        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
     }
 }
