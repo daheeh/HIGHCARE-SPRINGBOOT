@@ -27,16 +27,11 @@ public class LoginMemberDTO implements UserDetails {
 
     private List<AuthAccountDTO> roleList;
 
-    private String role;
-
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(roleList.toString().split(","))
+        return roleList.stream().map(role -> role.getAuthCode()).distinct()
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
-
 
     @Override
     public String getUsername() {
@@ -72,7 +67,7 @@ public class LoginMemberDTO implements UserDetails {
     @Builder
     public LoginMemberDTO(int empNo, String id, String name, String password,
                           String deptName, String jobName,
-                          List<AuthAccountDTO> roleList, String role) {
+                          List<AuthAccountDTO> roleList) {
         this.empNo = empNo;
         this.id = id;
         Name = name;
@@ -80,6 +75,5 @@ public class LoginMemberDTO implements UserDetails {
         this.deptName = deptName;
         this.jobName = jobName;
         this.roleList = roleList;
-        this.role = role;
     }
 }

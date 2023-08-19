@@ -42,13 +42,14 @@ public class TokenProvider {
         log.info("[TokenProvider] generateTokenDTO : loginMemberDTO === {}", loginMemberDTO);
 
         // 멤버 권한이름 추출
-        List<String> roles = new ArrayList<>();
-        loginMemberDTO.getRoleList().forEach(role -> roles.add(role.getAuthCode()));
-        log.info("[TokenProvider] generateTokenDTO : roles === {}", roles);
+//        List<String> roles = new ArrayList<>();
+//        loginMemberDTO.getAuthorities().forEach(role -> roles.add(role.getAuthCode()));
+        log.info("[TokenProvider] generateTokenDTO : roles === {}", loginMemberDTO.getAuthorities());
 
         // 클레임 설정(회원아이디, 권한, 부서, 직급)
-        Claims claims = Jwts.claims().setSubject(loginMemberDTO.getId());
-        claims.put(AUTHORITIES_KEY, roles); // "auth" - "roles"
+        Claims claims = Jwts.claims().setSubject(loginMemberDTO.getUsername()); // id
+        claims.put(AUTHORITIES_KEY, loginMemberDTO.getAuthorities()); // "auth" - "roles"
+        claims.put("name", loginMemberDTO.getName());
         claims.put("dept", loginMemberDTO.getDeptName());
         claims.put("job", loginMemberDTO.getJobName());
 

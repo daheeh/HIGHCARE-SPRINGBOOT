@@ -25,7 +25,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="highcare" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -35,8 +40,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -53,7 +58,7 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/KIM/Desktop/교육/final/highcare-springboot/highcare/src/main/java/com/highright/highcare/common&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.highright.highcare.approval.repository" />
@@ -63,10 +68,15 @@
       <recent name="C:\Users\KIM\Desktop\교육\final\highcare-springboot\highcare\src\main\java\com\highright\highcare\common" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.highright.highcare.approval.entity" />
+      <recent name="com.highright.highcare.approval.dto" />
       <recent name="com.highright.highcare.config" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.HighcareApplication">
+    <configuration name="approval | 기안 상신" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/approval.http" requestIdentifier="기안 상신" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="HighcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="highcare.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.HighcareApplication" />
@@ -74,7 +84,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.approval | 기안 상신" />
+      </list>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="apv DTO 루트 수정">
       <created>1692324477418</created>

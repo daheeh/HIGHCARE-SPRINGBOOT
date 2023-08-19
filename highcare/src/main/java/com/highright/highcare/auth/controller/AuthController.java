@@ -22,6 +22,7 @@ public class AuthController {
     public ResponseEntity<ResponseDTO> Login(@RequestBody LoginMemberDTO loginMemberDTO){
         log.info("[AuthController] Login : loginMemberDTO ==== {}", loginMemberDTO);
 
+
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "로그인 성공", authService.login(loginMemberDTO)));
     }
 
