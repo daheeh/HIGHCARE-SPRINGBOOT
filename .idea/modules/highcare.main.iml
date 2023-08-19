@@ -21,6 +21,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-rest:2.7.14" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:2.7.14" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web-services:2.7.14" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-websocket:2.7.14" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.7.14" level="project" />
     <orderEntry type="library" name="Gradle: org.modelmapper:modelmapper:3.1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-security:2.7.14" level="project" />
@@ -43,6 +44,8 @@
     <orderEntry type="library" name="Gradle: com.sun.xml.messaging.saaj:saaj-impl:1.5.3" level="project" />
     <orderEntry type="library" name="Gradle: jakarta.xml.ws:jakarta.xml.ws-api:2.3.3" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-oxm:5.3.29" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-websocket:5.3.29" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-messaging:5.3.29" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-json:2.7.14" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:2.7.14" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-webmvc:5.3.29" level="project" />
