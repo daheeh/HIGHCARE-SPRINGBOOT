@@ -43,6 +43,6 @@ public class ApvForm {
     private String contents2;
 
     @Column(name = "EMP_NO")
-    private Number empNo;
+    private int empNo;
 
 }

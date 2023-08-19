@@ -17,5 +17,5 @@ public class ApvFormDTO {
     private String category;
     private String contents1;
     private String contents2;
-    private Number empNo;
+    private int empNo;
 }
