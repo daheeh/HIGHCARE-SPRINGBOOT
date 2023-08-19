@@ -6,25 +6,7 @@
       <ServerVersion>18.0.0.0.0</ServerVersion>
       <TablespacesHash>4375590714</TablespacesHash>
     </root>
-    <schema id="2" parent="1" name="ANONYMOUS">
-      <ObjectId>62</ObjectId>
-    </schema>
-    <schema id="3" parent="1" name="APPQOSSYS">
-      <ObjectId>54</ObjectId>
-    </schema>
-    <schema id="4" parent="1" name="AUDSYS">
-      <ObjectId>8</ObjectId>
-    </schema>
-    <schema id="5" parent="1" name="C##BOOT_AUTH">
-      <ObjectId>104</ObjectId>
-    </schema>
-    <schema id="6" parent="1" name="C##EMPLOYEE">
-      <ObjectId>103</ObjectId>
-    </schema>
-    <schema id="7" parent="1" name="C##GREEDY">
-      <ObjectId>102</ObjectId>
-    </schema>
-    <schema id="8" parent="1" name="C##HIGHCARE">
+    <schema id="2" parent="1" name="C##HIGHCARE">
       <CommentsHash>16870562484459</CommentsHash>
       <CreatedTimestamp>2023-08-19.00:49:54</CreatedTimestamp>
       <Current>1</Current>
@@ -35,113 +17,131 @@
       <ModifiedTimestamp>2023-08-19.00:50:09</ModifiedTimestamp>
       <ObjectId>112</ObjectId>
     </schema>
-    <schema id="9" parent="1" name="C##NIBBLE">
-      <ObjectId>105</ObjectId>
+    <schema id="3" parent="1" name="PUBLIC">
+      <ObjectId>1</ObjectId>
     </schema>
-    <schema id="10" parent="1" name="C##OHGI">
-      <ObjectId>107</ObjectId>
+    <schema id="4" parent="1" name="SYS">
+      <ObjectId>0</ObjectId>
     </schema>
-    <schema id="11" parent="1" name="C##SPRING">
-      <ObjectId>101</ObjectId>
+    <schema id="5" parent="1" name="AUDSYS">
+      <ObjectId>8</ObjectId>
     </schema>
-    <schema id="12" parent="1" name="C##USERS">
-      <ObjectId>106</ObjectId>
+    <schema id="6" parent="1" name="SYSTEM">
+      <ObjectId>9</ObjectId>
     </schema>
-    <schema id="13" parent="1" name="CTXSYS">
-      <ObjectId>82</ObjectId>
+    <schema id="7" parent="1" name="OUTLN">
+      <ObjectId>13</ObjectId>
     </schema>
-    <schema id="14" parent="1" name="DBSFWUSER">
+    <schema id="8" parent="1" name="GSMADMIN_INTERNAL">
+      <ObjectId>21</ObjectId>
+    </schema>
+    <schema id="9" parent="1" name="GSMUSER">
+      <ObjectId>22</ObjectId>
+    </schema>
+    <schema id="10" parent="1" name="DIP">
+      <ObjectId>23</ObjectId>
+    </schema>
+    <schema id="11" parent="1" name="REMOTE_SCHEDULER_AGENT">
+      <ObjectId>34</ObjectId>
+    </schema>
+    <schema id="12" parent="1" name="DBSFWUSER">
       <ObjectId>35</ObjectId>
+    </schema>
+    <schema id="13" parent="1" name="ORACLE_OCM">
+      <ObjectId>39</ObjectId>
+    </schema>
+    <schema id="14" parent="1" name="SYS$UMF">
+      <ObjectId>46</ObjectId>
     </schema>
     <schema id="15" parent="1" name="DBSNMP">
       <ObjectId>53</ObjectId>
     </schema>
-    <schema id="16" parent="1" name="DIP">
-      <ObjectId>23</ObjectId>
+    <schema id="16" parent="1" name="APPQOSSYS">
+      <ObjectId>54</ObjectId>
     </schema>
-    <schema id="17" parent="1" name="DVF">
-      <ObjectId>98</ObjectId>
-    </schema>
-    <schema id="18" parent="1" name="DVSYS">
-      <ObjectId>1279990</ObjectId>
-    </schema>
-    <schema id="19" parent="1" name="GGSYS">
-      <ObjectId>59</ObjectId>
-    </schema>
-    <schema id="20" parent="1" name="GSMADMIN_INTERNAL">
-      <ObjectId>21</ObjectId>
-    </schema>
-    <schema id="21" parent="1" name="GSMCATUSER">
+    <schema id="17" parent="1" name="GSMCATUSER">
       <ObjectId>58</ObjectId>
     </schema>
-    <schema id="22" parent="1" name="GSMUSER">
-      <ObjectId>22</ObjectId>
+    <schema id="18" parent="1" name="GGSYS">
+      <ObjectId>59</ObjectId>
     </schema>
-    <schema id="23" parent="1" name="LBACSYS">
-      <ObjectId>96</ObjectId>
+    <schema id="19" parent="1" name="XDB">
+      <ObjectId>61</ObjectId>
     </schema>
-    <schema id="24" parent="1" name="MDDATA">
-      <ObjectId>94</ObjectId>
+    <schema id="20" parent="1" name="ANONYMOUS">
+      <ObjectId>62</ObjectId>
     </schema>
-    <schema id="25" parent="1" name="MDSYS">
-      <ObjectId>88</ObjectId>
-    </schema>
-    <schema id="26" parent="1" name="OJVMSYS">
-      <ObjectId>80</ObjectId>
-    </schema>
-    <schema id="27" parent="1" name="OLAPSYS">
-      <ObjectId>91</ObjectId>
-    </schema>
-    <schema id="28" parent="1" name="ORACLE_OCM">
-      <ObjectId>39</ObjectId>
-    </schema>
-    <schema id="29" parent="1" name="ORDDATA">
-      <ObjectId>85</ObjectId>
-    </schema>
-    <schema id="30" parent="1" name="ORDPLUGINS">
-      <ObjectId>86</ObjectId>
-    </schema>
-    <schema id="31" parent="1" name="ORDSYS">
-      <ObjectId>84</ObjectId>
-    </schema>
-    <schema id="32" parent="1" name="OUTLN">
-      <ObjectId>13</ObjectId>
-    </schema>
-    <schema id="33" parent="1" name="PUBLIC">
-      <ObjectId>1</ObjectId>
-    </schema>
-    <schema id="34" parent="1" name="REMOTE_SCHEDULER_AGENT">
-      <ObjectId>34</ObjectId>
-    </schema>
-    <schema id="35" parent="1" name="SI_INFORMTN_SCHEMA">
-      <ObjectId>87</ObjectId>
-    </schema>
-    <schema id="36" parent="1" name="SYS">
-      <ObjectId>0</ObjectId>
-    </schema>
-    <schema id="37" parent="1" name="SYS$UMF">
-      <ObjectId>46</ObjectId>
-    </schema>
-    <schema id="38" parent="1" name="SYSBACKUP">
-      <ObjectId>2147483617</ObjectId>
-    </schema>
-    <schema id="39" parent="1" name="SYSDG">
-      <ObjectId>2147483618</ObjectId>
-    </schema>
-    <schema id="40" parent="1" name="SYSKM">
-      <ObjectId>2147483619</ObjectId>
-    </schema>
-    <schema id="41" parent="1" name="SYSRAC">
-      <ObjectId>2147483620</ObjectId>
-    </schema>
-    <schema id="42" parent="1" name="SYSTEM">
-      <ObjectId>9</ObjectId>
-    </schema>
-    <schema id="43" parent="1" name="WMSYS">
+    <schema id="21" parent="1" name="WMSYS">
       <ObjectId>71</ObjectId>
     </schema>
-    <schema id="44" parent="1" name="XDB">
-      <ObjectId>61</ObjectId>
+    <schema id="22" parent="1" name="OJVMSYS">
+      <ObjectId>80</ObjectId>
+    </schema>
+    <schema id="23" parent="1" name="CTXSYS">
+      <ObjectId>82</ObjectId>
+    </schema>
+    <schema id="24" parent="1" name="ORDSYS">
+      <ObjectId>84</ObjectId>
+    </schema>
+    <schema id="25" parent="1" name="ORDDATA">
+      <ObjectId>85</ObjectId>
+    </schema>
+    <schema id="26" parent="1" name="ORDPLUGINS">
+      <ObjectId>86</ObjectId>
+    </schema>
+    <schema id="27" parent="1" name="SI_INFORMTN_SCHEMA">
+      <ObjectId>87</ObjectId>
+    </schema>
+    <schema id="28" parent="1" name="MDSYS">
+      <ObjectId>88</ObjectId>
+    </schema>
+    <schema id="29" parent="1" name="OLAPSYS">
+      <ObjectId>91</ObjectId>
+    </schema>
+    <schema id="30" parent="1" name="MDDATA">
+      <ObjectId>94</ObjectId>
+    </schema>
+    <schema id="31" parent="1" name="LBACSYS">
+      <ObjectId>96</ObjectId>
+    </schema>
+    <schema id="32" parent="1" name="DVF">
+      <ObjectId>98</ObjectId>
+    </schema>
+    <schema id="33" parent="1" name="C##SPRING">
+      <ObjectId>101</ObjectId>
+    </schema>
+    <schema id="34" parent="1" name="C##GREEDY">
+      <ObjectId>102</ObjectId>
+    </schema>
+    <schema id="35" parent="1" name="C##EMPLOYEE">
+      <ObjectId>103</ObjectId>
+    </schema>
+    <schema id="36" parent="1" name="C##BOOT_AUTH">
+      <ObjectId>104</ObjectId>
+    </schema>
+    <schema id="37" parent="1" name="C##NIBBLE">
+      <ObjectId>105</ObjectId>
+    </schema>
+    <schema id="38" parent="1" name="C##USERS">
+      <ObjectId>106</ObjectId>
+    </schema>
+    <schema id="39" parent="1" name="C##OHGI">
+      <ObjectId>107</ObjectId>
+    </schema>
+    <schema id="40" parent="1" name="DVSYS">
+      <ObjectId>1279990</ObjectId>
+    </schema>
+    <schema id="41" parent="1" name="SYSBACKUP">
+      <ObjectId>2147483617</ObjectId>
+    </schema>
+    <schema id="42" parent="1" name="SYSDG">
+      <ObjectId>2147483618</ObjectId>
+    </schema>
+    <schema id="43" parent="1" name="SYSKM">
+      <ObjectId>2147483619</ObjectId>
+    </schema>
+    <schema id="44" parent="1" name="SYSRAC">
+      <ObjectId>2147483620</ObjectId>
     </schema>
     <schema id="45" parent="1" name="XS$NULL">
       <ObjectId>2147483638</ObjectId>
@@ -161,138 +161,138 @@
       <Logging>1</Logging>
       <Status>E</Status>
     </tablespace>
-    <user id="48" parent="1" name="ANONYMOUS">
-      <ObjectId>62</ObjectId>
-    </user>
-    <user id="49" parent="1" name="APPQOSSYS">
-      <ObjectId>54</ObjectId>
-    </user>
-    <user id="50" parent="1" name="AUDSYS">
-      <ObjectId>8</ObjectId>
-    </user>
-    <user id="51" parent="1" name="C##BOOT_AUTH">
-      <ObjectId>104</ObjectId>
-    </user>
-    <user id="52" parent="1" name="C##EMPLOYEE">
-      <ObjectId>103</ObjectId>
-    </user>
-    <user id="53" parent="1" name="C##GREEDY">
-      <ObjectId>102</ObjectId>
-    </user>
-    <user id="54" parent="1" name="C##HIGHCARE">
+    <user id="48" parent="1" name="C##HIGHCARE">
       <ObjectId>112</ObjectId>
       <DefaultTablespaceName>USERS</DefaultTablespaceName>
       <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
-    <user id="55" parent="1" name="C##NIBBLE">
-      <ObjectId>105</ObjectId>
-    </user>
-    <user id="56" parent="1" name="C##OHGI">
-      <ObjectId>107</ObjectId>
-    </user>
-    <user id="57" parent="1" name="C##SPRING">
-      <ObjectId>101</ObjectId>
-    </user>
-    <user id="58" parent="1" name="C##USERS">
-      <ObjectId>106</ObjectId>
-    </user>
-    <user id="59" parent="1" name="CTXSYS">
-      <ObjectId>82</ObjectId>
-    </user>
-    <user id="60" parent="1" name="DBSFWUSER">
-      <ObjectId>35</ObjectId>
-    </user>
-    <user id="61" parent="1" name="DBSNMP">
-      <ObjectId>53</ObjectId>
-    </user>
-    <user id="62" parent="1" name="DIP">
-      <ObjectId>23</ObjectId>
-    </user>
-    <user id="63" parent="1" name="DVF">
-      <ObjectId>98</ObjectId>
-    </user>
-    <user id="64" parent="1" name="DVSYS">
-      <ObjectId>1279990</ObjectId>
-    </user>
-    <user id="65" parent="1" name="GGSYS">
-      <ObjectId>59</ObjectId>
-    </user>
-    <user id="66" parent="1" name="GSMADMIN_INTERNAL">
-      <ObjectId>21</ObjectId>
-    </user>
-    <user id="67" parent="1" name="GSMCATUSER">
-      <ObjectId>58</ObjectId>
-    </user>
-    <user id="68" parent="1" name="GSMUSER">
-      <ObjectId>22</ObjectId>
-    </user>
-    <user id="69" parent="1" name="LBACSYS">
-      <ObjectId>96</ObjectId>
-    </user>
-    <user id="70" parent="1" name="MDDATA">
-      <ObjectId>94</ObjectId>
-    </user>
-    <user id="71" parent="1" name="MDSYS">
-      <ObjectId>88</ObjectId>
-    </user>
-    <user id="72" parent="1" name="OJVMSYS">
-      <ObjectId>80</ObjectId>
-    </user>
-    <user id="73" parent="1" name="OLAPSYS">
-      <ObjectId>91</ObjectId>
-    </user>
-    <user id="74" parent="1" name="ORACLE_OCM">
-      <ObjectId>39</ObjectId>
-    </user>
-    <user id="75" parent="1" name="ORDDATA">
-      <ObjectId>85</ObjectId>
-    </user>
-    <user id="76" parent="1" name="ORDPLUGINS">
-      <ObjectId>86</ObjectId>
-    </user>
-    <user id="77" parent="1" name="ORDSYS">
-      <ObjectId>84</ObjectId>
-    </user>
-    <user id="78" parent="1" name="OUTLN">
-      <ObjectId>13</ObjectId>
-    </user>
-    <user id="79" parent="1" name="REMOTE_SCHEDULER_AGENT">
-      <ObjectId>34</ObjectId>
-    </user>
-    <user id="80" parent="1" name="SI_INFORMTN_SCHEMA">
-      <ObjectId>87</ObjectId>
-    </user>
-    <user id="81" parent="1" name="SYS">
+    <user id="49" parent="1" name="SYS">
       <ObjectId>0</ObjectId>
     </user>
-    <user id="82" parent="1" name="SYS$UMF">
-      <ObjectId>46</ObjectId>
+    <user id="50" parent="1" name="AUDSYS">
+      <ObjectId>8</ObjectId>
     </user>
-    <user id="83" parent="1" name="SYSBACKUP">
-      <ObjectId>2147483617</ObjectId>
-    </user>
-    <user id="84" parent="1" name="SYSDG">
-      <ObjectId>2147483618</ObjectId>
-    </user>
-    <user id="85" parent="1" name="SYSKM">
-      <ObjectId>2147483619</ObjectId>
-    </user>
-    <user id="86" parent="1" name="SYSRAC">
-      <ObjectId>2147483620</ObjectId>
-    </user>
-    <user id="87" parent="1" name="SYSTEM">
+    <user id="51" parent="1" name="SYSTEM">
       <ObjectId>9</ObjectId>
     </user>
-    <user id="88" parent="1" name="WMSYS">
+    <user id="52" parent="1" name="OUTLN">
+      <ObjectId>13</ObjectId>
+    </user>
+    <user id="53" parent="1" name="GSMADMIN_INTERNAL">
+      <ObjectId>21</ObjectId>
+    </user>
+    <user id="54" parent="1" name="GSMUSER">
+      <ObjectId>22</ObjectId>
+    </user>
+    <user id="55" parent="1" name="DIP">
+      <ObjectId>23</ObjectId>
+    </user>
+    <user id="56" parent="1" name="REMOTE_SCHEDULER_AGENT">
+      <ObjectId>34</ObjectId>
+    </user>
+    <user id="57" parent="1" name="DBSFWUSER">
+      <ObjectId>35</ObjectId>
+    </user>
+    <user id="58" parent="1" name="ORACLE_OCM">
+      <ObjectId>39</ObjectId>
+    </user>
+    <user id="59" parent="1" name="SYS$UMF">
+      <ObjectId>46</ObjectId>
+    </user>
+    <user id="60" parent="1" name="DBSNMP">
+      <ObjectId>53</ObjectId>
+    </user>
+    <user id="61" parent="1" name="APPQOSSYS">
+      <ObjectId>54</ObjectId>
+    </user>
+    <user id="62" parent="1" name="GSMCATUSER">
+      <ObjectId>58</ObjectId>
+    </user>
+    <user id="63" parent="1" name="GGSYS">
+      <ObjectId>59</ObjectId>
+    </user>
+    <user id="64" parent="1" name="XDB">
+      <ObjectId>61</ObjectId>
+    </user>
+    <user id="65" parent="1" name="ANONYMOUS">
+      <ObjectId>62</ObjectId>
+    </user>
+    <user id="66" parent="1" name="WMSYS">
       <ObjectId>71</ObjectId>
     </user>
-    <user id="89" parent="1" name="XDB">
-      <ObjectId>61</ObjectId>
+    <user id="67" parent="1" name="OJVMSYS">
+      <ObjectId>80</ObjectId>
+    </user>
+    <user id="68" parent="1" name="CTXSYS">
+      <ObjectId>82</ObjectId>
+    </user>
+    <user id="69" parent="1" name="ORDSYS">
+      <ObjectId>84</ObjectId>
+    </user>
+    <user id="70" parent="1" name="ORDDATA">
+      <ObjectId>85</ObjectId>
+    </user>
+    <user id="71" parent="1" name="ORDPLUGINS">
+      <ObjectId>86</ObjectId>
+    </user>
+    <user id="72" parent="1" name="SI_INFORMTN_SCHEMA">
+      <ObjectId>87</ObjectId>
+    </user>
+    <user id="73" parent="1" name="MDSYS">
+      <ObjectId>88</ObjectId>
+    </user>
+    <user id="74" parent="1" name="OLAPSYS">
+      <ObjectId>91</ObjectId>
+    </user>
+    <user id="75" parent="1" name="MDDATA">
+      <ObjectId>94</ObjectId>
+    </user>
+    <user id="76" parent="1" name="LBACSYS">
+      <ObjectId>96</ObjectId>
+    </user>
+    <user id="77" parent="1" name="DVF">
+      <ObjectId>98</ObjectId>
+    </user>
+    <user id="78" parent="1" name="C##SPRING">
+      <ObjectId>101</ObjectId>
+    </user>
+    <user id="79" parent="1" name="C##GREEDY">
+      <ObjectId>102</ObjectId>
+    </user>
+    <user id="80" parent="1" name="C##EMPLOYEE">
+      <ObjectId>103</ObjectId>
+    </user>
+    <user id="81" parent="1" name="C##BOOT_AUTH">
+      <ObjectId>104</ObjectId>
+    </user>
+    <user id="82" parent="1" name="C##NIBBLE">
+      <ObjectId>105</ObjectId>
+    </user>
+    <user id="83" parent="1" name="C##USERS">
+      <ObjectId>106</ObjectId>
+    </user>
+    <user id="84" parent="1" name="C##OHGI">
+      <ObjectId>107</ObjectId>
+    </user>
+    <user id="85" parent="1" name="DVSYS">
+      <ObjectId>1279990</ObjectId>
+    </user>
+    <user id="86" parent="1" name="SYSBACKUP">
+      <ObjectId>2147483617</ObjectId>
+    </user>
+    <user id="87" parent="1" name="SYSDG">
+      <ObjectId>2147483618</ObjectId>
+    </user>
+    <user id="88" parent="1" name="SYSKM">
+      <ObjectId>2147483619</ObjectId>
+    </user>
+    <user id="89" parent="1" name="SYSRAC">
+      <ObjectId>2147483620</ObjectId>
     </user>
     <user id="90" parent="1" name="XS$NULL">
       <ObjectId>2147483638</ObjectId>
     </user>
-    <table id="91" parent="8" name="TBL_ACCESS_MANAGER">
+    <table id="91" parent="2" name="TBL_ACCESS_MANAGER">
       <Comment>접속관리</Comment>
       <CreatedTimestamp>2023-08-19.00:49:54</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -300,7 +300,7 @@
       <ObjectId>80840</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="92" parent="8" name="TBL_ACCOUNT">
+    <table id="92" parent="2" name="TBL_ACCOUNT">
       <Comment>일반계정</Comment>
       <CreatedTimestamp>2023-08-19.00:49:55</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -308,7 +308,7 @@
       <ObjectId>80842</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="93" parent="8" name="TBL_ACCOUNT_OAUTH">
+    <table id="93" parent="2" name="TBL_ACCOUNT_OAUTH">
       <Comment>OAUTH계정</Comment>
       <CreatedTimestamp>2023-08-19.00:49:55</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -316,7 +316,7 @@
       <ObjectId>80844</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="94" parent="8" name="TBL_ANNUAL">
+    <table id="94" parent="2" name="TBL_ANNUAL">
       <Comment>연차조회</Comment>
       <CreatedTimestamp>2023-08-19.00:49:55</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -324,7 +324,7 @@
       <ObjectId>80846</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="95" parent="8" name="TBL_APV_BUSINESS_TRIP">
+    <table id="95" parent="2" name="TBL_APV_BUSINESS_TRIP">
       <Comment>출장신청서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:56</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -332,7 +332,7 @@
       <ObjectId>80848</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="96" parent="8" name="TBL_APV_BUSINESS_TRIP_EXP">
+    <table id="96" parent="2" name="TBL_APV_BUSINESS_TRIP_EXP">
       <Comment>출장경비신청서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:56</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -340,7 +340,7 @@
       <ObjectId>80850</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="97" parent="8" name="TBL_APV_CORPORATE_CARD">
+    <table id="97" parent="2" name="TBL_APV_CORPORATE_CARD">
       <Comment>법인카드사용보고서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:56</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -348,7 +348,7 @@
       <ObjectId>80852</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="98" parent="8" name="TBL_APV_CORPORATE_CARD_DETAIL">
+    <table id="98" parent="2" name="TBL_APV_CORPORATE_CARD_DETAIL">
       <Comment>법인카드사용상세내역</Comment>
       <CreatedTimestamp>2023-08-19.00:49:56</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -356,7 +356,7 @@
       <ObjectId>80854</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="99" parent="8" name="TBL_APV_EXPENSE">
+    <table id="99" parent="2" name="TBL_APV_EXPENSE">
       <Comment>지출결의서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:57</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -364,7 +364,7 @@
       <ObjectId>80856</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="100" parent="8" name="TBL_APV_EXPENSE_DETAIL">
+    <table id="100" parent="2" name="TBL_APV_EXPENSE_DETAIL">
       <Comment>지출결의서상세내역</Comment>
       <CreatedTimestamp>2023-08-19.00:49:57</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -372,7 +372,7 @@
       <ObjectId>80858</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="101" parent="8" name="TBL_APV_FAMILY_EVENT">
+    <table id="101" parent="2" name="TBL_APV_FAMILY_EVENT">
       <Comment>경조금신청서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:57</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -380,7 +380,7 @@
       <ObjectId>80860</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="102" parent="8" name="TBL_APV_FILE">
+    <table id="102" parent="2" name="TBL_APV_FILE">
       <Comment>첨부파일</Comment>
       <CreatedTimestamp>2023-08-19.00:49:58</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -388,7 +388,7 @@
       <ObjectId>80862</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="103" parent="8" name="TBL_APV_FORM">
+    <table id="103" parent="2" name="TBL_APV_FORM">
       <Comment>대표결재서식</Comment>
       <CreatedTimestamp>2023-08-19.00:49:58</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -396,7 +396,7 @@
       <ObjectId>80864</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="104" parent="8" name="TBL_APV_ISSUANCE">
+    <table id="104" parent="2" name="TBL_APV_ISSUANCE">
       <Comment>서류발급신청서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:58</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -404,7 +404,7 @@
       <ObjectId>80866</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="105" parent="8" name="TBL_APV_LINE">
+    <table id="105" parent="2" name="TBL_APV_LINE">
       <Comment>결재라인</Comment>
       <CreatedTimestamp>2023-08-19.00:49:59</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -412,7 +412,7 @@
       <ObjectId>80868</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="106" parent="8" name="TBL_APV_MEETINGLOG">
+    <table id="106" parent="2" name="TBL_APV_MEETINGLOG">
       <Comment>회의록</Comment>
       <CreatedTimestamp>2023-08-19.00:49:59</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -420,7 +420,7 @@
       <ObjectId>80870</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="107" parent="8" name="TBL_APV_OVERTIME">
+    <table id="107" parent="2" name="TBL_APV_OVERTIME">
       <Comment>연장근무신청서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:59</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -428,7 +428,7 @@
       <ObjectId>80872</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="108" parent="8" name="TBL_APV_VACATION">
+    <table id="108" parent="2" name="TBL_APV_VACATION">
       <Comment>연차신청서</Comment>
       <CreatedTimestamp>2023-08-19.00:49:59</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -436,7 +436,7 @@
       <ObjectId>80874</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="109" parent="8" name="TBL_AUTH">
+    <table id="109" parent="2" name="TBL_AUTH">
       <Comment>권한</Comment>
       <CreatedTimestamp>2023-08-19.00:50:00</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -444,7 +444,7 @@
       <ObjectId>80876</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="110" parent="8" name="TBL_AUTH_ACCOUNT">
+    <table id="110" parent="2" name="TBL_AUTH_ACCOUNT">
       <Comment>계정별권한</Comment>
       <CreatedTimestamp>2023-08-19.00:50:00</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -452,7 +452,7 @@
       <ObjectId>80878</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="111" parent="8" name="TBL_AUTH_TOKEN">
+    <table id="111" parent="2" name="TBL_AUTH_TOKEN">
       <Comment>인증토큰</Comment>
       <CreatedTimestamp>2023-08-19.00:50:00</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -460,7 +460,7 @@
       <ObjectId>80880</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="112" parent="8" name="TBL_BSCD">
+    <table id="112" parent="2" name="TBL_BSCD">
       <Comment>명함수집</Comment>
       <CreatedTimestamp>2023-08-19.00:50:00</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -468,7 +468,7 @@
       <ObjectId>80882</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="113" parent="8" name="TBL_BSNS_LOG">
+    <table id="113" parent="2" name="TBL_BSNS_LOG">
       <Comment>업무일지</Comment>
       <CreatedTimestamp>2023-08-19.00:50:01</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -476,7 +476,7 @@
       <ObjectId>80884</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="114" parent="8" name="TBL_BULLETIN_BOARD">
+    <table id="114" parent="2" name="TBL_BULLETIN_BOARD">
       <Comment>게시판</Comment>
       <CreatedTimestamp>2023-08-19.00:50:01</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -484,7 +484,7 @@
       <ObjectId>80886</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="115" parent="8" name="TBL_BULLETIN_CATEGORIES">
+    <table id="115" parent="2" name="TBL_BULLETIN_CATEGORIES">
       <Comment>게시판 카테고리</Comment>
       <CreatedTimestamp>2023-08-19.00:50:01</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -492,7 +492,7 @@
       <ObjectId>80890</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="116" parent="8" name="TBL_BULLETIN_FILE">
+    <table id="116" parent="2" name="TBL_BULLETIN_FILE">
       <Comment>게시판 파일</Comment>
       <CreatedTimestamp>2023-08-19.00:50:01</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -500,7 +500,7 @@
       <ObjectId>80892</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="117" parent="8" name="TBL_CALENDER">
+    <table id="117" parent="2" name="TBL_CALENDER">
       <Comment>캘린더</Comment>
       <CreatedTimestamp>2023-08-19.00:50:02</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -508,7 +508,7 @@
       <ObjectId>80894</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="118" parent="8" name="TBL_CAREER">
+    <table id="118" parent="2" name="TBL_CAREER">
       <Comment>경력사항</Comment>
       <CreatedTimestamp>2023-08-19.00:50:02</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -516,7 +516,7 @@
       <ObjectId>80896</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="119" parent="8" name="TBL_CERTIFICATION">
+    <table id="119" parent="2" name="TBL_CERTIFICATION">
       <Comment>자격증</Comment>
       <CreatedTimestamp>2023-08-19.00:50:02</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -524,7 +524,7 @@
       <ObjectId>80898</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="120" parent="8" name="TBL_CHANGE_PASSWORD">
+    <table id="120" parent="2" name="TBL_CHANGE_PASSWORD">
       <Comment>비밀번호변경이력</Comment>
       <CreatedTimestamp>2023-08-19.00:50:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -532,7 +532,7 @@
       <ObjectId>80900</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="121" parent="8" name="TBL_CHATROOMS">
+    <table id="121" parent="2" name="TBL_CHATROOMS">
       <Comment>채팅방</Comment>
       <CreatedTimestamp>2023-08-19.00:50:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -540,7 +540,7 @@
       <ObjectId>80904</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="122" parent="8" name="TBL_CHAT_MESSAGE">
+    <table id="122" parent="2" name="TBL_CHAT_MESSAGE">
       <Comment>채팅메세지</Comment>
       <CreatedTimestamp>2023-08-19.00:50:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -548,7 +548,7 @@
       <ObjectId>80902</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="123" parent="8" name="TBL_CNS_LOG">
+    <table id="123" parent="2" name="TBL_CNS_LOG">
       <Comment>상담일지</Comment>
       <CreatedTimestamp>2023-08-19.00:50:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -556,7 +556,7 @@
       <ObjectId>80906</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="124" parent="8" name="TBL_COMMENT">
+    <table id="124" parent="2" name="TBL_COMMENT">
       <Comment>댓글</Comment>
       <CreatedTimestamp>2023-08-19.00:50:04</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -564,7 +564,7 @@
       <ObjectId>80908</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="125" parent="8" name="TBL_DEPARTMENT">
+    <table id="125" parent="2" name="TBL_DEPARTMENT">
       <Comment>부서</Comment>
       <CreatedTimestamp>2023-08-19.00:50:04</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -572,7 +572,7 @@
       <ObjectId>80910</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="126" parent="8" name="TBL_EMPLOYEE">
+    <table id="126" parent="2" name="TBL_EMPLOYEE">
       <Comment>사원</Comment>
       <CreatedTimestamp>2023-08-19.00:50:04</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -580,7 +580,7 @@
       <ObjectId>80912</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="127" parent="8" name="TBL_JOB">
+    <table id="127" parent="2" name="TBL_JOB">
       <Comment>직급</Comment>
       <CreatedTimestamp>2023-08-19.00:50:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -588,7 +588,7 @@
       <ObjectId>80914</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="128" parent="8" name="TBL_LIST">
+    <table id="128" parent="2" name="TBL_LIST">
       <Comment>참석자리스트</Comment>
       <CreatedTimestamp>2023-08-19.00:50:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -596,7 +596,7 @@
       <ObjectId>80916</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="129" parent="8" name="TBL_LOGIN_FAIL">
+    <table id="129" parent="2" name="TBL_LOGIN_FAIL">
       <Comment>로그인실패</Comment>
       <CreatedTimestamp>2023-08-19.00:50:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -604,7 +604,7 @@
       <ObjectId>80918</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="130" parent="8" name="TBL_LOGIN_HISTORY">
+    <table id="130" parent="2" name="TBL_LOGIN_HISTORY">
       <Comment>로그인</Comment>
       <CreatedTimestamp>2023-08-19.00:50:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -612,7 +612,7 @@
       <ObjectId>80920</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="131" parent="8" name="TBL_MANAGEMENT">
+    <table id="131" parent="2" name="TBL_MANAGEMENT">
       <Comment>근태관리</Comment>
       <CreatedTimestamp>2023-08-19.00:50:06</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -620,7 +620,7 @@
       <ObjectId>80922</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="132" parent="8" name="TBL_MENU">
+    <table id="132" parent="2" name="TBL_MENU">
       <Comment>접근메뉴</Comment>
       <CreatedTimestamp>2023-08-19.00:50:06</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -628,7 +628,7 @@
       <ObjectId>80924</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="133" parent="8" name="TBL_MENU_GROUP">
+    <table id="133" parent="2" name="TBL_MENU_GROUP">
       <Comment>메뉴그룹</Comment>
       <CreatedTimestamp>2023-08-19.00:50:06</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -636,7 +636,7 @@
       <ObjectId>80926</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="134" parent="8" name="TBL_MILITARY">
+    <table id="134" parent="2" name="TBL_MILITARY">
       <Comment>병역</Comment>
       <CreatedTimestamp>2023-08-19.00:50:06</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -644,7 +644,7 @@
       <ObjectId>80928</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="135" parent="8" name="TBL_NOTE_BOX">
+    <table id="135" parent="2" name="TBL_NOTE_BOX">
       <Comment>쪽지함</Comment>
       <CreatedTimestamp>2023-08-19.00:50:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -652,7 +652,7 @@
       <ObjectId>80930</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="136" parent="8" name="TBL_NOTE_MESSAGE">
+    <table id="136" parent="2" name="TBL_NOTE_MESSAGE">
       <Comment>쪽지메세지</Comment>
       <CreatedTimestamp>2023-08-19.00:50:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -660,7 +660,7 @@
       <ObjectId>80932</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="137" parent="8" name="TBL_OFFICIAL_LETTER">
+    <table id="137" parent="2" name="TBL_OFFICIAL_LETTER">
       <Comment>공문</Comment>
       <CreatedTimestamp>2023-08-19.00:50:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -668,7 +668,7 @@
       <ObjectId>80934</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="138" parent="8" name="TBL_PROFILE">
+    <table id="138" parent="2" name="TBL_PROFILE">
       <Comment>프로필</Comment>
       <CreatedTimestamp>2023-08-19.00:50:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -676,7 +676,7 @@
       <ObjectId>80936</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="139" parent="8" name="TBL_PROFILE_FILE">
+    <table id="139" parent="2" name="TBL_PROFILE_FILE">
       <Comment>프로필사진파일</Comment>
       <CreatedTimestamp>2023-08-19.00:50:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -684,7 +684,7 @@
       <ObjectId>80938</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="140" parent="8" name="TBL_RESOURCE">
+    <table id="140" parent="2" name="TBL_RESOURCE">
       <Comment>자원</Comment>
       <CreatedTimestamp>2023-08-19.00:50:08</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -692,7 +692,7 @@
       <ObjectId>80940</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="141" parent="8" name="TBL_RESOURCE_CATEGORY">
+    <table id="141" parent="2" name="TBL_RESOURCE_CATEGORY">
       <Comment>자원 카테고리</Comment>
       <CreatedTimestamp>2023-08-19.00:50:08</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -700,7 +700,7 @@
       <ObjectId>80944</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="142" parent="8" name="TBL_RESOURCE_FILE">
+    <table id="142" parent="2" name="TBL_RESOURCE_FILE">
       <Comment>자원파일</Comment>
       <CreatedTimestamp>2023-08-19.00:50:08</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -708,7 +708,7 @@
       <ObjectId>80946</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="143" parent="8" name="TBL_RESOURCE_RESERVATION_STATUS">
+    <table id="143" parent="2" name="TBL_RESOURCE_RESERVATION_STATUS">
       <Comment>자원예약현황</Comment>
       <CreatedTimestamp>2023-08-19.00:50:09</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -716,7 +716,7 @@
       <ObjectId>80948</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="144" parent="8" name="TBL_WORK">
+    <table id="144" parent="2" name="TBL_WORK">
       <Comment>업무 일정 관리</Comment>
       <CreatedTimestamp>2023-08-19.00:50:09</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
