@@ -5,11 +5,11 @@ import com.highright.highcare.jwt.JwtAuthenticationEntryPoint;
 import com.highright.highcare.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -31,6 +31,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     // 시큐리티 설정무시 정적 리소스 빈 등록
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
@@ -50,13 +51,17 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                .antMatchers("/api/**").authenticated()
-//                .antMatchers("/api/v0/**").permitAll() // v0 모든 접근 허용 (로그인창)
-//                .antMatchers("/api/v1/**").hasAnyRole("USER", "MANAGER", "ADMIN") // v1: 일반 회원 이상 접근 가능
-//                .antMatchers("/api/v2/**").hasRole("MANAGER")   // v2: 매니저- 각 부서 부장급 접근 가능
-//                .antMatchers("/api/v3/**").hasRole("ADMIN")    // v3: 관리자 - 시스템운영담당자만 접근 가능
+                .antMatchers("/api/**").permitAll() //
+//                .antMatchers("/api/approval/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
+//                .antMatchers("/api/approval/regist").hasRole("MANAGER")   // 매니저- 각 부서 부장급 접근 가능
+//                .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
                 .anyRequest().permitAll()   // 테스트 후 삭제
-                .and()
+            .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+                .cors()
+            .and()
                 .apply(new JwtSecurityConfig(tokenProvider)) // jwt시큐리티설정파일 적용하기
                 ;
                 // oauth2 추가하기
@@ -74,7 +79,7 @@ public class SecurityConfig {
         config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE"));
         config.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-type"
                 , "Access-Control-Allow-Headers", "Authorization"
-                , "X-Requested-With"));
+                , "X-Requested-With", " application/json"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 
