@@ -55,7 +55,20 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 조회 성공" , writeApvList));
     }
 
+    @GetMapping("/write")
+    public ResponseEntity<ResponseDTO> selectWriteApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus){
+        List<ApvFormDTO> writeApvStatusApvList = approvalService.selectWriteApvStatusApvList(empNo, apvStatus);
 
+        if(writeApvStatusApvList.isEmpty()){
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , writeApvStatusApvList));
+    }
 
 
 }

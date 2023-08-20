@@ -84,4 +84,12 @@ public class ApprovalService {
     }
 
 
+    public List<ApvFormDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
+        log.info("[ApprovalService] selectWriteCategoryApvList --------------- start ");
+
+        List<ApvForm> writeApvList = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+
+        log.info("[ApprovalService] selectWriteCategoryApvList --------------- end ");
+        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+    }
 }

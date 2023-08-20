@@ -10,7 +10,5 @@ import java.util.List;
 public interface ApprovalRepository extends JpaRepository<ApvForm, Long> {
 
     List<ApvForm> findByEmpNo(int empNo);
-
-    @Query(value = "SELECT SEQ_APV_NO.NEXTVAL FROM DUAL", nativeQuery = true)
-    Long getNextApvNo();
+    List<ApvForm> findByEmpNoAndApvStatus(int empNo, String apvStatus);
 }

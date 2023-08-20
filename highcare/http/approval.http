@@ -7,17 +7,13 @@ Access-Control-Allow-Origin: *
 {
   "title": "타이틀",
   "writeDate": "2023-08-18",
-  "apvStatus": "진행중",
+  "apvStatus": "결재완료",
   "isUrgency": "F",
   "category": "인사",
   "contents1": "내용1",
   "contents2": "내용2",
   "empNo": 999999
 }
-
-### 상신 기안 조회
-GET http://localhost:8080/api/approval/write/999999
-Accept: */*
 
 ### 지출결의서 상신
 POST http://localhost:8080/api/approval/insert/exp1
@@ -29,10 +25,10 @@ Access-Control-Allow-Origin: *
 
   "title": "타이틀",
   "writeDate": "2023-08-18",
-  "apvStatus": "진행중",
+  "apvStatus": "결재진행중",
   "isUrgency": "F",
   "category": "지출",
-  "empNo": 999999,
+  "empNo": 888888,
   "apvExpForms": [
     {
     "requestDate": "2023-08-20",
@@ -58,3 +54,16 @@ Access-Control-Allow-Origin: *
     }
   ]
 }
+
+
+### 상신 기안 조회
+GET http://localhost:8080/api/approval/write/999999
+Accept: */*
+
+### 상신 기안 조회 (진행 상태)
+GET http://localhost:8080/api/approval/write?empNo=999999&apvStatus=결재완료
+Accept: */*
+
+### 상신 기안 조회 (카테고리)
+GET http://localhost:8080/api/approval/write/999999?인사
+Accept: */*
