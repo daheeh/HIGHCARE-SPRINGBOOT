@@ -1,22 +1,23 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.approval.entity.ApvForm;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
-
 @Entity
-@Table(name = "TBL_APV_EXPENSE_DETAIL")
+@Table(name = "TBL_APV_EXPFORM")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @SequenceGenerator(
         name = "SEQ_APV_ITEMS",
         sequenceName = "SEQ_APV_ITEMS",
         initialValue = 1, allocationSize = 1
 )
-public class ApvExpenseDetail {
+public class ApvExpForm {
 
     @Id
     @Column(name = "ITEMS_NO")
@@ -26,9 +27,20 @@ public class ApvExpenseDetail {
     )
     private Long itemsNo;
 
-    @ManyToOne
-    @JoinColumn(name = "APV_NO")
-    private ApvExpense apvExpense;
+    @Column(name = "REQUEST_DATE")
+    private Date requestDate;
+
+    @Column(name = "PAYEE")
+    private String payee;
+
+    @Column(name = "BANK")
+    private String bank;
+
+    @Column(name = "ACCOUNTHOLDER")
+    private String accountHolder;
+
+    @Column(name = "ACCOUNNUMBER")
+    private String accountNumber;
 
     @Column(name = "DETAILS")
     private String details;
@@ -42,4 +54,7 @@ public class ApvExpenseDetail {
     @Column(name = "EXP_COMMENT")
     private String comment;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private ApvForm apvForm;
 }

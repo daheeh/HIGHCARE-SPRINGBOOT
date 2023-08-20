@@ -31,6 +31,14 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
     }
 
+    @PostMapping("/insert/exp1")
+    public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormDTO apvFormDTO){
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormDTO)));
+    }
+
 
     @GetMapping("/write/{empNo}")
     public ResponseEntity<ResponseDTO> selectWriteApv(@PathVariable int empNo){

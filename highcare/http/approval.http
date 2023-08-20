@@ -1,11 +1,10 @@
-### 기안 상신
+### 기안 상신 - 기본 테스트
 POST http://localhost:8080/api/approval/insert
 Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
 
 {
-  "apvNo": "0003",
   "title": "타이틀",
   "writeDate": "2023-08-18",
   "apvStatus": "진행중",
@@ -20,3 +19,42 @@ Access-Control-Allow-Origin: *
 GET http://localhost:8080/api/approval/write/999999
 Accept: */*
 
+### 지출결의서 상신
+POST http://localhost:8080/api/approval/insert/exp1
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+{
+
+  "title": "타이틀",
+  "writeDate": "2023-08-18",
+  "apvStatus": "진행중",
+  "isUrgency": "F",
+  "category": "지출",
+  "empNo": 999999,
+  "apvExpForms": [
+    {
+    "requestDate": "2023-08-20",
+    "payee": "김나경",
+    "bank": "우리은행",
+    "accountHolder": "김나경",
+    "accountNumber": "111-111-1111",
+    "details": "책상",
+    "account": "비품",
+    "amount": 1,
+    "comment": "첫구매"
+    },
+    {
+      "requestDate": "2023-08-20",
+      "payee": "김나경",
+      "bank": "우리은행",
+      "accountHolder": "김나경",
+      "accountNumber": "111-111-1111",
+      "details": "의자",
+      "account": "비품",
+      "amount": 1,
+      "comment": "첫구매"
+    }
+  ]
+}

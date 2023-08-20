@@ -1,6 +1,7 @@
 package com.highright.highcare.approval.dto;
 import lombok.*;
 import java.sql.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -9,7 +10,7 @@ import java.sql.Date;
 @ToString
 public class ApvFormDTO {
 
-    private String apvNo;
+    private Long apvNo;
     private String title;
     private Date writeDate;
     private String apvStatus;
@@ -18,4 +19,6 @@ public class ApvFormDTO {
     private String contents1;
     private String contents2;
     private int empNo;
+    private List<ApvExpFormDTO> apvExpForms;
+
 }

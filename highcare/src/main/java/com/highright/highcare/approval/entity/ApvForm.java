@@ -1,12 +1,15 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.approval.dto.ApvExpenseDTO;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_APV_FORM")
@@ -15,11 +18,20 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(
+        name = "APV_SEQ_NO",
+        sequenceName = "SEQ_APV_NO",
+        initialValue = 1, allocationSize = 1
+)
 public class ApvForm {
 
     @Id
     @Column(name = "APV_NO")
-    private String apvNo;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "APV_SEQ_NO"
+    )
+    private Long apvNo;
 
     @Column(name = "TITLE")
     private String title;
@@ -44,5 +56,12 @@ public class ApvForm {
 
     @Column(name = "EMP_NO")
     private int empNo;
+
+//    @OneToOne(mappedBy = "apvForm", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+//    @Where(clause = "category = '지출'")
+//    private ApvExpense apvExpense;
+
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvExpForm> apvExpForms = new ArrayList<>();
 
 }
