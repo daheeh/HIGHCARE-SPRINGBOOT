@@ -10,7 +10,7 @@ public class HighcareApplication {
 		// 그룹웨어 어플리케이션 실행
 		SpringApplication.run(HighcareApplication.class, args);
 		// 웹소켓 어플리케이션 실행
-		WebSocketApplication.main(new String[]{});
+//		WebSocketApplication.main(new String[]{});
 	}
 
 }

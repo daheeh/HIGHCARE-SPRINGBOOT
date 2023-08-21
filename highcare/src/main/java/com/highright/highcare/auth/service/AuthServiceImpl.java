@@ -25,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final TokenProvider tokenProvider;
-    private final RefreshTokenRepository refreshTokenRepository;
+//    private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
     public Object login(LoginMemberDTO loginInfo) {
@@ -56,22 +56,22 @@ public class AuthServiceImpl implements AuthService {
         log.info("[AuthServiceImpl] login : token======{}", token);
 
         // 리프레시토큰 레디스에 id와 저장
-        refreshTokenSave(new RefreshToken(token.getId(), token.getRefreshToken()));
+//        refreshTokenSave(new RefreshToken(token.getId(), token.getRefreshToken()));
 
         // 토큰 발급 실패 처리
 
         return token;
     }
 
-    @Transactional
-    public void refreshTokenSave(RefreshToken refreshToken) {
-
-        log.info("[AuthServiceImpl] refreshTokenSave : refreshToken ==== {}", refreshToken);
-        refreshTokenRepository.save(refreshToken);
-
-
-        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user01"));
-        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user03"));
-        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user02"));
-    }
+//    @Transactional
+//    public void refreshTokenSave(RefreshToken refreshToken) {
+//
+//        log.info("[AuthServiceImpl] refreshTokenSave : refreshToken ==== {}", refreshToken);
+//        refreshTokenRepository.save(refreshToken);
+//
+//
+//        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user01"));
+//        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user03"));
+//        log.info("refreshTokenRepository===== {}", refreshTokenRepository.findById("user02"));
+//    }
 }
