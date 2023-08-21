@@ -8,14 +8,13 @@ import java.sql.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class ApvExpenseDetailDTO {
 
     private String itemsNo;
-    private String apvNo;
+    private Long apvNo;
     private String details;
     private String account;
-    private Number amount;
+    private int amount;
     private String comment;
 
 

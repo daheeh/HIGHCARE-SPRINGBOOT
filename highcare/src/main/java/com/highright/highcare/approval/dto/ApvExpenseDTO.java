@@ -7,20 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class ApvExpenseDTO {
 
-    private String apvNo;
+    private Long apvNo;
     private Date requestDate;
     private String payee;
     private String bank;
     private String accountHolder;
     private String accountNumber;
+    private List<ApvExpenseDetailDTO> expenseDetails;
 
 
 }

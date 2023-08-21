@@ -46,6 +46,7 @@ dependencies {
 
 	// security 관련
 	implementation group: 'com.google.guava', name: 'guava', version: '32.0.1-jre'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 	// 파일업로드
 	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
@@ -54,7 +55,7 @@ dependencies {
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.14'
 
 
-	compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 

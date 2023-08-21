@@ -2,10 +2,7 @@ package com.highright.highcare.approval.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -14,15 +11,24 @@ import java.sql.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@SequenceGenerator(
+        name = "SEQ_APV_ITEMS",
+        sequenceName = "SEQ_APV_ITEMS",
+        initialValue = 1, allocationSize = 1
+)
 public class ApvExpenseDetail {
 
     @Id
     @Column(name = "ITEMS_NO")
-    private String itemsNo;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_APV_ITEMS"
+    )
+    private Long itemsNo;
 
-    @Column(name = "APV_NO")
-    private String apvNo;
+    @ManyToOne
+    @JoinColumn(name = "APV_NO")
+    private ApvExpense apvExpense;
 
     @Column(name = "DETAILS")
     private String details;
@@ -31,7 +37,7 @@ public class ApvExpenseDetail {
     private String account;
 
     @Column(name = "AMOUNT")
-    private Number amount;
+    private int amount;
 
     @Column(name = "EXP_COMMENT")
     private String comment;
