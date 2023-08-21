@@ -51,11 +51,11 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/api/**").permitAll() //
-//                .antMatchers("/api/approval/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
+                .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
 //                .antMatchers("/api/approval/regist").hasRole("MANAGER")   // 매니저- 각 부서 부장급 접근 가능
-//                .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
-                .anyRequest().permitAll()   // 테스트 후 삭제
+//                .antMatchers("/api/approval/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
+//                .antMatchers("/api/**").permitAll()
+// .anyRequest().permitAll()   // 테스트 후 삭제
             .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -65,9 +65,7 @@ public class SecurityConfig {
                 .apply(new JwtSecurityConfig(tokenProvider)) // jwt시큐리티설정파일 적용하기
                 ;
                 // oauth2 추가하기
-
         return http.build();
-
     }
 
     // cors config

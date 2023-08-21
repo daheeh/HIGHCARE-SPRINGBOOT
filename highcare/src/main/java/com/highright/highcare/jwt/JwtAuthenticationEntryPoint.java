@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// 로그인실패 -- 이력관리
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
@@ -16,5 +17,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             , AuthenticationException authException) throws IOException, ServletException {
 
         response.sendError(HttpServletResponse.SC_FORBIDDEN); // 인가되지 않았을 때 403
+
     }
 }
+

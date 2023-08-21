@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="TBL_EMPLOYEE")
 @Getter
-public class Employee {
+public class ADMEmployee {
 
     @Id
     @Column(name="EMP_NO")
@@ -18,11 +18,11 @@ public class Employee {
 
     @OneToOne
     @JoinColumn(name="DEPT_CODE")
-    private Department deptCode;
+    private ADMDepartment deptCode;
 
     @OneToOne
     @JoinColumn(name="JOB_CODE")
-    private Job jobCode;
+    private ADMJob jobCode;
 
     @Override
     public String toString() {

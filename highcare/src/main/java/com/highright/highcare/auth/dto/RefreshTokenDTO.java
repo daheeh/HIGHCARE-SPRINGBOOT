@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@Builder
 public class RefreshTokenDTO {
 
     private String id;                  // 회원아이디

@@ -8,22 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TBL_JOB")
+@Table(name="TBL_DEPARTMENT")
 @Getter
-public class Job {
+public class ADMDepartment {
 
     @Id
-    @Column(name="JOB_CODE")
-    private int jobCode;
+    @Column(name="DEPT_CODE")
+    private int deptCode;
 
     @Column(name="NAME")
-    private String jobName;
+    private String deptName;
 
     @Override
     public String toString() {
-        return "Job{" +
-                "jobCode=" + jobCode +
-                ", jobName='" + jobName + '\'' +
+        return "Department{" +
+                "deptCode=" + deptCode +
+                ", deptName='" + deptName + '\'' +
                 '}';
     }
 }

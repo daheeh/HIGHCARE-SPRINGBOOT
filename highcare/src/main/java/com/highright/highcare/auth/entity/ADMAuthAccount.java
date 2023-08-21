@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class AuthAccount implements Serializable {
+public class ADMAuthAccount implements Serializable {
 
     private static final long serialVersionUID = 1L; // 추가
 

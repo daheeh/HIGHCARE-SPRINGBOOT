@@ -1,18 +1,16 @@
 package com.highright.highcare.auth.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 @AllArgsConstructor
 @Setter
 @Getter
-@RedisHash(value="id", timeToLive = 60)     // 60초임 test
+@RedisHash(value="id", timeToLive = 600)     // 10분 test
 @ToString
-public class RefreshToken {
+@Builder
+public class ADMRefreshToken {
 
     @Id
     private String id;
