@@ -5,6 +5,7 @@ import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
+import com.highright.highcare.pm.entity.PmEmployee;
 import com.highright.highcare.pm.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -38,31 +39,34 @@ public class PmEmployeeContorller {
         pagingResponseDTO.setData(employeeService.selectEmployeeAllList(cri));
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 
-        List<PmEmployeeDTO> employeeallList = employeeService.selectEmployeeList(offset);
-
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  employeeService.selectEmployeeList(offset)));
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공", employeeService.selectEmployeeAllList()));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
     }
 
-
+    //쿼리메소드에있는 내용만 바꾸면 된다..
     // 사원 상세조회
-    @GetMapping("/add")
+    @GetMapping("/search")
     public ResponseEntity<ResponseDTO> selectEmployeeList(
-            @RequestParam(name = "offset",defaultValue = "1", required = false) String offset){
+            @RequestParam(name = "offset",defaultValue = "1", required = false) String offset, String empName){
         log.info("offset===================> {}", offset);
-//        int total = employeeService.selectEmployeeList();
+        log.info("empName==============> {}", empName);
+
+        int total = employeeService.selectEmployeeTotal(empName); // 조건을 추가
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+        cri.setSearchValue(empName);
+
+        List<PmEmployeeDTO> employeeList = employeeService.selectEmployeeSearchList(cri, empName);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(employeeList);
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공", employeeService.selectEmployeeList(offset)));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",pagingResponseDTO));
+
+
     }
 
-
-//    @RequestMapping("/pm")
-//    public String pmMain(){
-//        log.info("pm main");
-//        return "pmMain";
-//    }
 }

@@ -1,9 +1,12 @@
 package com.highright.highcare.pm.entity;
 
+import com.highright.highcare.pm.entity.PmDepartment;
 import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -51,6 +54,9 @@ public class PmEmployee {
 
     @Column(name = "DEPT_CODE")
     private int deptCode;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="parent")
+//    private PmDepartment deptCode;
 
     @Column(name = "JOB_CODE")
     private int jobCode;
@@ -64,6 +70,8 @@ public class PmEmployee {
     @Column(name = "TELEPHONE")
     private String telephone;
 
+//    @OneToMany(mappedBy = "parent")
+//    private List<PmEmployee> children = new ArrayList<>();
 //    @Id
 //    @GeneratedValue
 //    @Column(name="emp_No")

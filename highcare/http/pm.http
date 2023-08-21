@@ -5,7 +5,10 @@ Accept: */*
 
 
 ### 사원 상세 조회
-GET http://localhost:8080/api/pm/add?offset=1
+GET http://localhost:8080/api/pm/search
 Content-Type: application/json
 Accept: */*
 
+{
+  "empName": "전아림"
+}
