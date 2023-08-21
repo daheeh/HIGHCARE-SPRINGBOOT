@@ -1,13 +1,11 @@
 package com.highright.highcare.pm.repository;
 
-import com.highright.highcare.auth.entity.Employee;
 import com.highright.highcare.pm.entity.PmEmployee;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 //@Repository
@@ -16,7 +14,22 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
 
 //    List<PmEmployee> findByemployee(String y);
 
-    List<PmEmployee> findByEmpNo(String empNo);
+    /* 사원 전체 조회 */
+    List<PmEmployee> findAll();
+
+    /* 사원 상세 조회 */
+    List<PmEmployee> findByEmpNo(Integer empNo);
+
+
+//    List<PmEmployee> findByIsResignation(String n);
+    List<PmEmployee> findByIsResignation(char isResignation);
+
+    Page<PmEmployee> findByIsResignation(char n, Pageable paging);
+
+
+
+
+//    List<PmEmployee> findByAll();
 
 
 //    List<Employee> findByEmployee(String y);

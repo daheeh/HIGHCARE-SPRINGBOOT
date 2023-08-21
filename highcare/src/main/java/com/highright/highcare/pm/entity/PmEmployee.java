@@ -19,7 +19,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
-public abstract class PmEmployee {
+public class PmEmployee {
     @Id
     @Column(name = "EMP_NO")
     @GeneratedValue(

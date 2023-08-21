@@ -1,3 +1,11 @@
-### 사원조회
-GET http://localhost:8080/api/pm/add?offset=1
+### 사원 전체 조회
+GET http://localhost:8080/api/pm/all?offset=2
+Content-Type: application/json
 Accept: */*
+
+
+### 사원 상세 조회
+GET http://localhost:8080/api/pm/add?offset=1
+Content-Type: application/json
+Accept: */*
+
