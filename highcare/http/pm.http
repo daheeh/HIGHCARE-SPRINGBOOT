@@ -1,5 +1,5 @@
 ### 사원 전체 조회
-GET http://localhost:8080/api/pm/all?offset=2
+GET http://localhost:8080/api/pm/all?offset=1
 Content-Type: application/json
 Accept: */*
 
@@ -12,3 +12,29 @@ Accept: */*
 {
   "empName": "전아림"
 }
+
+### 사원 등록
+POST http://localhost:8080/api/pm/all
+Content-Type: application/json; boundary=WebAppBoundary
+Accept: */*
+
+{
+  "empName" : "사계절",
+  "empEmail" : "aa@masda.com",
+  "phone" : "010-1321-4564",
+  "residentNo" : "1321546-5464578",
+  "startDate" : "2023-08-22",
+  "endDate" : null,
+  "isResignation" : "N",
+  "deptCode" : 1,
+  "jobCode" : 2,
+  "address" : "서울시",
+  "education" : "종로대학교",
+  "telephone" : "013-2441-6454"
+}
+
+
+### 부서조회
+GET http://localhost:8080/api/pm/department
+Content-Type: application/json
+Accept: */*

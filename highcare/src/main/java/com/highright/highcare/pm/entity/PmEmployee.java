@@ -21,7 +21,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class PmEmployee {
     @Id
     @Column(name = "EMP_NO")
@@ -53,12 +52,16 @@ public class PmEmployee {
     private char isResignation;
 
     @Column(name = "DEPT_CODE")
-    private int deptCode;
+    private Integer deptCode;
+
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="parent")
+//    @JoinColumn(name="DEPT_CODE")
 //    private PmDepartment deptCode;
 
-    @Column(name = "JOB_CODE")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "JOB_CODE")
+//    private PmJob jobCode;
+    @Column(name="JOB_CODE")
     private int jobCode;
 
     @Column(name = "ADDRESS")

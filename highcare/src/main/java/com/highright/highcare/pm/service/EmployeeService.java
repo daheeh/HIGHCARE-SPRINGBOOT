@@ -1,20 +1,21 @@
 package com.highright.highcare.pm.service;
 
 import com.highright.highcare.common.Criteria;
-import com.highright.highcare.common.ResponseDTO;
+import com.highright.highcare.pm.dto.PmDepartmentResult;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.PmEmployee;
 import com.highright.highcare.pm.repository.EmployeeRepository;
+import com.highright.highcare.pm.repository.PmDepartmentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.xml.ws.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,10 +29,13 @@ public class EmployeeService {
 
     private final ModelMapper modelMapper;
 
+    private final PmDepartmentRepository pmDepartmentRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper) {
+
+    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper, PmDepartmentRepository pmDepartmentRepository) {
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
+        this.pmDepartmentRepository = pmDepartmentRepository;
     }
 
     public int selectEmployeeTotal() {
@@ -98,6 +102,39 @@ public class EmployeeService {
 
         return employeedetailList;
     }
+
+    /* 사원 등록 */
+    @Transactional
+    public String insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO) {
+        log.info("insertPmEmployee start==================");
+        log.info("insertPmEmployee pmEmployeeDTO ================== " + pmEmployeeDTO );
+
+        int result = 0;
+
+        try {
+            PmEmployee insertPmEmployee = modelMapper.map(pmEmployeeDTO, PmEmployee.class);
+            employeeRepository.save(insertPmEmployee);
+
+            result = 1;
+        }catch (Exception e){
+            System.out.println("check");
+            throw new RuntimeException(e);
+        }
+
+        log.info("insertpmEmployee ============================end");
+        return (result > 0)? "사원 등록 성공": "사원 등록 실패";
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<PmDepartmentResult> getPmDepartmentList() {
+
+
+        List<PmDepartmentResult> results = pmDepartmentRepository.findAll().stream().map(PmDepartmentResult::of).collect(Collectors.toList());
+        return results;
+    }
+
+//    @Transactional(rollbackFor = Exception.class)
+//    public List<>
 
 
 

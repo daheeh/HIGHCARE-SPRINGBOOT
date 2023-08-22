@@ -48,7 +48,7 @@ public class PmEmployeeContorller {
     // 사원 상세조회
     @GetMapping("/search")
     public ResponseEntity<ResponseDTO> selectEmployeeList(
-            @RequestParam(name = "offset",defaultValue = "1", required = false) String offset, String empName){
+            @RequestParam(name = "offset",defaultValue = "1", required = false) String offset, @RequestBody String empName){
         log.info("offset===================> {}", offset);
         log.info("empName==============> {}", empName);
 
@@ -66,7 +66,21 @@ public class PmEmployeeContorller {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",pagingResponseDTO));
 
-
     }
+
+    /* 사원 등록 */
+    @PostMapping("/all")
+    public ResponseEntity<ResponseDTO> insertPmEmployee(@RequestBody PmEmployeeDTO pmEmployeeDTO){
+        log.info("inserPmEmployee=========================>", pmEmployeeDTO);
+        return ResponseEntity.ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(),"사원 등록 성공",
+                        employeeService.insertPmEmployee(pmEmployeeDTO)));
+    }
+
+    @GetMapping("/department")
+    public ResponseEntity<?> getPmDepartmentList() {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"부서 조회 성공", employeeService.getPmDepartmentList()));
+    }
+
 
 }

@@ -10,4 +10,6 @@ public class JobDTO {
 
     private int jobCode;
     private String name;
+    private int upperJobCode;
+    private String upperJobName;
 }

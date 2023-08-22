@@ -6,11 +6,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 //@Repository
 //@RequiredArgsConstructor
 public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
+
 
 //    List<PmEmployee> findByemployee(String y);
 
@@ -32,6 +34,10 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
 
     Page<PmEmployee> findByEmpName(String search, Pageable paging);
 
+//    /* 조직도 */
+//    public List<PmEmployee> findAll() {
+//        return EmployeeRepository.
+//    }
 
 //    List<PmEmployee> findByAll();
 

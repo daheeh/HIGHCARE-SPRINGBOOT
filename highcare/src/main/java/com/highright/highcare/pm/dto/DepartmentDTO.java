@@ -13,4 +13,6 @@ public class DepartmentDTO {
     private String tel;
     private String upperName;
     private int upperCode;
+
+
 }
