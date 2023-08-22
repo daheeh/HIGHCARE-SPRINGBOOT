@@ -33,8 +33,9 @@ public class AuthController {
     }
 
     @GetMapping("/reissue")
-    public ResponseEntity<ResponseDTO> Reissue(HttpServletRequest request){
+    public ResponseEntity<ResponseDTO> Reissue(HttpServletRequest request, @RequestParam String id){
         log.info("[AuthController] Reissue ===== {}", "컨트롤러 접근");
+        log.info("[AuthController] Reissue ===== id {}", id);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "엑세스토큰 재발급 성공", authService.reIssueToken(request)));

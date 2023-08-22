@@ -5,8 +5,8 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:XE
-    username: C##HIGHCARE
-    password: HIGHCARE
+    username: C##HIGH
+    password: HIGH
   servlet:
     multipart:
       enabled: true
@@ -15,6 +15,13 @@ spring:
   web:
     resources:
       static-locations: classpath:/images/
+  # cookie
+  server:
+    servlet:
+      session:
+        cookie:
+          same-site: none
+          secure: true
   # redis cache config
   redis:
     host: localhost
@@ -33,7 +40,7 @@ spring:
 # jwt secret key
 jwt:
   secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
-  expire-time: 300000 # 5분(밀리초 단위)
+  expire-time: 100000 # (밀리초 단위)
 
   # logging config
   logging:

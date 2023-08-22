@@ -51,10 +51,10 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
-//                .antMatchers("/api/approval/regist").hasRole("MANAGER")   // 매니저- 각 부서 부장급 접근 가능
-//                .antMatchers("/api/approval/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
-//                .antMatchers("/api/**").permitAll()
+                .antMatchers("/api/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
+//                .antMatchers("/api/**").hasRole("MANAGER")   // 매니저- 각 부서 부장급 접근 가능
 // .anyRequest().permitAll()   // 테스트 후 삭제
             .and()
                 .sessionManagement()
@@ -73,11 +73,12 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:8080"));
+        config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST","OPTIONS", "DELETE"));
         config.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-type"
-                , "Access-Control-Allow-Headers", "Authorization"
+                , "Access-Control-Allow-Headers", "Authorization", "Access-Control-Allow-Credentials"
                 , "X-Requested-With", " application/json"));
+        config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 

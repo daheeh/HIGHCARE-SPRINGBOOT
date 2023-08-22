@@ -111,8 +111,8 @@ public class TokenProvider {
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             throw new TokenException("잘못된 JWT 서명이나 형식으로 검증에 실패하였습니다.");
         } catch (ExpiredJwtException e) {
-//            return false;
-            throw new TokenException("만료된 JWT 서명입니다.");
+            return false;
+//            throw new TokenException("만료된 JWT 서명입니다.");
         } catch (UnsupportedJwtException e) {
             throw new TokenException("지원되지 않는 JWT 서명입니다.");
         } catch (IllegalArgumentException e) {
@@ -178,6 +178,7 @@ public class TokenProvider {
         cookie.setHttpOnly(true);             // httponly 옵션 설정
         cookie.setSecure(true);               // https 옵션 설정
         cookie.setPath("/");            // 모든 곳에서 쿠키열람 가능
+//        cookie.setDomain("localhost:3000");
         cookie.setMaxAge((60*60)/6);         // 쿠키 만료시간 설정 (테스트 10분)
 
         return cookie;
@@ -191,9 +192,7 @@ public class TokenProvider {
     // 헤더 쿠키에 있는refresh토큰 resolver
     public ADMRefreshToken resolveCookie(HttpServletRequest request) {
 
-        log.info("[TokenProvider] resolveCookie : request === {}",request);
         Cookie[] cookies = request.getCookies();
-        log.info("[TokenProvider] resolveCookie : cookies === {}",cookies);
         String refreshToken = "";
         String memberId = "";
 
@@ -201,11 +200,12 @@ public class TokenProvider {
             for (Cookie cookie : cookies) {
                 if (REFRESHKEY_HEADER.equals(cookie.getName())) {
                     refreshToken = cookie.getValue().split("=")[0];
-                    memberId = cookie.getName().split("=")[1];
+                    memberId = cookie.getValue().split("=")[1];
                     break; // 원하는 쿠키를 찾으면 루프 종료
                 }
             }
         }
+        //f04b112a-1c52-4ecf-9a18-b9385192403b=user01
         log.info("[TokenProvider] resolveCookie : refreshToken === {}",refreshToken);
         log.info("[TokenProvider] resolveCookie : memberId === {}",memberId);
         return ADMRefreshToken.builder()

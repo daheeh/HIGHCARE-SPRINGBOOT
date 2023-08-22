@@ -22,6 +22,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Optional;
+
 import static com.highright.highcare.jwt.TokenProvider.REFRESHKEY_HEADER;
 
 
@@ -120,12 +122,15 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public boolean findRefreshToken(ADMRefreshToken refreshToken) {
         log.info("[AuthServiceImpl] findRefreshToken : refreshToken ==== {}", refreshToken);
-        ADMRefreshToken findRefreshToken = refreshTokenRepository.findById(refreshToken.getId()).get();
-        if (findRefreshToken != null && findRefreshToken.equals(refreshToken.getRefreshToken())){
-            log.info("[AuthServiceImpl] refreshTokenSave : findRefreshToken ==== {}", findRefreshToken);
 
-            return true;
-        }
-        throw new TokenException("리프레시토큰 검증 실패하였습니다. 재로그인 해주세요.");
+            Optional<ADMRefreshToken> findRefreshToken = (refreshTokenRepository.findById(refreshToken.getId()));
+        if (findRefreshToken.isPresent() && findRefreshToken.get().getRefreshToken().equals(refreshToken.getRefreshToken())) {
+                log.info("[AuthServiceImpl] refreshTokenSave : findRefreshToken ==== {}", findRefreshToken);
+
+                return true;
+            }
+
+            throw new TokenException("리프레시토큰 검증 실패하였습니다. 재로그인 해주세요.");
+
     }
 }
