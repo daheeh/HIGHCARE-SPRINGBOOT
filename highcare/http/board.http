@@ -1,2 +1,11 @@
 GET http://localhost:8080/bulletin/board
 Accept: */*
+
+###
+POST http://localhost:8080/bulletin/boardAdd
+Content-Type: application/json
+Accept: */*
+
+{
+  "nameBoard": "user001"
+}
