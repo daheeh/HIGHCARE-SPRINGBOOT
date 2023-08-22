@@ -39,6 +39,12 @@ public class BoardService {
         return  boardList.stream()
                 .map(board-> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
     }
+
+    public List<BulletinCategoriesDTO> selectBoardTitle(){
+        List<BulletinCategories> boardTitleList = boardCategoryRepository.findAll();
+        return boardTitleList.stream()
+                .map(boardTitle-> modelMapper.map(boardTitle, BulletinCategoriesDTO.class)).collect(Collectors.toList());
+    }
     @Transactional
     public Object boardAdd(BulletinCategoriesDTO bulletinCategoriesDTO) {
 

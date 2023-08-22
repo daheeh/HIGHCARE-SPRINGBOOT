@@ -23,6 +23,12 @@ public class BoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardList()));
     }
 
+    @GetMapping("/boardTitle")
+    public ResponseEntity<ResponseDTO> selectBoardTitle(){
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardTitle()));
+
+    }
     @PostMapping("/boardAdd")
     public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
 
