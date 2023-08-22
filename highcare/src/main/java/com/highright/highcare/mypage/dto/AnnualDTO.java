@@ -1,4 +1,6 @@
 package com.highright.highcare.mypage.dto;
 
-public class Mycalendar {
+public class AnnualDTO {
+
+//    private
 }

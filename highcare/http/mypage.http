@@ -1,0 +1,17 @@
+
+### 프로필 회원아이디로 조회
+GET http://localhost:8080/api/mypage/profile/1
+Accept: */*
+
+### 프로필파일 인서트 테스트
+POST http://localhost:8080/api/mypage/insert
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+{
+  "code": "1",
+  "orName": "원본",
+  "chName": "체인지네임",
+  "date": "2023-08-22"
+}
