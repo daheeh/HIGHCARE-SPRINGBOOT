@@ -8,6 +8,7 @@ import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.PmEmployee;
 import com.highright.highcare.pm.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -80,6 +81,21 @@ public class PmEmployeeContorller {
     @GetMapping("/department")
     public ResponseEntity<?> getPmDepartmentList() {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"부서 조회 성공", employeeService.getPmDepartmentList()));
+    }
+
+    @GetMapping("/empde")
+    public ResponseEntity<ResponseDTO> selectEmployeeWithDepartment(@RequestParam(name="offset", defaultValue="1") String offset){
+        log.info("selectEmployeeDpartment ================ : " + offset);
+        int total = employeeService.selectEmployeeTotal();
+
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(employeeService.selectEmployeeWithDepartment(cri));
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",pagingResponseDTO));
+
+
     }
 
 

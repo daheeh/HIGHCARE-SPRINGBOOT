@@ -2,10 +2,14 @@ package com.highright.highcare.pm.service;
 
 import com.highright.highcare.common.Criteria;
 import com.highright.highcare.pm.dto.PmDepartmentResult;
+import com.highright.highcare.pm.dto.PmEmployeeAndDepartmentDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.PmEmployee;
+import com.highright.highcare.pm.entity.PmEmployeeAndPmDepartment;
 import com.highright.highcare.pm.repository.EmployeeRepository;
 import com.highright.highcare.pm.repository.PmDepartmentRepository;
+//import com.highright.highcare.pm.repository.PmJobRepository;
+import com.highright.highcare.pm.repository.PmEmployeeAndPmDepartmentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -31,11 +35,17 @@ public class EmployeeService {
 
     private final PmDepartmentRepository pmDepartmentRepository;
 
+    private final PmEmployeeAndPmDepartmentRepository pmEmployeeAndPmDepartmentRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper, PmDepartmentRepository pmDepartmentRepository) {
+//    private final PmJobRepository pmJobRepository;
+
+
+    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper, PmDepartmentRepository pmDepartmentRepository,PmEmployeeAndPmDepartmentRepository pmEmployeeAndPmDepartmentRepository) {
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
+//        this.pmJobRepository = pmJobRepository;
+        this.pmEmployeeAndPmDepartmentRepository = pmEmployeeAndPmDepartmentRepository;
     }
 
     public int selectEmployeeTotal() {
@@ -54,6 +64,7 @@ public class EmployeeService {
         Pageable paging = PageRequest.of(index, count, Sort.by("isResignation").descending());
         System.out.println("paging ==========================> " + paging);
 
+//        Page<PmEmployee> result = employeeRepository.findByIsResignation('N', paging);
         Page<PmEmployee> result = employeeRepository.findByIsResignation('N', paging);
         System.out.println("result ==========================> " + result);
 
@@ -133,6 +144,36 @@ public class EmployeeService {
         return results;
     }
 
+    /* 사원 부서 조회 */
+    public Object selectEmployeeWithDepartment(Criteria cri) {
+        log.info("PmEmployeeAndPmDepartment ============================start");
+
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("isResignation").descending());
+
+        Page<PmEmployeeAndPmDepartment> result = pmEmployeeAndPmDepartmentRepository.findAll(paging);
+        List<PmEmployeeAndPmDepartment> productList = (List<PmEmployeeAndPmDepartment>)result.getContent();
+
+
+        System.out.println("pmEmployeeAndPmDepartmentRepository paging ==========================> " + paging);
+        System.out.println("pmEmployeeAndPmDepartmentRepository result ==========================> " + result);
+
+        List<PmEmployeeAndDepartmentDTO> empdeList = result.stream()
+                .map(pmEmployee -> modelMapper
+                        .map(pmEmployee, PmEmployeeAndDepartmentDTO.class)).collect(Collectors.toList());
+
+        return empdeList;
+
+
+    }
+
+//    @Transactional(rollbackFor = Exception.class)
+//    public List<PmJobResult> getPmResultList(){
+//
+//        List<PmJobResult> results = pmJobRepository.findAll().stream().map(PmJobResult::of).collect(Collectors.toList());
+//        return results;
+//    }
 //    @Transactional(rollbackFor = Exception.class)
 //    public List<>
 

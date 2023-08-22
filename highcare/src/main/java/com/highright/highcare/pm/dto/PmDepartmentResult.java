@@ -2,6 +2,7 @@ package com.highright.highcare.pm.dto;
 
 
 import com.highright.highcare.pm.entity.PmDepartment;
+import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class PmDepartmentResult {
     private String upperName;
     private Integer upperCode;
     private List<PmDepartmentResult> children;
+    private PmEmployee employee;
 
     public static PmDepartmentResult of(PmDepartment pmDepartment){
         return new PmDepartmentResult(
@@ -27,7 +29,8 @@ public class PmDepartmentResult {
                 pmDepartment.getTel(),
                 pmDepartment.getUpperName(),
                 pmDepartment.getUpperCode(),
-                pmDepartment.getChildren().stream().map(PmDepartmentResult::of).collect(Collectors.toList())
+                pmDepartment.getChildren().stream().map(PmDepartmentResult::of).collect(Collectors.toList()),
+                pmDepartment.getEmployee()
         );
 
     }

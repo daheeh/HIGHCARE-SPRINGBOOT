@@ -52,6 +52,10 @@ public class PmDepartment {
     @OneToMany(mappedBy = "parent")
     private List<PmDepartment> children = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name="DEPT_CODE", insertable = false,updatable = false)
+    private PmEmployee employee;
+
 }
 // employee에서 department manytoone
 // 한명의사원이; 하나의 부서를 가지고있음

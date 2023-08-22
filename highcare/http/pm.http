@@ -38,3 +38,8 @@ Accept: */*
 GET http://localhost:8080/api/pm/department
 Content-Type: application/json
 Accept: */*
+### 사원 부서 조회
+GET http://localhost:8080/api/pm/empde
+Content-Type: application/json
+Accept: */*
+
