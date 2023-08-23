@@ -2,9 +2,7 @@ package com.highright.highcare.admin.controller;
 
 
 import com.highright.highcare.auth.dto.LoginMemberDTO;
-import com.highright.highcare.auth.entity.ADMEmployee;
-import com.highright.highcare.auth.service.AdminService;
-import com.highright.highcare.auth.service.AuthService;
+import com.highright.highcare.admin.service.AdminService;
 import com.highright.highcare.common.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,11 +31,14 @@ public class AdminController {
     }
 
     @GetMapping("member")
-    public ResponseEntity<ResponseDTO> selectMember(@RequestParam String id){
+    public ResponseEntity<ResponseDTO> selectMember(@RequestParam int empNo){
 
+        log.info("memberNo" , empNo);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "사원 조회 성공", adminService.selectMember(id)));
+                "사원 조회 성공", adminService.selectMember(empNo)));
     }
+
+    // 인서트 회원신청
 
 
 

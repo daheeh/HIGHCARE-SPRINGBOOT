@@ -20,6 +20,12 @@ public class ADMEmployee {
     @JoinColumn(name="DEPT_CODE")
     private ADMDepartment deptCode;
 
+    @Column(name="PHONE")
+    private String phone;
+
+    @Column(name="EMAIL")
+    private String email;
+
     @OneToOne
     @JoinColumn(name="JOB_CODE")
     private ADMJob jobCode;
