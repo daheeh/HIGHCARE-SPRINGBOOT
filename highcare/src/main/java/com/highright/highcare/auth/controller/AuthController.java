@@ -23,17 +23,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDTO> Login(@RequestBody LoginMemberDTO loginMemberDTO
+    public ResponseEntity<ResponseDTO> selectLogin(@RequestBody LoginMemberDTO loginMemberDTO
                                             , HttpServletResponse response){
         log.info("[AuthController] Login : loginMemberDTO ==== {}", loginMemberDTO);
 
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "로그인 성공", authService.login(loginMemberDTO, response)));
+                "로그인 성공", authService.selectLogin(loginMemberDTO, response)));
     }
 
     @GetMapping("/reissue")
-    public ResponseEntity<ResponseDTO> Reissue(HttpServletRequest request, @RequestParam String id){
+    public ResponseEntity<ResponseDTO> updateReissue(HttpServletRequest request, @RequestParam String id){
         log.info("[AuthController] Reissue ===== {}", "컨트롤러 접근");
         log.info("[AuthController] Reissue ===== id {}", id);
 

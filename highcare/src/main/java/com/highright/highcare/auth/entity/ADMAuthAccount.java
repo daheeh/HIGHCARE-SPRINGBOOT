@@ -25,9 +25,6 @@ public class ADMAuthAccount implements Serializable {
     @Column(name="ID")
     private String id;
 
-    @Id
-    @Column(name="GROUP_CODE")
-    private String groupCode;
 
 
 }

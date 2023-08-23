@@ -1,14 +1,11 @@
 package com.highright.highcare.mypage.entity;
 
-import com.highright.highcare.auth.entity.Department;
-import com.highright.highcare.auth.entity.Job;
-import com.highright.highcare.mypage.dto.MyBscdDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "TBL_EMPLOYEE")
