@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface AuthService {
 
-    Object login(LoginMemberDTO loginMemberDTO, HttpServletResponse response);
+    Object selectLogin(LoginMemberDTO loginMemberDTO, HttpServletResponse response);
 
     Object reIssueToken(HttpServletRequest request);
+
 }

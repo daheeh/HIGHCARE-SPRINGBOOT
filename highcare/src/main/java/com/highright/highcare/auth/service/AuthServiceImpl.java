@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Override
-    public Object login(LoginMemberDTO loginInfo, HttpServletResponse response) {
+    public Object selectLogin(LoginMemberDTO loginInfo, HttpServletResponse response) {
         log.info("[AuthServiceImpl] login : loginInfo ====== {} ", loginInfo);
 
         // 멤버 조회

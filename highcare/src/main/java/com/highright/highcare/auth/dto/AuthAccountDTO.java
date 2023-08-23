@@ -13,6 +13,5 @@ public class AuthAccountDTO {
 
     private String id;
 
-    private String groupCode;
 
 }

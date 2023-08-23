@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 @AllArgsConstructor
 @Setter
 @Getter
-@RedisHash(value="id", timeToLive = 600)     // 10분 test
+@RedisHash(value="id", timeToLive = 36000)     // 10시간 test
 @ToString
 @Builder
 public class ADMRefreshToken {
