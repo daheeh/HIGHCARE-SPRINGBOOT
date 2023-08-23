@@ -28,9 +28,6 @@ public class ApvVacation {
     )
     private String itemNo;
 
-    @Column(name = "APV_NO")
-    private String apvNo;
-
     @Column(name = "START_DATE")
     private Time startDate;
 
