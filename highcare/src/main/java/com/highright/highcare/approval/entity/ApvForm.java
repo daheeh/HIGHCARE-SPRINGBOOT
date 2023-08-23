@@ -1,6 +1,7 @@
 package com.highright.highcare.approval.entity;
 
 import com.highright.highcare.approval.dto.ApvExpenseDTO;
+import com.highright.highcare.approval.dto.ApvVacationDTO;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -57,11 +58,11 @@ public class ApvForm {
     @Column(name = "EMP_NO")
     private int empNo;
 
-//    @OneToOne(mappedBy = "apvForm", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
-//    @Where(clause = "category = '지출'")
-//    private ApvExpense apvExpense;
-
+    @Where(clause = "category = '지출'")
     @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ApvExpForm> apvExpForms = new ArrayList<>();
 
+    @Where(clause = "category = '인사'")
+    @OneToMany(mappedBy = "apvVacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvVacation> apvVacation = new ArrayList<>();
 }
