@@ -12,10 +12,13 @@ import java.sql.Time;
 @ToString
 public class ApvVacationDTO {
 
+    private String itemNo;
     private String apvNo;
-    private Date startDate;
-    private Date endDate;
+    private Time startDate;
+    private Time endDate;
     private String type;
     private String comment;
+    private Long amount;
 
+    private ApvFormDTO apvFormDTO;
 }
