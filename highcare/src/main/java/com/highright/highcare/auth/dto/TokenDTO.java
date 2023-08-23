@@ -14,7 +14,8 @@ public class TokenDTO {
     private String grantType;
     private String accessToken;
 //    private RefreshTokenDTO refreshToken;
-    private Long accessTokenExpiresIn;
+    private long accessTokenExpiresIn;
+    private long refreshTokenExpiresIn;
 
     private int empNo;
     private String memberName;

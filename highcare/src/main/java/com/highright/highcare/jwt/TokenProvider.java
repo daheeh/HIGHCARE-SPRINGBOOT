@@ -31,8 +31,11 @@ public class TokenProvider {
     private final String AUTHORITIES_KEY = "auth";   // 권한클레임 key값
     private final Key key;     // access 토큰 전용 시크릿키
 
-    @Value("${jwt.expire-time}")
-    private long ACCESS_TOKEN_EXPIRE_TIME;
+//    @Value("${jwt.expire-time}")
+    public static long ACCESS_TOKEN_EXPIRE_TIME = 100000;
+//    @Value("${jwt.refresh-expire-time}")
+    public static long REFRESH_TOKEN_EXPIRE_TIME = 1000000;
+
 
     private final UserDetailsService userDetailsService;
 
@@ -71,7 +74,8 @@ public class TokenProvider {
 
         return TokenDTO.builder().grantType(BEARER_TYPE)
                 .accessToken(accessToken)
-                .accessTokenExpiresIn(ACCESS_TOKEN_EXPIRE_TIME)
+                .accessTokenExpiresIn(now + ACCESS_TOKEN_EXPIRE_TIME)
+                .refreshTokenExpiresIn(now + REFRESH_TOKEN_EXPIRE_TIME)
                 .memberName(loginMemberDTO.getName())
                 .empNo(loginMemberDTO.getEmpNo())
                 .deptName(loginMemberDTO.getDeptName())
@@ -179,7 +183,7 @@ public class TokenProvider {
         cookie.setSecure(true);               // https 옵션 설정
         cookie.setPath("/");            // 모든 곳에서 쿠키열람 가능
 //        cookie.setDomain("localhost:3000");
-        cookie.setMaxAge((60*60)/6);         // 쿠키 만료시간 설정 (테스트 10분)
+        cookie.setMaxAge((int) REFRESH_TOKEN_EXPIRE_TIME);         // 쿠키 만료시간 설정 (테스트 10분)
 
         return cookie;
     }

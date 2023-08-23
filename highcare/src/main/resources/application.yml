@@ -41,6 +41,7 @@ spring:
 jwt:
   secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
   expire-time: 100000 # (밀리초 단위)
+  refresh-expire-time: 1000000
 
   # logging config
   logging:
