@@ -22,7 +22,7 @@ public class AdminController {
 
     @GetMapping("main")
     public ResponseEntity<ResponseDTO> selectAdmin(LoginMemberDTO loginMemberDTO
-                                            , HttpServletResponse response){
+            , HttpServletResponse response){
         log.info("[AdminController] Admin : Admin ==== {}", "관리자페이지 접속 성공");
 
 
