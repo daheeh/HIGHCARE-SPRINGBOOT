@@ -18,8 +18,12 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public ResponseEntity<ResponseDTO> selectBoardList(){
+    public ResponseEntity<ResponseDTO> selectBoardList(
+            @RequestParam(name = "categoryCode") String categoryCode,
+            @RequestParam(name = "currentPage") String currentPage){
         System.out.println("와성용");
+        System.out.println("cateogryCode"+ categoryCode);
+        System.out.println("currentPage"+ currentPage);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardList()));
     }
 
@@ -29,12 +33,12 @@ public class BoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardTitle()));
 
     }
-    @PostMapping("/boardAdd")
-    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
-
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
-    }
+//    @PostMapping("/boardAdd")
+//    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
+//
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
+//    }
 }

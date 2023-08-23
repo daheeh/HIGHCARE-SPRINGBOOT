@@ -29,13 +29,13 @@ public class Board {
     private String content;
 
     @Column(name = "CREATION_DATE")
-    private java.util.Date creationDate;
+    private java.sql.Date creationDate;
 
     @Column(name = "DELETE_YN")
     private char deleteYn;
 
     @Column(name = "MODIFIED_DATE")
-    private java.util.Date modifiedDate;
+    private java.sql.Date modifiedDate;
 
     @Column(name = "ALLOW_COMMENTS")
     private char allowComments;
