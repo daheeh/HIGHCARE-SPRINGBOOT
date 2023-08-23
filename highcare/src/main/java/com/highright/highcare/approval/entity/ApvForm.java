@@ -63,6 +63,6 @@ public class ApvForm {
     private List<ApvExpForm> apvExpForms = new ArrayList<>();
 
     @Where(clause = "category = '인사'")
-    @OneToMany(mappedBy = "apvVacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ApvVacation> apvVacation = new ArrayList<>();
 }
