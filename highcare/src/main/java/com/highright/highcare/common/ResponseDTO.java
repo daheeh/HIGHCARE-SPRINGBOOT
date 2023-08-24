@@ -1,11 +1,14 @@
 package com.highright.highcare.common;
 
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class ResponseDTO {
 
     private int status;          // 상태코드값
@@ -22,4 +25,5 @@ public class ResponseDTO {
         this.message = message;
         this.data = data;
     }
+
 }
