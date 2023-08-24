@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PmDepartment {
+public class Departments {
 
     @Id
     @Column(name = "DEPT_CODE")
@@ -40,6 +40,6 @@ public class PmDepartment {
     private List<PmDepartment> children = new ArrayList<>();
 
     @OneToMany(mappedBy = "deptCode")
-    private List<PmEmployee> employees;
+    private List<Employees> employees;
 
 }

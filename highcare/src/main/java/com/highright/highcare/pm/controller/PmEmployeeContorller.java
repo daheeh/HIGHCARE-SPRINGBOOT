@@ -5,10 +5,8 @@ import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
-import com.highright.highcare.pm.entity.PmEmployee;
 import com.highright.highcare.pm.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -96,7 +94,10 @@ public class PmEmployeeContorller {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "사원 수정 성공", employeeService.updateEmployee(pmEmployeeDTO)));
     }
 
-
+    @GetMapping("secondDept")
+    public ResponseEntity<ResponseDTO> secondDept() {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"부서조회성공", employeeService.secondDept()));
+    }
 
 
 

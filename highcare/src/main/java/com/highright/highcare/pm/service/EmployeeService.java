@@ -3,12 +3,11 @@ package com.highright.highcare.pm.service;
 import com.highright.highcare.common.Criteria;
 
 //import com.highright.highcare.pm.dto.PmEmployeeAndDepartmentDTO;
+import com.highright.highcare.pm.dto.DepartmentDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
-import com.highright.highcare.pm.entity.PmDepartment;
-import com.highright.highcare.pm.entity.PmDepartmentResult;
-import com.highright.highcare.pm.entity.PmEmployee;
+import com.highright.highcare.pm.entity.*;
 //import com.highright.highcare.pm.entity.PmEmployeeAndPmDepartment;
-import com.highright.highcare.pm.entity.PmEmployeeResult;
+import com.highright.highcare.pm.repository.DepartmentRepository;
 import com.highright.highcare.pm.repository.EmployeeRepository;
 import com.highright.highcare.pm.repository.PmDepartmentRepository;
 //import com.highright.highcare.pm.repository.PmJobRepository;
@@ -40,15 +39,19 @@ public class EmployeeService {
 
     private final PmDepartmentRepository pmDepartmentRepository;
 
+    private final DepartmentRepository departmentRepository;
+
 //    private final PmEmployeeAndPmDepartmentRepository pmEmployeeAndPmDepartmentRepository;
 
 //    private final PmJobRepository pmJobRepository;
 
 
-    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper, PmDepartmentRepository pmDepartmentRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
+            DepartmentRepository departmentRepository , PmDepartmentRepository pmDepartmentRepository) {
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
+        this.departmentRepository = departmentRepository;
 //        this.pmJobRepository = pmJobRepository;
 //        this.pmEmployeeAndPmDepartmentRepository = pmEmployeeAndPmDepartmentRepository;
     }
@@ -146,8 +149,22 @@ public class EmployeeService {
         List<PmDepartment> deptList = pmDepartmentRepository.findAll();
         PmDepartmentResult result =  deptList.stream().map(PmDepartmentResult::new).collect(Collectors.toList()).get(0);
         return result;
-
     }
+
+    /* 간단 조직도 */
+//    public DepartementResult secondDept() {
+//        List<PmDepartment> secondList = pmDepartmentRepository.findAll();
+//        DepartementResult result = secondList.stream().map(DepartementResult::new).collect(Collectors.toList()).get();
+//        return result;
+//    }
+    public List<DepartmentDTO> secondDept() {
+        List<Departments> secondList = departmentRepository.findAll();
+//        secondList.stream().map().collect(Collectors.toList());
+        return secondList.stream().map(second -> modelMapper.map(second, DepartmentDTO.class)).collect(Collectors.toList());
+    }
+
+
+
 //    @Transactional(rollbackFor = Exception.class)
 //    public List<PmDepartmentResult> getPmDepartmentList() {
 //
@@ -213,6 +230,7 @@ public class EmployeeService {
         return (result > 0)? "사원 수정 성공": "사원 수정 실패";
 
     }
+
 
 //    /* 사원 부서 조회 */
 //    public Object selectEmployeeWithDepartment(Criteria cri) {
