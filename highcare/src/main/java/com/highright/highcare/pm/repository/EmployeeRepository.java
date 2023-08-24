@@ -4,7 +4,9 @@ import com.highright.highcare.pm.entity.PmEmployee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.highright.highcare.pm.entity.PmDepartment;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -33,6 +35,8 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
     List<PmEmployee> findByEmpName(String empName);
 
     Page<PmEmployee> findByEmpName(String search, Pageable paging);
+
+
 
 //    /* 조직도 */
 //    public List<PmEmployee> findAll() {

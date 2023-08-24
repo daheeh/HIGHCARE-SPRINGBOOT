@@ -4,7 +4,7 @@ Content-Type: application/json
 Accept: */*
 
 
-### 사원 상세 조회
+### 사원 단건 조회
 GET http://localhost:8080/api/pm/search
 Content-Type: application/json
 Accept: */*
@@ -38,8 +38,15 @@ Accept: */*
 GET http://localhost:8080/api/pm/department
 Content-Type: application/json
 Accept: */*
+
 ### 사원 부서 조회
 GET http://localhost:8080/api/pm/empde
 Content-Type: application/json
 Accept: */*
+
+### 부서조회
+GET http://localhost:8080/api/pm/selectDept
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
 
