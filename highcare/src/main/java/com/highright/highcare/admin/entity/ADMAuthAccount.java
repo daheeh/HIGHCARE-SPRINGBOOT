@@ -1,33 +1,26 @@
 package com.highright.highcare.admin.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "adminAuthAccount")
 @Table(name="TBL_AUTH_ACCOUNT")
 @Getter
 @Setter
-@ToString
 public class ADMAuthAccount implements Serializable {
 
     private static final long serialVersionUID = 1L; // 추가
 
-    @Id
-    @Column(name="AUTH_CODE")
-    private String authCode;
 
-    @Id
-    @Column(name="ID")
-    private String id;
+    @EmbeddedId
+    private ADMAuthAccountId id;
 
-
-
+    @Builder
+    public ADMAuthAccount(ADMAuthAccountId id) {
+        this.id = id;
+    }
 }

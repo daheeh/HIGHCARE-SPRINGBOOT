@@ -5,8 +5,8 @@ Accept: */*
 Access-Control-Allow-Origin: *
 
 {
-  "id": "user01",
-  "password": "1234"
+  "id": "1111",
+  "password": "1111"
 }
 
 ### 로그인 (매니저)
@@ -34,3 +34,15 @@ Accept: */*
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMDEiLCJhdXRoIjpbIlJPTEVfQURNSU4iLCJST0xFX01BTkFHRVIiLCJST0xFX1VTRVIiXSwiZXhwIjoxNjkyNTk4MTY5fQ.lINmaNSo35e2nTKEL9m-eggkunFNuBqXjxMNFjCM0Xaf94A5wHJBkAiSktVV840GnrTNRecbGXY2U8bqB0DtAw
 RefreshToken: b14a3f18-b534-4c3c-a652-85b12837e3a9=user01
 
+
+### 이메일 전송
+POST http://localhost:8080/api/admin/mail
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5Mjg1NTYyMX0.V2r0z4cqvQBvd8PtbbTaRc1GgFWe6y9meoVZcZLy3lklj9YVvylo3CNxT6-H6U7FBL1XAEJuNabBCHxapo4BKg
+
+{
+  "address": "mian910522@gmail.com",
+  "title": "test mail",
+  "message": "test 아이디 비밀번호 보내기"
+}

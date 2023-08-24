@@ -1,6 +1,7 @@
 package com.highright.highcare.admin.controller;
 
 
+import com.highright.highcare.admin.dto.RequestMemberDTO;
 import com.highright.highcare.auth.dto.LoginMemberDTO;
 import com.highright.highcare.admin.service.AdminService;
 import com.highright.highcare.common.ResponseDTO;
@@ -32,13 +33,19 @@ public class AdminController {
 
     @GetMapping("member")
     public ResponseEntity<ResponseDTO> selectMember(@RequestParam int empNo){
-
-        log.info("memberNo" , empNo);
+        log.info("empNo" , empNo);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "사원 조회 성공", adminService.selectMember(empNo)));
     }
 
     // 인서트 회원신청
+    @PostMapping("/memberjoin")
+    public ResponseEntity<ResponseDTO> insertMember(@RequestBody RequestMemberDTO requestMemberDTO){
+        log.info("[AdminController] insertMember requestMemberDTO===={}", requestMemberDTO);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "회원등록 신청", adminService.insertMember(requestMemberDTO)));
+    }
 
 
 

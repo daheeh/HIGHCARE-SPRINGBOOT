@@ -26,18 +26,18 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 403 code
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;            // 401 code
 
-    @Bean // 비밀번호 암호화 처리 빈 등록
-    public BCryptPasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-
     // 시큐리티 설정무시 정적 리소스 빈 등록
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return web -> web.ignoring().antMatchers("/css/**", "/js/**", "/images/**",
                 "/lib/**");
     }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
     // http 요청 권한설정
     @Bean

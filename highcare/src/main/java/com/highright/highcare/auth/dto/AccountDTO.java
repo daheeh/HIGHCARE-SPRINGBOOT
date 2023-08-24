@@ -8,6 +8,7 @@ import java.sql.Date;
 @Setter
 @Getter
 @ToString
+@Builder
 public class AccountDTO {
     
     private String memberId;

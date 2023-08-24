@@ -29,7 +29,4 @@ public class ApiExceptionAdvice {
                 .body(new ApiExceptionDTO(HttpStatus.UNAUTHORIZED, e.getMessage()));
     }
 
-
-
-
 }

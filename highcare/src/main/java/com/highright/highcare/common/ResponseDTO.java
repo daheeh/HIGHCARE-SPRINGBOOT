@@ -1,7 +1,6 @@
 package com.highright.highcare.common;
 
 import lombok.*;
-import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
