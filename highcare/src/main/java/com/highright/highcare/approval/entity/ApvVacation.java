@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "TBL_APV_VACATION")
@@ -29,10 +30,10 @@ public class ApvVacation {
     private String itemNo;
 
     @Column(name = "START_DATE")
-    private Time startDate;
+    private Timestamp startDate;
 
     @Column(name = "END_DATE")
-    private Time endDate;
+    private Timestamp endDate;
 
     @Column(name = "TYPE")
     private String type;
@@ -42,6 +43,12 @@ public class ApvVacation {
 
     @Column(name = "AMOUNT")
     private Long amount;
+
+    @Column(name = "OFFTYPE1")
+    private Time offType1;
+
+    @Column(name = "OFFTYPE2")
+    private Time offType2;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "APV_NO")

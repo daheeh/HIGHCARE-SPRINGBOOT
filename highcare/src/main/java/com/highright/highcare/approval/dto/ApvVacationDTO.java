@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,12 +14,13 @@ import java.sql.Time;
 public class ApvVacationDTO {
 
     private String itemNo;
-    private String apvNo;
-    private Time startDate;
-    private Time endDate;
+    private Timestamp startDate;
+    private Timestamp endDate;
     private String type;
     private String comment;
     private Long amount;
+    private Time offType1;
+    private Time offType2;
 
     private ApvFormDTO apvFormDTO;
 }
