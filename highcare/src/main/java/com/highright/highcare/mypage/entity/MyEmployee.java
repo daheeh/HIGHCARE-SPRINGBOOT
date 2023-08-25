@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_EMPLOYEE")
@@ -27,8 +28,9 @@ public class MyEmployee {
     private String reNo;    // 주민번호
     @Column(name = "START_DATE")
     private String sDate;   // 입사일
-
-    //    private String eDate;
+//
+//    private String eDate;   // 퇴사일
+//
 //    private String isRes;  // 퇴사여부
 
     @Column(name = "DEPT_CODE")
@@ -40,6 +42,10 @@ public class MyEmployee {
     //    private String edu;
     @Column(name = "TELEPHONE")
     private String tel;    // 내선전화
+
+
+
+
 
 
 

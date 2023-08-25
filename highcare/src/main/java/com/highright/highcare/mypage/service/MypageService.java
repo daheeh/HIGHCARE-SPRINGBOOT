@@ -2,6 +2,7 @@ package com.highright.highcare.mypage.service;
 
 import com.highright.highcare.mypage.Repository.MyProfileFileRepository;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
+import com.highright.highcare.mypage.dto.MyEmployeeDTO;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.mypage.dto.MyProfileFileDTO;
 import com.highright.highcare.mypage.entity.MyProfile;
@@ -34,14 +35,21 @@ public class MypageService {
 
 
     @Transactional
-    public List<MyProfileDTO> selectProfilefileList(int empNo) {
+    public MyProfileDTO selectProfilefileList(int empNo) {
         log.info("[MypageService] selectProfile Start =============================================");
 
-        List<MyProfile> ProfileList = profileRepository.findByEmpNo(empNo);
-
+        MyProfile ProfileList = profileRepository.findByEmpNo(empNo);
+        log.info("[MypageService] selectProfilefileList ProfileList =================={}", ProfileList);
         log.info("[MypageService] selectProfile End =============================================");
 
-        return ProfileList.stream().map(profile -> modelMapper.map(profile, MyProfileDTO.class)).collect(Collectors.toList());
+        MyProfileDTO myProfileDTO = modelMapper.map(ProfileList, MyProfileDTO.class);
+        log.info("[MypageService] selectProfilefileList myProfileDTO1111 =================={}", myProfileDTO);
+
+        myProfileDTO.setMyEmployeeDTO(modelMapper.map(ProfileList.getMyEmployee(), MyEmployeeDTO.class));
+        log.info("[MypageService] selectProfilefileList myProfileDTO222 =================={}", myProfileDTO);
+
+//        return ProfileList.stream().map(profile -> modelMapper.map(profile, MyProfileDTO.class)).collect(Collectors.toList());
+        return myProfileDTO;
 
     }
 

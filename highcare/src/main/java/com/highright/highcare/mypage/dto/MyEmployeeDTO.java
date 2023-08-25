@@ -19,16 +19,15 @@ public class MyEmployeeDTO {
     private String phone;
     private String reNo;    // 주민번호
     private String sDate;   // 입사일
-//    private String eDate;
-//    private String isRes;  // 퇴사여부
+    private String eDate;
+    private String isRes;  // 퇴사여부
     private int deptCode;
     private int jopCode;
     private String address;
-//    private String edu;
+    private String edu;
     private String tel;    // 내선전화
 
     private List<MyBscdDTO> cdList;
-
 
 
 }
