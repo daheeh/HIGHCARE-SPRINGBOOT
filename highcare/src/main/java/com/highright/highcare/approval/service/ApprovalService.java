@@ -2,10 +2,12 @@ package com.highright.highcare.approval.service;
 
 import com.highright.highcare.approval.dto.ApvExpFormDTO;
 import com.highright.highcare.approval.dto.ApvFormDTO;
+import com.highright.highcare.approval.dto.ApvIssuanceDTO;
 import com.highright.highcare.approval.dto.ApvVacationDTO;
 import com.highright.highcare.approval.entity.ApvExpForm;
 
 import com.highright.highcare.approval.entity.ApvForm;
+import com.highright.highcare.approval.entity.ApvIssuance;
 import com.highright.highcare.approval.entity.ApvVacation;
 import com.highright.highcare.approval.repository.ApprovalRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -101,6 +103,35 @@ public class ApprovalService {
         }
     }
 
+    @Transactional
+    public Object insertApvIssuance(ApvFormDTO apvFormDTO) {
+
+        log.info("[ApprovalService] insertApvIssuance --------------- start ");
+
+        try {
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+
+            if (apvFormDTO.getApvIssuances() != null) {
+                List<ApvIssuance> apvIssuances = new ArrayList<>();
+                for (ApvIssuanceDTO apvIssuanceDTO : apvFormDTO.getApvIssuances()) {
+                    ApvIssuance apvIssuance = modelMapper.map(apvIssuanceDTO, ApvIssuance.class);
+                    apvIssuance.setApvForm(apvForm);
+                    apvIssuances.add(apvIssuance);
+                }
+                apvForm.setApvIssuances(apvIssuances);
+            }
+
+            approvalRepository.save(apvForm);
+
+            log.info("[ApprovalService] insertApvIssuance --------------- end ");
+            return "기안 상신 성공";
+        } catch (Exception e){
+            log.error("[ApprovalService] Error insertApvIssuance : " + e.getMessage());
+            return "기안 상신 실패";
+        }
+    }
+
+
     public List<ApvFormDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
 
@@ -109,6 +140,7 @@ public class ApprovalService {
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
     }
+
 
 
 }

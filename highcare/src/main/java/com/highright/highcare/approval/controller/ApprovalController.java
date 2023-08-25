@@ -74,6 +74,15 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvVacation(apvFormDTO)));
     }
 
+    @PostMapping("/insert/hrm3")
+    public ResponseEntity<ResponseDTO> insertApvHrm3(@RequestBody ApvFormDTO apvFormDTO){
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvIssuance(apvFormDTO)));
+    }
+
+
 
     @PostMapping("/insert/biz1")
     public ResponseEntity<ResponseDTO> insertApvForm(@RequestBody ApvFormDTO apvFormDTO){
