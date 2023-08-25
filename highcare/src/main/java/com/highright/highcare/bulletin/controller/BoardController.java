@@ -18,17 +18,29 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public ResponseEntity<ResponseDTO> selectBoardList(){
+    public ResponseEntity<ResponseDTO> selectBoardList(
+            @RequestParam(name = "categoryCode") String categoryCode,
+            @RequestParam(name = "currentPage") String currentPage){
         System.out.println("와성용");
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardList()));
+        System.out.println("cateogryCode"+ categoryCode);
+        System.out.println("currentPage"+ currentPage);
+        int boardCategoryCode = Integer.valueOf(categoryCode);
+        int total = boardService.selectBoardTotal(boardCategoryCode);
+        return null;
     }
 
-    @PostMapping("/boardAdd")
-    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
+    @GetMapping("/boardTitle")
+    public ResponseEntity<ResponseDTO> selectBoardTitle(){
 
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardTitle()));
 
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
     }
+//    @PostMapping("/boardAdd")
+//    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
+//
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
+//    }
 }
