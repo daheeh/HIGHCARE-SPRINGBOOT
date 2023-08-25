@@ -26,16 +26,24 @@ public class MypageController {
         this.mypageService = mypageService;
     }
 
+    // employee와 profile을 조인한 데이터를 조회해야함
+    // 현재는 파일리스트만 조회해오는것임
+    // 파일을 인서트 다시 생각해보기
+
+
     @GetMapping ("/profile/{empNo}")
         public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
+        MyProfileDTO profilefileList = mypageService.selectProfilefileList(empNo);
+        log.info("empNo Controller ================profilefileList{} ", profilefileList);
 
-        List<MyProfileDTO> profilefileList = mypageService.selectProfilefileList(empNo);
-
-        if(profilefileList.isEmpty()){
+        if(profilefileList == null ){
             return ResponseEntity
                     .ok()
                     .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
         }
+
+        System.out.println("empNo Controller ========================== " + empNo);
+
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "프로필 조회 성공", profilefileList));
         }
