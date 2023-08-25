@@ -9,5 +9,6 @@ import java.util.List;
 public interface BoardCategoryRepository extends JpaRepository<BulletinCategories, Integer> {
     BulletinCategories findByNameBoard(String nameBoard);
 
+    BulletinCategories findByCategoryCode(int categoryCode);
     List<BulletinCategories> findAll();
 }

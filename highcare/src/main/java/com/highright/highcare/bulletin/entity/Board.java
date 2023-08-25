@@ -2,10 +2,7 @@ package com.highright.highcare.bulletin.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_BULLETIN_BOARD")
@@ -39,8 +36,9 @@ public class Board {
 
     @Column(name = "ALLOW_COMMENTS")
     private char allowComments;
-    @Column(name = "CATEGORY_CODE")
-    private int categoryCode;
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY_CODE")
+    private BulletinCategories bulletinCategories;
 
     @Column(name = "EMP_NO")
     private int empNo;

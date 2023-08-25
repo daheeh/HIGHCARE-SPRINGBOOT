@@ -24,7 +24,9 @@ public class BoardController {
         System.out.println("와성용");
         System.out.println("cateogryCode"+ categoryCode);
         System.out.println("currentPage"+ currentPage);
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardList()));
+        int boardCategoryCode = Integer.valueOf(categoryCode);
+        int total = boardService.selectBoardTotal(boardCategoryCode);
+        return null;
     }
 
     @GetMapping("/boardTitle")
