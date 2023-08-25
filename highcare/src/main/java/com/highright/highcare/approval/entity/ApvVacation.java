@@ -3,8 +3,7 @@ package com.highright.highcare.approval.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "TBL_APV_VACATION")

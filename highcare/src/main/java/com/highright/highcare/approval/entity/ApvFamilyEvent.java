@@ -2,10 +2,7 @@ package com.highright.highcare.approval.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -15,11 +12,20 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(
+        name = "SEQ_APV_ITEMS",
+        sequenceName = "SEQ_APV_EV_ITEMS",
+        initialValue = 1, allocationSize = 1
+)
 public class ApvFamilyEvent {
 
     @Id
-    @Column(name = "APV_NO")
-    private String apvNo;
+    @Column(name = "ITEMS_NO")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_APV_ITEMS"
+    )
+    private Long itemsNo;
 
     @Column(name = "TYPE")
     private String type;
@@ -35,6 +41,28 @@ public class ApvFamilyEvent {
 
     @Column(name = "ACCOUNNUMBER")
     private String accountNumber;
+
+    @Column(name = "PAYMENT")
+    private int payment;
+
+    @Column(name = "ISSENDINGWREATH")
+    private char isSendingWreath;
+
+    @Column(name = "SENDINGNAME")
+    private String sendingName;
+
+    @Column(name = "SENDINGADDRESS")
+    private String sendingAddress;
+
+    @Column(name = "SENDINGPHONE")
+    private String sendingPhone;
+
+    @Column(name = "REQUESTSNOTE")
+    private String requestsNote;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private ApvForm apvForm;
 
 
 }

@@ -11,10 +11,12 @@ import java.sql.Date;
 @ToString
 public class ApvIssuanceDTO {
 
-    private String apvNo;
+    private Long itemsNo;
     private String type;
+    private String subType;
     private String submission;
     private String uses;
     private String requests;
 
+    private ApvFormDTO apvFormDTO;
 }

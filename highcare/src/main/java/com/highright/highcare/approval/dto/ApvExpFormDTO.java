@@ -11,7 +11,7 @@ import java.sql.Date;
 @ToString
 public class ApvExpFormDTO {
 
-    private String itemsNo;
+    private Long itemsNo;
     private Date requestDate;
     private String payee;
     private String bank;
