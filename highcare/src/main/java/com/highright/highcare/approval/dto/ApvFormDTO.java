@@ -24,4 +24,5 @@ public class ApvFormDTO {
     private List<ApvVacationDTO> apvVacations;
     private List<ApvIssuanceDTO> apvIssuances;
     private List<ApvFamilyEventDTO> apvFamilyEvents;
+    private List<ApvMeetingLogDTO> apvMeetingLogs;
 }

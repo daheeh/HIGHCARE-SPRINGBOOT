@@ -27,7 +27,7 @@ public class ApprovalService {
         this.modelMapper = modelMapper;
     }
 
-
+    /* 전자결재 - 업무 : biz1 기안서 */
     @Transactional
     public Object insertApvForm(ApvFormDTO apvFormDTO) {
         log.info("[ApprovalService] insertApvForm --------------- start ");
@@ -39,6 +39,34 @@ public class ApprovalService {
             return "기안 상신 성공";
         } catch (Exception e){
             log.error("[ApprovalService] Error insertApvForm : " + e.getMessage());
+            return "기안 상신 실패";
+        }
+    }
+
+    /* 전자결재 - 업무 : biz2 회의록 */
+    @Transactional
+    public Object insertApvMeetingLog(ApvFormDTO apvFormDTO) {
+        log.info("[ApprovalService] insertApvMeetingLog --------------- start ");
+
+        try {
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+
+            if (apvFormDTO.getApvMeetingLogs() != null) {
+                List<ApvMeetingLog> apvMeetingLogs = new ArrayList<>();
+                for (ApvMeetingLogDTO meetingLogDTO : apvFormDTO.getApvMeetingLogs()) {
+                    ApvMeetingLog apvMeetingLog = modelMapper.map(meetingLogDTO, ApvMeetingLog.class);
+                    apvMeetingLog.setApvForm(apvForm);
+                    apvMeetingLogs.add(apvMeetingLog);
+                }
+                apvForm.setApvMeetingLogs(apvMeetingLogs);
+            }
+
+            approvalRepository.save(apvForm);
+
+            log.info("[ApprovalService] insertApvMeetingLog --------------- end ");
+            return "기안 상신 성공";
+        } catch (Exception e){
+            log.error("[ApprovalService] Error insertApvMeetingLog : " + e.getMessage());
             return "기안 상신 실패";
         }
     }

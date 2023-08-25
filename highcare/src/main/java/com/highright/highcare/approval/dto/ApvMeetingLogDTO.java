@@ -12,24 +12,12 @@ import java.sql.Time;
 @ToString
 public class ApvMeetingLogDTO {
 
-
-    private String apvNo;
+    private Long itemsNo;
+    private String meetingTitle;
     private Date meetingDate;
     private String location;
-    private char participants;
+    private String participants;
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    @ToString
-    public static class ApvVacationDTO {
+    private ApvFormDTO apvFormDTO;
 
-        private String apvNo;
-        private Date workingDate;
-        private Time startTime;
-        private Time endTime;
-        private String reason;
-
-    }
 }

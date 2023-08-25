@@ -49,6 +49,25 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
     }
 
+
+
+    /* 전자결재 - 업무 : biz1 기안서 */
+    @PostMapping("/insert/biz1")
+    public ResponseEntity<ResponseDTO> insertApvForm(@RequestBody ApvFormDTO apvFormDTO){
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
+    }
+
+    /* 전자결재 - 업무 : biz2 회의록 */
+    @PostMapping("/insert/biz2")
+    public ResponseEntity<ResponseDTO> insertApvBiz1(@RequestBody ApvFormDTO apvFormDTO){
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvMeetingLog(apvFormDTO)));
+    }
+
+
     @PostMapping("/insert/exp1")
     public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormDTO apvFormDTO){
 
@@ -87,16 +106,6 @@ public class ApprovalController {
         return ResponseEntity
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvIssuance(apvFormDTO)));
-    }
-
-
-
-    @PostMapping("/insert/biz1")
-    public ResponseEntity<ResponseDTO> insertApvForm(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
     }
 
 

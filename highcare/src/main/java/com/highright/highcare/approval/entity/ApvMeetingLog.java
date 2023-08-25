@@ -1,11 +1,9 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.approval.dto.ApvFormDTO;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -15,11 +13,23 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(
+        name = "SEQ_APV_ITEMS",
+        sequenceName = "SEQ_APV_ML_ITEMS",
+        initialValue = 1, allocationSize = 1
+)
 public class ApvMeetingLog {
 
     @Id
-    @Column(name = "APV_NO")
-    private String apvNo;
+    @Column(name = "ITEMS_NO")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_APV_ITEMS"
+    )
+    private Long itemsNo;
+
+    @Column(name = "MEETING_TITLE")
+    private String meetingTitle;
 
     @Column(name = "MEETING_DATE")
     private Date meetingDate;
@@ -28,6 +38,9 @@ public class ApvMeetingLog {
     private String location;
 
     @Column(name = "PARTICIPANTS")
-    private char participants;
+    private String participants;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private ApvForm apvForm;
 }

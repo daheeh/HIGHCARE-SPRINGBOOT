@@ -53,19 +53,25 @@ public class ApvForm {
     @Column(name = "EMP_NO")
     private int empNo;
 
-//    @Where(clause = "category = '지출'")
+    //    @Where(clause = "category = '업무'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvMeetingLog> apvMeetingLogs = new ArrayList<>();
+
+
+    //    @Where(clause = "category = '지출'")
     @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ApvExpForm> apvExpForms = new ArrayList<>();
-
-//    @Where(clause = "category = '인사'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ApvVacation> apvVacations = new ArrayList<>();
-
-//    @Where(clause = "category = '인사'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ApvIssuance> apvIssuances = new ArrayList<>();
 
     //    @Where(clause = "category = '지출'")
     @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ApvFamilyEvent> apvFamilyEvents = new ArrayList<>();
+
+
+    //    @Where(clause = "category = '인사'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvVacation> apvVacations = new ArrayList<>();
+
+    //    @Where(clause = "category = '인사'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvIssuance> apvIssuances = new ArrayList<>();
 }
