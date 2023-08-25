@@ -23,11 +23,11 @@ public class BoardDTO {
 
     private String content;
 
-    private java.util.Date creationDate;
+    private java.sql.Date creationDate;
 
     private char deleteYn;
 
-    private java.util.Date modifiedDate;
+    private java.sql.Date modifiedDate;
 
     private char allowComments;
 

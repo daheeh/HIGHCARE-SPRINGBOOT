@@ -22,6 +22,17 @@ spring:
         cookie:
           same-site: none
           secure: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hdhye89@gmail.com
+    password: aedelgcwhhiexqpt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   # redis cache config
   redis:
     host: localhost

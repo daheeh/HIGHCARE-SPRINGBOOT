@@ -3,6 +3,7 @@ package com.highright.highcare.jwt;
 import com.highright.highcare.auth.dto.LoginMemberDTO;
 import com.highright.highcare.auth.dto.TokenDTO;
 import com.highright.highcare.auth.entity.ADMRefreshToken;
+import com.highright.highcare.common.AdminCustomBean;
 import com.highright.highcare.exception.TokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -20,7 +21,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Date;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -32,18 +32,20 @@ public class TokenProvider {
     private final Key key;     // access 토큰 전용 시크릿키
 
 //    @Value("${jwt.expire-time}")
-    public static long ACCESS_TOKEN_EXPIRE_TIME = 3600000;   // 1시간
+    public static long ACCESS_TOKEN_EXPIRE_TIME = 360000;   // 0.1시간
 //    @Value("${jwt.refresh-expire-time}")
-    public static long REFRESH_TOKEN_EXPIRE_TIME = 36000000;    // 10시간
+    public static long REFRESH_TOKEN_EXPIRE_TIME = 3600000;    // 1시간
 
 
     private final UserDetailsService userDetailsService;
+    private final AdminCustomBean customBean;
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String REFRESHKEY_HEADER = "RefreshToken";
 
-    public TokenProvider(@Value("${jwt.secret}") String secretAccessKey, UserDetailsService userDetailsService) {
+    public TokenProvider(@Value("${jwt.secret}") String secretAccessKey, UserDetailsService userDetailsService, AdminCustomBean customBean) {
         this.userDetailsService = userDetailsService;
+        this.customBean = customBean;
         byte[] AkeyBytes = Decoders.BASE64.decode(secretAccessKey);
         this.key = Keys.hmacShaKeyFor(AkeyBytes);
 
@@ -170,7 +172,7 @@ public class TokenProvider {
     public Cookie generateRefreshTokenInCookie(LoginMemberDTO loginMemberDTO){
 
         // 리프레쉬 토큰 생성 ( "uuid id")
-        String refreshToken = UUID.randomUUID().toString() + "=" + loginMemberDTO.getId();
+        String refreshToken = customBean.randomRefreshToken() + loginMemberDTO.getId();
         // 쿠키에 헤더와 담는다
         String cookieName = REFRESHKEY_HEADER;
         String cookieValue = refreshToken;

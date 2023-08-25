@@ -20,6 +20,6 @@ public class ApvFormDTO {
     private String contents2;
     private int empNo;
     private List<ApvExpFormDTO> apvExpForms;
-    private List<ApvVacationDTO> apvVacation;
+    private List<ApvVacationDTO> apvVacations;
 
 }

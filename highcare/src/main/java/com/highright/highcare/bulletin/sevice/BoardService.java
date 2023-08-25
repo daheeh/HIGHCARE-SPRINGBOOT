@@ -39,6 +39,12 @@ public class BoardService {
         return  boardList.stream()
                 .map(board-> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
     }
+
+    public List<BulletinCategoriesDTO> selectBoardTitle(){
+        List<BulletinCategories> boardTitleList = boardCategoryRepository.findAll();
+        return boardTitleList.stream()
+                .map(boardTitle-> modelMapper.map(boardTitle, BulletinCategoriesDTO.class)).collect(Collectors.toList());
+    }
     @Transactional
     public Object boardAdd(BulletinCategoriesDTO bulletinCategoriesDTO) {
 
@@ -56,5 +62,20 @@ public class BoardService {
         bulletinCategoriesDTO.setCategoryCode(category.getCategoryCode());
 
         return bulletinCategoriesDTO;
+    }
+
+    public int selectBoardTotal(int boardCategoryCode) {
+        System.out.println("서비스까지 옴");
+        if(boardCategoryCode>2) {
+            List<Board> boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
+            System.out.println(boardList);
+            System.out.println("3이상");
+        }else{
+            List<Board> boardList = boardRepository.findByDeleteYn('N');
+            System.out.println(boardList);
+            System.out.println("2이하");
+        }
+
+        return 1;
     }
 }

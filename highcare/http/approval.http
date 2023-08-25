@@ -12,7 +12,7 @@ Access-Control-Allow-Origin: *
   "category": "인사",
   "contents1": "내용1",
   "contents2": "내용2",
-  "empNo": 999999
+  "empNo": 1
 }
 
 ### 지출결의서 상신

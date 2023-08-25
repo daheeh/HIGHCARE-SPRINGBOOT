@@ -1,7 +1,6 @@
 package com.highright.highcare.auth.service;
 
 import com.highright.highcare.auth.dto.LoginMemberDTO;
-import com.highright.highcare.auth.dto.RefreshTokenDTO;
 import com.highright.highcare.auth.dto.TokenDTO;
 import com.highright.highcare.auth.entity.ADMAccount;
 import com.highright.highcare.auth.entity.ADMRefreshToken;
@@ -10,10 +9,8 @@ import com.highright.highcare.auth.repository.RefreshTokenRepository;
 import com.highright.highcare.exception.LoginFailedException;
 import com.highright.highcare.exception.TokenException;
 import com.highright.highcare.jwt.TokenProvider;
-import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
 
-import static com.highright.highcare.jwt.TokenProvider.REFRESHKEY_HEADER;
 
 
 @Slf4j

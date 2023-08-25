@@ -2,8 +2,8 @@ package com.highright.highcare.approval.dto;
 
 import lombok.*;
 
-import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,13 +12,14 @@ import java.sql.Time;
 @ToString
 public class ApvVacationDTO {
 
-    private String itemNo;
-    private String apvNo;
-    private Time startDate;
-    private Time endDate;
+    private Long itemNo;
+    private String startDate;
+    private String endDate;
     private String type;
     private String comment;
     private Long amount;
+    private String offType1;
+    private String offType2;
 
     private ApvFormDTO apvFormDTO;
 }

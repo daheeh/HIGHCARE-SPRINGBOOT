@@ -1,14 +1,17 @@
 package com.highright.highcare.auth.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Table(name="TBL_ACCOUNT")
 @Getter
+@Setter
 @ToString
 public class ADMAccount {
 
@@ -26,5 +29,9 @@ public class ADMAccount {
     @OneToMany
     @JoinColumn(name="ID")
     private List<ADMAuthAccount> roleList;
+
+
+
+
 
 }
