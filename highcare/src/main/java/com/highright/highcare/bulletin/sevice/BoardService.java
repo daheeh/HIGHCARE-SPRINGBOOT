@@ -3,7 +3,12 @@ package com.highright.highcare.bulletin.sevice;
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
 import com.highright.highcare.bulletin.entity.BulletinCategories;
 import com.highright.highcare.bulletin.repository.BoardRepository;
+import com.highright.highcare.common.Criteria;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.highright.highcare.bulletin.dto.BoardDTO;
 import com.highright.highcare.bulletin.entity.Board;
@@ -66,16 +71,44 @@ public class BoardService {
 
     public int selectBoardTotal(int boardCategoryCode) {
         System.out.println("서비스까지 옴");
+        List<Board> boardList;
         if(boardCategoryCode>2) {
-            List<Board> boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
-            System.out.println(boardList);
-            System.out.println("3이상");
+            boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
+            System.out.println("3이상" + boardList.size());
         }else{
-            List<Board> boardList = boardRepository.findByDeleteYn('N');
-            System.out.println(boardList);
-            System.out.println("2이하");
+             boardList = boardRepository.findByDeleteYn('N');
+            System.out.println("2이하" + boardList.size());
         }
 
-        return 1;
+        return boardList.size();
+    }
+
+    public Object selectBoardListWithPaging(Criteria cri, int boardCategoryCode) {
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("bulletinCode").descending());
+
+        Page<Board> result;
+        if(boardCategoryCode>2) {
+            result = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode),paging);
+
+        }else{
+            result = boardRepository.findByDeleteYn('N',paging);
+        }
+
+
+        List<Board> boardList = (List<Board>)result.getContent();
+        System.out.println("서비스 ");
+        System.out.println(boardList);
+        System.out.println("보내줄 값");
+        System.out.println(boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList()));
+        return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+    }
+
+    public Object selectBoard(int code) {
+        Board board = boardRepository.findById(code).get();
+        BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
+
+        return boardDTO;
     }
 }

@@ -1,5 +1,7 @@
 package com.highright.highcare.bulletin.dto;
 
+import com.highright.highcare.bulletin.entity.BulletinCategories;
+import com.highright.highcare.bulletin.entity.BulletinEmployee;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -31,9 +33,9 @@ public class BoardDTO {
 
     private char allowComments;
 
-    private int categoryCode;
+    private BulletinCategories bulletinCategories;
 
-    private int empNo;
+    private BulletinEmployee BulletinEmployee;
 
 
 }

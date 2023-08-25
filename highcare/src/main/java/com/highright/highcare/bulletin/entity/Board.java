@@ -39,9 +39,8 @@ public class Board {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_CODE")
     private BulletinCategories bulletinCategories;
-
-    @Column(name = "EMP_NO")
-    private int empNo;
-
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO")
+    private BulletinEmployee bulletinEmployee;
 
 }
