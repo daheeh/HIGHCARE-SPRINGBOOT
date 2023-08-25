@@ -1,14 +1,8 @@
 package com.highright.highcare.approval.service;
 
-import com.highright.highcare.approval.dto.ApvExpFormDTO;
-import com.highright.highcare.approval.dto.ApvFormDTO;
-import com.highright.highcare.approval.dto.ApvIssuanceDTO;
-import com.highright.highcare.approval.dto.ApvVacationDTO;
-import com.highright.highcare.approval.entity.ApvExpForm;
+import com.highright.highcare.approval.dto.*;
+import com.highright.highcare.approval.entity.*;
 
-import com.highright.highcare.approval.entity.ApvForm;
-import com.highright.highcare.approval.entity.ApvIssuance;
-import com.highright.highcare.approval.entity.ApvVacation;
 import com.highright.highcare.approval.repository.ApprovalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -75,6 +69,36 @@ public class ApprovalService {
             return "기안 상신 실패";
         }
     }
+
+    @Transactional
+    public Object insertApvFamilyEvent(ApvFormDTO apvFormDTO) {
+        log.info("[ApprovalService] insertApvFamilyEvent --------------- start ");
+
+        try {
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+
+            if (apvFormDTO.getApvFamilyEvents() != null) {
+                List<ApvFamilyEvent> apvFamilyEvents = new ArrayList<>();
+                for (ApvFamilyEventDTO familyEventDTO : apvFormDTO.getApvFamilyEvents()) {
+                    ApvFamilyEvent apvFamilyEvent = modelMapper.map(familyEventDTO, ApvFamilyEvent.class);
+                    apvFamilyEvent.setApvForm(apvForm);
+                    apvFamilyEvents.add(apvFamilyEvent);
+                }
+                apvForm.setApvFamilyEvents(apvFamilyEvents);
+            }
+
+            approvalRepository.save(apvForm);
+
+            log.info("[ApprovalService] insertApvFamilyEvent --------------- end ");
+            return "기안 상신 성공";
+        } catch (Exception e){
+            log.error("[ApprovalService] Error insertApvFamilyEvent : " + e.getMessage());
+            return "기안 상신 실패";
+        }
+    }
+
+
+
     @Transactional
     public Object insertApvVacation(ApvFormDTO apvFormDTO) {
 
