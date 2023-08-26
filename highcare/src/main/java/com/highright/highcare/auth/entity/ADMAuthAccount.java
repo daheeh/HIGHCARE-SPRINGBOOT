@@ -17,7 +17,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class ADMAuthAccount implements Serializable {
 
-//    private static final long serialVersionUID = 1L; // 추가
+    private static final long serialVersionUID = 1L; // 추가
 
     @Id
     @Column(name="AUTH_CODE")

@@ -1,5 +1,6 @@
 package com.highright.highcare.config;
 
+import com.highright.highcare.auth.service.CustomOauth2UserService;
 import com.highright.highcare.jwt.JwtAccessDeniedHandler;
 import com.highright.highcare.jwt.JwtAuthenticationEntryPoint;
 import com.highright.highcare.jwt.TokenProvider;
@@ -28,6 +29,8 @@ public class SecurityConfig {
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 403 code
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;            // 401 code
+
+    private final CustomOauth2UserService customOauth2UserService;
 
     // 시큐리티 설정무시 정적 리소스 빈 등록
     @Bean
@@ -67,6 +70,12 @@ public class SecurityConfig {
                 .cors()
             .and()
                 .apply(new JwtSecurityConfig(tokenProvider)) // jwt시큐리티설정파일 적용하기
+            .and()
+                .logout().logoutSuccessUrl("/")
+            .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(sustomOauth2UserSErvice)
                 ;
                 // oauth2 추가하기
         return http.build();
