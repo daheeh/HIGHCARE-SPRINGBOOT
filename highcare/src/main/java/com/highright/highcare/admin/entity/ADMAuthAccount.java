@@ -11,13 +11,16 @@ import java.io.Serializable;
 @Table(name="TBL_AUTH_ACCOUNT")
 @Getter
 @Setter
-public class ADMAuthAccount implements Serializable {
+public class ADMAuthAccount {
 
-    private static final long serialVersionUID = 1L; // 추가
+//    private static final long serialVersionUID = 1L; // 추가
 
 
     @EmbeddedId
+    @Id
     private ADMAuthAccountId id;
+
+
 
     @Builder
     public ADMAuthAccount(ADMAuthAccountId id) {

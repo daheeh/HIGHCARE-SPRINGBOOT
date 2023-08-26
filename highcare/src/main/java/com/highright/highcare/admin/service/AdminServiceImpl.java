@@ -34,19 +34,24 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Object selectMember(int empNo) {
 
-        // 리빌딩 --- 전체 사원 조회 (if 이미 회원인 사원은 조회불가)
-        ADMEmployee findMember = admEmployeeRepository.findById(empNo).get();
+        ADMAccount isExist = admAccountRepository.findByEmpNo(empNo);
+        if(isExist != null){
 
-        log.info("[AdminServiceImpl] selectMember : findMember ==== {}",findMember);
+            // 리빌딩 --- 전체 사원 조회 (if 이미 회원인 사원은 조회불가)
+            ADMEmployee findMember = admEmployeeRepository.findById(empNo).get();
 
-        return  RequestMemberDTO.builder()
-                .empNo(findMember.getEmpNo())
-                .Name(findMember.getName())
-                .jobName(findMember.getJobCode().getJobName())
-                .deptName(findMember.getDeptCode().getDeptName())
-                .phone(findMember.getPhone())
-                .email(findMember.getEmail())
-                .build();
+            log.info("[AdminServiceImpl] selectMember : findMember ==== {}",findMember);
+
+            return  RequestMemberDTO.builder()
+                    .empNo(findMember.getEmpNo())
+                    .Name(findMember.getName())
+                    .jobName(findMember.getJobCode().getJobName())
+                    .deptName(findMember.getDeptCode().getDeptName())
+                    .phone(findMember.getPhone())
+                    .email(findMember.getEmail())
+                    .build();
+        }
+        return "이미 존재하는 회원입니다.";
     }
 
     @Transactional

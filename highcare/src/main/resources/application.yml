@@ -15,6 +15,7 @@ spring:
   web:
     resources:
       static-locations: classpath:/images/
+      add-mappings: false
   # cookie
   server:
     servlet:
@@ -46,8 +47,10 @@ spring:
       hibernate.enable_lazy_load_no_trans: true
       hibernate:
         '[format_sql]': true
-    hibernate:
-      use-new-id-generator-mappings: true
+        use-new-id-generator-mappings: true
+        dialect: org.hibernate.dialect.Oracle10gDialect
+  mvc:
+    throw-exception-if-no-handler-found: true
 # jwt secret key
 jwt:
   secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
