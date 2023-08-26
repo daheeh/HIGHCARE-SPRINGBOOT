@@ -12,6 +12,7 @@ import javax.persistence.Id;
 @ToString
 public class ADMAuthAccountDTO {
 
+    // 수정
     private String authCode;
 
     private String id;
