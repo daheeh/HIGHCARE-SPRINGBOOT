@@ -37,10 +37,7 @@ public class ApprovalController {
         Criteria criteria = new Criteria(Integer.valueOf(offset), 15); // parseInt 사용해도 됨
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-        /* 1. offset의 번호에 맞는 페이지에 뿌려줄 Product들 */
         pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo,apvStatus, criteria));
-
-        /* 2. PageDTO : 화면에서 페이징 처리에 필요한 정보들 */
         pagingResponseDTO.setPageInfo(new PageDTO(criteria, total));
 
         List<ApvFormDTO> writeApvStatusApvList = approvalService.selectWriteApvStatusApvList(empNo, apvStatus);
@@ -142,9 +139,19 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFamilyEvent(apvFormDTO)));
     }
 
+    /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
+    @PostMapping("/insert/exp7")
+    public ResponseEntity<ResponseDTO> insertApvCorpCard(@RequestBody ApvFormDTO apvFormDTO){
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvCorpCard(apvFormDTO)));
+    }
+
+
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @PostMapping("/insert/hrm1")
-    public ResponseEntity<ResponseDTO> insertApvHrm1(@RequestBody ApvFormDTO apvFormDTO){
+    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormDTO apvFormDTO){
 
         return ResponseEntity
                 .ok()
@@ -153,7 +160,7 @@ public class ApprovalController {
 
     /* 전자결재 - 인사 : hrm3 서류발급신청서 */
     @PostMapping("/insert/hrm3")
-    public ResponseEntity<ResponseDTO> insertApvHrm3(@RequestBody ApvFormDTO apvFormDTO){
+    public ResponseEntity<ResponseDTO> insertApvIssuance(@RequestBody ApvFormDTO apvFormDTO){
 
         return ResponseEntity
                 .ok()

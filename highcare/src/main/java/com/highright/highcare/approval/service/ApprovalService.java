@@ -210,6 +210,36 @@ public class ApprovalService {
         }
     }
 
+    /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
+    @Transactional
+    public Object insertApvCorpCard(ApvFormDTO apvFormDTO) {
+        log.info("[ApprovalService] insertApvCorpCard --------------- start ");
+
+        try {
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+
+            if (apvFormDTO.getApvCorpCards()!= null) {
+                List<ApvCorpCard> apvCorpCards = new ArrayList<>();
+                for (ApvCorpCardDTO corpCardDTO : apvFormDTO.getApvCorpCards()) {
+                    ApvCorpCard apvCorpCard = modelMapper.map(corpCardDTO, ApvCorpCard.class);
+                    apvCorpCard.setApvForm(apvForm);
+                    apvCorpCards.add(apvCorpCard);
+                }
+                apvForm.setApvCorpCards(apvCorpCards);
+            }
+
+            approvalRepository.save(apvForm);
+
+            log.info("[ApprovalService] insertApvCorpCard --------------- end ");
+            return "기안 상신 성공";
+        } catch (Exception e){
+            log.error("[ApprovalService] Error insertApvCorpCard : " + e.getMessage());
+            return "기안 상신 실패";
+        }
+    }
+
+
+
 
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */

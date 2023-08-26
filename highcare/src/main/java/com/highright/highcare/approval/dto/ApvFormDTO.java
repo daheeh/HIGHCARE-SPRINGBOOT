@@ -27,6 +27,7 @@ public class ApvFormDTO {
     /* 지출 */
     private List<ApvExpFormDTO> apvExpForms;
     private List<ApvFamilyEventDTO> apvFamilyEvents;
+    private List<ApvCorpCardDTO> apvCorpCards;
 
     /* 인사 */
     private List<ApvVacationDTO> apvVacations;

@@ -2,6 +2,7 @@ package com.highright.highcare.approval.dto;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import java.sql.Date;
 
 @AllArgsConstructor
@@ -11,8 +12,13 @@ import java.sql.Date;
 @ToString
 public class ApvCorpCardDTO {
 
-    private String apvNo;
+    private Long itemsNo;
     private String cardNo;
-    private Number paymentMonth;
+    private int paymentMonth;
+    private String details;
+    private String account;
+    private int amount;
+    private String cardComment;
 
+    private ApvFormDTO apvFormDTO;
 }
