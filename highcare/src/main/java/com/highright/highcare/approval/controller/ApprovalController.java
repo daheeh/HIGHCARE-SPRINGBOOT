@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/approval")
@@ -26,6 +27,29 @@ public class ApprovalController {
         this.approvalService = approvalService;
     }
 
+
+    /* Apv메인페이지 - 조건별 현황 1 */
+    @GetMapping("/writeMain")
+    public ResponseEntity<ResponseDTO> selectWriteApv(@RequestParam int empNo){
+
+        Map<String, Integer> countsMap = approvalService.selectWriteApv(empNo);
+
+        System.out.println("countsMap = " + countsMap);
+
+        if(countsMap.isEmpty()){
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , countsMap));
+    }
+
+
+
+
     /* 전자결재 결재함 조회 */
     @GetMapping("/write")
     public ResponseEntity<ResponseDTO> selectWriteApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus
@@ -34,7 +58,7 @@ public class ApprovalController {
         log.info("[ProductController] selectProductListWithPaging => offset : {} ", offset);
 
         int total = approvalService.selectWriteApvStatusTotal(empNo,apvStatus);
-        Criteria criteria = new Criteria(Integer.valueOf(offset), 15); // parseInt 사용해도 됨
+        Criteria criteria = new Criteria(Integer.valueOf(offset), 15);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
         pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo,apvStatus, criteria));
@@ -52,6 +76,9 @@ public class ApprovalController {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , writeApvStatusApvList));
     }
+
+
+
 
     @GetMapping("/")
 

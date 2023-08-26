@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +33,25 @@ public class ApprovalService {
         this.approvalRepository = approvalRepository;
         this.modelMapper = modelMapper;
     }
+
+    /* Apv메인페이지 - 조건별 현황 1 */
+    public Map<String, Integer> selectWriteApv(int empNo) {
+        log.info("[ApprovalService] selectWriteApv --------------- start ");
+
+        int countInProgress = approvalRepository.countByEmpNoAndApvStatus(empNo, "결재진행중");
+        int countUrgency = approvalRepository.countByEmpNoAndIsUrgency(empNo, "T");
+        int countRejected = approvalRepository.countByEmpNoAndApvStatus(empNo, "반려");
+
+        Map<String, Integer> counts = new HashMap<>();
+        counts.put("countInProgress", countInProgress);
+        counts.put("countUrgency", countUrgency);
+        counts.put("countRejected", countRejected);
+
+        log.info("[ApprovalService] selectWriteApv --------------- end ");
+        return counts;
+    }
+
+
 
 
     /* 전자결재 결재함 조회 */

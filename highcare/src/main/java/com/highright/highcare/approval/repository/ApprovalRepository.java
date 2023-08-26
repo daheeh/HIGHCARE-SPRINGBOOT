@@ -18,4 +18,7 @@ public interface ApprovalRepository extends JpaRepository<ApvForm, Long> {
     Page<ApvForm> findByEmpNoAndApvStatus(int empNo, String apvStatus, Pageable paging);
     List<ApvForm> findByEmpNoAndTitle(int empNo, String title);
 
+    int countByEmpNoAndApvStatus(int empNo, String 결재진행중);
+
+    int countByEmpNoAndIsUrgency(int empNo, String t);
 }

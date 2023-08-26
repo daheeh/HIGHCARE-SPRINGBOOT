@@ -39,7 +39,7 @@ public class ApvForm {
     private String apvStatus;
 
     @Column(name = "ISURGENCY")
-    private char isUrgency;
+    private String isUrgency;
 
     @Column(name = "APV_CATEGORY")
     private String category;
