@@ -22,5 +22,6 @@ public class ApvExpFormDTO {
     private int amount;
     private String comment;
 
+    private Long refApvNo;
     private ApvFormDTO apvFormDTO;
 }

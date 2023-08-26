@@ -57,6 +57,10 @@ public class ApvForm {
     @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ApvMeetingLog> apvMeetingLogs = new ArrayList<>();
 
+    //    @Where(clause = "category = '업무'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvBusinessTrip> apvBusinessTrips = new ArrayList<>();
+
 
     //    @Where(clause = "category = '지출'")
     @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

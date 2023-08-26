@@ -106,3 +106,7 @@ Accept: */*
 ### 상신 기안 조회 (카테고리)
 GET http://localhost:8080/api/approval/write/999999?인사
 Accept: */*
+
+### 테스트 조회
+GET http://localhost:8080/api/approval/search/exp4?title=출장신청서&empNo=1
+Accept: */*

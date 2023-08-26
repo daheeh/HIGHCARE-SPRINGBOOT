@@ -20,9 +20,15 @@ public class ApvFormDTO {
     private String contents2;
     private int empNo;
 
+    /* 업무 */
+    private List<ApvMeetingLogDTO> apvMeetingLogs;
+    private List<ApvBusinessTripDTO> apvBusinessTrips;
+
+    /* 지출 */
     private List<ApvExpFormDTO> apvExpForms;
+    private List<ApvFamilyEventDTO> apvFamilyEvents;
+
+    /* 인사 */
     private List<ApvVacationDTO> apvVacations;
     private List<ApvIssuanceDTO> apvIssuances;
-    private List<ApvFamilyEventDTO> apvFamilyEvents;
-    private List<ApvMeetingLogDTO> apvMeetingLogs;
 }

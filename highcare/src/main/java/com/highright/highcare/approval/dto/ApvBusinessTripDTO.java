@@ -3,6 +3,7 @@ package com.highright.highcare.approval.dto;
 import lombok.*;
 
 import java.sql.Date;
+import java.sql.Time;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,9 +12,13 @@ import java.sql.Date;
 @ToString
 public class ApvBusinessTripDTO {
 
-    private String apvNo;
+    private Long itemsNo;
     private String purpose;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String startTime;
+    private String endDate;
+    private String endTime;
     private String location;
+
+    private ApvFormDTO apvFormDTO;
 }
