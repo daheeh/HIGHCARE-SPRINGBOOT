@@ -75,7 +75,7 @@ public class SecurityConfig {
             .and()
                 .oauth2Login()
                 .userInfoEndpoint()
-                .userService(sustomOauth2UserSErvice)
+                .userService(customOauth2UserService)
                 ;
                 // oauth2 추가하기
         return http.build();
