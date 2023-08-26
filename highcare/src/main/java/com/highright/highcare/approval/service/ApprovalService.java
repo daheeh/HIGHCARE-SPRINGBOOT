@@ -4,9 +4,14 @@ import com.highright.highcare.approval.dto.*;
 import com.highright.highcare.approval.entity.*;
 
 import com.highright.highcare.approval.repository.ApprovalRepository;
+import com.highright.highcare.common.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +30,43 @@ public class ApprovalService {
     public ApprovalService(ApprovalRepository approvalRepository, ModelMapper modelMapper) {
         this.approvalRepository = approvalRepository;
         this.modelMapper = modelMapper;
+    }
+
+
+    /* 전자결재 결재함 조회 */
+    public List<ApvFormDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
+        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
+
+        List<ApvForm> writeApvList = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+
+        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
+        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+    }
+
+    /* 전자결재 결재함 조회 - 페이징 */
+    public int selectWriteApvStatusTotal(int empNo, String apvStatus){
+        log.info("[ApprovalService] selectWriteApvStatusTotal --------------- start ");
+
+        List<ApvForm> writeApvList = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+
+        log.info("[ApprovalService] selectWriteApvStatusTotal --------------- end ");
+
+        return writeApvList.size();
+    }
+
+    public Object selectProductListWithPaging(int empNo, String apvStatus, Criteria criteria) {
+        log.info("[ApprovalService] selectProductListWithPaging => Start =============");
+
+        int index = criteria.getPageNum() - 1;
+        int count = criteria.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("apvNo").descending());
+
+        Page<ApvForm> result1 = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus, paging);
+        List<ApvForm> writeApvList = (List<ApvForm>) result1.getContent();
+
+        log.info("[ApprovalService] selectProductListWithPaging => end =============");
+        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+
     }
 
     /* 전자결재 - 업무 : biz1 기안서 */
@@ -71,6 +113,34 @@ public class ApprovalService {
         }
     }
 
+
+    /* 전자결재 - 업무 : biz3 출장신청서 */
+    @Transactional
+    public Object insertApvBusinessTrip(ApvFormDTO apvFormDTO) {
+        log.info("[ApprovalService] insertApvBusinessTrip --------------- start ");
+
+        try {
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+
+            if (apvFormDTO.getApvBusinessTrips() != null) {
+                List<ApvBusinessTrip> apvBusinessTrips = new ArrayList<>();
+                for (ApvBusinessTripDTO businessTripDTO : apvFormDTO.getApvBusinessTrips()) {
+                    ApvBusinessTrip apvBusinessTrip = modelMapper.map(businessTripDTO, ApvBusinessTrip.class);
+                    apvBusinessTrip.setApvForm(apvForm);
+                    apvBusinessTrips.add(apvBusinessTrip);
+                }
+                apvForm.setApvBusinessTrips(apvBusinessTrips);
+            }
+            approvalRepository.save(apvForm);
+            log.info("[ApprovalService] insertApvBusinessTrip --------------- end ");
+            return "기안 상신 성공";
+        } catch (Exception e){
+            log.error("[ApprovalService] Error insertApvBusinessTrip : " + e.getMessage());
+            return "기안 상신 실패";
+        }
+    }
+
+    /* 전자결재 - 지출 : exp1 지출결의서, exp4 출장경비정산서 */
     @Transactional
     public Object insertApvExpense(ApvFormDTO apvFormDTO) {
         log.info("[ApprovalService] insertApvExpense --------------- start ");
@@ -98,6 +168,21 @@ public class ApprovalService {
         }
     }
 
+    /* 전자결재 - 지출 : exp4 출장경비정산서 */
+    public List<ApvFormDTO> selectApvBusinessTripExp(int empNo, String title) {
+        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
+
+        List<ApvForm> apvBusinessTripList = approvalRepository.findByEmpNoAndTitle(empNo, title);
+        System.out.println("empNo = " + empNo);
+        System.out.println("title = " + title);
+        System.out.println("apvBusinessTripList = " + apvBusinessTripList);
+        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
+        return apvBusinessTripList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+    }
+
+
+
+    /* 전자결재 - 지출 : exp6 경조금 신청서 */
     @Transactional
     public Object insertApvFamilyEvent(ApvFormDTO apvFormDTO) {
         log.info("[ApprovalService] insertApvFamilyEvent --------------- start ");
@@ -127,6 +212,7 @@ public class ApprovalService {
 
 
 
+    /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @Transactional
     public Object insertApvVacation(ApvFormDTO apvFormDTO) {
 
@@ -155,6 +241,7 @@ public class ApprovalService {
         }
     }
 
+    /* 전자결재 - 인사 : hrm3 서류발급신청서 */
     @Transactional
     public Object insertApvIssuance(ApvFormDTO apvFormDTO) {
 
@@ -183,15 +270,6 @@ public class ApprovalService {
         }
     }
 
-
-    public List<ApvFormDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
-        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
-
-        List<ApvForm> writeApvList = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
-
-        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
-        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
-    }
 
 
 
