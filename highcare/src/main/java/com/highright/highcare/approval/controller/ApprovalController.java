@@ -47,6 +47,23 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , countsMap));
     }
 
+    /* Apv메인페이지 - 리스트 */
+    @GetMapping("/apvList")
+    public ResponseEntity<ResponseDTO> selectMyApvList(@RequestParam int empNo){
+
+        List<ApvFormDTO> myApvList = approvalService.selectMyApvList(empNo);
+        System.out.println("myApvList = " + myApvList);
+
+        if(myApvList.isEmpty()){
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , myApvList));
+    }
 
 
 

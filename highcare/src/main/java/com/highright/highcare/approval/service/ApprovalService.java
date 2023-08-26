@@ -51,7 +51,15 @@ public class ApprovalService {
         return counts;
     }
 
+    /* Apv메인페이지 - 리스트 */
+    public List<ApvFormDTO> selectMyApvList(int empNo) {
+        log.info("[ApprovalService] selectMyApvList --------------- start ");
 
+        List<ApvForm> writeApvList = approvalRepository.findTitlesByEmpNo(empNo);
+
+        log.info("[ApprovalService] selectMyApvList --------------- end ");
+        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+    }
 
 
     /* 전자결재 결재함 조회 */
