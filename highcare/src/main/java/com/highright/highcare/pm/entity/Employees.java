@@ -64,6 +64,9 @@ public class Employees {
     @JoinColumn(name="JOB_CODE")
     private PmJob job;
 
+//    @ManyToOne
+//    @JoinColumn(name="DEPT_CODE")
+//    private Departments dep;
 
 }
 

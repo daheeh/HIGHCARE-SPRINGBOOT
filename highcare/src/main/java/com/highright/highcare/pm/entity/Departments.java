@@ -34,12 +34,14 @@ public class Departments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UPPER_CODE", insertable = false, updatable = false)
-    private PmDepartment parent;
+    private Departments parent;
 
     @OneToMany(mappedBy = "parent")
-    private List<PmDepartment> children = new ArrayList<>();
+    private List<Departments> children = new ArrayList<>();
 
     @OneToMany(mappedBy = "deptCode")
-    private List<Employees> employees;
+    private List<Employees> employeesList;
+    // 부서조회
+    // 부서// 사원+직급 두개의 쿼리문 날려서 하나로 합치기
 
 }

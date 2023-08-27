@@ -43,8 +43,6 @@ public class PmEmployeeContorller {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
     }
 
-    //쿼리메소드에있는 내용만 바꾸면 된다..
-    // 사원 상세조회
     @GetMapping("/search")
     public ResponseEntity<ResponseDTO> selectEmployeeList(
             @RequestParam(name = "offset",defaultValue = "1", required = false) String offset, @RequestBody String empName){
@@ -96,26 +94,11 @@ public class PmEmployeeContorller {
 
     @GetMapping("secondDept")
     public ResponseEntity<ResponseDTO> secondDept() {
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"부서조회성공", employeeService.secondDept()));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"사원조회성공", employeeService.secondDept()));
     }
 
 
 
-
-//    @GetMapping("/empde")
-//    public ResponseEntity<ResponseDTO> selectEmployeeWithDepartment(@RequestParam(name="offset", defaultValue="1") String offset){
-//        log.info("selectEmployeeDpartment ================ : " + offset);
-//        int total = employeeService.selectEmployeeTotal();
-//
-//        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
-//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-//        pagingResponseDTO.setData(employeeService.selectEmployeeWithDepartment(cri));
-//        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
-//
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",pagingResponseDTO));
-//
-//
-//    }
 
 
 }
