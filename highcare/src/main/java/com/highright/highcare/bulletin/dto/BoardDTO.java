@@ -33,9 +33,11 @@ public class BoardDTO {
 
     private char allowComments;
 
-    private BulletinCategories bulletinCategories;
+    private BulletinCategoriesDTO bulletinCategories;
 
-    private BulletinEmployee BulletinEmployee;
+    private BulletinEmployeeDTO BulletinEmployee;
+
+    private int categoryCode;
 
 
 }

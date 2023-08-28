@@ -1,6 +1,7 @@
 package com.highright.highcare.bulletin.sevice;
 
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
+import com.highright.highcare.bulletin.dto.BulletinEmployeeDTO;
 import com.highright.highcare.bulletin.entity.BulletinCategories;
 import com.highright.highcare.bulletin.repository.BoardRepository;
 import com.highright.highcare.common.Criteria;
@@ -104,11 +105,25 @@ public class BoardService {
         System.out.println(boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList()));
         return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
     }
-
+    @Transactional
     public Object selectBoard(int code) {
         Board board = boardRepository.findById(code).get();
+        board.setViews(board.getViews()+1);
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
 
         return boardDTO;
+    }
+    @Transactional
+    public Object insertBoard(BoardDTO boardDTO) {
+//        BulletinCategories bulletinCategories = boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode());
+            BulletinCategoriesDTO bulletinCategoriesDTO = modelMapper.map(boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode()), BulletinCategoriesDTO.class);
+        boardDTO.setBulletinCategories(bulletinCategoriesDTO);
+        // 임시용
+       BulletinEmployeeDTO bulletinEmployeeDTO = new BulletinEmployeeDTO(1,"봄","spring0820@gmail.com","010-1234-5678","123456-7891011",null,null,'N',5,4,"서울시종로구","종로대학교","010-1234-5678");
+        boardDTO.setBulletinEmployee(bulletinEmployeeDTO);
+        Board board = modelMapper.map(boardDTO, Board.class);
+        boardRepository.save(board);
+
+        return 1;
     }
 }

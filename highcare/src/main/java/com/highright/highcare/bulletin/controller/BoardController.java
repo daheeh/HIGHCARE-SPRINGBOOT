@@ -1,5 +1,6 @@
 package com.highright.highcare.bulletin.controller;
 
+import com.highright.highcare.bulletin.dto.BoardDTO;
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
 import com.highright.highcare.bulletin.sevice.BoardService;
 import com.highright.highcare.common.Criteria;
@@ -65,4 +66,9 @@ public class BoardController {
 //                .ok()
 //                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
 //    }
+    @PostMapping("/insertBoard")
+    public ResponseEntity<ResponseDTO> insertBoard(@RequestBody BoardDTO boardDTO){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(),"글쓰기 성공",boardService.insertBoard(boardDTO)));
+
+    }
 }
