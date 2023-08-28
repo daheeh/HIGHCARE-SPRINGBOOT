@@ -1,30 +1,26 @@
 package com.highright.highcare.pm.entity;
 
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 
+
 @Entity
 @Table(name="TBL_EMPLOYEE")
-@SequenceGenerator(
-        name="EMPLOYEE_SEQ_GENERATOR",
-        sequenceName = "SEQ_EMPLOYEE_CODE",
-        initialValue = 1, allocationSize = 1
-)
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Employees {
+public class ReEmployee {
+
     @Id
     @Column(name = "EMP_NO")
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "EMPLOYEE_SEQ_GENERATOR"
-    )
     private int empNo;
 
     @Column(name = "NAME")
@@ -62,11 +58,12 @@ public class Employees {
 
     @ManyToOne
     @JoinColumn(name="JOB_CODE")
-    private PmJob job;
-
+    private ReJob reJob;
+//
 //    @ManyToOne
 //    @JoinColumn(name="DEPT_CODE")
-//    private Departments dep;
+//    private ReDepartment reDepartment;
+
 
 }
 

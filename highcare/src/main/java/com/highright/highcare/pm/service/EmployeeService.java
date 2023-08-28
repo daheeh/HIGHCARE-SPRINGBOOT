@@ -3,14 +3,20 @@ package com.highright.highcare.pm.service;
 import com.highright.highcare.common.Criteria;
 
 //import com.highright.highcare.pm.dto.PmEmployeeAndDepartmentDTO;
+import com.highright.highcare.pm.dto.DeAndEmpDTO;
+import com.highright.highcare.pm.dto.DepartmentDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.*;
 //import com.highright.highcare.pm.entity.PmEmployeeAndPmDepartment;
-import com.highright.highcare.pm.repository.DepartmentRepository;
+//import com.highright.highcare.pm.repository.DepartmentRepository;
 import com.highright.highcare.pm.repository.EmployeeRepository;
 import com.highright.highcare.pm.repository.PmDepartmentRepository;
 //import com.highright.highcare.pm.repository.PmJobRepository;
 //import com.highright.highcare.pm.repository.PmEmployeeAndPmDepartmentRepository;
+//import com.highright.highcare.pm.repository.ReDepartmentRepository;
+//import com.highright.highcare.pm.repository.ReEmployeeRepository;
+//import com.highright.highcare.pm.repository.ReDepartmentRepository;
+import com.highright.highcare.pm.repository.ReEmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -37,19 +43,20 @@ public class EmployeeService {
 
     private final PmDepartmentRepository pmDepartmentRepository;
 
-    private final DepartmentRepository departmentRepository;
+    private final ReEmployeeRepository reEmployeeRepository;
 
 
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
-            DepartmentRepository departmentRepository , PmDepartmentRepository pmDepartmentRepository
-    ) {
+                            PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
+                           ){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
-        this.departmentRepository = departmentRepository;
+        this.reEmployeeRepository = reEmployeeRepository;
     }
 
+    /* 토탈 */
     public int selectEmployeeTotal() {
         List<PmEmployee> pmEmployeeList = employeeRepository.findByIsResignation('N');
         log.info("size: {}", pmEmployeeList);
@@ -99,6 +106,7 @@ public class EmployeeService {
         return pmEmployeeList.size();
     }
 
+    /* 사원 검색 */
     public List<PmEmployeeDTO> selectEmployeeSearchList(Criteria cri, String search) {
         System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
         int index = cri.getPageNum() -1;
@@ -138,43 +146,16 @@ public class EmployeeService {
         return (result > 0)? "사원 등록 성공": "사원 등록 실패";
     }
 
-    /* 사원 및 부서 조회*/
+    /* 사원 및 부서 조회 // 트리뷰 */
     public PmDepartmentResult selectDept() {
         List<PmDepartment> deptList = pmDepartmentRepository.findAll();
         PmDepartmentResult result =  deptList.stream().map(PmDepartmentResult::new).collect(Collectors.toList()).get(0);
         return result;
     }
 
-    /* 간단 조직도 */
-//    public List<DepartementResult> secondDept() {
-//        List<Departments> secondList = departmentRepository.findAll();
-//        List<DepartementResult> result = secondList.stream().map(DepartementResult::new).collect(Collectors.toList());
-//        return result;
-//    }
-//    public List<DepartmentDTO> secondDept() {
-//        List<Departments> secondList = departmentRepository.findAll();
-////        secondList.stream().map().collect(Collectors.toList());
-////        secondList.forEach(System.out::println);
-//        return secondList.stream().map(second -> modelMapper.map(second, DepartmentDTO.class)).collect(Collectors.toList());
-//    }
-    ////
-    public List<DepartementResult> secondDept() {
-        List<Departments> secondList = departmentRepository.findAll();
-        List<DepartementResult> result = new ArrayList<>();
-
-        for (Departments department : secondList) {
-            List<Employees> employeesList = department.getEmployeesList();
-            Employees firstEmployee = (employeesList != null && !employeesList.isEmpty()) ? employeesList.get(0) : null;
-            DepartementResult departmentResult = new DepartementResult(department, employeesList);
-            result.add(departmentResult);
-        }
-
-        return result;
-    }
-
-    /* 사원 등록 */
 
 
+    /* 사원 수정 */
     @Transactional
     public String updateEmployee(PmEmployeeDTO pmEmployeeDTO) {
         log.info("[ProductService] updateEmployee Start ===================================");
@@ -203,6 +184,45 @@ public class EmployeeService {
 
         return (result > 0)? "사원 수정 성공": "사원 수정 실패";
 
+    }
+
+    /* 라인 트리뷰 */
+    public Object secondDept() {
+
+        log.info("[EmployeeService] secondDept start ==================================================");
+
+        List<PmDepartment>  pmList = pmDepartmentRepository.findAll();
+
+        List<DeAndEmpDTO> list = new ArrayList<>();
+        for(PmDepartment pm : pmList) {
+            if (pm.getDeptCode() != 0) {
+                DeAndEmpDTO dept = new DeAndEmpDTO();
+                dept.setId(pm.getDeptCode());
+                dept.setText(pm.getName());
+                dept.setParent(pm.getUpperCode() == null ? 0 : pm.getUpperCode());
+                dept.setDroppable(true);
+//            dept.setName(null);
+//            dept.setJobName(null);
+
+                list.add(dept);
+            }
+        }
+        List<ReEmployee> empList = reEmployeeRepository.findAll();
+        System.out.println("empList = " + empList);
+        for(ReEmployee emp : empList) {
+            if (emp.getEmpNo() != 0) {
+                DeAndEmpDTO dept = new DeAndEmpDTO();
+                dept.setId(emp.getEmpNo());
+                dept.setText(emp.getEmpName() + " " + emp.getReJob().getJobName());
+                dept.setParent(emp.getDeptCode());
+                dept.setName(emp.getEmpName());
+                dept.setJobName(emp.getReJob().getJobName());
+
+                list.add(dept);
+            }
+        }
+        System.out.println("result===================>" + list);
+        return list;
     }
 
 

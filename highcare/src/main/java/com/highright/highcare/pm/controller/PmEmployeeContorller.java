@@ -24,6 +24,7 @@ public class PmEmployeeContorller {
         this.employeeService = employeeService;
     }
 
+    /* 사원 전체 조회 */
     @GetMapping("/all")
     public ResponseEntity<ResponseDTO> selectEmployeeAllList(
             @RequestParam(name = "offset", defaultValue = "1") String offset){
@@ -43,6 +44,7 @@ public class PmEmployeeContorller {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
     }
 
+    /* 사원 검색 */
     @GetMapping("/search")
     public ResponseEntity<ResponseDTO> selectEmployeeList(
             @RequestParam(name = "offset",defaultValue = "1", required = false) String offset, @RequestBody String empName){
@@ -74,11 +76,8 @@ public class PmEmployeeContorller {
                         employeeService.insertPmEmployee(pmEmployeeDTO)));
     }
 
-//    @GetMapping("/department")
-//    public ResponseEntity<?> getPmDepartmentList() {
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"부서 조회 성공", employeeService.getPmDepartmentList()));
-//    }
 
+    /* 트리뷰 */
     @GetMapping("selectDept")
     public ResponseEntity<ResponseDTO> selectDept() {
 
@@ -92,11 +91,11 @@ public class PmEmployeeContorller {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "사원 수정 성공", employeeService.updateEmployee(pmEmployeeDTO)));
     }
 
+    /* 라인 트리뷰 */
     @GetMapping("secondDept")
     public ResponseEntity<ResponseDTO> secondDept() {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"사원조회성공", employeeService.secondDept()));
     }
-
 
 
 
