@@ -1,9 +1,15 @@
 package com.highright.highcare.bulletin.sevice;
 
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
+import com.highright.highcare.bulletin.dto.BulletinEmployeeDTO;
 import com.highright.highcare.bulletin.entity.BulletinCategories;
 import com.highright.highcare.bulletin.repository.BoardRepository;
+import com.highright.highcare.common.Criteria;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.highright.highcare.bulletin.dto.BoardDTO;
 import com.highright.highcare.bulletin.entity.Board;
@@ -11,6 +17,7 @@ import com.highright.highcare.bulletin.repository.BoardCategoryRepository;
 
 import javax.transaction.Transactional;
 import java.beans.Transient;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,15 +73,63 @@ public class BoardService {
 
     public int selectBoardTotal(int boardCategoryCode) {
         System.out.println("서비스까지 옴");
+        List<Board> boardList;
         if(boardCategoryCode>2) {
-            List<Board> boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
-            System.out.println(boardList);
-            System.out.println("3이상");
+            boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
+            System.out.println("3이상" + boardList.size());
         }else{
-            List<Board> boardList = boardRepository.findByDeleteYn('N');
-            System.out.println(boardList);
-            System.out.println("2이하");
+             boardList = boardRepository.findByDeleteYn('N');
+            System.out.println("2이하" + boardList.size());
         }
+
+        return boardList.size();
+    }
+
+    public Object selectBoardListWithPaging(Criteria cri, int boardCategoryCode) {
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("bulletinCode").descending());
+
+        Page<Board> result;
+        if(boardCategoryCode>2) {
+            result = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode),paging);
+
+        }else{
+            result = boardRepository.findByDeleteYn('N',paging);
+        }
+
+
+        List<Board> boardList = (List<Board>)result.getContent();
+        System.out.println("서비스 ");
+        System.out.println(boardList);
+        System.out.println("보내줄 값");
+        System.out.println(boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList()));
+        return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+    }
+    @Transactional
+    public Object selectBoard(int code) {
+        Board board = boardRepository.findById(code).get();
+        board.setViews(board.getViews()+1);
+        BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
+
+        return boardDTO;
+    }
+    @Transactional
+    public Object insertBoard(BoardDTO boardDTO) {
+//        BulletinCategories bulletinCategories = boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode());
+            BulletinCategoriesDTO bulletinCategoriesDTO = modelMapper.map(boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode()), BulletinCategoriesDTO.class);
+        boardDTO.setBulletinCategories(bulletinCategoriesDTO);
+        // 임시용
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        boardDTO.setCreationDate(sqlDate);
+        boardDTO.setModifiedDate(sqlDate);
+        boardDTO.setDeleteYn('N');
+        BulletinEmployeeDTO bulletinEmployeeDTO = new BulletinEmployeeDTO(1,"봄","spring0820@gmail.com","010-1234-5678","123456-7891011",null,null,'N',5,4,"서울시종로구","종로대학교","010-1234-5678");
+        boardDTO.setBulletinEmployee(bulletinEmployeeDTO);
+        Board board = modelMapper.map(boardDTO, Board.class);
+        boardRepository.save(board);
 
         return 1;
     }
