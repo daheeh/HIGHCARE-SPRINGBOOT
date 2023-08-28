@@ -17,6 +17,7 @@ import com.highright.highcare.bulletin.repository.BoardCategoryRepository;
 
 import javax.transaction.Transactional;
 import java.beans.Transient;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -119,7 +120,13 @@ public class BoardService {
             BulletinCategoriesDTO bulletinCategoriesDTO = modelMapper.map(boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode()), BulletinCategoriesDTO.class);
         boardDTO.setBulletinCategories(bulletinCategoriesDTO);
         // 임시용
-       BulletinEmployeeDTO bulletinEmployeeDTO = new BulletinEmployeeDTO(1,"봄","spring0820@gmail.com","010-1234-5678","123456-7891011",null,null,'N',5,4,"서울시종로구","종로대학교","010-1234-5678");
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        boardDTO.setCreationDate(sqlDate);
+        boardDTO.setModifiedDate(sqlDate);
+        boardDTO.setDeleteYn('N');
+        BulletinEmployeeDTO bulletinEmployeeDTO = new BulletinEmployeeDTO(1,"봄","spring0820@gmail.com","010-1234-5678","123456-7891011",null,null,'N',5,4,"서울시종로구","종로대학교","010-1234-5678");
         boardDTO.setBulletinEmployee(bulletinEmployeeDTO);
         Board board = modelMapper.map(boardDTO, Board.class);
         boardRepository.save(board);
