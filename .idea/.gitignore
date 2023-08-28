@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/react,intellij,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,intellij,visualstudiocode
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+=======
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47
 HELP.md
 .gradle
 build/
@@ -48,6 +51,7 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
+<<<<<<< HEAD
 .vscode/
 
 # User-specific stuff
@@ -195,3 +199,6 @@ sketch
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/react,intellij,visualstudiocode
+=======
+.vscode/
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47

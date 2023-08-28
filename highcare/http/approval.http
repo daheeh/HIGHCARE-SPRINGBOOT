@@ -1,10 +1,112 @@
-### 전자결재
-GET http://localhost:8002//api/approval
+### 기안 상신 - 기본 테스트
+POST http://localhost:8080/api/approval/insert
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+{
+  "title": "타이틀",
+  "writeDate": "2023-08-18",
+  "apvStatus": "결재완료",
+  "isUrgency": "F",
+  "category": "인사",
+  "contents1": "내용1",
+  "contents2": "내용2",
+  "empNo": 1
+}
+
+### 지출결의서 상신
+POST http://localhost:8080/api/approval/insert/exp1
 Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
 
 {
 
-
+  "title": "타이틀",
+  "writeDate": "2023-08-18",
+  "apvStatus": "결재진행중",
+  "isUrgency": "F",
+  "category": "지출",
+  "empNo": 888888,
+  "apvExpForms": [
+    {
+    "requestDate": "2023-08-20",
+    "payee": "김나경",
+    "bank": "우리은행",
+    "accountHolder": "김나경",
+    "accountNumber": "111-111-1111",
+    "details": "책상",
+    "account": "비품",
+    "amount": 1,
+    "comment": "첫구매"
+    },
+    {
+      "requestDate": "2023-08-20",
+      "payee": "김나경",
+      "bank": "우리은행",
+      "accountHolder": "김나경",
+      "accountNumber": "111-111-1111",
+      "details": "의자",
+      "account": "비품",
+      "amount": 1,
+      "comment": "첫구매"
+    }
+  ]
 }
+
+### 지출결의서 상신
+POST http://localhost:8080/api/approval/insert/exp2
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+{
+
+  "title": "타이틀",
+  "writeDate": "2023-08-18",
+  "apvStatus": "결재진행중",
+  "isUrgency": "F",
+  "category": "지출",
+  "empNo": 888888,
+  "apvExpForms": [
+    {
+      "requestDate": "2023-08-20",
+      "payee": "김나경",
+      "bank": "우리은행",
+      "accountHolder": "김나경",
+      "accountNumber": "111-111-1111",
+      "details": "책상",
+      "account": "비품",
+      "amount": 1,
+      "comment": "첫구매"
+    },
+    {
+      "requestDate": "2023-08-20",
+      "payee": "김나경",
+      "bank": "우리은행",
+      "accountHolder": "김나경",
+      "accountNumber": "111-111-1111",
+      "details": "의자",
+      "account": "비품",
+      "amount": 1,
+      "comment": "첫구매"
+    }
+  ]
+}
+
+### 상신 기안 조회
+GET http://localhost:8080/api/approval/write/999999
+Accept: */*
+
+### 상신 기안 조회 (진행 상태)
+GET http://localhost:8080/api/approval/write?empNo=999999&apvStatus=결재완료
+Accept: */*
+
+### 상신 기안 조회 (카테고리)
+GET http://localhost:8080/api/approval/write/999999?인사
+Accept: */*
+
+### 테스트 조회
+GET http://localhost:8080/api/approval/search/exp4?title=출장신청서&empNo=1
+Accept: */*

@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b9bd601-0532-4c07-a151-956e2e2459e7" name="Changes" comment="apv DTO 루트 수정">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/modules/highcare.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/highcare.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/highcare.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/highcare.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -12,6 +13,12 @@
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/build.gradle" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/bin/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/bin/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" afterDir="false" />
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +58,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="2U93BGiHnAa9U7tBDErX9nB2iXO" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -79,6 +87,12 @@
       "oracle",
       "redis"
     ]
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KIM/Desktop/교육/final/highcare-springboot/highcare/src/main/java/com/highright/highcare/common&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47
   }
 }]]></component>
   <component name="RecentsManager">
@@ -90,10 +104,18 @@
       <recent name="C:\Users\KIM\Desktop\교육\final\highcare-springboot\highcare\src\main\java\com\highright\highcare\common" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.highright.highcare.approval.entity" />
+      <recent name="com.highright.highcare.approval.dto" />
       <recent name="com.highright.highcare.config" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HighcareApplication">
+<<<<<<< HEAD
+=======
+    <configuration name="approval | 기안 상신" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/approval.http" requestIdentifier="기안 상신" runType="Run single request">
+      <method v="2" />
+    </configuration>
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47
     <configuration name="HighcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="highcare.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.HighcareApplication" />
@@ -101,6 +123,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="WebSocketApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="highcare.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.WebSocketApplication" />
@@ -117,6 +140,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.WebSocketApplication" />
+=======
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.approval | 기안 상신" />
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47
       </list>
     </recent_temporary>
   </component>
@@ -129,6 +157,7 @@
       <option name="project" value="LOCAL" />
       <updated>1692324477418</updated>
     </task>
+<<<<<<< HEAD
     <task active="true" id="Default" summary="Default task">
       <changelist id="2b9bd601-0532-4c07-a151-956e2e2459e7" name="Changes" comment="apv DTO 루트 수정" />
       <created>1692337831898</created>
@@ -141,11 +170,10 @@
       <workItem from="1693065763720" duration="1449000" />
       <workItem from="1693200662460" duration="326000" />
     </task>
+=======
+>>>>>>> 4c170c2b8ba36b7a04f3dc1a13c2fd927f9c8d47
     <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="apv DTO 루트 수정" />

@@ -2,11 +2,10 @@ package com.highright.highcare.approval.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_APV_FORM")
@@ -15,17 +14,72 @@ import java.sql.Date;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(
+        name = "APV_SEQ_NO",
+        sequenceName = "SEQ_APV_NO",
+        initialValue = 1, allocationSize = 1
+)
 public class ApvForm {
 
     @Id
-    @Column(name = "")
-    private String apvNo;
-    private String title;
-    private Date writeDate;
-    private String apvStatus;
-    private char isUrgency;
-    private String contents1;
-    private String contents2;
-    private Number empNo;
+    @Column(name = "APV_NO")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "APV_SEQ_NO"
+    )
+    private Long apvNo;
 
+    @Column(name = "TITLE")
+    private String title;
+
+    @Column(name = "WRITE_DATE")
+    private Date writeDate;
+
+    @Column(name = "APV_STATUS")
+    private String apvStatus;
+
+    @Column(name = "ISURGENCY")
+    private String isUrgency;
+
+    @Column(name = "APV_CATEGORY")
+    private String category;
+
+    @Column(name = "CONTENTS1")
+    private String contents1;
+
+    @Column(name = "CONTENTS2")
+    private String contents2;
+
+    @Column(name = "EMP_NO")
+    private int empNo;
+
+    //    @Where(clause = "category = '업무'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvMeetingLog> apvMeetingLogs = new ArrayList<>();
+
+    //    @Where(clause = "category = '업무'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvBusinessTrip> apvBusinessTrips = new ArrayList<>();
+
+
+    //    @Where(clause = "category = '지출'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvExpForm> apvExpForms = new ArrayList<>();
+
+    //    @Where(clause = "category = '지출'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvFamilyEvent> apvFamilyEvents = new ArrayList<>();
+
+    //    @Where(clause = "category = '지출'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvCorpCard> apvCorpCards = new ArrayList<>();
+
+
+    //    @Where(clause = "category = '인사'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvVacation> apvVacations = new ArrayList<>();
+
+    //    @Where(clause = "category = '인사'")
+    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ApvIssuance> apvIssuances = new ArrayList<>();
 }

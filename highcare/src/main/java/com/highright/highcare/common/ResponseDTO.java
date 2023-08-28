@@ -1,27 +1,27 @@
 package com.highright.highcare.common;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.http.HttpStatus;
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
+import lombok.*;
 
-/* 응답 body에 담길 객체(json문자열이 될 객체)*/
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ResponseDTO {
 
-    private int status;         // 상태코드값(200,404,415, 400, 500)
+    private int status;          // 상태코드값
+    private String message;     // 응답 매세지
+    private Object data;        // 응답 데이터
 
-    private String message;     // 응답메세지
-
-    private Object data;        // 응답데이터
-
-    public ResponseDTO() {
+    public ResponseDTO(int status, String message) {
+        this.status = status;
+        this.message = message;
     }
 
-    public ResponseDTO(HttpStatus status, String message, Object data) {
-        this.status = status.value(); // HttpStatus enum 타입에서 value라는 int형 상태 코드 값만 추출
+    public ResponseDTO(int status, String message, Object data) {
+        this.status = status;
         this.message = message;
         this.data = data;
     }
