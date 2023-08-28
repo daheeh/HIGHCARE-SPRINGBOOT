@@ -1,5 +1,6 @@
 package com.highright.highcare.approval.dto;
 
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
 
 @AllArgsConstructor
@@ -9,10 +10,13 @@ import lombok.*;
 @ToString
 public class ApvLineDTO {
 
-    private String apvLineNo;
-    private String degree;
+    private Long apvLineNo;
+    private int degree;
     private char isApproval;
-    private String apvNo;
-    private String empNo;
+    private String apvDate;
+
+    private PmEmployeeDTO employee;
+    private ApvFormDTO apvForm;
+
 
 }

@@ -98,14 +98,39 @@ public class ApprovalService {
 
     }
 
+
+    /* 전자결재 - 결재라인 insert */
+//    public Object insertApvLine(ApvLineDTO apvLineDTO) {
+//        log.info("[ApprovalService] insertApvLine --------------- start ");
+//
+//        try {
+//            ApvLine insertApvLine = modelMapper.map(apvLineDTO, ApvLine.class);
+//            approvalRepository.save(insertApvLine);
+//            log.info("[ApprovalService] insertApvLine --------------- end ");
+//            return "기안 상신 성공";
+//        } catch (Exception e){
+//            log.error("[ApprovalService] Error insertApvLine : " + e.getMessage());
+//            return "기안 상신 실패";
+//        }
+//    }
+
+
+
     /* 전자결재 - 업무 : biz1 기안서 */
     @Transactional
-    public Object insertApvForm(ApvFormDTO apvFormDTO) {
+    public Object insertApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
         log.info("[ApprovalService] insertApvForm --------------- start ");
+        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
         try {
+            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
+            List<ApvLineDTO> apvLineDTOs = apvFormWithLinesDTO.getApvLineDTOs();
             ApvForm insertApvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-            approvalRepository.save(insertApvForm);
+            List<ApvLine> apvLineList = apvLineDTOs.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+           ApvForm updateApvForm = approvalRepository.save(insertApvForm);
+           apvLineList.forEach(item -> item.setApvForm(updateApvForm));
+            updateApvForm.setApvLines(apvLineList);
+
             log.info("[ApprovalService] insertApvForm --------------- end ");
             return "기안 상신 성공";
         } catch (Exception e){
@@ -328,8 +353,6 @@ public class ApprovalService {
             return "기안 상신 실패";
         }
     }
-
-
 
 
 }

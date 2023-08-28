@@ -1,6 +1,8 @@
 package com.highright.highcare.approval.controller;
 
 import com.highright.highcare.approval.dto.ApvFormDTO;
+import com.highright.highcare.approval.dto.ApvFormWithLinesDTO;
+import com.highright.highcare.approval.dto.ApvLineDTO;
 import com.highright.highcare.approval.service.ApprovalService;
 import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
@@ -94,28 +96,42 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , writeApvStatusApvList));
     }
 
+//    @PostMapping("/insert")
+//    public ResponseEntity<ResponseDTO> insertApv(@RequestBody ApvFormDTO apvFormDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
+//    }
 
 
-
-    @GetMapping("/")
-
-    @PostMapping("/insert")
-    public ResponseEntity<ResponseDTO> insertApv(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
-    }
-
-
+    /* 전자결재 - 결재라인 insert */
+//    @PostMapping("/insert/line")
+//    public ResponseEntity<ResponseDTO> insertApvLine(@RequestBody List<ApvLineDTO> apvLineDTO){
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvLineDTO)));
+//    }
 
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
-    public ResponseEntity<ResponseDTO> insertApvForm(@RequestBody ApvFormDTO apvFormDTO){
+    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+        System.out.println("apvFormWithLinesDTO = " + apvFormWithLinesDTO);
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFormWithLines(apvFormWithLinesDTO)));
     }
+
+//
+//    @PostMapping("/insert/biz1")
+//    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormDTO apvFormDTO, @RequestBody List<ApvLineDTO> apvLineDTO){
+//        System.out.println("apvFormWithLinesDTO = ");
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFormWithLines(apvFormDTO, apvLineDTO)));
+//    }
+
+
 
     /* 전자결재 - 업무 : biz2 회의록 */
     @PostMapping("/insert/biz2")

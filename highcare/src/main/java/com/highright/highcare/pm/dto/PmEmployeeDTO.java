@@ -1,8 +1,10 @@
 package com.highright.highcare.pm.dto;
 
+import com.highright.highcare.approval.dto.ApvLineDTO;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,5 +27,5 @@ public class PmEmployeeDTO {
     private String education;
     private String telephone;
 
-
+    private List<ApvLineDTO> apvLines;
 }
