@@ -13,7 +13,7 @@ public class MyProfileFileDTO {
 
     private int photoCode;
     private int code;
-    private String orName;
+    private String name;
     private String chName;
     private Date date;
 }
