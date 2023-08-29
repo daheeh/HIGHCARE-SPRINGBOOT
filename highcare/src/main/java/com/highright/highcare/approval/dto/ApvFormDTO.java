@@ -32,4 +32,8 @@ public class ApvFormDTO {
     /* 인사 */
     private List<ApvVacationDTO> apvVacations;
     private List<ApvIssuanceDTO> apvIssuances;
+
+    /* 결재라인*/
+    private List<ApvLineDTO> apvLines;
+
 }
