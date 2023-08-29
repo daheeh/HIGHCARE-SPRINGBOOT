@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -39,5 +40,10 @@ public class BoardDTO {
 
     private int categoryCode;
 
+    private int commentCnt;
+
+    private List<CommentDTO> commentList;
+
+    private int empNo;
 
 }
