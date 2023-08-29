@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @SequenceGenerator(
-        name = "APV_SEQ_ITEMS",
+        name = "APV_SEQ_ITEMS07",
         sequenceName = "SEQ_APV_VA_ITEMS",
         initialValue = 1, allocationSize = 1
 )
@@ -23,7 +23,7 @@ public class ApvVacation {
     @Column(name = "ITEMS_NO")
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "APV_SEQ_ITEMS"
+            generator = "APV_SEQ_ITEMS07"
     )
     private Long itemNo;
 
@@ -48,7 +48,10 @@ public class ApvVacation {
     @Column(name = "OFFTYPE2")
     private String offType2;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "APV_NO")
-    private ApvForm apvForm;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "APV_NO")
+//    private ApvForm apvForm;
+
+    @Column(name = "APV_NO")
+    private Long apvNo;
 }

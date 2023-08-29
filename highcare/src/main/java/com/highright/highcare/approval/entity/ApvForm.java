@@ -54,36 +54,46 @@ public class ApvForm {
     private int empNo;
 
     //    @Where(clause = "category = '업무'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvMeetingLog> apvMeetingLogs = new ArrayList<>();
 
     //    @Where(clause = "category = '업무'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvBusinessTrip> apvBusinessTrips = new ArrayList<>();
 
 
     //    @Where(clause = "category = '지출'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvExpForm> apvExpForms = new ArrayList<>();
 
     //    @Where(clause = "category = '지출'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvFamilyEvent> apvFamilyEvents = new ArrayList<>();
 
     //    @Where(clause = "category = '지출'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvCorpCard> apvCorpCards = new ArrayList<>();
 
 
     //    @Where(clause = "category = '인사'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvVacation> apvVacations = new ArrayList<>();
 
     //    @Where(clause = "category = '인사'")
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvIssuance> apvIssuances = new ArrayList<>();
 
     // 결재라인
-    @OneToMany(mappedBy = "apvForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
+
+
 }

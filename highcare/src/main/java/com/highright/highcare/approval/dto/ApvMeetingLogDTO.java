@@ -18,6 +18,6 @@ public class ApvMeetingLogDTO {
     private String location;
     private String participants;
 
-    private ApvFormDTO apvFormDTO;
+    private Long apvNo;
 
 }

@@ -37,9 +37,8 @@ public class ApvLine {
     @Column(name = "APV_DATE")
     private String apvDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "APV_NO")
-    private ApvForm apvForm;
+    @Column(name = "APV_NO")
+    private Long apvNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMP_NO")

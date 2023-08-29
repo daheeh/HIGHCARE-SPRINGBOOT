@@ -16,7 +16,8 @@ public class ApvLineDTO {
     private String apvDate;
 
     private PmEmployeeDTO employee;
-    private ApvFormDTO apvForm;
+    private Long apvNo;
+
 
 
 }

@@ -15,5 +15,4 @@ public class ApvFormWithLinesDTO {
     private ApvFormDTO apvFormDTO;
     private List<ApvLineDTO> apvLineDTOs;
 
-
 }

@@ -96,137 +96,145 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , writeApvStatusApvList));
     }
 
-//    @PostMapping("/insert")
-//    public ResponseEntity<ResponseDTO> insertApv(@RequestBody ApvFormDTO apvFormDTO){
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvFormDTO)));
-//    }
-
-
-    /* 전자결재 - 결재라인 insert */
-//    @PostMapping("/insert/line")
-//    public ResponseEntity<ResponseDTO> insertApvLine(@RequestBody List<ApvLineDTO> apvLineDTO){
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvForm(apvLineDTO)));
-//    }
-
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
     public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
-        System.out.println("apvFormWithLinesDTO = " + apvFormWithLinesDTO);
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFormWithLines(apvFormWithLinesDTO)));
-    }
+        System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
-//
-//    @PostMapping("/insert/biz1")
-//    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormDTO apvFormDTO, @RequestBody List<ApvLineDTO> apvLineDTO){
-//        System.out.println("apvFormWithLinesDTO = ");
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFormWithLines(apvFormDTO, apvLineDTO)));
-//    }
+        Object serviceResponse =  approvalService.insertApvFormWithLines(apvFormWithLinesDTO);
+        int statusCode;
+        String responseMessage;
 
-
-
-    /* 전자결재 - 업무 : biz2 회의록 */
-    @PostMapping("/insert/biz2")
-    public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestBody ApvFormDTO apvFormDTO){
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvMeetingLog(apvFormDTO)));
-    }
-
-    /* 전자결재 - 업무 : biz3 출장신청서 */
-    @PostMapping("/insert/biz3")
-    public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestBody ApvFormDTO apvFormDTO){
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvBusinessTrip(apvFormDTO)));
-    }
-
-    /* 전자결재 - 지출 : exp1 지출결의서 */
-    @PostMapping("/insert/exp1")
-    public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormDTO)));
-    }
-
-    /* 전자결재 - 지출 : exp2 지출결의서 */
-    @PostMapping("/insert/exp2")
-    public ResponseEntity<ResponseDTO> insertApvExpense2(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormDTO)));
-    }
-
-    /* 전자결재 - 지출 : exp4 출장경비정산서 */
-    @GetMapping("/search/exp4")
-    public ResponseEntity<ResponseDTO> selectApvBusinessTripExp(@RequestParam int empNo, @RequestParam String title){
-        List<ApvFormDTO> apvBusinessTripList = approvalService.selectApvBusinessTripExp(empNo, title);
-
-        if(apvBusinessTripList.isEmpty()){
-            return ResponseEntity
-                    .ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+            if (serviceResponse.equals("기안 상신 실패")) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
         }
 
         return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , apvBusinessTripList));
+                .status(statusCode)
+            .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
-    @PostMapping("/insert/exp4")
-    public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(@RequestBody ApvFormDTO apvFormDTO){
+
+    /* 전자결재 - 업무 : biz2 회의록 */
+    @PostMapping("/insert/biz2")
+    public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
+        System.out.println("biz2 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+
+        Boolean serviceResponse = approvalService.insertApvMeetingLog(apvFormWithLinesDTO);
+        int statusCode;
+        String responseMessage;
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
 
         return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormDTO)));
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 
-    /* 전자결재 - 지출 : exp6 경조금 신청서 */
-    @PostMapping("/insert/exp6")
-    public ResponseEntity<ResponseDTO> insertApvFamilyEvent(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFamilyEvent(apvFormDTO)));
-    }
-
-    /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
-    @PostMapping("/insert/exp7")
-    public ResponseEntity<ResponseDTO> insertApvCorpCard(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvCorpCard(apvFormDTO)));
-    }
-
-
-    /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
-    @PostMapping("/insert/hrm1")
-    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvVacation(apvFormDTO)));
-    }
-
-    /* 전자결재 - 인사 : hrm3 서류발급신청서 */
-    @PostMapping("/insert/hrm3")
-    public ResponseEntity<ResponseDTO> insertApvIssuance(@RequestBody ApvFormDTO apvFormDTO){
-
-        return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvIssuance(apvFormDTO)));
-    }
-
+//    @PostMapping("/insert/biz2")
+//    public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//        System.out.println("biz2 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvMeetingLog(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 업무 : biz3 출장신청서 */
+//    @PostMapping("/insert/biz3")
+//    public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvBusinessTrip(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 지출 : exp1 지출결의서 */
+//    @PostMapping("/insert/exp1")
+//    public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormDTO apvFormDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 지출 : exp2 지출결의서 */
+//    @PostMapping("/insert/exp2")
+//    public ResponseEntity<ResponseDTO> insertApvExpense2(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 지출 : exp4 출장경비정산서 */
+//    @GetMapping("/search/exp4")
+//    public ResponseEntity<ResponseDTO> selectApvBusinessTripExp(@RequestParam int empNo, @RequestParam String title){
+//        List<ApvFormDTO> apvBusinessTripList = approvalService.selectApvBusinessTripExp(empNo, title);
+//
+//        if(apvBusinessTripList.isEmpty()){
+//            return ResponseEntity
+//                    .ok()
+//                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+//        }
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , apvBusinessTripList));
+//    }
+//    @PostMapping("/insert/exp4")
+//    public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 지출 : exp6 경조금 신청서 */
+//    @PostMapping("/insert/exp6")
+//    public ResponseEntity<ResponseDTO> insertApvFamilyEvent(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvFamilyEvent(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
+//    @PostMapping("/insert/exp7")
+//    public ResponseEntity<ResponseDTO> insertApvCorpCard(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvCorpCard(apvFormWithLinesDTO)));
+//    }
+//
+//
+//    /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
+//    @PostMapping("/insert/hrm1")
+//    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvVacation(apvFormWithLinesDTO)));
+//    }
+//
+//    /* 전자결재 - 인사 : hrm3 서류발급신청서 */
+//    @PostMapping("/insert/hrm3")
+//    public ResponseEntity<ResponseDTO> insertApvIssuance(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvIssuance(apvFormWithLinesDTO)));
+//    }
+//
 
 
 }

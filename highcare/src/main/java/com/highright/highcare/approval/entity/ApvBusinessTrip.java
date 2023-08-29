@@ -14,7 +14,7 @@ import java.sql.Time;
 @Setter
 @ToString
 @SequenceGenerator(
-        name = "SEQ_APV_ITEMS",
+        name = "SEQ_APV_ITEMS01",
         sequenceName = "SEQ_APV_BT_ITEMS",
         initialValue = 1, allocationSize = 1
 )
@@ -23,7 +23,7 @@ public class ApvBusinessTrip {
     @Column(name = "ITEMS_NO")
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_APV_ITEMS"
+            generator = "SEQ_APV_ITEMS01"
     )
     private Long itemsNo;
 
@@ -45,7 +45,6 @@ public class ApvBusinessTrip {
     @Column(name = "BT_LOCATION")
     private String location;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "APV_NO")
-    private ApvForm apvForm;
+    @Column(name = "APV_NO")
+    private Long apvNo;
 }
