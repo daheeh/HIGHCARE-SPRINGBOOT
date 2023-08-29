@@ -15,10 +15,10 @@ public class DeAndEmpDTO {
 
     private int id;
     private String text;
-    private String tel;
     private Integer parent;
     private boolean droppable;
     private String name;
     private String jobName;
+    private String deptName;
 
 }

@@ -51,7 +51,7 @@ Access-Control-Allow-Origin: *
 
 ### 간단 트리뷰
 GET http://localhost:8080/api/pm/secondDept
-Content-Type: application/jso
+Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
 

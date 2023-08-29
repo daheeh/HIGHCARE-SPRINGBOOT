@@ -44,8 +44,8 @@ public class ReEmployee {
     @Column(name = "IS_RESIGNATION")
     private char isResignation;
 
-    @Column(name = "DEPT_CODE")
-    private int deptCode;
+//    @Column(name = "DEPT_CODE")
+//    private int deptCode;
 
     @Column(name = "ADDRESS")
     private String address;
@@ -59,10 +59,10 @@ public class ReEmployee {
     @ManyToOne
     @JoinColumn(name="JOB_CODE")
     private ReJob reJob;
-//
-//    @ManyToOne
-//    @JoinColumn(name="DEPT_CODE")
-//    private ReDepartment reDepartment;
+
+    @ManyToOne
+    @JoinColumn(name="DEPT_CODE")
+    private PmDepartment reDepartment;
 
 
 }

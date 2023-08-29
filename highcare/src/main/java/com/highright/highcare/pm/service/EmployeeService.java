@@ -201,8 +201,8 @@ public class EmployeeService {
                 dept.setText(pm.getName());
                 dept.setParent(pm.getUpperCode() == null ? 0 : pm.getUpperCode());
                 dept.setDroppable(true);
-//            dept.setName(null);
-//            dept.setJobName(null);
+                dept.setJobName(null);
+                dept.setDeptName(null);
 
                 list.add(dept);
             }
@@ -214,9 +214,14 @@ public class EmployeeService {
                 DeAndEmpDTO dept = new DeAndEmpDTO();
                 dept.setId(emp.getEmpNo());
                 dept.setText(emp.getEmpName() + " " + emp.getReJob().getJobName());
-                dept.setParent(emp.getDeptCode());
+//                dept.setParent(emp.getDeptCode());
+                dept.setParent(emp.getReDepartment().getDeptCode());
                 dept.setName(emp.getEmpName());
                 dept.setJobName(emp.getReJob().getJobName());
+                dept.setDeptName(emp.getReDepartment().getName());
+
+
+
 
                 list.add(dept);
             }
