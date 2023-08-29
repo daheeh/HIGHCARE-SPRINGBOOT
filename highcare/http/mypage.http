@@ -1,6 +1,8 @@
 
 ### 프로필 회원아이디로 조회
-GET http://localhost:8080/api/mypage/profile/1
+GET http://localhost:8080/api/mypage/profile/10002
+
+
 Accept: */*
 
 ### 프로필파일 인서트 테스트
