@@ -57,6 +57,13 @@ dependencies {
 	// google email api
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '3.1.0'
+
+//	implementation 'com.fasterxml.jackson.core:jackson-core:2.10.1'
+//	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.1'
+//	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.10.1'
+//	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1'
 
 
 	compileOnly 'org.projectlombok:lombok'

@@ -33,11 +33,13 @@ public class JwtFilter extends OncePerRequestFilter {
         // 2-2. 인증을 위해 Authentication 객체를 SecurityContextHolder에 담는다.
         if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)){
             log.info("[JwtFilter] validateToken 통과 ==== {통과}");
-
             // 인증
             Authentication authentication = tokenProvider.getAuthentication(jwt);
+
             // 권한부여
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
         }
 
         filterChain.doFilter(request, response);

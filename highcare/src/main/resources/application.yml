@@ -1,6 +1,5 @@
 server:
   port: 8080
-
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
@@ -51,6 +50,20 @@ spring:
         dialect: org.hibernate.dialect.Oracle10gDialect
   mvc:
     throw-exception-if-no-handler-found: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 831001732147-ggsjpv73kps8bchv2s8k85790qm3iv76.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+  profiles:
+    include: oauth
+
+
 # jwt secret key
 jwt:
   secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==

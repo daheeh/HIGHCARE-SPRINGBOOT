@@ -231,4 +231,18 @@ public class TokenProvider {
     }
 
 
+    public String createOauthToken(String email, String role) {
+
+        Claims claims = Jwts.claims().setSubject(email);
+        claims.put("role", role);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_TIME);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(SignatureAlgorithm.HS256, key)
+                .compact();
+    }
 }
