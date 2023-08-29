@@ -2,9 +2,15 @@ package com.highright.highcare.bulletin.sevice;
 
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
 import com.highright.highcare.bulletin.dto.BulletinEmployeeDTO;
+import com.highright.highcare.bulletin.dto.CommentDTO;
 import com.highright.highcare.bulletin.entity.BulletinCategories;
+import com.highright.highcare.bulletin.entity.BulletinEmployee;
+import com.highright.highcare.bulletin.entity.Comment;
 import com.highright.highcare.bulletin.repository.BoardRepository;
+import com.highright.highcare.bulletin.repository.BulletinEmployeeRepository;
+import com.highright.highcare.bulletin.repository.CommentRepository;
 import com.highright.highcare.common.Criteria;
+import net.minidev.json.JSONUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,13 +33,20 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final BoardCategoryRepository boardCategoryRepository;
     private final ModelMapper modelMapper;
+
+    private final CommentRepository commentRepository;
+
+    private final BulletinEmployeeRepository bulletinEmployeeRepository;
     public BoardService(BoardRepository boardRepository,
                         ModelMapper modelMapper,
-                        BoardCategoryRepository boardCategoryRepository){
+                        BoardCategoryRepository boardCategoryRepository,
+                        CommentRepository commentRepository,
+                        BulletinEmployeeRepository bulletinEmployeeRepository){
         this.boardRepository = boardRepository;
         this.modelMapper = modelMapper;
         this.boardCategoryRepository = boardCategoryRepository;
-
+        this.commentRepository = commentRepository;
+        this.bulletinEmployeeRepository = bulletinEmployeeRepository;
     }
 
     public List<BoardDTO> selectBoardList(){
@@ -112,11 +125,18 @@ public class BoardService {
         board.setViews(board.getViews()+1);
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
 
+        List<Comment> comment = commentRepository.findByBoard(board);
+        List<CommentDTO> commentList = comment.stream().map(comment1 -> modelMapper.map(comment1, CommentDTO.class)).collect(Collectors.toList());
+
+        boardDTO.setCommentList(commentList);
+        boardDTO.setCommentCnt(commentList.size());
         return boardDTO;
     }
     @Transactional
     public Object insertBoard(BoardDTO boardDTO) {
+        System.out.println("boardDTO get empNo : " + boardDTO.getEmpNo());
 //        BulletinCategories bulletinCategories = boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode());
+        System.out.println("서비스 옴 : " + boardDTO.getCategoryCode());
             BulletinCategoriesDTO bulletinCategoriesDTO = modelMapper.map(boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode()), BulletinCategoriesDTO.class);
         boardDTO.setBulletinCategories(bulletinCategoriesDTO);
         // 임시용
@@ -126,11 +146,65 @@ public class BoardService {
         boardDTO.setCreationDate(sqlDate);
         boardDTO.setModifiedDate(sqlDate);
         boardDTO.setDeleteYn('N');
-        BulletinEmployeeDTO bulletinEmployeeDTO = new BulletinEmployeeDTO(1,"봄","spring0820@gmail.com","010-1234-5678","123456-7891011",null,null,'N',5,4,"서울시종로구","종로대학교","010-1234-5678");
+
+        BulletinEmployeeDTO bulletinEmployeeDTO = modelMapper.map(bulletinEmployeeRepository.findById(boardDTO.getEmpNo()).get(), BulletinEmployeeDTO.class);
+
         boardDTO.setBulletinEmployee(bulletinEmployeeDTO);
+        System.out.println("bulleinEdto : " + bulletinEmployeeDTO);
         Board board = modelMapper.map(boardDTO, Board.class);
         boardRepository.save(board);
 
         return 1;
+    }
+    @Transactional
+    public Object insertComment(BoardDTO boardDTO) {
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setCommentContent(boardDTO.getContent());
+        commentDTO.setBoard(boardDTO);
+        commentDTO.setCreationDate(sqlDate);
+        commentDTO.setModifiedDate(sqlDate);
+        commentDTO.setDeleteYn('N');
+        BulletinEmployeeDTO bulletinEmployeeDTO = modelMapper.map(bulletinEmployeeRepository.findById(boardDTO.getEmpNo()).get(), BulletinEmployeeDTO.class);
+        commentDTO.setBulletinEmployee(bulletinEmployeeDTO);
+        Comment comment = modelMapper.map(commentDTO, Comment.class);
+        commentRepository.save(comment);
+
+        return 1;
+
+    }
+    @Transactional
+    public Object updateBoard(BoardDTO boardDTO) {
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+
+        String title = boardDTO.getTitle();
+        String content = boardDTO.getContent();
+        Board board = boardRepository.findById(boardDTO.getBulletinCode()).get();
+
+        board.setContent(content);
+        board.setTitle(title);
+        board.setModifiedDate(sqlDate);
+
+
+
+        return 1;
+
+    }
+    @Transactional
+    public Object deleteBoard(BoardDTO boardDTO) {
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        Board board = boardRepository.findById(boardDTO.getBulletinCode()).get();
+        board.setDeleteYn('Y');
+        board.setModifiedDate(sqlDate);
+
+        return 1;
+
     }
 }
