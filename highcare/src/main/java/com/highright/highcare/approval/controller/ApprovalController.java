@@ -32,80 +32,79 @@ public class ApprovalController {
 
     /* Apv메인페이지 - 조건별 현황 1 */
     @GetMapping("/writeMain")
-    public ResponseEntity<ResponseDTO> selectWriteApv(@RequestParam int empNo){
+    public ResponseEntity<ResponseDTO> selectWriteApv(@RequestParam int empNo) {
 
         Map<String, Integer> countsMap = approvalService.selectWriteApv(empNo);
 
         System.out.println("countsMap = " + countsMap);
 
-        if(countsMap.isEmpty()){
+        if (countsMap.isEmpty()) {
             return ResponseEntity
                     .ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
         }
 
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , countsMap));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", countsMap));
     }
 
     /* Apv메인페이지 - 리스트 */
     @GetMapping("/apvList")
-    public ResponseEntity<ResponseDTO> selectMyApvList(@RequestParam int empNo){
+    public ResponseEntity<ResponseDTO> selectMyApvList(@RequestParam int empNo) {
 
         List<ApvFormDTO> myApvList = approvalService.selectMyApvList(empNo);
         System.out.println("myApvList = " + myApvList);
 
-        if(myApvList.isEmpty()){
+        if (myApvList.isEmpty()) {
             return ResponseEntity
                     .ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
         }
 
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , myApvList));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", myApvList));
     }
-
 
 
     /* 전자결재 결재함 조회 */
     @GetMapping("/write")
     public ResponseEntity<ResponseDTO> selectWriteApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus
-                                                                ,@RequestParam(name = "offset", defaultValue = "1") String offset){
+            , @RequestParam(name = "offset", defaultValue = "1") String offset) {
 
         log.info("[ProductController] selectProductListWithPaging => offset : {} ", offset);
 
-        int total = approvalService.selectWriteApvStatusTotal(empNo,apvStatus);
+        int total = approvalService.selectWriteApvStatusTotal(empNo, apvStatus);
         Criteria criteria = new Criteria(Integer.valueOf(offset), 15);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-        pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo,apvStatus, criteria));
+        pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo, apvStatus, criteria));
         pagingResponseDTO.setPageInfo(new PageDTO(criteria, total));
 
         List<ApvFormDTO> writeApvStatusApvList = approvalService.selectWriteApvStatusApvList(empNo, apvStatus);
 
-        if(writeApvStatusApvList.isEmpty()){
+        if (writeApvStatusApvList.isEmpty()) {
             return ResponseEntity
                     .ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
+                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
         }
 
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , writeApvStatusApvList));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", writeApvStatusApvList));
     }
 
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
-    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
         System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
-        Object serviceResponse =  approvalService.insertApvFormWithLines(apvFormWithLinesDTO);
+        Boolean serviceResponse = approvalService.insertApvFormWithLines(apvFormWithLinesDTO);
         int statusCode;
         String responseMessage;
 
-            if (serviceResponse.equals("기안 상신 실패")) {
+        if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
             responseMessage = "상신 등록 실패";
         } else {
@@ -115,7 +114,7 @@ public class ApprovalController {
 
         return ResponseEntity
                 .status(statusCode)
-            .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 
     /* 전자결재 - 업무 : biz2 회의록 */
@@ -134,37 +133,54 @@ public class ApprovalController {
             statusCode = HttpStatus.OK.value();
             responseMessage = "상신 등록 성공";
         }
-
         return ResponseEntity
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 
-//    @PostMapping("/insert/biz2")
-//    public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
-//        System.out.println("biz2 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvMeetingLog(apvFormWithLinesDTO)));
-//    }
-//
-//    /* 전자결재 - 업무 : biz3 출장신청서 */
-//    @PostMapping("/insert/biz3")
-//    public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvBusinessTrip(apvFormWithLinesDTO)));
-//    }
-//
+
+    /* 전자결재 - 업무 : biz3 출장신청서 */
+    @PostMapping("/insert/biz3")
+    public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
+
+        Boolean serviceResponse = approvalService.insertApvBusinessTrip(apvFormWithLinesDTO);
+        int statusCode;
+        String responseMessage;
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+    }
+
+
+
 //    /* 전자결재 - 지출 : exp1 지출결의서 */
-//    @PostMapping("/insert/exp1")
-//    public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormDTO apvFormDTO){
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormWithLinesDTO)));
-//    }
+    @PostMapping("/insert/exp1")
+    public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+
+        Boolean serviceResponse = approvalService.insertApvExpense(apvFormWithLinesDTO);
+        int statusCode;
+        String responseMessage;
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+    }
+
 //
 //    /* 전자결재 - 지출 : exp2 지출결의서 */
 //    @PostMapping("/insert/exp2")

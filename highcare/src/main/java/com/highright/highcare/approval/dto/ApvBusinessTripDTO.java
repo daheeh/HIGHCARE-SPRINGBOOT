@@ -20,5 +20,5 @@ public class ApvBusinessTripDTO {
     private String endTime;
     private String location;
 
-    private ApvFormDTO apvFormDTO;
+    private Long apvNo;
 }
