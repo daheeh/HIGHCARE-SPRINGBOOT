@@ -31,6 +31,8 @@ dependencies {
 
 	// redis 디펜던시
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	// embedded-redis
+	implementation group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
 
 	// jpa 모델매퍼
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
@@ -38,6 +40,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	// redis cache
 	implementation group: 'org.springframework.data', name: 'spring-data-redis', version: '2.7.7'
 
@@ -60,7 +63,13 @@ dependencies {
 	// google email api
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-
+	// websocket
+	implementation 'org.webjars.bower:bootstrap:4.3.1'
+	implementation 'org.webjars.bower:vue:2.5.16'
+	implementation 'org.webjars.bower:axios:0.17.1'
+	implementation 'org.webjars:sockjs-client:1.1.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3-1'
+	implementation 'com.google.code.gson:gson:2.8.0'
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
