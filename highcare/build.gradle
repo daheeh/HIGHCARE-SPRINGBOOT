@@ -41,12 +41,15 @@ dependencies {
 	// redis cache
 	implementation group: 'org.springframework.data', name: 'spring-data-redis', version: '2.7.7'
 
+	// redis dependency
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	//jwt 토큰 관련
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
 
 	// security 관련
 	implementation group: 'com.google.guava', name: 'guava', version: '32.0.1-jre'
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 	// 파일업로드
 	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
@@ -54,8 +57,12 @@ dependencies {
 	// Swagger UI 사용 OpenAPI
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.14'
 
+	// google email api
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-    compileOnly 'org.projectlombok:lombok'
+
+
+	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 

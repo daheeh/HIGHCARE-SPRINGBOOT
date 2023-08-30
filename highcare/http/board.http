@@ -1,0 +1,21 @@
+GET http://localhost:8080/bulletin/board
+Accept: */*
+
+###
+GET http://localhost:8080/bulletin/boardTitle
+Accept: */*
+
+
+
+###
+POST http://localhost:8080/bulletin/boardAdd
+Content-Type: application/json
+Accept: */*
+
+{
+  "nameBoard": "user001"
+}
+
+###
+GET http://localhost:8080/bulletin/thread?bulletinCode=20
+Accept: */*

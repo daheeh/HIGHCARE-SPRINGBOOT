@@ -8,6 +8,7 @@ class HighcareApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

@@ -4,7 +4,8 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XE
+    url: jdbc:oracle:thin:@oracle.coffit.today:1521:XE
+
     username: C##HIGHCARE
     password: HIGHCARE
   servlet:
@@ -15,12 +16,34 @@ spring:
   web:
     resources:
       static-locations: classpath:/images/
-  # redis cache config
-  redis:
+
+  # cookie
+  server:
+    servlet:
+      session:
+        cookie:
+          same-site: none
+          secure: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hdhye89@gmail.com
+    password: aedelgcwhhiexqpt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# redis cache config
+redis:
     host: localhost
     port: 6379
+
 # jpa config
-  jpa:
+
+jpa:
     generate-ddl: false
     show-sql: true
     database: oracle
@@ -28,11 +51,15 @@ spring:
       hibernate.enable_lazy_load_no_trans: true
       hibernate:
         '[format_sql]': true
+
 # jwt secret key
 jwt:
   secret: EBWJJG+CWIAKltusVjf9SL0pEfOL9xWvLnu2vClsYx7kZLH0t3R6jLCjE7OB1Jq45yIxOd3wa73/obPVhVosyQ==
-  expire-time: 3600000 # 1시간(밀리초 단위)
-# logging config
+  expire-time: 100000 # (밀리초 단위)
+  refresh-expire-time: 1000000
+
+
+  # logging config
   logging:
     level:
       root: info

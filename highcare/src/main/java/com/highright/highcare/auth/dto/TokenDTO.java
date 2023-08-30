@@ -8,12 +8,19 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
+@Builder
 public class TokenDTO {
 
     private String grantType;
-    private String memberName;
-    private String id;
     private String accessToken;
-    private String refreshToken;
-    private Long accessTokenExpiresIn;
+//    private RefreshTokenDTO refreshToken;
+    private long accessTokenExpiresIn;
+    private long refreshTokenExpiresIn;
+
+    private int empNo;
+    private String memberName;
+    private String deptName;
+    private String jobName;
+    private String role;
+
 }

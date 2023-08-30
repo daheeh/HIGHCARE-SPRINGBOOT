@@ -1,12 +1,10 @@
 package com.highright.highcare.auth.dto;
 
-import com.highright.highcare.auth.entity.AuthAccount;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +25,11 @@ public class LoginMemberDTO implements UserDetails {
 
     private List<AuthAccountDTO> roleList;
 
+    private Collection<GrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roleList.stream().map(role -> role.getAuthCode()).distinct()
-                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return this.authorities;
     }
 
     @Override

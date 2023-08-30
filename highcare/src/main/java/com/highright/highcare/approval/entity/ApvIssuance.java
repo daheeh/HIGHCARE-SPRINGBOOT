@@ -2,10 +2,7 @@ package com.highright.highcare.approval.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_APV_ISSUANCE")
@@ -14,14 +11,26 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(
+        name = "SEQ_APV_ITEMS05",
+        sequenceName = "SEQ_APV_IN_ITEMS",
+        initialValue = 1, allocationSize = 1
+)
 public class ApvIssuance {
 
     @Id
-    @Column(name = "APV_NO")
-    private String apvNo;
+    @Column(name = "ITEMS_NO")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_APV_ITEMS05"
+    )
+    private Long itemsNo;
 
     @Column(name = "TYPE")
     private String type;
+
+    @Column(name = "SUBTYPE")
+    private String subType;
 
     @Column(name = "SUBMISSION")
     private String submission;
@@ -31,5 +40,8 @@ public class ApvIssuance {
 
     @Column(name = "REQUESTS")
     private String requests;
+
+    @Column(name = "APV_NO")
+    private Long apvNo;
 
 }

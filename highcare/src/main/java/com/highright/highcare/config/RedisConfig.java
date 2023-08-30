@@ -8,4 +8,7 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @EntityScan(basePackages = "com.highright.highcare")
 @EnableRedisRepositories(basePackages = "com.highright.highcare")
 public class RedisConfig {
+
 }
+
+
