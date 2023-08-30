@@ -1,9 +1,7 @@
 package com.highright.highcare.common;
 
-import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
 
-import java.util.List;
 
 @Getter
 @Setter

@@ -3,17 +3,21 @@ package com.highright.highcare.pm.service;
 import com.highright.highcare.common.Criteria;
 
 //import com.highright.highcare.pm.dto.PmEmployeeAndDepartmentDTO;
+import com.highright.highcare.pm.dto.DeAndEmpDTO;
+import com.highright.highcare.pm.dto.DepartmentDTO;
+import com.highright.highcare.pm.dto.ManagementDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
-import com.highright.highcare.pm.entity.PmDepartment;
-import com.highright.highcare.pm.entity.PmDepartmentResult;
-import com.highright.highcare.pm.entity.PmEmployee;
+import com.highright.highcare.pm.entity.*;
 //import com.highright.highcare.pm.entity.PmEmployeeAndPmDepartment;
-import com.highright.highcare.pm.entity.PmEmployeeResult;
+//import com.highright.highcare.pm.repository.DepartmentRepository;
 import com.highright.highcare.pm.repository.EmployeeRepository;
 import com.highright.highcare.pm.repository.PmDepartmentRepository;
 //import com.highright.highcare.pm.repository.PmJobRepository;
 //import com.highright.highcare.pm.repository.PmEmployeeAndPmDepartmentRepository;
-import lombok.Value;
+//import com.highright.highcare.pm.repository.ReDepartmentRepository;
+//import com.highright.highcare.pm.repository.ReEmployeeRepository;
+//import com.highright.highcare.pm.repository.ReDepartmentRepository;
+import com.highright.highcare.pm.repository.ReEmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -24,7 +28,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,19 +46,20 @@ public class EmployeeService {
 
     private final PmDepartmentRepository pmDepartmentRepository;
 
-//    private final PmEmployeeAndPmDepartmentRepository pmEmployeeAndPmDepartmentRepository;
-
-//    private final PmJobRepository pmJobRepository;
+    private final ReEmployeeRepository reEmployeeRepository;
 
 
-    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper, PmDepartmentRepository pmDepartmentRepository) {
+
+    public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
+                            PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
+                           ){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
-//        this.pmJobRepository = pmJobRepository;
-//        this.pmEmployeeAndPmDepartmentRepository = pmEmployeeAndPmDepartmentRepository;
+        this.reEmployeeRepository = reEmployeeRepository;
     }
 
+    /* 토탈 */
     public int selectEmployeeTotal() {
         List<PmEmployee> pmEmployeeList = employeeRepository.findByIsResignation('N');
         log.info("size: {}", pmEmployeeList);
@@ -80,6 +87,30 @@ public class EmployeeService {
         return employeeallList;
     }
 
+
+//    public List<ManagementDTO> manageMent(Criteria cri) {
+//        System.out.println("cri ============================> " + cri);
+//        int index = cri.getPageNum() -1;
+//        int count = cri.getAmount();
+//        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
+//        System.out.println("paging ==========================> " + paging);
+//
+//        Page<PmEmployee> result = employeeRepository.findByManNo("manNo", paging);
+//        System.out.println("result ==========================> " + result);
+//
+//        List<ManagementDTO> managementList = result.stream()
+//                .map(management -> modelMapper
+//                        .map(management, ManagementDTO.class)).collect(Collectors.toList());
+//
+//        Long datetime = System.currentTimeMillis();
+//        Timestamp timestamp = new Timestamp(datetime);
+//
+//        System.out.println("Datetime ======================================= " + datetime);
+//        System.out.println("Timestamp:============================"+timestamp);
+//        return null;
+//    }
+
+
     /* 사원 상세 조회 */
     public List<PmEmployeeDTO> selectEmployeeList(String empName) {
 //        log.info("empNo==================================> {}",empNo);
@@ -102,6 +133,7 @@ public class EmployeeService {
         return pmEmployeeList.size();
     }
 
+    /* 사원 검색 */
     public List<PmEmployeeDTO> selectEmployeeSearchList(Criteria cri, String search) {
         System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
         int index = cri.getPageNum() -1;
@@ -141,49 +173,16 @@ public class EmployeeService {
         return (result > 0)? "사원 등록 성공": "사원 등록 실패";
     }
 
-    /* 사원 및 부서 조회*/
+    /* 사원 및 부서 조회 // 트리뷰 */
     public PmDepartmentResult selectDept() {
         List<PmDepartment> deptList = pmDepartmentRepository.findAll();
         PmDepartmentResult result =  deptList.stream().map(PmDepartmentResult::new).collect(Collectors.toList()).get(0);
         return result;
-
     }
-//    @Transactional(rollbackFor = Exception.class)
-//    public List<PmDepartmentResult> getPmDepartmentList() {
-//
-////        List<PmDepartmentResult> results = pmDepartmentRepository.findAll().stream()
-////                .filter(pm -> pm.getUpperCode() == null)
-////                .map(PmDepartmentResult::of)
-////                .sorted((dept1, dept2) -> {
-////                    if (dept1.getJobcode()!= null && dept2.getJobcode() == null) {
-////                        return -1; // dept1을 앞으로
-////                    } else if (dept1.getJobcode() == null && dept2.getJobcode() != null) {
-////                        return 1;  // dept2를 앞으로
-////                    }
-////                    return 0; // 그 외의 경우는 순서 변경 없음
-////                })
-////                .collect(Collectors.toList());
-//
-//        List<PmDepartmentResult> results = pmDepartmentRepository.findAll().stream().filter(pm -> pm.getUpperCode() == null)
-//                .map(PmDepartmentResult::insertChild)
-//                .map(PmDepartmentResult::of).collect(Collectors.toList());
-//        System.out.println("results = " + results);
-//        return results;                                          //findAll다찾아서-> stream리스트로 뽑아줌 그중에서 결과값이 true 즉,upperCode가 null인값만 받겠다.
-//
-//
-////        return results;
-//    }
 
-//    private List<Deemployee> chemployee;
-//
-//    public List<Deemployee> getChemployee() {
-//        return chemployee;
-//    }
-//
-//    public void setChemployee(List<Deemployee> chemployee) {
-//        this.chemployee = chemployee;
-//    }
 
+
+    /* 사원 수정 */
     @Transactional
     public String updateEmployee(PmEmployeeDTO pmEmployeeDTO) {
         log.info("[ProductService] updateEmployee Start ===================================");
@@ -214,52 +213,58 @@ public class EmployeeService {
 
     }
 
-//    /* 사원 부서 조회 */
-//    public Object selectEmployeeWithDepartment(Criteria cri) {
-//        log.info("PmEmployeeAndPmDepartment ============================start");
-//
-//        int index = cri.getPageNum() - 1;
-//        int count = cri.getAmount();
-//        Pageable paging = PageRequest.of(index, count, Sort.by("isResignation").descending());
-//
-//        Page<PmEmployeeAndPmDepartment> result = pmEmployeeAndPmDepartmentRepository.findAll(paging);
-//        List<PmEmployeeAndPmDepartment> productList = (List<PmEmployeeAndPmDepartment>)result.getContent();
-//
-//
-//        System.out.println("pmEmployeeAndPmDepartmentRepository paging ==========================> " + paging);
-//        System.out.println("pmEmployeeAndPmDepartmentRepository result ==========================> " + result);
-//
-//        List<PmEmployeeAndDepartmentDTO> empdeList = result.stream()
-//                .map(pmEmployee -> modelMapper
-//                        .map(pmEmployee, PmEmployeeAndDepartmentDTO.class)).collect(Collectors.toList());
-//
-//        return empdeList;
-//
-//
-//    }
+    /* 라인 트리뷰 */
+    public Object secondDept() {
 
-//    @Transactional(rollbackFor = Exception.class)
-//    public List<PmJobResult> getPmResultList(){
-//
-//        List<PmJobResult> results = pmJobRepository.findAll().stream().map(PmJobResult::of).collect(Collectors.toList());
-//        return results;
-//    }
-//    @Transactional(rollbackFor = Exception.class)
-//    public List<>
+        log.info("[EmployeeService] secondDept start ==================================================");
+
+        List<PmDepartment>  pmList = pmDepartmentRepository.findAll();
+
+        List<DeAndEmpDTO> list = new ArrayList<>();
+        for(PmDepartment pm : pmList) {
+            if (pm.getDeptCode() != 0) {
+                DeAndEmpDTO dept = new DeAndEmpDTO();
+                dept.setId(pm.getDeptCode());
+                dept.setText(pm.getName());
+                dept.setParent(pm.getUpperCode() == null ? 0 : pm.getUpperCode());
+                dept.setDroppable(true);
+                dept.setJobName(null);
+                dept.setDeptName(null);
+
+                list.add(dept);
+            }
+        }
+        List<ReEmployee> empList = reEmployeeRepository.findAll();
+        System.out.println("empList = " + empList);
+        for(ReEmployee emp : empList) {
+            if (emp.getEmpNo() != 0) {
+                DeAndEmpDTO dept = new DeAndEmpDTO();
+                dept.setId(emp.getEmpNo());
+                dept.setText(emp.getEmpName() + " " + emp.getReJob().getJobName());
+//                dept.setParent(emp.getDeptCode());
+                dept.setParent(emp.getReDepartment().getDeptCode());
+                dept.setName(emp.getEmpName());
+                dept.setJobName(emp.getReJob().getJobName());
+                dept.setDeptName(emp.getReDepartment().getName());
 
 
 
-//    public List<PmEmployeeDTO> selectEmployeeList(String empNo) {
-//        List<PmEmployee> pmemployeeList = employeeRepository.findByEmployee(empNo);
+
+                list.add(dept);
+            }
+        }
+        System.out.println("result===================>" + list);
+        return list;
+    }
+
+
+//    public Object manageMent() {
+//        Long datetime = System.currentTimeMillis();
+//        Timestamp timestamp = new Timestamp(datetime);
 //
-//        List<PmEmployeeDTO> employeeList = pmemployeeList.stream()
-//                .map(pmEmployee -> {
-//                    PmEmployeeDTO pmEmployeeDTO = modelMapper.map(pmEmployee, PmEmployeeDTO.class);
-//                    return pmEmployeeDTO;
-//                })
-//                .collect(Collectors.toList());
-//
-//        return employeeList;
+//        System.out.println("Datetime ======================================= " + datetime);
+//        System.out.println("Timestamp:============================"+timestamp);
+//    return null;
 //    }
 }
 
@@ -267,36 +272,3 @@ public class EmployeeService {
 
 
 
-//    public List<PmEmployeeDTO> selectEmployeeList(String empNo) {
-//
-////        PmEmployee pmEmployee = employeeRepository.findByemployee(empNo).get();
-////        EmployeeDTO employeeDTO = modelMapper.map(pmEmployee, EmployeeDTO.class);
-//
-////        List<EmployeeDTO> result = employeeRepository.findByemployee(empNo).get();
-////        List<EmployeeDTO> employeeList = result.stream()
-//
-//        List<PmEmployee> pmemployeeList = employeeRepository.findByemployee(empNo);
-//        List<PmEmployeeDTO> employeeList = pmemployeeList.stream()
-//                .map((pmEmployee -> modelMapper
-//                        .map(pmEmployee, PmEmployeeDTO.class)).collect(Collectors.toList());
-//
-//        return employeeList;
-//
-//    }
-
-//    @Transactional
-//    public Long resist(PmEmployee pmemployee) {
-//        employeeRepository.save(pmemployee);
-//        return Long.valueOf(pmemployee.getEmpNo());
-//
-//    }
-//
-//    public List<PmEmployee> findEmployee(){
-//        return employeeRepository.findAll();
-//    }
-//
-//    public PmEmployee findEmployeeOne(Long empNo){
-//        return employeeRepository.findOne(empNo);
-//    }
-
-// 1. 전체데이터조회 2.페이징 필요하면 리스트로뿌려주니까 페이징추가하고 3.검색어추가하고
