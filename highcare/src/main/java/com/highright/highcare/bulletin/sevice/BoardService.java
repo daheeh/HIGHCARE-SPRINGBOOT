@@ -83,7 +83,12 @@ public class BoardService {
 
         return bulletinCategoriesDTO;
     }
+    public int selectCommentTotal(String bulletinCode) {
 
+        Board board = boardRepository.findById(Integer.valueOf(bulletinCode)).get();
+        List<Comment> comments = commentRepository.findByBoard(board);
+        return comments.size();
+    }
     public int selectBoardTotal(int boardCategoryCode) {
         System.out.println("서비스까지 옴");
         List<Board> boardList;
@@ -97,7 +102,15 @@ public class BoardService {
 
         return boardList.size();
     }
-
+    public Object selectBoardAndCommentPaging(Criteria cri, String bulletinCode) {
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        int code = Integer.parseInt(bulletinCode);
+        Pageable paging = PageRequest.of(index, count, Sort.by("modifiedDate").descending());
+        Page<Comment> result = commentRepository.findByDeleteYnAndBoard('N',boardRepository.findById(code).get(),paging);
+        List<Comment> commentList = (List<Comment>)result.getContent();
+        return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
+    }
     public Object selectBoardListWithPaging(Criteria cri, int boardCategoryCode) {
         int index = cri.getPageNum() - 1;
         int count = cri.getAmount();
@@ -107,7 +120,11 @@ public class BoardService {
         if(boardCategoryCode>2) {
             result = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode),paging);
 
-        }else{
+        } else if (boardCategoryCode == 2 ) {
+            paging = PageRequest.of(index, count, Sort.by("views").descending());
+            result = boardRepository.findByDeleteYn('N',paging);
+        } else{
+            paging = PageRequest.of(index, count, Sort.by("modifiedDate").descending());
             result = boardRepository.findByDeleteYn('N',paging);
         }
 
@@ -127,8 +144,6 @@ public class BoardService {
 
         List<Comment> comment = commentRepository.findByBoard(board);
         List<CommentDTO> commentList = comment.stream().map(comment1 -> modelMapper.map(comment1, CommentDTO.class)).collect(Collectors.toList());
-
-        boardDTO.setCommentList(commentList);
         boardDTO.setCommentCnt(commentList.size());
         return boardDTO;
     }
@@ -207,4 +222,7 @@ public class BoardService {
         return 1;
 
     }
+
+
+
 }
