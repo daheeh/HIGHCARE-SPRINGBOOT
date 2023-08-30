@@ -1,6 +1,7 @@
 package com.highright.highcare.bulletin.controller;
 
 import com.highright.highcare.bulletin.dto.BoardDTO;
+import com.highright.highcare.bulletin.dto.BoardPagingResponseDTO;
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
 import com.highright.highcare.bulletin.sevice.BoardService;
 import com.highright.highcare.common.Criteria;
@@ -44,13 +45,22 @@ public class BoardController {
 
     @GetMapping("/thread")
     public ResponseEntity<ResponseDTO> selectBoardDetail(
-            @RequestParam(name = "bulletinCode") String bulletinCode
+            @RequestParam(name = "bulletinCode") String bulletinCode,
+            @RequestParam(name = "currentPage") String currentPage
     ) {
-        System.out.println("thread 옴");
-        System.out.println("bulletinCode : " + bulletinCode);
+        int total = boardService.selectCommentTotal(bulletinCode);
         int code = Integer.parseInt(bulletinCode);
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "글 조회 성공"
-                , boardService.selectBoard(code)));
+
+        Criteria cri = new Criteria(Integer.valueOf(currentPage), 10);
+        BoardPagingResponseDTO pagingResponseDTO = new BoardPagingResponseDTO();
+        pagingResponseDTO.setDetail(boardService.selectBoard(code));
+        pagingResponseDTO.setData(boardService.selectBoardAndCommentPaging(cri, bulletinCode));
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "글 조회 성공", pagingResponseDTO));
+
+//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "글 조회 성공"
+//                , boardService.selectBoard(code)));
     }
 
     @GetMapping("/boardTitle")
