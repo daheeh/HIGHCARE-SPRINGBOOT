@@ -5,6 +5,7 @@ import com.highright.highcare.common.Criteria;
 //import com.highright.highcare.pm.dto.PmEmployeeAndDepartmentDTO;
 import com.highright.highcare.pm.dto.DeAndEmpDTO;
 import com.highright.highcare.pm.dto.DepartmentDTO;
+import com.highright.highcare.pm.dto.ManagementDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.*;
 //import com.highright.highcare.pm.entity.PmEmployeeAndPmDepartment;
@@ -27,6 +28,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,6 +86,30 @@ public class EmployeeService {
 
         return employeeallList;
     }
+
+
+//    public List<ManagementDTO> manageMent(Criteria cri) {
+//        System.out.println("cri ============================> " + cri);
+//        int index = cri.getPageNum() -1;
+//        int count = cri.getAmount();
+//        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
+//        System.out.println("paging ==========================> " + paging);
+//
+//        Page<PmEmployee> result = employeeRepository.findByManNo("manNo", paging);
+//        System.out.println("result ==========================> " + result);
+//
+//        List<ManagementDTO> managementList = result.stream()
+//                .map(management -> modelMapper
+//                        .map(management, ManagementDTO.class)).collect(Collectors.toList());
+//
+//        Long datetime = System.currentTimeMillis();
+//        Timestamp timestamp = new Timestamp(datetime);
+//
+//        System.out.println("Datetime ======================================= " + datetime);
+//        System.out.println("Timestamp:============================"+timestamp);
+//        return null;
+//    }
+
 
     /* 사원 상세 조회 */
     public List<PmEmployeeDTO> selectEmployeeList(String empName) {
@@ -231,7 +258,14 @@ public class EmployeeService {
     }
 
 
-
+//    public Object manageMent() {
+//        Long datetime = System.currentTimeMillis();
+//        Timestamp timestamp = new Timestamp(datetime);
+//
+//        System.out.println("Datetime ======================================= " + datetime);
+//        System.out.println("Timestamp:============================"+timestamp);
+//    return null;
+//    }
 }
 
 

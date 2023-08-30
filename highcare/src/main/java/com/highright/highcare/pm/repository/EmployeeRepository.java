@@ -33,6 +33,6 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
 
     Page<PmEmployee> findByEmpName(String search, Pageable paging);
 
-
-
+    /* 출퇴근 전체 조회*/
+//    Page<PmEmployee> findByManNo(String manNo, Pageable paging);
 }
