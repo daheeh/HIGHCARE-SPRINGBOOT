@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 @Slf4j
 public class ApprovalService {
 
-    private final ApprovalRepository approvalRepository;
+//    private final ApprovalRepository approvalRepository;
     private final ApvFormMainRepository apvFormMainRepository;
     private final ApvLineRepository apvLineRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
@@ -36,7 +36,7 @@ public class ApprovalService {
 
     @Autowired
     public ApprovalService(ModelMapper modelMapper,
-                           ApprovalRepository approvalRepository,
+//                           ApprovalRepository approvalRepository,
                            ApvFormMainRepository apvFormMainRepository,
                            ApvLineRepository apvLineRepository,
                            ApvMeetingLogRepository apvMeetingLogRepository,
@@ -44,7 +44,7 @@ public class ApprovalService {
                            ApvExpFormRepository apvExpFormRepository
     ) {
         this.modelMapper = modelMapper;
-        this.approvalRepository = approvalRepository;
+//        this.approvalRepository = approvalRepository;
         this.apvFormMainRepository = apvFormMainRepository;
         this.apvLineRepository = apvLineRepository;
         this.apvMeetingLogRepository = apvMeetingLogRepository;
@@ -56,9 +56,9 @@ public class ApprovalService {
     public Map<String, Integer> selectWriteApv(int empNo) {
         log.info("[ApprovalService] selectWriteApv --------------- start ");
 
-        int countInProgress = approvalRepository.countByEmpNoAndApvStatus(empNo, "결재진행중");
-        int countUrgency = approvalRepository.countByEmpNoAndIsUrgency(empNo, "T");
-        int countRejected = approvalRepository.countByEmpNoAndApvStatus(empNo, "반려");
+        int countInProgress = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "결재진행중");
+        int countUrgency = apvFormMainRepository.countByEmpNoAndIsUrgency(empNo, "T");
+        int countRejected = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "반려");
 
         Map<String, Integer> counts = new HashMap<>();
         counts.put("countInProgress", countInProgress);
@@ -73,10 +73,10 @@ public class ApprovalService {
     public List<ApvFormDTO> selectMyApvList(int empNo) {
         log.info("[ApprovalService] selectMyApvList --------------- start ");
 
-        List<ApvForm> writeApvList = approvalRepository.findTitlesByEmpNo(empNo);
+        List<ApvFormMain> writeApvList = apvFormMainRepository.findTitlesByEmpNo(empNo);
 
         log.info("[ApprovalService] selectMyApvList --------------- end ");
-        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+        return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormDTO.class)).collect(Collectors.toList());
     }
 
 
@@ -84,17 +84,28 @@ public class ApprovalService {
     public List<ApvFormDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
 
-        List<ApvForm> writeApvList = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+        List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
 
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
-        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+        return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormDTO.class)).collect(Collectors.toList());
     }
+
+    /* 전자결재 수신함 조회 */
+    public List<ApvFormDTO> selectReceiveApvStatusApvList(int empNo) {
+        log.info("[ApprovalService] selectReceiveApvStatusApvList --------------- start ");
+
+        List<ApvFormMain> receiveApvList = apvFormMainRepository.findApprovedTitlesByEmpNo(empNo);
+
+        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
+        return receiveApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+    }
+
 
     /* 전자결재 결재함 조회 - 페이징 */
     public int selectWriteApvStatusTotal(int empNo, String apvStatus){
         log.info("[ApprovalService] selectWriteApvStatusTotal --------------- start ");
 
-        List<ApvForm> writeApvList = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+        List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
 
         log.info("[ApprovalService] selectWriteApvStatusTotal --------------- end ");
 
@@ -108,13 +119,38 @@ public class ApprovalService {
         int count = criteria.getAmount();
         Pageable paging = PageRequest.of(index, count, Sort.by("apvNo").descending());
 
-        Page<ApvForm> result1 = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus, paging);
-        List<ApvForm> writeApvList = (List<ApvForm>) result1.getContent();
+        Page<ApvFormMain> result1 = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus, paging);
+        List<ApvFormMain> writeApvList = (List<ApvFormMain>) result1.getContent();
 
         log.info("[ApprovalService] selectProductListWithPaging => end =============");
         return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
-
     }
+
+    /* 전자결재 수신함 조회 - 페이징 */
+    public int selectReceiveApvStatusTotal(int empNo, String apvStatus){
+        log.info("[ApprovalService] selectReceiveApvStatusTotal --------------- start ");
+
+        List<ApvFormMain> recevieApvList = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+
+        log.info("[ApprovalService] selectReceiveApvStatusTotal --------------- end ");
+
+        return recevieApvList.size();
+    }
+
+//    public Object selectProductListWithPaging(int empNo, String apvStatus, Criteria criteria) {
+//        log.info("[ApprovalService] selectProductListWithPaging => Start =============");
+//
+//        int index = criteria.getPageNum() - 1;
+//        int count = criteria.getAmount();
+//        Pageable paging = PageRequest.of(index, count, Sort.by("apvNo").descending());
+//
+//        Page<ApvForm> result1 = approvalRepository.findByEmpNoAndApvStatus(empNo, apvStatus, paging);
+//        List<ApvForm> writeApvList = (List<ApvForm>) result1.getContent();
+//
+//        log.info("[ApprovalService] selectProductListWithPaging => end =============");
+//        return writeApvList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
+//
+//    }
 
 
     /* 전자결재 - 업무 : biz1 기안서 */
@@ -128,12 +164,17 @@ public class ApprovalService {
             List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
 
+            ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+            ApvFormMain updateApvForm = apvFormMainRepository.save(apvFormMain);
+            apvForm.setApvNo(updateApvForm.getApvNo());
+
             List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
 
-            ApvForm updateApvForm = approvalRepository.save(apvForm);
-            System.out.println("updateApvForm : " + updateApvForm);
-            apvLineList.forEach(item -> item.setApvNo(updateApvForm.getApvNo()));
+            apvLineList.forEach(item -> {
+                item.setApvNo(updateApvForm.getApvNo());
+            });
             updateApvForm.setApvLines(apvLineList);
+            apvForm.setApvLines(apvLineList);
 
             log.info("[ApprovalService] insertApvForm --------------- end ");
             return true;
@@ -150,7 +191,7 @@ public class ApprovalService {
         log.info("[ApprovalService] insertApvMeetingLog --------------- start ");
         try {
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-            List<ApvLineDTO> apvLineDTOs = apvFormWithLinesDTO.getApvLineDTOs();
+            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
             List<ApvMeetingLogDTO> apvMeetingLogsDTO = apvFormDTO.getApvMeetingLogs();
 
@@ -163,15 +204,12 @@ public class ApprovalService {
 
             // 2. ApvLine 등록하기
 
-            List<ApvLine> apvLineList = apvLineDTOs.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+            List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
 
             apvLineList.forEach(item -> {
                 item.setApvNo(updateApvForm.getApvNo());
-                System.out.println("item = " + item);
             });
             updateApvForm.setApvLines(apvLineList);
-
-//            List<ApvLine> savedApvLineList = apvLineRepository.saveAll(apvLineList);
             apvForm.setApvLines(apvLineList);
 
             // 3. ApvMeetingLog 등록하기
@@ -316,7 +354,6 @@ public class ApprovalService {
             return false;
         }
     }
-
 
 
 

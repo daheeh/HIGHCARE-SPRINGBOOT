@@ -95,6 +95,32 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", writeApvStatusApvList));
     }
 
+    /* 전자결재 수신함 조회 */
+    @GetMapping("/receive")
+    public ResponseEntity<ResponseDTO> selectReceiveApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus
+            , @RequestParam(name = "offset", defaultValue = "1") String offset) {
+
+        log.info("[ProductController] selectReceiveApvStatusApv => offset : {} ", offset);
+
+        int total = approvalService.selectReceiveApvStatusTotal(empNo, apvStatus);
+        Criteria criteria = new Criteria(Integer.valueOf(offset), 15);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo, apvStatus, criteria));
+        pagingResponseDTO.setPageInfo(new PageDTO(criteria, total));
+
+        List<ApvFormDTO> receiveApvStatusApvList = approvalService.selectReceiveApvStatusApvList(empNo);
+
+        if (receiveApvStatusApvList.isEmpty()) {
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", receiveApvStatusApvList));
+    }
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
     public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
