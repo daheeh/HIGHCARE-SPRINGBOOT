@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 public class PmDepartment {
 
     @Id
@@ -41,9 +41,5 @@ public class PmDepartment {
 
     @OneToMany(mappedBy = "deptCode")
     private List<PmEmployee> employees;
-
-
-
-
 
 }

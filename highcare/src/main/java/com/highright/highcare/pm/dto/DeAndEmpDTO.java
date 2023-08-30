@@ -1,5 +1,6 @@
 package com.highright.highcare.pm.dto;
 
+
 import lombok.*;
 
 import javax.persistence.Embeddable;
@@ -10,10 +11,14 @@ import javax.persistence.Embeddable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobDTO {
+public class DeAndEmpDTO {
 
-    private int jobCode;
+    private int id;
+    private String text;
+    private Integer parent;
+    private boolean droppable;
     private String name;
-    private Integer upperJobCode;
-    private String upperJobName;
+    private String jobName;
+    private String deptName;
+
 }

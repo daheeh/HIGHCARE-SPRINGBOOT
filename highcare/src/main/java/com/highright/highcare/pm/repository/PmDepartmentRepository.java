@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 
 public interface PmDepartmentRepository extends JpaRepository<PmDepartment, Integer> {
-//    List<PmDepartment> findAll();//?
     @EntityGraph(attributePaths = "employees")
     List<PmDepartment> findAll();
 }
