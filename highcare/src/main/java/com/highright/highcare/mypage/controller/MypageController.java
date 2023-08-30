@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -48,18 +49,22 @@ public class MypageController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "프로필 조회 성공", profilefileList));
         }
 
-    @PostMapping("/insert")
-    public ResponseEntity<ResponseDTO> insertMyProfile(@RequestBody MyProfileFileDTO myProfileFileDTO){
+    @PostMapping("/update")
+    public ResponseEntity<ResponseDTO> updateMyProfileFile(@ModelAttribute MyProfileFileDTO myProfileFileDTO, MultipartFile profileImage){
 
-//        MyProfileDTO savedProfile = mypageService.insertMyProfileFile(myProfileDTO);
+        log.info("insertMyProfileFile multifile!!!!!!! {}", profileImage);
+
+//        int photoFileCodeDelete = myProfileFileDTO.getCode();
+
+        MyProfileFileDTO updateMyProfile = mypageService.updateMyProfileFile(myProfileFileDTO, profileImage);
+
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "사진 파일 등록 성공", mypageService.insertMyProfileFile(myProfileFileDTO)));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "사진 파일 등록 성공", updateMyProfile));
+        //  MyProfileFileDTO updatedProfile = mypageService.updateMyProfileFile(myProfileFileDTO, profileImage);여기에서 서비스로 갔다옴
+        // return에서 갔다온 파일 변수에 넘김
+
     }
-
-
-
-
 
 
 /* TEST를 위해 작성, 연결이 됐는지만 확인, 여기서 직접 리포지토리로 보냄 */

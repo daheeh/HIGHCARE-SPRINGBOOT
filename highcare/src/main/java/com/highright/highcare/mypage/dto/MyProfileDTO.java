@@ -1,6 +1,9 @@
 package com.highright.highcare.mypage.dto;
 
+import com.highright.highcare.mypage.entity.MyProfileFile;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,9 +13,10 @@ import lombok.*;
 public class MyProfileDTO {
 
     private int code;
-    private String photo;
     private int empNo;
 
-    private MyEmployeeDTO myEmployeeDTO;
+    private MyEmployeeDTO myEmployee;
+
+    private MyProfileFileDTO myProfileFile;
 
 }

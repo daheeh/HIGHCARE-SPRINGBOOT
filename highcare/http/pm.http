@@ -34,19 +34,36 @@ Accept: */*
 }
 
 
-### 부서조회
-GET http://localhost:8080/api/pm/department
+### 부서조회/?
 Content-Type: application/json
 Accept: */*
 
-### 사원 부서 조회
+### 사원 부서 조회 /?
 GET http://localhost:8080/api/pm/empde
 Content-Type: application/json
 Accept: */*
 
-### 부서조회
+### 부서조회 // 트리뷰
 GET http://localhost:8080/api/pm/selectDept
 Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
+
+### 간단 트리뷰
+GET http://localhost:8080/api/pm/secondDept
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+
+### 출 퇴근
+GET http://localhost:8080/api/pm/management
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+
+
+
+
+
 

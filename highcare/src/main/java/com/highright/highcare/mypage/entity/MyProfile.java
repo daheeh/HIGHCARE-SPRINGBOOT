@@ -15,37 +15,33 @@ import java.util.List;
         sequenceName = "PROFILE_SEQ_NO",
         initialValue = 1, allocationSize = 1
 )
-//@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class MyProfile {
 
     @Id
     @Column(name = "PROFILE_CODE")
-    private int profileCode;
+    private int code;
 
     @Column(name="EMP_NO")
     private int empNo;
 
-    @Column(name = "PROFILE_PHOTO")
-    private String photo;
-
-    // MyProfile은 MyProfileFile을 알고 있어야 한다.
-    // MyProfileFile타입의 List로 조인
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="PROFILE_CODE")
-    private List<MyProfileFile> profileFile;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name="EMP_NO", insertable = false, updatable = false)
     private MyEmployee myEmployee;
+
+    @OneToOne
+    @JoinColumn(name = "PROFILE_CODE")
+    private MyProfileFile myProfileFile;
 
     @Override
     public String toString() {
         return "MyProfile{" +
-                "profileCode=" + profileCode +
+                "code=" + code +
                 ", empNo=" + empNo +
-                ", photo='" + photo + '\'' +
+//
                 ", myEmployee=" + myEmployee +
+                ", myProfileFile=" + myProfileFile +
                 '}';
     }
 }

@@ -6,6 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_BULLETIN_BOARD")
+@SequenceGenerator(
+        name = "BOARD_CODE_SEQ_GENERATOR",
+        sequenceName = "SEQ_BOARD_CODE",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,6 +19,10 @@ import javax.persistence.*;
 public class Board {
     @Id
     @Column(name = "BULLETIN_CODE")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "BOARD_CODE_SEQ_GENERATOR"
+    )
     private int bulletinCode;
 
     @Column(name = "TITLE")
@@ -39,9 +48,8 @@ public class Board {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_CODE")
     private BulletinCategories bulletinCategories;
-
-    @Column(name = "EMP_NO")
-    private int empNo;
-
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO")
+    private BulletinEmployee bulletinEmployee;
 
 }

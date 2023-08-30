@@ -15,3 +15,7 @@ Accept: */*
 {
   "nameBoard": "user001"
 }
+
+###
+GET http://localhost:8080/bulletin/thread?bulletinCode=20
+Accept: */*

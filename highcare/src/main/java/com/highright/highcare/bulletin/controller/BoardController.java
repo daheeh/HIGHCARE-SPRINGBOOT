@@ -1,10 +1,16 @@
 package com.highright.highcare.bulletin.controller;
 
+import com.highright.highcare.bulletin.dto.BoardDTO;
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
 import com.highright.highcare.bulletin.sevice.BoardService;
+import com.highright.highcare.common.Criteria;
+import com.highright.highcare.common.PageDTO;
+import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,29 +19,48 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    public BoardController(BoardService boardService){
+    public BoardController(BoardService boardService) {
         this.boardService = boardService;
     }
 
     @GetMapping("/board")
     public ResponseEntity<ResponseDTO> selectBoardList(
             @RequestParam(name = "categoryCode") String categoryCode,
-            @RequestParam(name = "currentPage") String currentPage){
+            @RequestParam(name = "currentPage") String currentPage) {
         System.out.println("와성용");
-        System.out.println("cateogryCode"+ categoryCode);
-        System.out.println("currentPage"+ currentPage);
+        System.out.println("cateogryCode" + categoryCode);
+        System.out.println("currentPage" + currentPage);
         int boardCategoryCode = Integer.valueOf(categoryCode);
         int total = boardService.selectBoardTotal(boardCategoryCode);
-        return null;
+
+        Criteria cri = new Criteria(Integer.valueOf(currentPage), 10);
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(boardService.selectBoardListWithPaging(cri, boardCategoryCode));
+
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "조회 성공", pagingResponseDTO));
+    }
+
+    @GetMapping("/thread")
+    public ResponseEntity<ResponseDTO> selectBoardDetail(
+            @RequestParam(name = "bulletinCode") String bulletinCode
+    ) {
+        System.out.println("thread 옴");
+        System.out.println("bulletinCode : " + bulletinCode);
+        int code = Integer.parseInt(bulletinCode);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "글 조회 성공"
+                , boardService.selectBoard(code)));
     }
 
     @GetMapping("/boardTitle")
-    public ResponseEntity<ResponseDTO> selectBoardTitle(){
+    public ResponseEntity<ResponseDTO> selectBoardTitle() {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "게시글 조회 성공", boardService.selectBoardTitle()));
 
     }
-//    @PostMapping("/boardAdd")
+
+    //    @PostMapping("/boardAdd")
 //    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
 //
 //
@@ -43,4 +68,26 @@ public class BoardController {
 //                .ok()
 //                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
 //    }
+    @PostMapping("/insertBoard")
+    public ResponseEntity<ResponseDTO> insertBoard(@RequestBody BoardDTO boardDTO) {
+        System.out.println("boardDTO get empNo : " + boardDTO.getEmpNo());
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글쓰기 성공", boardService.insertBoard(boardDTO)));
+    }
+
+    @PostMapping("/insertComment")
+    public ResponseEntity<ResponseDTO> insertComment(@RequestBody BoardDTO boardDTO) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "댓글쓰기 성공", boardService.insertComment(boardDTO)));
+    }
+    @PutMapping("/updateBoard")
+    public ResponseEntity<ResponseDTO> updateBoard(@RequestBody BoardDTO boardDTO){
+        System.out.println("put mapping입니다");
+        System.out.println("boardDTO : " + boardDTO);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 수정 성공", boardService.updateBoard(boardDTO)));
+    }
+
+    @PutMapping("/deleteBoard")
+    public ResponseEntity<ResponseDTO> deleteBoard(@RequestBody BoardDTO boardDTO){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 삭제 성공", boardService.deleteBoard(boardDTO)));
+
+    }
 }

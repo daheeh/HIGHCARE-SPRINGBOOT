@@ -110,3 +110,11 @@ Accept: */*
 ### 테스트 조회
 GET http://localhost:8080/api/approval/search/exp4?title=출장신청서&empNo=1
 Accept: */*
+
+####
+
+POST http://localhost:8080/api/approval/insert/biz1
+Content-Type: application/json
+Accept: */*
+Access-Control-Allow-Origin: *
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzE5OTIwMX0.BBJ8vspeBtStoAbuBxRxWWXGXQa0_S9V3SLO7kwIWOsh3QKpxsFTHs6V0gYH0wjTtgwZb-zT0kKq_29MnUQAoQ

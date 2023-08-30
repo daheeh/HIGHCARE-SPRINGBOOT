@@ -3,6 +3,8 @@ package com.highright.highcare.pm.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -24,9 +26,17 @@ public class PmJob {
     @Column(name="NAME")
     private String name;
 
-    @Column(name="UPPER_JOB_CODE", nullable = true)
+    @Column(name="UPPER_JOB_CODE",nullable = true)
     private Integer upperJobCode;
 
     @Column(name="UPPER_JOB_NAME")
     private String upperJobName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UPPER_JOB_CODE", insertable = false, updatable = false)
+    private PmJob parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<PmJob> children = new ArrayList<>();
+
 }

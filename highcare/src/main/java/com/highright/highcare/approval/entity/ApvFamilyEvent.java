@@ -13,7 +13,7 @@ import java.sql.Date;
 @Setter
 @ToString
 @SequenceGenerator(
-        name = "SEQ_APV_ITEMS",
+        name = "SEQ_APV_ITEMS04",
         sequenceName = "SEQ_APV_EV_ITEMS",
         initialValue = 1, allocationSize = 1
 )
@@ -23,7 +23,7 @@ public class ApvFamilyEvent {
     @Column(name = "ITEMS_NO")
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_APV_ITEMS"
+            generator = "SEQ_APV_ITEMS04"
     )
     private Long itemsNo;
 
@@ -60,9 +60,7 @@ public class ApvFamilyEvent {
     @Column(name = "REQUESTSNOTE")
     private String requestsNote;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "APV_NO")
-    private ApvForm apvForm;
-
+    @Column(name = "APV_NO")
+    private Long apvNo;
 
 }

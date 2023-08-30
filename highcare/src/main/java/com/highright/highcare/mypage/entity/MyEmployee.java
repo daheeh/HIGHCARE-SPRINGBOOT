@@ -33,15 +33,27 @@ public class MyEmployee {
 //
 //    private String isRes;  // 퇴사여부
 
-    @Column(name = "DEPT_CODE")
-    private int deptCode;
-    @Column(name = "JOB_CODE")
-    private int jopCode;
+    @OneToOne
+    @JoinColumn(name = "DEPT_CODE")
+    private Department dep;
+
+    @OneToOne
+    @JoinColumn(name="JOB_CODE")
+    private Job job;
+
     @Column(name = "ADDRESS")
     private String address;
     //    private String edu;
     @Column(name = "TELEPHONE")
     private String tel;    // 내선전화
+
+//    @OneToOne
+//    @JoinColumn(name = "DEPT_CODE", insertable = false, updatable = false)
+//    private Department deptName;
+//
+//    @OneToOne
+//    @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false)
+//    private Job jobName;
 
 
 
