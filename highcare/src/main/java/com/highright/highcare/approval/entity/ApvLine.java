@@ -32,7 +32,7 @@ public class ApvLine {
     private int degree;
 
     @Column(name = "ISAPPROVAL")
-    private char isApproval;
+    private String isApproval;
 
     @Column(name = "APV_DATE")
     private String apvDate;

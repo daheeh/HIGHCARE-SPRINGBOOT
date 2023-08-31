@@ -52,36 +52,40 @@ public class ApprovalService {
         this.apvExpFormRepository = apvExpFormRepository;
     }
 
-    /* Apv메인페이지 - 조건별 현황 1 */
+    /* Apv메인페이지 - 조건별 현황 */
     public Map<String, Integer> selectApvMainCount(int empNo) {
-        log.info("[ApprovalService] selectWriteApv --------------- start ");
+        log.info("[ApprovalService] selectApvMainCount --------------- start ");
 
+        // 1. 오늘 - 결재진행중
+        int countTodayInProgress = apvFormMainRepository.countByEmpNoAndApvStatus1(empNo);
 
-        /*
-        *
-        *         countTodayInProgress: 0,
-        countTodayUrgency: 0,
-        countInProgress: 0,
-        countUrgency: 0,
-        countNewReceive: 0,
-        countRejected: 0,
-        *
-        * */
-        int countTodayInProgress = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "반려");
-        int countTodayUrgency = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "반려");
-        int countNewReceive = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "반려");
+        // 1. 오늘 - 긴급
+        int countTodayUrgency = apvFormMainRepository.countByEmpNoAndIsUrgencyToday(empNo);
 
-
+        // 2. 결재진행중
         int countInProgress = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "결재진행중");
+
+        // 3. 긴급수신
         int countUrgency = apvFormMainRepository.countByEmpNoAndIsUrgency(empNo, "T");
+
+        // 4. 신규수신
+        int countNewReceive = apvFormMainRepository.countByEmpNoAndIsApprovalReceive(empNo, "F");
+
+        // 2. 결재반려
         int countRejected = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "반려");
 
+
+
         Map<String, Integer> counts = new HashMap<>();
+        counts.put("countTodayInProgress", countTodayInProgress);
+        counts.put("countTodayUrgency", countTodayUrgency);
+
         counts.put("countInProgress", countInProgress);
         counts.put("countUrgency", countUrgency);
+        counts.put("countNewReceive", countNewReceive);
         counts.put("countRejected", countRejected);
 
-        log.info("[ApprovalService] selectWriteApv --------------- end ");
+        log.info("[ApprovalService] selectApvMainCount --------------- end ");
         return counts;
     }
 

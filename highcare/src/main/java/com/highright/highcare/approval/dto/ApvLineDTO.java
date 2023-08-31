@@ -12,7 +12,7 @@ public class ApvLineDTO {
 
     private Long apvLineNo;
     private int degree;
-    private char isApproval;
+    private String isApproval;
     private String apvDate;
 
     private PmEmployeeDTO employee;
