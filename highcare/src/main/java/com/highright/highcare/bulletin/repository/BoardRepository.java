@@ -2,6 +2,7 @@ package com.highright.highcare.bulletin.repository;
 
 import com.highright.highcare.bulletin.entity.Board;
 import com.highright.highcare.bulletin.entity.BulletinCategories;
+import com.highright.highcare.bulletin.entity.BulletinEmployee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,10 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     List<Board> findByDeleteYnAndTitleContains(char n, String title);
     Page<Board> findByDeleteYnAndTitleContains(char n, String title,Pageable paging);
+    List<Board> findByDeleteYnAndBulletinEmployee(char n, BulletinEmployee bulletinEmployee);
+
+    Page<Board> findByDeleteYnAndBulletinEmployee(char n, BulletinEmployee bulletinEmployee, Pageable paging);
+
+    List<Board> findByDeleteYnAndBulletinEmployeeAndTitleContains(char n, BulletinEmployee bulletinEmployee, String content);
+    Page<Board> findByDeleteYnAndBulletinEmployeeAndTitleContains(char n, BulletinEmployee bulletinEmployee, String content, Pageable paging);
 }
