@@ -1,5 +1,7 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.auth.entity.ADMEmployee;
+import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.*;
 
 import javax.persistence.*;
@@ -57,10 +59,9 @@ public class ApvFormMain {
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 
-//    @Column(name = "EMP_NAME")
-//    private String empName;
 
-//    @Column(name = "JOB_NAME")
-//    private String jobName;
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
+    private PmEmployee employee;
 
 }

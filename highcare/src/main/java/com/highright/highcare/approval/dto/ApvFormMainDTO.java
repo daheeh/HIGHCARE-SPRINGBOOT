@@ -1,5 +1,7 @@
 package com.highright.highcare.approval.dto;
 
+import com.highright.highcare.auth.entity.ADMEmployee;
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
 
 import java.sql.Date;
@@ -21,7 +23,6 @@ public class ApvFormMainDTO {
     private String contents1;
     private String contents2;
     private int empNo;
-    private String empName;
-    private String jobName;
+    private PmEmployeeDTO employee;
 
 }
