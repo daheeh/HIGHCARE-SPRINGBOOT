@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -112,21 +113,32 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public Object insertOauthRegist(Map<String, Object> data, HttpServletResponse response) {
 
-        OAuthUserInfo googleUser = new GoogleUser(data);
-        log.info("[AuthServiceImpl] insertOauthRegist : googleUser.getProvider ================{}",googleUser.getProvider());
-        log.info("[AuthServiceImpl] insertOauthRegist : googleUser.getProviderId ================{}",googleUser.getProviderId() );
+        OAuthUserInfo userInfo = null; 
+        switch ((String) data.get("provider")) {
 
-        Optional<OAuthUser> findOauthUser = oAuthRepository.findById(googleUser.getProvider() + "_" + googleUser.getProviderId());
+            case "google" :
+                userInfo = new GoogleUser(data); 
+                break; 
+            case "kakao" :
+                userInfo = new KakaoUser(data);
+                break;
+        }
+
+        log.info("[AuthServiceImpl] insertOauthRegist : googleUser.getProvider ================{}",userInfo.getProvider());
+        log.info("[AuthServiceImpl] insertOauthRegist : googleUser.getProviderId ================{}",userInfo.getProviderId() );
+
+        // 기존 계정 있는지 조회 : 리소스서버(프로바이더)명 + 프로바이더에서 제공한 고유아이디
+        Optional<OAuthUser> findOauthUser = oAuthRepository.findById(userInfo.getProvider() + "_" + userInfo.getProviderId());
         OAuthUser insertUser = null;
 
         //기존 계정 조회해서 없으면
         if(findOauthUser.isEmpty()) {
             insertUser = OAuthUser.builder()
-                    .oauthId(googleUser.getProvider() + "_" + googleUser.getProviderId())
-                    .provider(googleUser.getProvider())
-                    .id(googleUser.getId())
-                    .provideEmail(googleUser.getEmail())
-                    .provideName(googleUser.getName())
+                    .oauthId(userInfo.getProvider() + "_" + userInfo.getProviderId())
+                    .provider(userInfo.getProvider())
+                    .id(userInfo.getId())
+                    .provideEmail(userInfo.getEmail())
+                    .provideName(userInfo.getName())
                     .build();
 
             log.info("[AuthServiceImpl] insertOauthRegist : insertUser ================{}", insertUser);

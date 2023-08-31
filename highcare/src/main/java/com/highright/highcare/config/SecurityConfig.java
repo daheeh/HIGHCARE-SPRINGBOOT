@@ -83,7 +83,8 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(Arrays.asList("http://localhost:8080",
+        config.setAllowedOrigins(Arrays.asList("http://localhost:8080", "https://kauth.kakao.com",
+                "https://kapi.kakao.com",
                 "http://" + hostname));
         config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST","OPTIONS", "DELETE"));
         config.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-type"
