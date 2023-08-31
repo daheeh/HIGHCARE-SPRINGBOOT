@@ -21,4 +21,7 @@ public class ApvFormMainDTO {
     private String contents1;
     private String contents2;
     private int empNo;
+    private String empName;
+    private String jobName;
+
 }

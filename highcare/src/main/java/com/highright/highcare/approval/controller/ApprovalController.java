@@ -4,6 +4,8 @@ import com.highright.highcare.approval.dto.ApvFormDTO;
 import com.highright.highcare.approval.dto.ApvFormMainDTO;
 import com.highright.highcare.approval.dto.ApvFormWithLinesDTO;
 import com.highright.highcare.approval.dto.ApvLineDTO;
+import com.highright.highcare.approval.service.ApprovalBizService;
+import com.highright.highcare.approval.service.ApprovalExpService;
 import com.highright.highcare.approval.service.ApprovalService;
 import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
@@ -24,10 +26,22 @@ import java.util.Map;
 public class ApprovalController {
 
     private final ApprovalService approvalService;
+    private final ApprovalBizService approvalBizService;
+    private final ApprovalExpService approvalExpService;
+
+
+
 
     @Autowired
-    public ApprovalController(ApprovalService approvalService) {
+    public ApprovalController(
+            ApprovalService approvalService,
+            ApprovalBizService approvalBizService,
+            ApprovalExpService approvalExpService
+    ) {
         this.approvalService = approvalService;
+        this.approvalBizService = approvalBizService;
+        this.approvalExpService = approvalExpService;
+
     }
 
 
@@ -132,7 +146,7 @@ public class ApprovalController {
     public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
         System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
-        Boolean serviceResponse = approvalService.insertApvFormWithLines(apvFormWithLinesDTO);
+        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormWithLinesDTO);
         int statusCode;
         String responseMessage;
 
@@ -154,7 +168,7 @@ public class ApprovalController {
     public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
         System.out.println("biz2 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
-        Boolean serviceResponse = approvalService.insertApvMeetingLog(apvFormWithLinesDTO);
+        Boolean serviceResponse = approvalBizService.insertApvMeetingLog(apvFormWithLinesDTO);
         int statusCode;
         String responseMessage;
 
@@ -175,7 +189,7 @@ public class ApprovalController {
     @PostMapping("/insert/biz3")
     public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
 
-        Boolean serviceResponse = approvalService.insertApvBusinessTrip(apvFormWithLinesDTO);
+        Boolean serviceResponse = approvalBizService.insertApvBusinessTrip(apvFormWithLinesDTO);
         int statusCode;
         String responseMessage;
 
@@ -197,7 +211,7 @@ public class ApprovalController {
     @PostMapping("/insert/exp1")
     public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
 
-        Boolean serviceResponse = approvalService.insertApvExpense(apvFormWithLinesDTO);
+        Boolean serviceResponse = approvalExpService.insertApvExpense(apvFormWithLinesDTO);
         int statusCode;
         String responseMessage;
 

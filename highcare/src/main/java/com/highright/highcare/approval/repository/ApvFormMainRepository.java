@@ -16,8 +16,8 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
 
     // 수신함
     @Query(value = "SELECT AF.* " +
-            ", E.NAME " +
-            ", J.NAME " +
+            ", E.EMP_NAME " +
+            ", J.JOB_NAME " +
             "FROM TBL_APV_FORM AF " +
             "JOIN TBL_APV_LINE AL ON AL.APV_NO = AF.APV_NO " +
             "JOIN TBL_EMPLOYEE E ON AF.EMP_NO = E.EMP_NO " +

@@ -57,4 +57,10 @@ public class ApvFormMain {
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 
+//    @Column(name = "EMP_NAME")
+//    private String empName;
+
+//    @Column(name = "JOB_NAME")
+//    private String jobName;
+
 }
