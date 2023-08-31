@@ -9,16 +9,19 @@ import com.highright.highcare.auth.repository.RefreshTokenRepository;
 import com.highright.highcare.exception.LoginFailedException;
 import com.highright.highcare.exception.TokenException;
 import com.highright.highcare.jwt.TokenProvider;
+import com.highright.highcare.oauth.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -29,40 +32,23 @@ import java.util.Optional;
 public class AuthServiceImpl implements AuthService {
 
     private final AccountRepository accountRepository;
+    private final OAuthRepository oAuthRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    private final String SOCIAL_LOGIN_TYPE = "oauth";   // 로그인타입(소셜인경우만)
+
+
     @Override
     public Object selectLogin(LoginMemberDTO loginInfo, HttpServletResponse response) {
-        log.info("[AuthServiceImpl] login : loginInfo ====== {} ", loginInfo);
 
-        // 멤버 조회
-        ADMAccount member = memberFindById(loginInfo.getId());
-        // 패스워드 검증
-        // 비번 조회
-
-//        if(!passwordEncoder.matches(member.getPassword(), loginInfo.getPassword())){
-//            // 비번 실패 예외
-//            throw new LoginFailedException("PASSWORD incorrect : 잘못된 비밀번호입니다.");
-//        }
-
-        // 성공시 token 발급
-
-        // 멤버 dto에 다시 여러 정보 담아서 전달하기
-        LoginMemberDTO loginMemberDTO = modelMapper.map(member, LoginMemberDTO.class);
-        log.info("[AuthServiceImpl] login : loginMemberDTO======{}", loginMemberDTO);
-        loginMemberDTO.setEmpNo(member.getEmployee().getEmpNo());
-        loginMemberDTO.setName(member.getEmployee().getName());
-        loginMemberDTO.setDeptName(member.getEmployee().getDeptCode().getDeptName());
-        loginMemberDTO.setJobName(member.getEmployee().getJobCode().getJobName());
+        LoginMemberDTO setMemberDTO = this.setMember(loginInfo);
 
         // access 토큰 + refresh 토큰 받아오기
-        TokenDTO token = tokenProvider.generateTokenDTO(loginMemberDTO);
-        Cookie cookie = tokenProvider.generateRefreshTokenInCookie(loginMemberDTO);
-
-
+        TokenDTO token = tokenProvider.generateTokenDTO(setMemberDTO);
+        Cookie cookie = tokenProvider.generateRefreshTokenInCookie(setMemberDTO);
 
         log.info("[AuthServiceImpl] login : cookie======{}", cookie);
         log.info("[AuthServiceImpl] login : token======{}", token);
@@ -71,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
         response.addCookie(cookie);
         try {
             // 리프레시토큰 레디스에 id와 저장
-            refreshTokenSave(ADMRefreshToken.builder().id(loginMemberDTO.getId())
+            refreshTokenSave(ADMRefreshToken.builder().id(setMemberDTO.getId())
                                                     .refreshToken(cookie.getValue().split("=")[0])
                                                     .build());
             return token;
@@ -108,6 +94,87 @@ public class AuthServiceImpl implements AuthService {
         throw new TokenException("액세트 토큰 재발급 실패");
     }
 
+    // 소셜로그인 jwt 토큰 발급
+//    @Override
+//    public Object insertOauthJwt(Map<String, Object> data, HttpServletResponse response) {
+//
+//        log.info("[AuthServiceImpl] oauthJwtLogin : data.get(profileObj) ==== {}", data.get("profileObj"));
+//        OAuthUserInfo googleUser = new GoogleUser((Map<String, Object>)data.get("profileObj"));
+//
+//        // 롤 넣어주기
+//
+////        OAuthUser oAuthUser = oAuthRepository.findById(googleUser.getProvider() + "_");
+//
+//        return null;
+//    }
+
+    // 소셜로그인 연동 데이터 인서트, jwt토큰 발급 요청
+    @Override
+    @Transactional
+    public Object insertOauthRegist(Map<String, Object> data, HttpServletResponse response) {
+
+        OAuthUserInfo userInfo = null; 
+        switch ((String) data.get("provider")) {
+
+            case "google" :
+                userInfo = new GoogleUser(data); 
+                break; 
+            case "kakao" :
+                userInfo = new KakaoUser(data);
+                break;
+        }
+
+        log.info("[AuthServiceImpl] insertOauthRegist : googleUser.getProvider ================{}",userInfo.getProvider());
+        log.info("[AuthServiceImpl] insertOauthRegist : googleUser.getProviderId ================{}",userInfo.getProviderId() );
+
+        // 기존 계정 있는지 조회 : 리소스서버(프로바이더)명 + 프로바이더에서 제공한 고유아이디
+        Optional<OAuthUser> findOauthUser = oAuthRepository.findById(userInfo.getProvider() + "_" + userInfo.getProviderId());
+        OAuthUser insertUser = null;
+
+        //기존 계정 조회해서 없으면
+        if(findOauthUser.isEmpty()) {
+            insertUser = OAuthUser.builder()
+                    .oauthId(userInfo.getProvider() + "_" + userInfo.getProviderId())
+                    .provider(userInfo.getProvider())
+                    .id(userInfo.getId())
+                    .provideEmail(userInfo.getEmail())
+                    .provideName(userInfo.getName())
+                    .build();
+
+            log.info("[AuthServiceImpl] insertOauthRegist : insertUser ================{}", insertUser);
+
+            oAuthRepository.save(insertUser);
+        }
+        // 기존 계정 존재하면
+        else {
+            insertUser = findOauthUser.get();
+            log.info("[AuthServiceImpl] insertOauthRegist : findOauthUser.get() = insertUser ================{}", insertUser);
+
+        }
+
+        // 소셜 아이디 가져가서 토큰 발행
+        LoginMemberDTO setMemberDTO = this.setMember((LoginMemberDTO.builder().id(insertUser.getId()).loginType(SOCIAL_LOGIN_TYPE).build()));
+
+        // access 토큰 + refresh 토큰 받아오기
+        TokenDTO token = tokenProvider.generateTokenDTO(setMemberDTO);
+        Cookie cookie = tokenProvider.generateRefreshTokenInCookie(setMemberDTO);
+
+        log.info("[AuthServiceImpl] login : cookie======{}", cookie);
+        log.info("[AuthServiceImpl] login : token======{}", token);
+
+        // 헤더에 쿠키 저장
+        response.addCookie(cookie);
+        try {
+            // 리프레시토큰 레디스에 id와 저장
+            refreshTokenSave(ADMRefreshToken.builder().id(setMemberDTO.getId())
+                    .refreshToken(cookie.getValue().split("=")[0])
+                    .build());
+            return token;
+        } catch (Exception e){
+            throw new TokenException("토큰 발급 실패, 다시 시도해주세요.");
+        }
+    }
+
 
     @Transactional
     public void refreshTokenSave(ADMRefreshToken refreshToken) {
@@ -128,5 +195,35 @@ public class AuthServiceImpl implements AuthService {
 
             throw new TokenException("리프레시토큰 검증 실패하였습니다. 재로그인 해주세요.");
 
+    }
+
+    private LoginMemberDTO setMember(LoginMemberDTO loginInfo) {
+
+        log.info("[AuthServiceImpl] login : loginInfo ====== {} ", loginInfo);
+
+        // 멤버 조회
+        ADMAccount member = memberFindById(loginInfo.getId());
+        // 패스워드 검증
+        // 비번 조회
+
+        // 일반로그인시 진행
+//        if(!loginInfo.getLoginType().contains(SOCIAL_LOGIN_TYPE)){
+//            if(!passwordEncoder.matches(member.getPassword(), loginInfo.getPassword())){
+//                // 비번 실패 예외
+//                throw new LoginFailedException("PASSWORD incorrect : 잘못된 비밀번호입니다.");
+//            }
+//        }
+
+        // 성공시 token 발급
+
+        // 멤버 dto에 다시 여러 정보 담아서 전달하기
+        LoginMemberDTO setMemberDTO = modelMapper.map(member, LoginMemberDTO.class);
+        log.info("[AuthServiceImpl] login : loginMemberDTO======{}", setMemberDTO);
+        setMemberDTO.setEmpNo(member.getEmployee().getEmpNo());
+        setMemberDTO.setName(member.getEmployee().getName());
+        setMemberDTO.setDeptName(member.getEmployee().getDeptCode().getDeptName());
+        setMemberDTO.setJobName(member.getEmployee().getJobCode().getJobName());
+
+        return setMemberDTO;
     }
 }
