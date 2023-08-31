@@ -1,4 +1,6 @@
 package com.highright.highcare.auth.dto;
+import com.highright.highcare.auth.entity.ADMEmployee;
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
 
 import java.sql.Date;
@@ -16,5 +18,6 @@ public class AccountDTO {
     private String password;
     private String isTempPwd;
     private Date pwdExpiredDate;
+
 
 }

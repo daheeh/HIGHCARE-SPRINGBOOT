@@ -1,12 +1,10 @@
 server:
   port: 8080
-  address: 0.0.0.0
 
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@oracle.coffit.today:1521:XE
-
     username: C##HIGHCARE
     password: HIGHCARE
   servlet:
@@ -17,7 +15,6 @@ spring:
   web:
     resources:
       static-locations: classpath:/images/
-
   # cookie
   server:
     servlet:
@@ -36,15 +33,12 @@ spring:
           auth: true
           starttls:
             enable: true
-
-# redis cache config
-redis:
+  # redis cache config
+  redis:
     host: localhost
     port: 6379
-
 # jpa config
-
-jpa:
+  jpa:
     generate-ddl: false
     show-sql: true
     database: oracle
@@ -67,12 +61,10 @@ jwt:
   expire-time: 100000 # (밀리초 단위)
   refresh-expire-time: 1000000
 
-
   # logging config
   logging:
     level:
       root: info
-
 image:
   add-resource-locations: classpath:/static/images/
   add-resource-handler: /images/**
