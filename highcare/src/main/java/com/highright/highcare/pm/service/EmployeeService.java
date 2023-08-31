@@ -2,21 +2,13 @@ package com.highright.highcare.pm.service;
 
 import com.highright.highcare.common.Criteria;
 
-//import com.highright.highcare.pm.dto.PmEmployeeAndDepartmentDTO;
 import com.highright.highcare.pm.dto.DeAndEmpDTO;
-import com.highright.highcare.pm.dto.DepartmentDTO;
 import com.highright.highcare.pm.dto.ManagementDTO;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.*;
-//import com.highright.highcare.pm.entity.PmEmployeeAndPmDepartment;
-//import com.highright.highcare.pm.repository.DepartmentRepository;
 import com.highright.highcare.pm.repository.EmployeeRepository;
+import com.highright.highcare.pm.repository.ManagementEmRepository;
 import com.highright.highcare.pm.repository.PmDepartmentRepository;
-//import com.highright.highcare.pm.repository.PmJobRepository;
-//import com.highright.highcare.pm.repository.PmEmployeeAndPmDepartmentRepository;
-//import com.highright.highcare.pm.repository.ReDepartmentRepository;
-//import com.highright.highcare.pm.repository.ReEmployeeRepository;
-//import com.highright.highcare.pm.repository.ReDepartmentRepository;
 import com.highright.highcare.pm.repository.ReEmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -28,8 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,15 +38,17 @@ public class EmployeeService {
 
     private final ReEmployeeRepository reEmployeeRepository;
 
+    private final ManagementEmRepository managementEmRepository;
 
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
                             PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
-                           ){
+                            , ManagementEmRepository managementEmRepository){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
         this.reEmployeeRepository = reEmployeeRepository;
+        this.managementEmRepository = managementEmRepository;
     }
 
     /* 토탈 */
@@ -87,28 +79,6 @@ public class EmployeeService {
         return employeeallList;
     }
 
-
-//    public List<ManagementDTO> manageMent(Criteria cri) {
-//        System.out.println("cri ============================> " + cri);
-//        int index = cri.getPageNum() -1;
-//        int count = cri.getAmount();
-//        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
-//        System.out.println("paging ==========================> " + paging);
-//
-//        Page<PmEmployee> result = employeeRepository.findByManNo("manNo", paging);
-//        System.out.println("result ==========================> " + result);
-//
-//        List<ManagementDTO> managementList = result.stream()
-//                .map(management -> modelMapper
-//                        .map(management, ManagementDTO.class)).collect(Collectors.toList());
-//
-//        Long datetime = System.currentTimeMillis();
-//        Timestamp timestamp = new Timestamp(datetime);
-//
-//        System.out.println("Datetime ======================================= " + datetime);
-//        System.out.println("Timestamp:============================"+timestamp);
-//        return null;
-//    }
 
 
     /* 사원 상세 조회 */
@@ -172,6 +142,8 @@ public class EmployeeService {
         log.info("insertpmEmployee ============================end");
         return (result > 0)? "사원 등록 성공": "사원 등록 실패";
     }
+
+
 
     /* 사원 및 부서 조회 // 트리뷰 */
     public PmDepartmentResult selectDept() {
@@ -256,6 +228,62 @@ public class EmployeeService {
         System.out.println("result===================>" + list);
         return list;
     }
+
+    /* 출 퇴근 조회 */
+    public List<ManagementResult> manageMent(Criteria cri) {
+        System.out.println("cri ============================> " + cri);
+        int index = cri.getPageNum() -1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
+        System.out.println("paging ==========================> " + paging);
+
+        Page<Management> result = managementEmRepository.findAll(paging);
+        System.out.println("result ==========================> " + result);
+
+//        List<ManagementDTO> managementList = result.stream()
+//                .map(management -> modelMapper
+//                        .map(management, ManagementDTO.class)).collect(Collectors.toList());
+//
+//        System.out.println("managementList =======================>" + managementList);
+//
+//        Long datetime = System.currentTimeMillis();
+//        Timestamp timestamp = new Timestamp(datetime);
+//
+//        System.out.println("Datetime ======================================= " + datetime);
+//        System.out.println("Timestamp:============================"+timestamp);
+
+        List<Management> manageList = managementEmRepository.findAll();
+        List<ManagementResult> managementResult =  manageList.stream().map(ManagementResult::new).collect(Collectors.toList());
+        return managementResult;
+    }
+
+
+    /*출근시간 등록*/
+    @Transactional
+    public Object insertmanageMent(@ModelAttribute ManagementDTO managementDTO) {
+        log.info("insertmanageMent start==================");
+        log.info("insertmanageMent ManagementDTO ================== " + managementDTO );
+
+//        Management insertmanageMent =  modelMapper.map(managementDTO, Management.class);
+//            managementEmRepository.save(insertmanageMent);
+        int result = 0;
+
+        try {
+            Management insertmanageMent =  modelMapper.map(managementDTO, Management.class);
+            managementEmRepository.save(insertmanageMent);
+            result = 1;
+        }catch (Exception e) {
+            System.out.println("check");
+            throw new RuntimeException(e);
+        }
+        log.info("insertmanageMent ============================end");
+        return (result > 0)? "출근 시간 등록 ": "출근 시간 등록 실패";
+
+//        return insertmanageMent;
+    }
+
+//    public Object insertmanageMent(DepartmentDTO departmentDTO) {
+//    }
 
 
 //    public Object manageMent() {

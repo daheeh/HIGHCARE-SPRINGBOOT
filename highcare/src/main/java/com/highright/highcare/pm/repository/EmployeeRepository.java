@@ -1,6 +1,7 @@
 package com.highright.highcare.pm.repository;
 
 //import com.highright.highcare.pm.entity.Employees;
+import com.highright.highcare.pm.entity.MgEmployee;
 import com.highright.highcare.pm.entity.PmEmployee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,5 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
 
     Page<PmEmployee> findByEmpName(String search, Pageable paging);
 
-    /* 출퇴근 전체 조회*/
-//    Page<PmEmployee> findByManNo(String manNo, Pageable paging);
+
 }
