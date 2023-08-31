@@ -1,6 +1,7 @@
 package com.highright.highcare.approval.controller;
 
 import com.highright.highcare.approval.dto.ApvFormDTO;
+import com.highright.highcare.approval.dto.ApvFormMainDTO;
 import com.highright.highcare.approval.dto.ApvFormWithLinesDTO;
 import com.highright.highcare.approval.dto.ApvLineDTO;
 import com.highright.highcare.approval.service.ApprovalService;
@@ -31,10 +32,10 @@ public class ApprovalController {
 
 
     /* Apv메인페이지 - 조건별 현황 1 */
-    @GetMapping("/writeMain")
+    @GetMapping("/main")
     public ResponseEntity<ResponseDTO> selectWriteApv(@RequestParam int empNo) {
 
-        Map<String, Integer> countsMap = approvalService.selectWriteApv(empNo);
+        Map<String, Integer> countsMap = approvalService.selectApvMainCount(empNo);
 
         System.out.println("countsMap = " + countsMap);
 
@@ -53,7 +54,7 @@ public class ApprovalController {
     @GetMapping("/apvList")
     public ResponseEntity<ResponseDTO> selectMyApvList(@RequestParam int empNo) {
 
-        List<ApvFormDTO> myApvList = approvalService.selectMyApvList(empNo);
+        List<ApvFormMainDTO> myApvList = approvalService.selectMyApvList(empNo);
         System.out.println("myApvList = " + myApvList);
 
         if (myApvList.isEmpty()) {
@@ -73,16 +74,16 @@ public class ApprovalController {
     public ResponseEntity<ResponseDTO> selectWriteApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus
             , @RequestParam(name = "offset", defaultValue = "1") String offset) {
 
-        log.info("[ProductController] selectProductListWithPaging => offset : {} ", offset);
+        log.info("[ProductController] selectListWithPaging => offset : {} ", offset);
 
-        int total = approvalService.selectWriteApvStatusTotal(empNo, apvStatus);
+        int total = approvalService.selectApvStatusTotal(empNo, apvStatus);
         Criteria criteria = new Criteria(Integer.valueOf(offset), 15);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-        pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo, apvStatus, criteria));
+        pagingResponseDTO.setData(approvalService.selectListWithPaging(empNo, apvStatus, criteria));
         pagingResponseDTO.setPageInfo(new PageDTO(criteria, total));
 
-        List<ApvFormDTO> writeApvStatusApvList = approvalService.selectWriteApvStatusApvList(empNo, apvStatus);
+        List<ApvFormMainDTO> writeApvStatusApvList = approvalService.selectWriteApvStatusApvList(empNo, apvStatus);
 
         if (writeApvStatusApvList.isEmpty()) {
             return ResponseEntity
@@ -102,14 +103,14 @@ public class ApprovalController {
 
         log.info("[ProductController] selectReceiveApvStatusApv => offset : {} ", offset);
 
-        int total = approvalService.selectReceiveApvStatusTotal(empNo, apvStatus);
+        int total = approvalService.selectApvStatusTotal(empNo, apvStatus);
         Criteria criteria = new Criteria(Integer.valueOf(offset), 15);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-        pagingResponseDTO.setData(approvalService.selectProductListWithPaging(empNo, apvStatus, criteria));
+        pagingResponseDTO.setData(approvalService.selectListWithPaging(empNo, apvStatus, criteria));
         pagingResponseDTO.setPageInfo(new PageDTO(criteria, total));
 
-        List<ApvFormDTO> receiveApvStatusApvList = approvalService.selectReceiveApvStatusApvList(empNo);
+        List<ApvFormMainDTO> receiveApvStatusApvList = approvalService.selectReceiveApvStatusApvList(empNo, apvStatus);
 
         if (receiveApvStatusApvList.isEmpty()) {
             return ResponseEntity
@@ -121,6 +122,11 @@ public class ApprovalController {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", receiveApvStatusApvList));
     }
+
+
+
+
+
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
     public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
