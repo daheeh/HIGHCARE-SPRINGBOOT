@@ -16,4 +16,10 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     List<Board> findByDeleteYn(char n);
     Page<Board> findByDeleteYn(char n, Pageable paging);
+
+    List<Board> findByDeleteYnAndBulletinCategoriesAndTitleContains(char n, BulletinCategories byCategoryCode, String title);
+    Page<Board> findByDeleteYnAndBulletinCategoriesAndTitleContains(char n, BulletinCategories byCategoryCode, String title,Pageable paging);
+
+    List<Board> findByDeleteYnAndTitleContains(char n, String title);
+    Page<Board> findByDeleteYnAndTitleContains(char n, String title,Pageable paging);
 }

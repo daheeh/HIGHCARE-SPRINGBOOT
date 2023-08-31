@@ -27,17 +27,20 @@ public class BoardController {
     @GetMapping("/board")
     public ResponseEntity<ResponseDTO> selectBoardList(
             @RequestParam(name = "categoryCode") String categoryCode,
-            @RequestParam(name = "currentPage") String currentPage) {
-        System.out.println("와성용");
-        System.out.println("cateogryCode" + categoryCode);
-        System.out.println("currentPage" + currentPage);
+            @RequestParam(name = "currentPage") String currentPage,
+            @RequestParam(name = "content") String content) {
         int boardCategoryCode = Integer.valueOf(categoryCode);
-        int total = boardService.selectBoardTotal(boardCategoryCode);
-
         Criteria cri = new Criteria(Integer.valueOf(currentPage), 10);
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-        pagingResponseDTO.setData(boardService.selectBoardListWithPaging(cri, boardCategoryCode));
+        int total = 0;
+        if(content == ""){
+             total = boardService.selectBoardTotal(boardCategoryCode);
+            pagingResponseDTO.setData(boardService.selectBoardListWithPaging(cri, boardCategoryCode));
 
+        }else{
+             total = boardService.selectSearchTotal(boardCategoryCode, content);
+            pagingResponseDTO.setData(boardService.selectBoardListWithPagingSearch(cri, boardCategoryCode, content));
+        }
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "조회 성공", pagingResponseDTO));
@@ -59,8 +62,6 @@ public class BoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "글 조회 성공", pagingResponseDTO));
 
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "글 조회 성공"
-//                , boardService.selectBoard(code)));
     }
 
     @GetMapping("/boardTitle")
