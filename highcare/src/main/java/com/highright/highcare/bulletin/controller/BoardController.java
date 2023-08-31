@@ -61,7 +61,14 @@ public class BoardController {
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "글 조회 성공", pagingResponseDTO));
-
+    }
+    @GetMapping("/thr")
+    public ResponseEntity<ResponseDTO> selectBoardDetails(
+            @RequestParam(name = "bulletinCode") String bulletinCode
+    ){
+        int code = Integer.parseInt(bulletinCode);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "글 조회 성공", boardService.selectBoards(code)));
     }
 
     @GetMapping("/boardTitle")

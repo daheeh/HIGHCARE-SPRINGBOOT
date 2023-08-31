@@ -157,6 +157,10 @@ public class BoardService {
         System.out.println(boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList()));
         return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
     }
+    public Object selectBoards(int code) {
+        Board board = boardRepository.findById(code).get();
+        return modelMapper.map(board, BoardDTO.class);
+    }
     @Transactional
     public Object selectBoard(int code) {
         Board board = boardRepository.findById(code).get();
