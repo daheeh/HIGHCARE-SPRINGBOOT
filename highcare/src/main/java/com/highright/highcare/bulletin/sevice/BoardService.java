@@ -274,4 +274,15 @@ public class BoardService {
         return 1;
 
     }
+
+    @Transactional
+    public Object updateComment(CommentDTO commentDTO) {
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        Comment comment = commentRepository.findById(commentDTO.getCommentCode()).get();
+        comment.setModifiedDate(sqlDate);
+        comment.setCommentContent(commentDTO.getCommentContent());
+        return 1;
+    }
 }
