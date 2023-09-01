@@ -38,6 +38,7 @@ public class BoardController {
         int total = 0;
         if(content == ""){
              total = boardService.selectBoardTotal(boardCategoryCode,empNo);
+
             pagingResponseDTO.setData(boardService.selectBoardListWithPaging(cri, boardCategoryCode,empNo));
 
         }else{
