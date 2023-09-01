@@ -1,6 +1,7 @@
 package com.highright.highcare.bulletin.controller;
 
 import com.highright.highcare.bulletin.dto.BoardDTO;
+import com.highright.highcare.bulletin.dto.CommentDTO;
 import com.highright.highcare.bulletin.dto.BoardPagingResponseDTO;
 import com.highright.highcare.bulletin.dto.BulletinCategoriesDTO;
 import com.highright.highcare.bulletin.sevice.BoardService;
@@ -110,6 +111,12 @@ public class BoardController {
     @PutMapping("/deleteBoard")
     public ResponseEntity<ResponseDTO> deleteBoard(@RequestBody BoardDTO boardDTO){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 삭제 성공", boardService.deleteBoard(boardDTO)));
+    }
+
+    @PutMapping("/deleteComment")
+    public ResponseEntity<ResponseDTO> deleteBoard(@RequestBody CommentDTO commentDTO){
+        System.out.println("commentCode : " + commentDTO.getCommentCode());
+        return null;
+    }
 
     }
-}
