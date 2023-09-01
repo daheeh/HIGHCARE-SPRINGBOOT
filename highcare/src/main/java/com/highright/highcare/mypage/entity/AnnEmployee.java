@@ -2,9 +2,7 @@
 package com.highright.highcare.mypage.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +12,8 @@ import java.util.List;
 @Getter
 @ToString
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AnnEmployee {
 
     @Id
@@ -22,9 +22,9 @@ public class AnnEmployee {
 
 
     // MyAnnual매핑
-    @OneToMany
-    @JoinColumn(name = "EMP_NO")
-    private List<MyAnnual> myAnnual;
+//    @OneToMany
+//    @JoinColumn(name = "EMP_NO")
+//    private List<MyAnnual> myAnnual;
 
 
 

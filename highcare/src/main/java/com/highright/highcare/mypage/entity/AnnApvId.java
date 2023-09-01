@@ -4,16 +4,14 @@
 //
 //import javax.persistence.Column;
 //import javax.persistence.Embeddable;
-//import javax.persistence.Id;
 //import java.io.Serializable;
-//
-//@NoArgsConstructor(access= AccessLevel.PROTECTED)
 //@Embeddable
+//@NoArgsConstructor(access= AccessLevel.PROTECTED)
 //@Getter
 //@Setter
 //@ToString
 //@EqualsAndHashCode
-//public class AnnApv implements Serializable {
+//public class AnnApvId implements Serializable {
 //
 //    @Column(name ="EMP_NO")
 //    private int empNo;
@@ -22,7 +20,7 @@
 //    private int annNo;  // pk
 //
 //    @Builder
-//    public AnnApv(int empNo, int annNo) {
+//    public AnnApvId(int empNo, int annNo) {
 //        this.empNo = empNo;
 //        this.annNo = annNo;
 //    }

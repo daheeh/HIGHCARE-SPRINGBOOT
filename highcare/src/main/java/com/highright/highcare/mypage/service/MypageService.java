@@ -2,15 +2,14 @@ package com.highright.highcare.mypage.service;
 
 //import com.highright.highcare.mypage.Repository.AnnRepository;
 import com.highright.highcare.mypage.Repository.AnnRepository;
+import com.highright.highcare.mypage.dto.MyAnnualDTO;
 import com.highright.highcare.mypage.dto.MyEmployeeDTO;
-import com.highright.highcare.mypage.entity.AnnEmployee;
+import com.highright.highcare.mypage.entity.*;
 import com.highright.highcare.util.FileUploadUtils;
 import com.highright.highcare.mypage.Repository.MyProfileFileRepository;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.mypage.dto.MyProfileFileDTO;
-import com.highright.highcare.mypage.entity.MyProfile;
-import com.highright.highcare.mypage.entity.MyProfileFile;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -108,17 +110,21 @@ public class MypageService {
     }
 
     @Transactional
-    public MyEmployeeDTO selectAnnList(int empNo) {
+    public Object selectAnnList(int empNo) {
+        log.info("[MyPageService] empNo^^^^222222222 {}", empNo);
 
-        AnnEmployee annEmployee = annRepository.findByEmpNo(empNo);
-        log.info("[MyPageService] annEmployee^^^^ {}", annEmployee);
-//        log.info("[MyPageService] annEmployee^^^^ {}", annEmployee.getMyAnnual());
+        List<MyAnnual> annEmployee = annRepository.findByEmpNo(empNo);
 
-        //AmmEmployee랑 MyEmployeeDTO랑 연결이 알아서 됨?
-        MyEmployeeDTO myEmployeeDTO = modelMapper.map(annEmployee, MyEmployeeDTO.class);
-        log.info("[MyPageService] MyEmployeeDTO^^^^ {}",myEmployeeDTO);
+        log.info("[MyPageService] annEmployee^^^^222222222 {}", annEmployee);
 
-        return myEmployeeDTO;
+
+//        AmmEmployee랑 MyEmployeeDTO랑 연결이 알아서 됨?
+        List<MyAnnualDTO> myAnnualDTOList = annEmployee.stream().map(item -> modelMapper.map(item, MyAnnualDTO.class)).collect(Collectors.toList());
+        log.info("[MyPageService] MyEmployeeDTO^^^^ {}",myAnnualDTOList);
+
+
+
+        return myAnnualDTOList;
     }
 }
 

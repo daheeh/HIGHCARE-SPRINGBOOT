@@ -1,14 +1,24 @@
 package com.highright.highcare.mypage.Repository;
 
-import com.highright.highcare.mypage.entity.AnnEmployee;
+import com.highright.highcare.mypage.entity.MyAnnual;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 
-@Repository
-public interface AnnRepository extends JpaRepository<AnnEmployee, Integer> {
+public interface AnnRepository extends JpaRepository<MyAnnual, Integer> {
 
-//    @Query(value = "SELECT * FROM AnnEmployee ORDER BY annNo DESC LIMIT 1", nativeQuery = true)
-    AnnEmployee findByEmpNo(int empNo);
+
+    List<MyAnnual> findByEmpNo(int empNo);
+
+//    List<MyAnnual> findByAnnApvId(AnnApvId annApvId);
+
+
+
+//FETCH FIRST 1 ROWS ONLY
+//    @Query(value = "SELECT * FROM TBL_ANNUAL A JOIN TBL_EMPLOYEE B ON(A.EMP_NO = B.EMP_NO) WHERE A.EMP_NO = :empNo " +
+//            "ORDER BY A.ANN_NO DESC ",
+//            nativeQuery = true)
+//    AnnEmployee findByEmpNo(int empNo);
 }
