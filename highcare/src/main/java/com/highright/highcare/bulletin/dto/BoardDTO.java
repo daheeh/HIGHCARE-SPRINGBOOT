@@ -36,7 +36,7 @@ public class BoardDTO {
 
     private BulletinCategoriesDTO bulletinCategories;
 
-    private BulletinEmployeeDTO BulletinEmployee;
+    private BulletinEmployeeDTO bulletinEmployee;
 
     private int categoryCode;
 
