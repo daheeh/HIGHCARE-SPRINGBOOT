@@ -16,7 +16,6 @@ public class MyProfileDTO {
     private int empNo;
 
     private MyEmployeeDTO myEmployee;
-
     private MyProfileFileDTO myProfileFile;
 
 }

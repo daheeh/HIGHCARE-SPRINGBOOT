@@ -1,5 +1,6 @@
 package com.highright.highcare.mypage.dto;
 
+import com.highright.highcare.mypage.entity.MyAnnual;
 import lombok.*;
 
 import javax.persistence.JoinColumn;
@@ -27,10 +28,7 @@ public class MyEmployeeDTO {
 //    private String edu;
     private String tel;    // 내선전화
 
-//    private List<MyBscdDTO> cdList;
-
-//    private JobDTO jobName;
-//    private DepartmentDTO deptName;
-
+    private List<MyAnnualDTO> myAnnual;
 
 }
+
