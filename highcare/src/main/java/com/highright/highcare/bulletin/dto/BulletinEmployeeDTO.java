@@ -1,9 +1,9 @@
 package com.highright.highcare.bulletin.dto;
-
+import com.highright.highcare.approval.dto.ApvLineDTO;
 import lombok.*;
 
 import java.sql.Date;
-
+import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -24,5 +24,6 @@ public class BulletinEmployeeDTO {
     private String address;
     private String education;
     private String telephone;
+
 
 }

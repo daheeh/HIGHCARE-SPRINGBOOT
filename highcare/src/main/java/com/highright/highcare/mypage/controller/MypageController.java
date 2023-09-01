@@ -1,15 +1,20 @@
 package com.highright.highcare.mypage.controller;
 
+import com.highright.highcare.auth.dto.LoginMemberDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
+import com.highright.highcare.mypage.dto.MyAnnualDTO;
+import com.highright.highcare.mypage.dto.MyEmployeeDTO;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.mypage.dto.MyProfileFileDTO;
+import com.highright.highcare.mypage.entity.AnnEmployee;
 import com.highright.highcare.mypage.entity.MyProfile;
 import com.highright.highcare.mypage.entity.MyProfileFile;
 import com.highright.highcare.mypage.service.MypageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +40,7 @@ public class MypageController {
     @GetMapping ("/profile/{empNo}")
         public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
         MyProfileDTO profilefileList = mypageService.selectProfilefileList(empNo);
-        log.info("empNo Controller ================profilefileList{} ", profilefileList);
+        log.info("empNo [Controller] ================profilefileList{} ", profilefileList);
 
         if(profilefileList == null ){
             return ResponseEntity
@@ -43,7 +48,7 @@ public class MypageController {
                     .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
         }
 
-        System.out.println("empNo Controller ========================== " + empNo);
+        System.out.println("empNo [Controller] ========================== " + empNo);
 
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "프로필 조회 성공", profilefileList));
@@ -64,6 +69,24 @@ public class MypageController {
         //  MyProfileFileDTO updatedProfile = mypageService.updateMyProfileFile(myProfileFileDTO, profileImage);여기에서 서비스로 갔다옴
         // return에서 갔다온 파일 변수에 넘김
 
+    }
+
+    @GetMapping("/anselect/{empNo}")
+    public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
+                                                 @PathVariable int empNo) {
+//        member.getEmpNo();
+        Object annEmployee = mypageService.selectAnnList(empNo);
+
+        log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annEmployee);
+
+        if(annEmployee == null){
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
+        }
+        System.out.println("[Controller] annEmployee ^^^^^^" + empNo);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", annEmployee));
     }
 
 

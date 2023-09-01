@@ -1,4 +1,3 @@
-
 ### 프로필 회원아이디로 조회
 GET http://localhost:8080/api/mypage/profile/10002
 
@@ -22,3 +21,6 @@ Access-Control-Allow-Origin: *
   "chName": "체인지네임",
   "date": "2023-08-22"
 }
+
+###회원 아이디로 연차조회
+GET http://localhost:8080/api/mypage/anselect/10001

@@ -1,6 +1,6 @@
 package com.highright.highcare.chatting.pubsub;
 
-import com.highright.highcare.chatting.dto.ChatDTO;
+import com.highright.highcare.chatting.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -12,7 +12,7 @@ public class RedisPublisher {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public void publish(ChannelTopic topic, ChatDTO message) {
+    public void publish(ChannelTopic topic, ChatMessage message) {
         redisTemplate.convertAndSend(topic.getTopic(), message);
     }
 }

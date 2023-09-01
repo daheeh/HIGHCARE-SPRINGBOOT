@@ -63,6 +63,58 @@ Accept: */*
 Access-Control-Allow-Origin: *
 
 
+### 출근 등록
+POST http://localhost:8080/api/pm/management/insert
+Content-Type: application/json; boundary=WebAppBoundary
+Accept: */*
+
+{
+  "startTime" : 0,
+  "endTime" : null,
+  "manDate" : 0,
+  "status" : "출근",
+  "workTime" : "0",
+  "totalWorkTime" : "0",
+  "mgEmployee": "10005"
+}
+
+
+### 퇴근 등록
+POST http://localhost:8080/api/pm/management/update
+Content-Type: application/json; boundary=WebAppBoundary
+Accept: */*
+
+{
+  "startTime" : 0,
+  "endTime" : 0,
+  "manDate" : 0,
+  "status" : "퇴근",
+  "workTime" : "0",
+  "totalWorkTime" : "0",
+  "mgEmployee": "0"
+}
+
+
+### 퇴근 조회
+GET http://localhost:8080/api/pm/management/search?empNo=10005
+Content-Type: application/json
+Accept: */*
+
+{
+  "empNo":10005
+}
+
+
+### 퇴근 조회 및 등록
+POST http://localhost:8080/api/pm/management/update
+Content-Type: application/json
+Accept: */*
+
+{
+  "empNo":0
+}
+
+
 
 
 

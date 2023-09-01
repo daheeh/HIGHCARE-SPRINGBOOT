@@ -18,7 +18,7 @@ public class MyEmployee {
     @Id
     @Column(name = "EMP_NO")
     private int empNo;
-    @Column(name = "NAME")
+    @Column(name = "EMP_NAME")
     private String name;
     @Column(name = "EMAIL")
     private String email;
@@ -47,13 +47,13 @@ public class MyEmployee {
     @Column(name = "TELEPHONE")
     private String tel;    // 내선전화
 
-//    @OneToOne
-//    @JoinColumn(name = "DEPT_CODE", insertable = false, updatable = false)
-//    private Department deptName;
-//
-//    @OneToOne
-//    @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false)
-//    private Job jobName;
+    @OneToOne
+    @JoinColumn(name = "DEPT_CODE", insertable = false, updatable = false)
+    private Department deptName;
+
+    @OneToOne
+    @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false)
+    private Job jobName;
 
 
 
