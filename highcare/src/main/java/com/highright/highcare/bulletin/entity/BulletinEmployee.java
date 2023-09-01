@@ -31,7 +31,7 @@ public class BulletinEmployee {
     )
     private int empNo;
 
-    @Column(name = "NAME")
+    @Column(name = "EMP_NAME")
     private String empName;
 
     @Column(name = "EMAIL")
@@ -64,9 +64,8 @@ public class BulletinEmployee {
     @Column(name = "TELEPHONE")
     private String telephone;
 
-    @Column(name = "JOB_CODE")
-    private int jobCode;
+    @ManyToOne
+    @JoinColumn(name="JOB_CODE")
+    private PmJob job;
 
 }
-
-

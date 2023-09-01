@@ -50,12 +50,7 @@ public class BoardService {
     }
 
     public List<BoardDTO> selectBoardList(){
-        System.out.println("=======================");
-        System.out.println("service전");
         List<Board> boardList = boardRepository.findAll();
-        System.out.println("====================");
-        System.out.println("조회후");
-        System.out.println("boardList = " + boardList);
         return  boardList.stream()
                 .map(board-> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
     }
@@ -71,8 +66,6 @@ public class BoardService {
         /* 게시판 중복 검사*/
         if(boardCategoryRepository.findByNameBoard(bulletinCategoriesDTO.getNameBoard())!= null){
 
-            System.out.println("asdf");
-            System.out.println("이미 있는 게시판입니다");
             return null;
         }
         BulletinCategories category = modelMapper.map(bulletinCategoriesDTO, BulletinCategories.class);
@@ -89,17 +82,34 @@ public class BoardService {
         List<Comment> comments = commentRepository.findByBoard(board);
         return comments.size();
     }
-    public int selectBoardTotal(int boardCategoryCode) {
-        System.out.println("서비스까지 옴");
+    public int selectSearchTotal(int boardCategoryCode, String content,int empNo) {
         List<Board> boardList;
-        if(boardCategoryCode>2) {
-            boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
-            System.out.println("3이상" + boardList.size());
-        }else{
-             boardList = boardRepository.findByDeleteYn('N');
-            System.out.println("2이하" + boardList.size());
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
+        System.out.println("bulletinEmployee no : " + bulletinEmployee.getEmpNo());
+
+        if(boardCategoryCode==5) {
+            boardList = boardRepository.findByDeleteYnAndBulletinEmployeeAndTitleContains('N',bulletinEmployee, content);
+        }else if (boardCategoryCode > 2){
+            boardList = boardRepository.findByDeleteYnAndBulletinCategoriesAndTitleContains('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode), content);
+        } else{
+            boardList = boardRepository.findByDeleteYnAndTitleContains('N', content);
         }
 
+        return boardList.size();
+    }
+
+    public int selectBoardTotal(int boardCategoryCode,int empNo) {
+        List<Board> boardList;
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
+        System.out.println("bulletinEmployee no : " + bulletinEmployee.getEmpNo());
+        if(boardCategoryCode==5) {
+            boardList = boardRepository.findByDeleteYnAndBulletinEmployee('N',bulletinEmployee);
+        } else if (boardCategoryCode >2) {
+            boardList = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode));
+        } else{
+             boardList = boardRepository.findByDeleteYn('N');
+        }
+        System.out.println("갯수 : " +  boardList.size());
         return boardList.size();
     }
     public Object selectBoardAndCommentPaging(Criteria cri, String bulletinCode) {
@@ -111,15 +121,46 @@ public class BoardService {
         List<Comment> commentList = (List<Comment>)result.getContent();
         return commentList.stream().map(comment -> modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
     }
-    public Object selectBoardListWithPaging(Criteria cri, int boardCategoryCode) {
+    public Object selectBoardListWithPagingSearch(Criteria cri, int boardCategoryCode, String content,int empNo) {
         int index = cri.getPageNum() - 1;
         int count = cri.getAmount();
         Pageable paging = PageRequest.of(index, count, Sort.by("bulletinCode").descending());
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
+        System.out.println("bulletinEmployee : " + bulletinEmployee);
+        Page<Board> result;
+        if(boardCategoryCode==5) {
+            paging = PageRequest.of(index, count, Sort.by("modifiedDate").descending());
+            result = boardRepository.findByDeleteYnAndBulletinEmployeeAndTitleContains('N',bulletinEmployee,content,paging);
+
+        } else if (boardCategoryCode > 2) {
+            result = boardRepository.findByDeleteYnAndBulletinCategoriesAndTitleContains('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode),content,paging);
+        } else if (boardCategoryCode == 2 ) {
+            paging = PageRequest.of(index, count, Sort.by("views").descending());
+            result = boardRepository.findByDeleteYnAndTitleContains('N',content,paging);
+        } else{
+            paging = PageRequest.of(index, count, Sort.by("modifiedDate").descending());
+            result = boardRepository.findByDeleteYnAndTitleContains('N',content,paging);
+        }
+
+
+        List<Board> boardList = (List<Board>)result.getContent();
+        System.out.println("category : 5 "+boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList()));
+        return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+    }
+    public Object selectBoardListWithPaging(Criteria cri, int boardCategoryCode, int empNo) {
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("bulletinCode").descending());
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
+        System.out.println("bulletinEmployee : " + bulletinEmployee);
 
         Page<Board> result;
-        if(boardCategoryCode>2) {
-            result = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode),paging);
+        if(boardCategoryCode == 5) {
+            paging = PageRequest.of(index, count, Sort.by("modifiedDate").descending());
+            result = boardRepository.findByDeleteYnAndBulletinEmployee('N',bulletinEmployee,paging);
 
+        } else if (boardCategoryCode > 2) {
+            result = boardRepository.findByDeleteYnAndBulletinCategories('N', boardCategoryRepository.findByCategoryCode(boardCategoryCode),paging);
         } else if (boardCategoryCode == 2 ) {
             paging = PageRequest.of(index, count, Sort.by("views").descending());
             result = boardRepository.findByDeleteYn('N',paging);
@@ -130,11 +171,12 @@ public class BoardService {
 
 
         List<Board> boardList = (List<Board>)result.getContent();
-        System.out.println("서비스 ");
-        System.out.println(boardList);
-        System.out.println("보내줄 값");
         System.out.println(boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList()));
         return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).collect(Collectors.toList());
+    }
+    public Object selectBoards(int code) {
+        Board board = boardRepository.findById(code).get();
+        return modelMapper.map(board, BoardDTO.class);
     }
     @Transactional
     public Object selectBoard(int code) {
@@ -150,14 +192,13 @@ public class BoardService {
     @Transactional
     public Object insertBoard(BoardDTO boardDTO) {
         System.out.println("boardDTO get empNo : " + boardDTO.getEmpNo());
-//        BulletinCategories bulletinCategories = boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode());
-        System.out.println("서비스 옴 : " + boardDTO.getCategoryCode());
             BulletinCategoriesDTO bulletinCategoriesDTO = modelMapper.map(boardCategoryRepository.findByCategoryCode(boardDTO.getCategoryCode()), BulletinCategoriesDTO.class);
         boardDTO.setBulletinCategories(bulletinCategoriesDTO);
-        // 임시용
+
         java.util.Date utilDate = new java.util.Date();
         long currentMilliseconds = utilDate.getTime();
         java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+
         boardDTO.setCreationDate(sqlDate);
         boardDTO.setModifiedDate(sqlDate);
         boardDTO.setDeleteYn('N');
@@ -165,7 +206,6 @@ public class BoardService {
         BulletinEmployeeDTO bulletinEmployeeDTO = modelMapper.map(bulletinEmployeeRepository.findById(boardDTO.getEmpNo()).get(), BulletinEmployeeDTO.class);
 
         boardDTO.setBulletinEmployee(bulletinEmployeeDTO);
-        System.out.println("bulleinEdto : " + bulletinEmployeeDTO);
         Board board = modelMapper.map(boardDTO, Board.class);
         boardRepository.save(board);
 

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,6 @@ public class AdminController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "관리자 페이지 접속 성공", null));
     }
-
     @GetMapping("member")
     public ResponseEntity<ResponseDTO> selectMember(@RequestParam int empNo){
         log.info("empNo" , empNo);
@@ -39,6 +39,7 @@ public class AdminController {
     }
 
     // 인서트 회원신청
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/memberjoin")
     public ResponseEntity<ResponseDTO> insertMember(@RequestBody RequestMemberDTO requestMemberDTO){
         log.info("[AdminController] insertMember requestMemberDTO===={}", requestMemberDTO);

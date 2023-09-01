@@ -16,7 +16,7 @@ public class ADMJob {
     @Column(name="JOB_CODE")
     private int jobCode;
 
-    @Column(name="NAME")
+    @Column(name="JOB_NAME")
     private String jobName;
 
     @Override
