@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/socket")
 public class RoomController {
 
     private final ChatService chatService;
@@ -30,7 +27,8 @@ public class RoomController {
      * @param roomId 채팅방 id
      */
     @GetMapping("/{roomId}")
-    public ResponseEntity<ResponseDTO> joinRoom(@PathVariable(required = false) Long roomId, Model model) {
+//    public ResponseEntity<ResponseDTO> joinRoom(@PathVariable(required = false) Long roomId, Model model) {
+    public ResponseEntity<ResponseDTO> joinRoom(@PathVariable Long roomId) {
         System.out.println("Room Controller ===> joinRoom roomId = " + roomId);
 
         List<Chat> chatList = chatService.findAllChatByRoomId(roomId);
@@ -51,7 +49,7 @@ public class RoomController {
      * @param form
      */
     @PostMapping("/room")
-    public ResponseEntity<ResponseDTO> createRoom(RoomForm form) {
+    public ResponseEntity<ResponseDTO> createRoom(@RequestBody RoomForm form) {
         System.out.println("Room Controller ===> createRoom roomForm = " + form);
 
         Room createRoomName = chatService.createRoom(form.getName());
