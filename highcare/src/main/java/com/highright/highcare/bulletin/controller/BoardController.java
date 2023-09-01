@@ -115,8 +115,8 @@ public class BoardController {
 
     @PutMapping("/deleteComment")
     public ResponseEntity<ResponseDTO> deleteBoard(@RequestBody CommentDTO commentDTO){
-        System.out.println("commentCode : " + commentDTO.getCommentCode());
-        return null;
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "댓글 삭제 성공", boardService.deleteComment(commentDTO)));
+
     }
 
     }
