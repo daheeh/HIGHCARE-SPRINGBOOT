@@ -56,7 +56,22 @@ public class Management {
     @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
     private MgEmployee mgEmployee;
 
+    @Override
+    public String toString() {
+        return "Management{" +
+                "manNo=" + manNo +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", manDate='" + manDate + '\'' +
+                ", status='" + status + '\'' +
+                ", workTime='" + workTime + '\'' +
+                ", totalWorkTime='" + totalWorkTime + '\'' +
+                ", empNo=" + empNo +
+                ", mgEmployee=" + mgEmployee +
+                '}';
+    }
 
-//    @Column(name = "EMP_NO")
+
+    //    @Column(name = "EMP_NO")
 //    private int empNo;
 }

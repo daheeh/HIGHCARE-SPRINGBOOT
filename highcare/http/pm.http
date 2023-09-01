@@ -96,7 +96,17 @@ Accept: */*
 
 
 ### 퇴근 조회
-GET http://localhost:8080/api/pm/management/search?empNo=0
+GET http://localhost:8080/api/pm/management/search?empNo=10005
+Content-Type: application/json
+Accept: */*
+
+{
+  "empNo":10005
+}
+
+
+### 퇴근 조회 및 등록
+POST http://localhost:8080/api/pm/management/update
 Content-Type: application/json
 Accept: */*
 

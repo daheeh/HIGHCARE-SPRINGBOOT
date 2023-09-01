@@ -16,15 +16,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -303,7 +308,7 @@ public class EmployeeService {
         log.info("insertmanageMent ManagementDTO ================== " + managementDTO );
 
 
-        List<Management> existingRecords = managementEmRepository.findByManDateAndEmpNo(managementDTO.getManDate(), managementDTO.getEmpNo());
+        Optional<Management> existingRecords = managementEmRepository.findByManDateAndEmpNo(managementDTO.getManDate(), managementDTO.getEmpNo());
 
         if (!existingRecords.isEmpty()) {
             log.info("Record with the same manDate and empNo already exists");
@@ -328,22 +333,22 @@ public class EmployeeService {
 
     /* 퇴근 */
     @Transactional
-    public Object updateManageMent(@ModelAttribute ManagementDTO managementDTO) {
+    public String updateManageMent(Management management) {
         log.info("updatemanageMent start==================");
-        log.info("updatemanageMent ManagementDTO ================== " + managementDTO );
+        log.info("updatemanageMent Management ================== " + management );
 
         int result = 0;
 
         try {
-            Management updatemanageMent =  modelMapper.map(managementDTO, Management.class);
-            managementEmRepository.save(updatemanageMent);
+           // Management updatemanageMent =  modelMapper.map(managementDTO, Management.class);
+            managementEmRepository.save(management);
             result = 1;
         }catch (Exception e) {
             System.out.println("check");
             throw new RuntimeException(e);
         }
         log.info("updatemanageMent ============================end");
-        return (result > 0)? "퇴근 시간 등록 ": "퇴근 시간 등록 실패";
+        return (result > 0)? "success": "fail";
 
 
     }
@@ -382,12 +387,47 @@ public class EmployeeService {
 
         List<Management> manageList = result.getContent(); // 조회된 결과 리스트
 
+
         List<ManagementResult> manageMentsearchlist = manageList.stream()
                 .sorted(Comparator.comparing(Management::getEmpNo).reversed()) // manNo 내림차순 정렬
                 .map(ManagementResult::new)
                 .collect(Collectors.toList());
 
         return manageMentsearchlist;
+    }
+
+    public String hasAttendanceRecord(ManagementDTO managementDTO) {
+
+        System.out.println("empNo =============================> " + managementDTO);
+
+        // 현재 날짜를 구합니다.
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        System.out.println("formattedDate =============================> " + formattedDate);
+
+        // 해당 날짜의 출근 기록을 조회합니다.
+        Optional<Management> attendanceRecords = managementEmRepository.findByManDateAndEmpNo(formattedDate, managementDTO.getEmpNo());
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalTime currentTime = currentDateTime.toLocalTime();
+        LocalDate currentDate2 = currentDateTime.toLocalDate();
+
+        String yearMonthDay = currentDate2.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+        // 퇴근 정보 업데이트
+        //managementDTO.setManDate(yearMonthDay);
+        attendanceRecords.get().setEndTime(formattedTime);
+        attendanceRecords.get().setStatus("퇴근");
+
+        String result = updateManageMent(attendanceRecords.get());
+        // 출근 기록이 존재하면 true를 반환, 없으면 false를 반환합니다.
+        return result;
+    }
+
+    public Management getExistingAttendance(Integer empNo) {
+        return managementEmRepository.findByEmpNoAndEndTimeIsNull(empNo);
     }
 
 
