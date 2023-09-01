@@ -21,7 +21,7 @@ public class PmJob {
     )
     private int jobCode;
 
-    @Column(name="NAME")
+    @Column(name="JOB_NAME")
     private String name;
 
     @Column(name="UPPER_JOB_CODE", nullable = true)

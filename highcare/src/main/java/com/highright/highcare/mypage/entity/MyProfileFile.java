@@ -16,8 +16,8 @@ import java.sql.Date;
         sequenceName = "FILE_SEQ_NO",       // DB에 저장되는 이름
         initialValue = 1, allocationSize = 1
 )
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @ToString
 public class MyProfileFile {
 
