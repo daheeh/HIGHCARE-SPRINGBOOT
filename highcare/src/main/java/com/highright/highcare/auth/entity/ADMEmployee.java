@@ -13,7 +13,7 @@ public class ADMEmployee {
     @Column(name="EMP_NO")
     private int empNo;
 
-    @Column(name="NAME")
+    @Column(name="EMP_NAME")
     private String name;
 
     @OneToOne

@@ -32,7 +32,7 @@ public class ApvLine {
     private int degree;
 
     @Column(name = "ISAPPROVAL")
-    private char isApproval;
+    private String isApproval;
 
     @Column(name = "APV_DATE")
     private String apvDate;
@@ -40,8 +40,8 @@ public class ApvLine {
     @Column(name = "APV_NO")
     private Long apvNo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EMP_NO")
-    private PmEmployee employee;
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "EMP_NO")
+    private int empNo;
 
 }

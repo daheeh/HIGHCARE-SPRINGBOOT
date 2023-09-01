@@ -2,12 +2,10 @@ package com.highright.highcare.auth.dto;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
@@ -22,6 +20,8 @@ public class LoginMemberDTO implements UserDetails {
 
     private String deptName;
     private String jobName;
+
+    private String loginType;
 
     private List<AuthAccountDTO> roleList;
 
@@ -64,15 +64,15 @@ public class LoginMemberDTO implements UserDetails {
 
 
     @Builder
-    public LoginMemberDTO(int empNo, String id, String name, String password,
-                          String deptName, String jobName,
-                          List<AuthAccountDTO> roleList) {
+
+    public LoginMemberDTO(int empNo, String id, String name, String password, String deptName, String jobName, String loginType, List<AuthAccountDTO> roleList) {
         this.empNo = empNo;
         this.id = id;
         Name = name;
         this.password = password;
         this.deptName = deptName;
         this.jobName = jobName;
+        this.loginType = loginType;
         this.roleList = roleList;
     }
 }
