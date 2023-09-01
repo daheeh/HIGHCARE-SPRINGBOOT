@@ -3,6 +3,7 @@ package com.highright.highcare.approval.entity;
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@DynamicInsert
 @SequenceGenerator(
         name = "SEQ_APV_LINES",
         sequenceName = "SEQ_APV_LINES",
@@ -40,8 +42,11 @@ public class ApvLine {
     @Column(name = "APV_NO")
     private Long apvNo;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "EMP_NO")
     private int empNo;
+
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
+    private PmEmployee employee;
 
 }

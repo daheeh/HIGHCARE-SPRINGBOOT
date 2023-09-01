@@ -1,5 +1,6 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.*;
 
 import javax.persistence.*;
@@ -53,6 +54,10 @@ public class ApvForm {
     @Column(name = "EMP_NO")
     private int empNo;
 
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
+    private PmEmployee employee;
+
     //    @Where(clause = "category = '업무'")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "APV_NO")
@@ -62,7 +67,6 @@ public class ApvForm {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "APV_NO")
     private List<ApvBusinessTrip> apvBusinessTrips = new ArrayList<>();
-
 
     //    @Where(clause = "category = '지출'")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -94,6 +98,4 @@ public class ApvForm {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
-
-
 }

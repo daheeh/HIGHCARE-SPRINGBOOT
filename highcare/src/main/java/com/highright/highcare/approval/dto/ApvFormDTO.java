@@ -1,4 +1,5 @@
 package com.highright.highcare.approval.dto;
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
 import java.sql.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ public class ApvFormDTO {
     private String contents1;
     private String contents2;
     private int empNo;
+    private PmEmployeeDTO employee;
 
     /* 업무 */
     private List<ApvMeetingLogDTO> apvMeetingLogs;
@@ -35,5 +37,7 @@ public class ApvFormDTO {
 
     /* 결재라인*/
     private List<ApvLineDTO> apvLines;
+
+
 
 }

@@ -28,7 +28,4 @@ public class PmEmployeeDTO {
     private String telephone;
     private DepartmentDTO dt;
 
-    private List<ApvLineDTO> apvLines;
-
-
 }

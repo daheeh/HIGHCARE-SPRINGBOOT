@@ -104,7 +104,7 @@ public class ApprovalService {
     public List<ApvFormMainDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
 
-        List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+        List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
 
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
@@ -114,7 +114,21 @@ public class ApprovalService {
     public List<ApvFormMainDTO> selectReceiveApvStatusApvList(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectReceiveApvStatusApvList --------------- start ");
 
-        List<ApvFormMain> receiveApvList = apvFormMainRepository.findByEmpNoAndApvStatus2(empNo, apvStatus);
+        String isApproval = "";
+        List<ApvFormMain> receiveApvList;
+
+        if (apvStatus.equals("결재진행중") || apvStatus.equals("결재완료")) {
+            if (apvStatus.equals("결재진행중")) {
+                isApproval = "F";
+            } else if (apvStatus.equals("결재완료")) {
+                isApproval = "T";
+            }
+            receiveApvList = apvFormMainRepository.findByEmpNoAndApvStatus2(empNo, isApproval);
+
+        } else {
+            receiveApvList = apvFormMainRepository.findByEmpNoAndApvStatus3(empNo, apvStatus);
+
+        }
 
         System.out.println("receiveApvList = " + receiveApvList);
 
@@ -123,11 +137,12 @@ public class ApprovalService {
     }
 
 
+
     /* 전자결재 조회 - 페이징 */
     public int selectApvStatusTotal(int empNo, String apvStatus){
         log.info("[ApprovalService] selectApvStatusTotal --------------- start ");
 
-        List<ApvFormMain> apvList = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus);
+        List<ApvFormMain> apvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
 
         log.info("[ApprovalService] selectApvStatusTotal --------------- end ");
 
@@ -140,7 +155,7 @@ public class ApprovalService {
         int count = criteria.getAmount();
         Pageable paging = PageRequest.of(index, count, Sort.by("apvNo").descending());
 
-        Page<ApvFormMain> result1 = apvFormMainRepository.findByEmpNoAndApvStatus(empNo, apvStatus, paging);
+        Page<ApvFormMain> result1 = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus, paging);
         List<ApvFormMain> writeApvList = (List<ApvFormMain>) result1.getContent();
 
         log.info("[ApprovalService] selectListWithPaging => end =============");
@@ -204,6 +219,23 @@ public class ApprovalService {
         }
     }
 
+    @Transactional
+    public boolean updateApprovalStatus(Long apvLineNo, Long apvNo) {
+        log.info("[ApprovalService] updateApprovalStatus --------------- start ");
+    try {
+
+        apvLineRepository.updateIsApproval(apvLineNo);
+        int approved = apvLineRepository.areAllApproved(apvLineNo);
+        if (approved == 0) {
+            apvFormRepository.updateApvStatusToPaymentCompleted(apvNo);
+        }
+        log.info("[ApprovalService] updateApprovalStatus --------------- end ");
+         return true;
+        } catch (Exception e) {
+            log.error("[ApprovalService] Error updateApprovalStatus : " + e.getMessage());
+            return false;
+        }
+    }
 
 
 
