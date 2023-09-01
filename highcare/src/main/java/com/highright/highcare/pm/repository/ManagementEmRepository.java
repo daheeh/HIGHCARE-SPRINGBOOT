@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ManagementEmRepository extends JpaRepository<Management, Integer> {
@@ -13,4 +14,17 @@ public interface ManagementEmRepository extends JpaRepository<Management, Intege
     Page<Management> findByManNo(String manNo, Pageable paging);
 
     List<Management> findAll();
+
+    List<Management> findByManDateAndEmpNo(String manDate, Integer empNo);
+
+    /* 퇴근 조회용 */
+    Page<Management> findByEmpNo(int empNo, Pageable paging);
+
+    Page<Management> findByEmpNo(int empNo, String manDate, Pageable paging);
+
+    Management findByEmpNoAndManDate(int empNo, String manDate);
+
+    Page<Management> findByEmpNoAndManDate(int empNo, String manDate, Pageable paging);
+
+    Page<Management> findByEmpNoAndManDate(int empNo, LocalDate manDate, Pageable paging);
 }

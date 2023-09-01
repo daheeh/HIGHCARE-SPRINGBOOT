@@ -27,7 +27,7 @@ public class PmEmployee {
     )
     private int empNo;
 
-    @Column(name = "NAME")
+    @Column(name = "EMP_NAME")
     private String empName;
 
     @Column(name = "EMAIL")

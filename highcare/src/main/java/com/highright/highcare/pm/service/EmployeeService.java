@@ -19,8 +19,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -111,12 +114,12 @@ public class EmployeeService {
         Pageable paging = PageRequest.of(index, count, Sort.by("empName").descending());
         System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
 
-        Page<PmEmployee> result = employeeRepository.findByEmpName(search, paging);
+        Page<MgEmployee> result = employeeRepository.findByEmpName(search, paging);
         System.out.println("selectEmployeeSearchList result ==========================> " + result);
 
         List<PmEmployeeDTO> employeedetailList = result.stream()
-                .map(pmEmployee -> modelMapper
-                        .map(pmEmployee, PmEmployeeDTO.class)).collect(Collectors.toList());
+                .map(mgEmployee -> modelMapper
+                        .map(mgEmployee, PmEmployeeDTO.class)).collect(Collectors.toList());
 
         return employeedetailList;
     }
@@ -251,12 +254,47 @@ public class EmployeeService {
 //
 //        System.out.println("Datetime ======================================= " + datetime);
 //        System.out.println("Timestamp:============================"+timestamp);
+        // 편지
+        // 우리 정렬이라는걸 해보지 않겠어???? 번호순으로 DESC해주면 아주 좋을 것같애 뭐 그렇다고
+//        List<Management> manageList = managementEmRepository.findAll();
+//        List<ManagementResult> managementResult =  manageList.stream().map(ManagementResult::new).collect(Collectors.toList());
+//        return managementResult;
 
-        List<Management> manageList = managementEmRepository.findAll();
-        List<ManagementResult> managementResult =  manageList.stream().map(ManagementResult::new).collect(Collectors.toList());
+        List<Management> manageList = result.getContent(); // 조회된 결과 리스트
+        List<ManagementResult> managementResult = manageList.stream()
+                .sorted(Comparator.comparing(Management::getManNo).reversed()) // manNo 내림차순 정렬
+                .map(ManagementResult::new)
+                .collect(Collectors.toList());
+
         return managementResult;
     }
 
+
+
+//    @Transactional
+//    public Object insertmanageMent(@ModelAttribute ManagementDTO managementDTO) {
+//        log.info("insertmanageMent start==================");
+//        log.info("insertmanageMent ManagementDTO ================== " + managementDTO );
+//
+////        Management insertmanageMent =  modelMapper.map(managementDTO, Management.class);
+////            managementEmRepository.save(insertmanageMent);
+//        // 여기서 현재 날짜와 사원번호를 가지고 등록된 내용이 있으면 이미 등록된 내용이라는 반환을 해주고 아니면 등록을 진행
+//
+//        int result = 0;
+//
+//        try {
+//            Management insertmanageMent =  modelMapper.map(managementDTO, Management.class);
+//            managementEmRepository.save(insertmanageMent);
+//            result = 1;
+//        }catch (Exception e) {
+//            System.out.println("check");
+//            throw new RuntimeException(e);
+//        }
+//        log.info("insertmanageMent ============================end");
+//        return (result > 0)? "출근 시간 등록 ": "출근 시간 등록 실패";
+//
+////        return insertmanageMent;
+//    }
 
     /*출근시간 등록*/
     @Transactional
@@ -264,23 +302,109 @@ public class EmployeeService {
         log.info("insertmanageMent start==================");
         log.info("insertmanageMent ManagementDTO ================== " + managementDTO );
 
-//        Management insertmanageMent =  modelMapper.map(managementDTO, Management.class);
-//            managementEmRepository.save(insertmanageMent);
+
+        List<Management> existingRecords = managementEmRepository.findByManDateAndEmpNo(managementDTO.getManDate(), managementDTO.getEmpNo());
+
+        if (!existingRecords.isEmpty()) {
+            log.info("Record with the same manDate and empNo already exists");
+            return "exit";
+        }
+
         int result = 0;
 
         try {
             Management insertmanageMent =  modelMapper.map(managementDTO, Management.class);
             managementEmRepository.save(insertmanageMent);
             result = 1;
+        } catch (Exception e) {
+            log.error("Error while inserting management record", e);
+            throw new RuntimeException(e);
+        }
+
+        log.info("insertmanageMent ============================end");
+        return (result > 0) ? "success" : "fail";
+    }
+
+
+    /* 퇴근 */
+    @Transactional
+    public Object updateManageMent(@ModelAttribute ManagementDTO managementDTO) {
+        log.info("updatemanageMent start==================");
+        log.info("updatemanageMent ManagementDTO ================== " + managementDTO );
+
+        int result = 0;
+
+        try {
+            Management updatemanageMent =  modelMapper.map(managementDTO, Management.class);
+            managementEmRepository.save(updatemanageMent);
+            result = 1;
         }catch (Exception e) {
             System.out.println("check");
             throw new RuntimeException(e);
         }
-        log.info("insertmanageMent ============================end");
-        return (result > 0)? "출근 시간 등록 ": "출근 시간 등록 실패";
+        log.info("updatemanageMent ============================end");
+        return (result > 0)? "퇴근 시간 등록 ": "퇴근 시간 등록 실패";
 
-//        return insertmanageMent;
+
     }
+/* 퇴근 조회*/
+//    public List<PmEmployeeDTO> manageMentsearch(Criteria cri, @RequestBody int empNo) {
+//
+//        System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
+//        int index = cri.getPageNum() -1;
+//        int count = cri.getAmount();
+//        Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
+//        System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
+//
+//        Page<PmEmployeeDTO> result = employeeRepository.findByEmpNo(empNo, paging);
+//        System.out.println("selectEmployeeSearchList result ==========================> " + result);
+//
+//        List<PmEmployeeDTO> manageMentsearchlist = result.stream()
+//                .map(pmEmployee -> modelMapper
+//                        .map(pmEmployee, PmEmployeeDTO.class)).collect(Collectors.toList());
+//
+//        return manageMentsearchlist;
+//    }
+
+    /* 퇴근 조회 */
+    public List<ManagementResult> manageMentsearch(Criteria cri, int empNo, LocalDate manDate) { // Remove @RequestBody
+        System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
+        System.out.println("selectEmployeeSearchList  empNo ==========================> " + empNo);
+
+        int index = cri.getPageNum() -1;
+        int count = cri.getAmount();
+
+        Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
+        System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
+
+        Page<Management> result = managementEmRepository.findByEmpNoAndManDate(empNo, manDate, paging);
+        System.out.println("selectEmployeeSearchList result ==========================> " + result);
+
+        List<Management> manageList = result.getContent(); // 조회된 결과 리스트
+
+        List<ManagementResult> manageMentsearchlist = manageList.stream()
+                .sorted(Comparator.comparing(Management::getManNo).reversed()) // manNo 내림차순 정렬
+                .map(ManagementResult::new)
+                .collect(Collectors.toList());
+
+        return manageMentsearchlist;
+    }
+
+    public boolean canRegisterEndTime(int empNo, String manDate) {
+        // 출근 여부 확인 로직을 추가하세요.
+        // empNo와 manDate를 사용하여 출근 여부를 확인합니다.
+        // 이미 출근했고 해당 날짜에 등록되어 있는지 등을 확인합니다.
+        // 출근 여부에 따라 true 또는 false를 반환합니다.
+        Management existingManagement = managementEmRepository.findByEmpNoAndManDate(empNo, manDate);
+
+        if (existingManagement != null) {
+            // 이미 해당 날짜에 출근 및 퇴근이 등록된 경우
+            return false;
+        }
+        return true;
+    }
+
+
 
 //    public Object insertmanageMent(DepartmentDTO departmentDTO) {
 //    }
