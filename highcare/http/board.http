@@ -1,4 +1,4 @@
-GET http://localhost:8080/bulletin/board
+GET http://localhost:8080/bulletin/board?categoryCode=5&currentPage=1&content=&empNo=10001
 Accept: */*
 
 ###
