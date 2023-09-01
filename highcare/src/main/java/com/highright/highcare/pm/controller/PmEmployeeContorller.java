@@ -181,19 +181,16 @@ public class PmEmployeeContorller {
     @GetMapping("management/search")
     public ResponseEntity<ResponseDTO> updatesearchManageMent(
             @RequestParam(name = "offset", defaultValue = "1", required = false) String offset,
-            @RequestParam(name = "empNo") int empNo,
-            @RequestParam(name = "manDate")
-            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate manDate
+            @RequestParam(name = "empNo") int empNo
     ) { // Use @RequestParam instead of @RequestBody
         log.info("offset===================> {}", offset);
         log.info("empNo==============> {}", empNo);
-        log.info("manDate======================================================> {}", manDate);
 
         int total = employeeService.selectEmployeeTotal(String.valueOf(empNo)); // 조건을 추가
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
         cri.setSearchValue(String.valueOf(empNo));
 
-        List<ManagementResult> mgEmployeeList = employeeService.manageMentsearch(cri, empNo, manDate);
+        List<ManagementResult> mgEmployeeList = employeeService.manageMentsearch(cri, empNo);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
         pagingResponseDTO.setData(mgEmployeeList);
@@ -206,60 +203,57 @@ public class PmEmployeeContorller {
 
 
     /* 퇴근 */
+    @PostMapping("management/update")
+    public ResponseEntity<ResponseDTO> updateManageMent(@RequestBody ManagementDTO managementDTO){
+        log.info("updatemanageMent=========================>", managementDTO);
+        // 데이터베이스에 넣을 날짜형식을 갈라서..만들어요
+
+        /* 퇴근 시간 등록 */
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalTime currentTime = currentDateTime.toLocalTime();
+
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+        managementDTO.setEndTime(formattedTime); // 퇴근 시간은 초기값으로 설정/
+
+
+        return ResponseEntity.ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(),"퇴근 등록",
+                        employeeService.updateManageMent(managementDTO)));
+
+        // 조회 먼저하고 회원이 오늘날짜에 출근찍혔는지
+    }
+
+//    /* 퇴근 등록 */
 //    @PostMapping("management/update")
-//    public ResponseEntity<ResponseDTO> updateManageMent(@RequestBody ManagementDTO managementDTO){
+//    public ResponseEntity<ResponseDTO> updateManageMent(@RequestBody ManagementDTO managementDTO) {
 //        log.info("updatemanageMent=========================>", managementDTO);
-//        // 데이터베이스에 넣을 날짜형식을 갈라서..만들어요
 //
 //        LocalDateTime currentDateTime = LocalDateTime.now();
 //        LocalDate currentDate = currentDateTime.toLocalDate();
-//        LocalTime currentTime = currentDateTime.toLocalTime();
-//
 //        String yearMonthDay = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 //
-//        managementDTO.setStartTime(formattedTime);
-//        managementDTO.setEndTime(null); // 퇴근 시간은 초기값으로 설정/
-//        managementDTO.setManDate(yearMonthDay); // 년월일만 설정
+//        // 퇴근 가능 여부 확인
+//        boolean canRegisterEndTime = employeeService.canRegisterEndTime(managementDTO.getEmpNo(), yearMonthDay);
 //
+//        if (canRegisterEndTime) {
+//            // 퇴근 가능한 경우 퇴근 시간 설정
+//            LocalTime currentTime = currentDateTime.toLocalTime();
+//            String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+//            managementDTO.setStartTime(formattedTime);
+//            managementDTO.setEndTime(formattedTime);
+//            managementDTO.setManDate(yearMonthDay); // 년월일만 설정
 //
-//        return ResponseEntity.ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(),"퇴근 등록",
-//                        employeeService.updateManageMent(managementDTO)));
+//            // 퇴근 등록
+//            employeeService.updateManageMent(managementDTO);
 //
-//        // 조회 먼저하고 회원이 오늘날짜에 출근찍혔는지
+//            return ResponseEntity.ok()
+//                    .body(new ResponseDTO(HttpStatus.OK.value(), "퇴근 등록 완료"));
+//        } else {
+//            return ResponseEntity.badRequest()
+//                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "이미 퇴근 등록되었거나 출근하지 않았습니다."));
+//        }
 //    }
-
-    /* 퇴근 등록 */
-    @PostMapping("management/update")
-    public ResponseEntity<ResponseDTO> updateManageMent(@RequestBody ManagementDTO managementDTO) {
-        log.info("updatemanageMent=========================>", managementDTO);
-
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        LocalDate currentDate = currentDateTime.toLocalDate();
-        String yearMonthDay = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-        // 퇴근 가능 여부 확인
-        boolean canRegisterEndTime = employeeService.canRegisterEndTime(managementDTO.getEmpNo(), yearMonthDay);
-
-        if (canRegisterEndTime) {
-            // 퇴근 가능한 경우 퇴근 시간 설정
-            LocalTime currentTime = currentDateTime.toLocalTime();
-            String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-            managementDTO.setStartTime(formattedTime);
-            managementDTO.setEndTime(formattedTime);
-            managementDTO.setManDate(yearMonthDay); // 년월일만 설정
-
-            // 퇴근 등록
-            employeeService.updateManageMent(managementDTO);
-
-            return ResponseEntity.ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(), "퇴근 등록 완료"));
-        } else {
-            return ResponseEntity.badRequest()
-                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "이미 퇴근 등록되었거나 출근하지 않았습니다."));
-        }
-    }
 
 
 

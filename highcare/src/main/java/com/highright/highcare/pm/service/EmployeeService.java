@@ -367,7 +367,7 @@ public class EmployeeService {
 //    }
 
     /* 퇴근 조회 */
-    public List<ManagementResult> manageMentsearch(Criteria cri, int empNo, LocalDate manDate) { // Remove @RequestBody
+    public List<ManagementResult> manageMentsearch(Criteria cri, int empNo) { // Remove @RequestBody
         System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
         System.out.println("selectEmployeeSearchList  empNo ==========================> " + empNo);
 
@@ -377,32 +377,34 @@ public class EmployeeService {
         Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
         System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
 
-        Page<Management> result = managementEmRepository.findByEmpNoAndManDate(empNo, manDate, paging);
+        Page<Management> result = managementEmRepository.findByEmpNo(empNo, paging);
         System.out.println("selectEmployeeSearchList result ==========================> " + result);
 
         List<Management> manageList = result.getContent(); // 조회된 결과 리스트
 
         List<ManagementResult> manageMentsearchlist = manageList.stream()
-                .sorted(Comparator.comparing(Management::getManNo).reversed()) // manNo 내림차순 정렬
+                .sorted(Comparator.comparing(Management::getEmpNo).reversed()) // manNo 내림차순 정렬
                 .map(ManagementResult::new)
                 .collect(Collectors.toList());
 
         return manageMentsearchlist;
     }
 
-    public boolean canRegisterEndTime(int empNo, String manDate) {
-        // 출근 여부 확인 로직을 추가하세요.
-        // empNo와 manDate를 사용하여 출근 여부를 확인합니다.
-        // 이미 출근했고 해당 날짜에 등록되어 있는지 등을 확인합니다.
-        // 출근 여부에 따라 true 또는 false를 반환합니다.
-        Management existingManagement = managementEmRepository.findByEmpNoAndManDate(empNo, manDate);
 
-        if (existingManagement != null) {
-            // 이미 해당 날짜에 출근 및 퇴근이 등록된 경우
-            return false;
-        }
-        return true;
-    }
+
+//    public boolean canRegisterEndTime(int empNo, String manDate) {
+//        // 출근 여부 확인 로직을 추가하세요.
+//        // empNo와 manDate를 사용하여 출근 여부를 확인합니다.
+//        // 이미 출근했고 해당 날짜에 등록되어 있는지 등을 확인합니다.
+//        // 출근 여부에 따라 true 또는 false를 반환합니다.
+//        Management existingManagement = managementEmRepository.findByEmpNoAndManDate(empNo, manDate);
+//
+//        if (existingManagement != null) {
+//            // 이미 해당 날짜에 출근 및 퇴근이 등록된 경우
+//            return false;
+//        }
+//        return true;
+//    }
 
 
 

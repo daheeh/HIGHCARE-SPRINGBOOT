@@ -101,8 +101,7 @@ Content-Type: application/json
 Accept: */*
 
 {
-  "empNo":0,
-  "manDate": "2023-09-01"
+  "empNo":0
 }
 
 
