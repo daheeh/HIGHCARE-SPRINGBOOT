@@ -3,6 +3,7 @@ package com.highright.highcare.mypage.controller;
 import com.highright.highcare.auth.dto.LoginMemberDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
+import com.highright.highcare.mypage.dto.MyAnnualDTO;
 import com.highright.highcare.mypage.dto.MyEmployeeDTO;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.mypage.dto.MyProfileFileDTO;
@@ -74,7 +75,8 @@ public class MypageController {
     public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo) {
 //        member.getEmpNo();
-        MyEmployeeDTO annEmployee = mypageService.selectAnnList(empNo);
+        Object annEmployee = mypageService.selectAnnList(empNo);
+
         log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annEmployee);
 
         if(annEmployee == null){

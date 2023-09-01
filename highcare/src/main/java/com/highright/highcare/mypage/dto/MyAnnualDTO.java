@@ -1,7 +1,9 @@
 package com.highright.highcare.mypage.dto;
 
+import com.highright.highcare.mypage.entity.AnnEmployee;
 import lombok.*;
 
+import javax.persistence.Column;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,6 +18,8 @@ public class MyAnnualDTO {
     private int bAn;
     private int useAn;
     private int addAn;
+
+    @Column(name = "TOTAL_ANNUAL")
     private int totalAn;
     //    private String reason;
     private int annNo;  // pk
@@ -25,5 +29,7 @@ public class MyAnnualDTO {
 
     // 담을 공간 만들기
     private MyApvVationDTO myApvVation;
+
+//    private List<MyEmployeeDTO> annEmployee;
 
 }
