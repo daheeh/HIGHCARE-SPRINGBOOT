@@ -1,7 +1,7 @@
 package com.highright.highcare.chatting.pubsub;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.highright.highcare.chatting.dto.ChatDTO;
+import com.highright.highcare.chatting.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
@@ -28,9 +28,9 @@ public class RedisSubscriber implements MessageListener {
             // redis에서 발행된 데이터를 받아 deserialize
             String publishMessage = (String) redisTemplate.getStringSerializer().deserialize(message.getBody());
             // ChatMessage 객채로 맵핑
-            ChatDTO roomMessage = objectMapper.readValue(publishMessage, ChatDTO.class);
+            ChatMessage roomMessage = objectMapper.readValue(publishMessage, ChatMessage.class);
             // Websocket 구독자에게 채팅 메시지 Send
-            messagingTemplate.convertAndSend("/sub/chat/room/" + roomMessage.getRoomId(), roomMessage);
+            messagingTemplate.convertAndSend("/sub/socket/chatting" + roomMessage.getRoomId(), roomMessage);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
