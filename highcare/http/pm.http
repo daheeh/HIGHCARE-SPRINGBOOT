@@ -115,6 +115,11 @@ Accept: */*
 }
 
 
+### 연차 조회
+GET http://localhost:8080/api/pm/annaul
+Content-Type: application/json
+Accept: */*
+
 
 
 
