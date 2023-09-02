@@ -1,16 +1,18 @@
 package com.highright.highcare.mypage.controller;
 
 import com.highright.highcare.auth.dto.LoginMemberDTO;
+import com.highright.highcare.common.Criteria;
+import com.highright.highcare.common.PageDTO;
+import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
-import com.highright.highcare.mypage.dto.MyAnnualDTO;
-import com.highright.highcare.mypage.dto.MyEmployeeDTO;
-import com.highright.highcare.mypage.dto.MyProfileDTO;
-import com.highright.highcare.mypage.dto.MyProfileFileDTO;
+import com.highright.highcare.mypage.dto.*;
 import com.highright.highcare.mypage.entity.AnnEmployee;
 import com.highright.highcare.mypage.entity.MyProfile;
 import com.highright.highcare.mypage.entity.MyProfileFile;
 import com.highright.highcare.mypage.service.MypageService;
+import com.highright.highcare.pm.dto.ManagementDTO;
+import com.highright.highcare.pm.entity.Management;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,18 +77,51 @@ public class MypageController {
     public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo) {
 //        member.getEmpNo();
-        Object annEmployee = mypageService.selectAnnList(empNo);
+        Object annAnnual = mypageService.selectAnnList(empNo);
 
-        log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annEmployee);
+        log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annAnnual);
 
-        if(annEmployee == null){
+        if(annAnnual == null){
             return ResponseEntity
                     .ok()
                     .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
         }
         System.out.println("[Controller] annEmployee ^^^^^^" + empNo);
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", annEmployee));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", annAnnual));
+    }
+
+    @GetMapping("/manselect/{empNo}")
+    public ResponseEntity<ResponseDTO> manselect(@AuthenticationPrincipal LoginMemberDTO member,
+                                                 @PathVariable int empNo
+//                                                 @RequestParam(name = "offset", defaultValue = "1") int offset,
+//                                                 @RequestParam(name = "limit", defaultValue = "10") int limit
+    ) {
+
+//        log.info("start=================");
+//        log.info("offset=========== : {}", offset);
+
+        MyManegementDTO mymanagementDTO = mypageService.selectManList(empNo);
+//        int total = mypageService.manselect(empNo);     // 데이터이 총 개수 반환
+
+        log.info("Controller] managementDTO selectManList^^^^^^ {}", mymanagementDTO);
+
+//        Criteria cri = new Criteria(offset, limit);
+
+//        List<ManagementDTO> data = mypageService.manselectPage(empNo);  // 페이징된 데이터 가지고 옴
+
+//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+//        pagingResponseDTO.setData(mypageService.manageMent(cri));
+//        pagingResponseDTO.setPageInfo((new PageDTO(cri, total)));
+
+        if(mymanagementDTO == null) {
+            return ResponseEntity
+                    .ok()
+                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
+        }
+        System.out.println("[Controller] managementDTO %%%%" + empNo);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", mymanagementDTO));
     }
 
 
@@ -103,3 +138,5 @@ public class MypageController {
 
 
 }
+
+

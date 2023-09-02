@@ -2,8 +2,9 @@ package com.highright.highcare.mypage.service;
 
 //import com.highright.highcare.mypage.Repository.AnnRepository;
 import com.highright.highcare.mypage.Repository.AnnRepository;
+import com.highright.highcare.mypage.Repository.MyManagementRepository;
 import com.highright.highcare.mypage.dto.MyAnnualDTO;
-import com.highright.highcare.mypage.dto.MyEmployeeDTO;
+import com.highright.highcare.mypage.dto.MyManegementDTO;
 import com.highright.highcare.mypage.entity.*;
 import com.highright.highcare.util.FileUploadUtils;
 import com.highright.highcare.mypage.Repository.MyProfileFileRepository;
@@ -19,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,6 +34,8 @@ public class MypageService {
     private final MyProfileFileRepository myProfileFileRepository;
 
     private final AnnRepository annRepository;
+
+    private final MyManagementRepository myManagementRepository;
     private final ModelMapper modelMapper;
 
     /* 이미지 저장 할 위치 및 응답 할 이미지 주소 */
@@ -43,10 +45,11 @@ public class MypageService {
     private String IMAGE_URL;
 
     @Autowired
-    public MypageService(ProfileRepository profileRepository, MyProfileFileRepository myProfileFileRepository, AnnRepository annRepository, ModelMapper modelMapper) {
+    public MypageService(ProfileRepository profileRepository, MyProfileFileRepository myProfileFileRepository, AnnRepository annRepository, MyManagementRepository myManagementRepository, ModelMapper modelMapper) {
         this.profileRepository = profileRepository;
         this.myProfileFileRepository = myProfileFileRepository;
         this.annRepository = annRepository;
+        this.myManagementRepository = myManagementRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -100,6 +103,7 @@ public class MypageService {
                 log.info("ProfileService update 이미지 name : {}", replaceFileName);
 
                 return myProfileFileDTO;
+
             } else {
                 throw new RuntimeException("해당 코드의 프로필 파일을 찾을 수 없습니다.");
             }
@@ -125,6 +129,21 @@ public class MypageService {
 
 
         return myAnnualDTOList;
+    }
+
+    public MyManegementDTO selectManList(int empNo) {
+        log.info("[MyPageService] empNo%%%%%% {}", empNo);
+        List<MyManegement> myManegementList = myManagementRepository.findByEmpNo(empNo);
+        MyManegementDTO mymanagementDTOList = modelMapper.map(myManegementList, MyManegementDTO.class);
+
+        log.info("[MyPageService] myManegementList ========== {}", myManegementList);
+        log.info("[MyPageService] managementDTOList =============== {}", mymanagementDTOList);
+
+        return mymanagementDTOList;
+
+
+
+
     }
 }
 

@@ -97,27 +97,27 @@ public class PmEmployeeContorller {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"사원조회성공", employeeService.secondDept()));
     }
 
-//    /* 출/퇴근 */
-//    @GetMapping("management")
-//    public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset) {
-//
-//        log.info("start============================================");
-//        log.info("offset=============================== : {}", offset);
-//
-//        int total = employeeService.selectEmployeeTotal();
-//
-//        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
-//
-//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-//        pagingResponseDTO.setData(employeeService.manageMent(cri));
-//        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
-//
-////        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", employeeService.manageMent()));
-//    }
+    /* 출/퇴근 */
+    @GetMapping("management")
+    public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset) {
+
+        log.info("start============================================");
+        log.info("offset=============================== : {}", offset);
+
+        int total = employeeService.selectEmployeeTotal();
+
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(employeeService.manageMent(cri));
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
+
+//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", employeeService.manageMent()));
+    }
 
 
 

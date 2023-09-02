@@ -88,27 +88,27 @@ public class EmployeeService {
     }
 
 
-//    public List<ManagementDTO> manageMent(Criteria cri) {
-//        System.out.println("cri ============================> " + cri);
-//        int index = cri.getPageNum() -1;
-//        int count = cri.getAmount();
-//        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
-//        System.out.println("paging ==========================> " + paging);
-//
-//        Page<PmEmployee> result = employeeRepository.findByManNo("manNo", paging);
-//        System.out.println("result ==========================> " + result);
-//
-//        List<ManagementDTO> managementList = result.stream()
-//                .map(management -> modelMapper
-//                        .map(management, ManagementDTO.class)).collect(Collectors.toList());
-//
-//        Long datetime = System.currentTimeMillis();
-//        Timestamp timestamp = new Timestamp(datetime);
-//
-//        System.out.println("Datetime ======================================= " + datetime);
-//        System.out.println("Timestamp:============================"+timestamp);
-//        return null;
-//    }
+    public List<ManagementDTO> manageMent(Criteria cri) {
+        System.out.println("cri ============================> " + cri);
+        int index = cri.getPageNum() -1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
+        System.out.println("paging ==========================> " + paging);
+
+        Page<PmEmployee> result = employeeRepository.findByManNo("manNo", paging);
+        System.out.println("result ==========================> " + result);
+
+        List<ManagementDTO> managementList = result.stream()
+                .map(management -> modelMapper
+                        .map(management, ManagementDTO.class)).collect(Collectors.toList());
+
+        Long datetime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(datetime);
+
+        System.out.println("Datetime ======================================= " + datetime);
+        System.out.println("Timestamp:============================"+timestamp);
+        return null;
+    }
 
 
     /* 사원 상세 조회 */

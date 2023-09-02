@@ -55,8 +55,9 @@ public class MyEmployee {
     @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false)
     private Job jobName;
 
-
-
+    @OneToMany
+    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+    private List<MyManegement> manegementList;
 
 
 
