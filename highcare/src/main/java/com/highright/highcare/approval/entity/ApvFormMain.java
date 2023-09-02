@@ -59,7 +59,6 @@ public class ApvFormMain {
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 
-
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
     private PmEmployee employee;

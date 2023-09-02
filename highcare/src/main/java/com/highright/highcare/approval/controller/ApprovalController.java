@@ -4,6 +4,7 @@ import com.highright.highcare.approval.dto.ApvFormDTO;
 import com.highright.highcare.approval.dto.ApvFormMainDTO;
 import com.highright.highcare.approval.dto.ApvFormWithLinesDTO;
 import com.highright.highcare.approval.dto.ApvLineDTO;
+import com.highright.highcare.approval.entity.ApvForm;
 import com.highright.highcare.approval.service.ApprovalBizService;
 import com.highright.highcare.approval.service.ApprovalExpService;
 import com.highright.highcare.approval.service.ApprovalService;
@@ -138,6 +139,27 @@ public class ApprovalController {
     }
 
 
+    int statusCode;
+    String responseMessage;
+
+
+    /* 전자결재 승인 */
+    @PutMapping("/put/line/{apvLineNo}")
+    public ResponseEntity<ResponseDTO> updateApprovalStatus(@PathVariable Long apvLineNo, @RequestParam Long apvNo) {
+
+        boolean updatedResponse = approvalService.updateApprovalStatus(apvLineNo, apvNo);
+
+        if (!updatedResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "승인 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "승인 성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, updatedResponse));
+    }
 
 
 
@@ -147,8 +169,6 @@ public class ApprovalController {
         System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
         Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormWithLinesDTO);
-        int statusCode;
-        String responseMessage;
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
@@ -157,11 +177,32 @@ public class ApprovalController {
             statusCode = HttpStatus.OK.value();
             responseMessage = "상신 등록 성공";
         }
-
         return ResponseEntity
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
+
+    @GetMapping("/search/biz1/{apvNo}")
+    public ResponseEntity<?> searchApvFormWithLines(@PathVariable Long apvNo) {
+        System.out.println("biz1View searchApvFormWithLines = " + apvNo);
+
+        ApvFormDTO serviceResponse = approvalBizService.searchApvFormWithLines(apvNo);
+
+        if (serviceResponse == null) {
+            statusCode = HttpStatus.NOT_FOUND.value();
+            responseMessage = "ApvForm not found with apvNo: " + apvNo;
+            return ResponseEntity
+                    .status(statusCode)
+                    .body(new ResponseDTO(statusCode, responseMessage, null));
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "조회 성공";
+            return ResponseEntity
+                    .status(statusCode)
+                    .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+        }
+    }
+
 
     /* 전자결재 - 업무 : biz2 회의록 */
     @PostMapping("/insert/biz2")
@@ -169,8 +210,6 @@ public class ApprovalController {
         System.out.println("biz2 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
         Boolean serviceResponse = approvalBizService.insertApvMeetingLog(apvFormWithLinesDTO);
-        int statusCode;
-        String responseMessage;
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
@@ -297,6 +336,10 @@ public class ApprovalController {
 //                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvIssuance(apvFormWithLinesDTO)));
 //    }
 //
+
+
+
+
 
 
 }

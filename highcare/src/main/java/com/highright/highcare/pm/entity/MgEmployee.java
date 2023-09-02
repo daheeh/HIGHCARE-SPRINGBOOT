@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
-
-
+import java.util.List;
 
 @Entity
 @Table(name="TBL_EMPLOYEE")
@@ -16,8 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ReEmployee {
-
+public class MgEmployee {
     @Id
     @Column(name = "EMP_NO")
     private int empNo;
@@ -63,7 +61,8 @@ public class ReEmployee {
     @JoinColumn(name="DEPT_CODE")
     private PmDepartment reDepartment;
 
+    @OneToMany
+    @JoinColumn(name = "MAN_NO")
+    private List<Management> manNo;
 
 }
-
-

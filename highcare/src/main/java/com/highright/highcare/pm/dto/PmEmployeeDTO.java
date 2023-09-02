@@ -27,8 +27,7 @@ public class PmEmployeeDTO {
     private String education;
     private String telephone;
     private DepartmentDTO dt;
-
-    private List<ApvLineDTO> apvLines;
-
+//    private JobDTO job;
+    private List<ManagementDTO> management;
 
 }

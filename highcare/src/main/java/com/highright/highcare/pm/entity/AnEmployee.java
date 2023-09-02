@@ -1,5 +1,6 @@
 package com.highright.highcare.pm.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,14 +10,13 @@ import javax.persistence.*;
 import java.sql.Date;
 
 
-
 @Entity
 @Table(name="TBL_EMPLOYEE")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ReEmployee {
+public class AnEmployee {
 
     @Id
     @Column(name = "EMP_NO")
@@ -43,8 +43,11 @@ public class ReEmployee {
     @Column(name = "IS_RESIGNATION")
     private char isResignation;
 
-//    @Column(name = "DEPT_CODE")
-//    private int deptCode;
+    @Column(name = "DEPT_CODE")
+    private int deptCode;
+
+    @Column(name = "JOB_CODE")
+    private int jobcode;
 
     @Column(name = "ADDRESS")
     private String address;
@@ -55,15 +58,4 @@ public class ReEmployee {
     @Column(name = "TELEPHONE")
     private String telephone;
 
-    @ManyToOne
-    @JoinColumn(name="JOB_CODE")
-    private ReJob reJob;
-
-    @ManyToOne
-    @JoinColumn(name="DEPT_CODE")
-    private PmDepartment reDepartment;
-
-
 }
-
-
