@@ -122,5 +122,10 @@ Accept: */*
 
 
 
+### 회원 상세조회
+GET http://localhost:8080/api/pm/all/10001
+
+
+
 
 
