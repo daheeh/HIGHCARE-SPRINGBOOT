@@ -1,7 +1,10 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.pm.dto.PmEmployeeDTO;
+import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -46,6 +49,11 @@ public class ApvLine {
 //    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
 //    private ApvEmployee apvEmployee;
 
+        @ManyToOne
+    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
+    private PmEmployee employee;
+
+
     @Override
     public String toString() {
         return "ApvLine: " +
@@ -54,10 +62,8 @@ public class ApvLine {
                 ", isApproval='" + isApproval +
                 ", apvDate='" + apvDate +
                 ", apvNo=" + apvNo +
-//                ", empNo=" + empNo +
+                ", empNo=" + empNo +
 //                ", empName=" + apvEmployee.getEmpName() +
-//                ", jobName=" +apvEmployee.getJobCode().getJobName() +
-//                ", deptName=" +apvEmployee.getDeptCode().getDeptName() +
                 '\'';
     }
 

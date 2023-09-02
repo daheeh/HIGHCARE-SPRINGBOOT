@@ -2,6 +2,7 @@ package com.highright.highcare.approval.dto;
 
 import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
+
 import java.sql.Date;
 
 @AllArgsConstructor
@@ -19,9 +20,6 @@ public class ApvLineDTO {
     private Long apvNo;
 
     private int empNo;
-    private String empName;
-    private String deptName;
-    private String jobName;
 
     @Override
     public String toString() {
@@ -32,9 +30,6 @@ public class ApvLineDTO {
                 ", apvDate='" + apvDate + '\'' +
                 ", apvNo=" + apvNo +
                 ", empNo=" + empNo +
-                ", empName='" + empName + '\'' +
-                ", deptName='" + deptName + '\'' +
-                ", jobName='" + jobName + '\'' +
                 '}';
     }
 }

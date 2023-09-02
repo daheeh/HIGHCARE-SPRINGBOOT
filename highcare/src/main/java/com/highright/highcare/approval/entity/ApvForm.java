@@ -95,6 +95,7 @@ public class ApvForm {
 
     // 결재라인
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("apvLineNo ASC")
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 

@@ -1,25 +1,25 @@
 package com.highright.highcare.approval.entity;
 
+import com.highright.highcare.auth.entity.ADMDepartment;
+import com.highright.highcare.auth.entity.ADMJob;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="TBL_EMPLOYEE")
 @Getter
 public class ApvEmployee {
-
     @Id
     @Column(name="EMP_NO")
     private int empNo;
 
     @Column(name="EMP_NAME")
-    private String empName;
+    private String name;
 
     @OneToOne
     @JoinColumn(name="DEPT_CODE")
-    private ApvDepartment deptCode;
+    private ADMDepartment deptCode;
 
     @Column(name="PHONE")
     private String phone;
@@ -29,17 +29,15 @@ public class ApvEmployee {
 
     @OneToOne
     @JoinColumn(name="JOB_CODE")
-    private ApvJob jobCode;
+    private ADMJob jobCode;
 
     @Override
     public String toString() {
-        return "ApvEmp: " +
+        return "Employee{" +
                 "empNo=" + empNo +
-                ", empName='" + empName +
+                ", name='" + name + '\'' +
                 ", deptCode=" + deptCode +
                 ", jobCode=" + jobCode +
-                ", deptName=" + deptCode.getDeptName() +
-                ", jobName=" + jobCode.getJobName() +
-                '\'';
+                '}';
     }
 }
