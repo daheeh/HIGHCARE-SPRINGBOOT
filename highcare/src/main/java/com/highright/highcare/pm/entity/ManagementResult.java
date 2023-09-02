@@ -17,6 +17,7 @@ public class ManagementResult {
     private String deptName; // 부서 이름
     private String jobName; // 직급 이름
     private int empNo;
+    private String manDate;
     public ManagementResult(Management management) {
         this.manNo = management.getManNo();
         this.empName = management.getMgEmployee().getEmpName();
@@ -28,6 +29,7 @@ public class ManagementResult {
         this.deptName = management.getMgEmployee().getReDepartment().getName();
         this.jobName = management.getMgEmployee().getReJob().getJobName();
         this.empNo = management.getMgEmployee().getEmpNo();
+        this.manDate = management.getManDate();
 
     }
 

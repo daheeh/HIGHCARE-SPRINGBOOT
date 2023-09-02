@@ -20,7 +20,7 @@ public interface ManagementEmRepository extends JpaRepository<Management, Intege
 
     /* 퇴근 조회용 */
     Page<Management> findByEmpNo(int empNo, Pageable paging);
-
+    Management findByEmpNo(int empNo);
     Page<Management> findByEmpNo(int empNo, String manDate, Pageable paging);
 
 
