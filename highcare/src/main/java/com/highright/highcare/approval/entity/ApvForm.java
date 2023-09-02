@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @SequenceGenerator(
         name = "APV_SEQ_NO",
         sequenceName = "SEQ_APV_NO",
@@ -56,7 +55,7 @@ public class ApvForm {
 
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
-    private PmEmployee employee;
+    private ApvEmployee apvEmployee;
 
     //    @Where(clause = "category = '업무'")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -96,6 +95,32 @@ public class ApvForm {
 
     // 결재라인
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("apvLineNo ASC")
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "ApvForm{" +
+                "apvNo=" + apvNo +
+                ", title='" + title +
+                ", writeDate=" + writeDate +
+                ", apvStatus='" + apvStatus +
+                ", isUrgency='" + isUrgency +
+                ", category='" + category +
+                ", contents1='" + contents1 +
+                ", contents2='" + contents2 +
+                ", empNo=" + empNo +
+                ", apvEmployee=" + apvEmployee + '\'' +
+                ", apvMeetingLogs=" + apvMeetingLogs + '\'' +
+                ", apvBusinessTrips=" + apvBusinessTrips + '\'' +
+                ", apvExpForms=" + apvExpForms + '\'' +
+                ", apvFamilyEvents=" + apvFamilyEvents + '\'' +
+                ", apvCorpCards=" + apvCorpCards + '\'' +
+                ", apvVacations=" + apvVacations + '\'' +
+                ", apvIssuances=" + apvIssuances + '\'' +
+                ", apvLines=" + apvLines + '\'' +
+                '}';
+    }
 }

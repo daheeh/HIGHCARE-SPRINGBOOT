@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,61 +56,31 @@ public class ApprovalBizService {
 
         try {
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-            System.out.println("```````````````apvFormDTO = " + apvFormDTO);
+            System.out.println("=========== 1. apvFormDTO ===========");
+            System.out.println(apvFormDTO);
 
             List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
-            System.out.println("```````````````apvLineDTO = " + apvLineDTO);
-
-            List<ApvLine> apvListList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());;
-            System.out.println("```````````````apvListList = " + apvListList);
-            List<PmEmployee> employees = apvLineDTO.stream().map(item -> modelMapper.map(item.getEmployee(), PmEmployee.class)).collect(Collectors.toList());
-            System.out.println("```````````````employees = " + employees);
-
-            for (int i = 0; i < apvListList.size(); i++) {
-                apvListList.get(i).setEmpNo(employees.get(i).getEmpNo());
-            }
+            System.out.println("=========== 2. apvLineDTO ===========");
+            System.out.println(apvLineDTO);
 
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-            System.out.println("```````````````apvForm = " + apvForm);
+            System.out.println("=========== 3. apvForm ===========");
+            System.out.println(apvForm);
 
+            ApvForm savedApvForm = apvFormRepository.save(apvForm);
+            System.out.println("=========== 4. savedApvForm ===========");
+            System.out.println(savedApvForm);
 
-            ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
-            ApvFormMain updateApvForm = apvFormMainRepository.save(apvFormMain);
-            apvListList.forEach(item -> item.setApvNo(updateApvForm.getApvNo()));
-            updateApvForm.setApvLines(apvListList);
+            apvLineDTO.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
+            System.out.println("=========== 5. apvLineDTO ===========");
+            System.out.println(apvLineDTO);
 
-            System.out.println("updateApvForm = " + updateApvForm);
+            List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+            savedApvForm.setApvLines(apvLineList);
+            apvForm.setApvLines(apvLineList);
 
-//            apvForm.setApvNo(updateApvForm.getApvNo());
-//
-//            System.out.println("```````````````updateApvForm = " + updateApvForm);
-//            System.out.println("```````````````updateApvForm.getEmployee() = " + updateApvForm.getEmployee());
-//            System.out.println("```````````````apvForm = " + apvForm);
-//
-//            System.out.println("===========================================================================================");
-//            // 2. ApvLine 등록하기
-////            List<ApvLine> apvLineList = apvLineDTO
-////                    .stream()
-////                    .map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
-//
-//            List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> {
-//                ApvLine apvLine = modelMapper.map(item, ApvLine.class);
-//
-//                apvLine.setEmpNo(item.getEmployee().getEmpNo()); // Set the empNo from apvFormDTO
-//                return apvLine;
-//            }).collect(Collectors.toList());
-//            System.out.println("``````````````1`apvLineList = " + apvLineList);
-//            apvLineList.forEach(item -> {
-//                System.out.println("```````````````updateApvForm.getApvNo() = " + updateApvForm.getApvNo());
-//                item.setApvNo(updateApvForm.getApvNo());
-//                System.out.println("```````````````updateApvForm.getEmployee().getEmpNo() = " + updateApvForm.getEmpNo());
-//                item.setEmpNo(updateApvForm.getEmpNo());
-//            });
-//
-//                System.out.println("``````````````` 2apvLineList = " + apvLineList);
-//            updateApvForm.setApvLines(apvLineList);
-//            apvForm.setApvLines(apvLineList);
-//                System.out.println("```````````````3. apvLineList = " + apvLineList);
+            System.out.println("=========== 6. apvLineList ===========");
+            System.out.println(apvLineList);
 
             log.info("[ApprovalService] biz1-insertApvForm --------------- end ");
             return true;

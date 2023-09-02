@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "TBL_APV_LINE")
@@ -13,7 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @DynamicInsert
 @SequenceGenerator(
         name = "SEQ_APV_LINES",
@@ -37,7 +37,7 @@ public class ApvLine {
     private String isApproval;
 
     @Column(name = "APV_DATE")
-    private String apvDate;
+    private Date apvDate;
 
     @Column(name = "APV_NO")
     private Long apvNo;
@@ -45,8 +45,26 @@ public class ApvLine {
     @Column(name = "EMP_NO")
     private int empNo;
 
-    @ManyToOne
+//    @ManyToOne
+//    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
+//    private ApvEmployee apvEmployee;
+
+        @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
     private PmEmployee employee;
+
+
+    @Override
+    public String toString() {
+        return "ApvLine: " +
+                "apvLineNo=" + apvLineNo +
+                ", degree=" + degree +
+                ", isApproval='" + isApproval +
+                ", apvDate='" + apvDate +
+                ", apvNo=" + apvNo +
+                ", empNo=" + empNo +
+//                ", empName=" + apvEmployee.getEmpName() +
+                '\'';
+    }
 
 }

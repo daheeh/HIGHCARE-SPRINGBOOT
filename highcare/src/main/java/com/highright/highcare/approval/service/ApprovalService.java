@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,7 +73,7 @@ public class ApprovalService {
         int countNewReceive = apvFormMainRepository.countByEmpNoAndIsApprovalReceive(empNo, "F");
 
         // 2. 결재반려
-        int countRejected = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "반려");
+        int countRejected = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "결재반려");
 
 
 
@@ -106,6 +107,7 @@ public class ApprovalService {
 
         List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
 
+        System.out.println("WriteBox-writeApvList = " + writeApvList);
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
     }
@@ -130,7 +132,7 @@ public class ApprovalService {
 
         }
 
-        System.out.println("receiveApvList = " + receiveApvList);
+        System.out.println("ReceiveBox-receiveApvList = " + receiveApvList);
 
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return receiveApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
@@ -219,6 +221,7 @@ public class ApprovalService {
         }
     }
 
+    // 결재 승인
     @Transactional
     public boolean updateApprovalStatus(Long apvLineNo, Long apvNo) {
         log.info("[ApprovalService] updateApprovalStatus --------------- start ");
@@ -237,6 +240,24 @@ public class ApprovalService {
         }
     }
 
+    // 결재 반려
+    @Transactional
+    public boolean updateApvStatusReject(Long apvNo) {
+        log.info("[ApprovalService] updateApvStatusReject --------------- start ");
+        try {
+            apvFormRepository.updateApvStatusToReject(apvNo);
+            apvFormRepository.updateIsApprovalToFalse(apvNo);
+
+            log.info("[ApprovalService] updateApvStatusReject --------------- end ");
+            return true;
+        } catch (Exception e) {
+            log.error("[ApprovalService] Error updateApvStatusReject : " + e.getMessage());
+            return false;
+        }
+    }
+
+
+    }
 
 
 //
@@ -401,7 +422,7 @@ public class ApprovalService {
 //    }
 
 
-}
+
 
 //    @Transactional
 //    public Boolean insertApvBusinessTrip(ApvFormWithLinesDTO apvFormWithLinesDTO) {

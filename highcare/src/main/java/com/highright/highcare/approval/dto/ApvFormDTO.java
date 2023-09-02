@@ -20,7 +20,12 @@ public class ApvFormDTO {
     private String contents1;
     private String contents2;
     private int empNo;
-    private PmEmployeeDTO employee;
+//    private PmEmployeeDTO employee;
+
+    private String empName;
+    private String deptName;
+    private String jobName;
+
 
     /* 업무 */
     private List<ApvMeetingLogDTO> apvMeetingLogs;
