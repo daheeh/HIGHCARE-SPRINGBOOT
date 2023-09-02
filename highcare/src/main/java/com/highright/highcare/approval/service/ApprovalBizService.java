@@ -106,6 +106,42 @@ public class ApprovalBizService {
         return apvFormDTO;
     }
 
+    @Transactional
+    public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
+        log.info("[ApprovalService] biz1-putApvFormWithLines --------------- start ");
+        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+
+        try {
+            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
+            System.out.println("=========== 1. apvFormDTO ===========");
+            System.out.println(apvFormDTO);
+
+            List<ApvLineDTO> apvLineDTO = apvFormDTO.getApvLines();
+            System.out.println("=========== 2. apvLineDTO ===========");
+            System.out.println(apvLineDTO);
+
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+            System.out.println("=========== 3. apvForm ===========");
+            System.out.println(apvForm);
+
+            List<ApvLine> apvLineList = apvForm.getApvLines();
+            System.out.println("apvLineList = " + apvLineList);
+
+            ApvForm savedApvForm = apvFormRepository.save(apvForm);
+            System.out.println("=========== 4. savedApvForm ===========");
+            System.out.println(savedApvForm);
+
+
+
+            log.info("[ApprovalService] biz1-putApvFormWithLines --------------- end ");
+            return true;
+        } catch (Exception e) {
+            log.error("[ApprovalService] Error biz1-putApvFormWithLines : " + e.getMessage());
+            return false;
+        }
+    }
+
+
 
     /* 전자결재 - 업무 : biz2 회의록 */
     @Transactional

@@ -23,6 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/approval")
+@CrossOrigin(origins = "http://localhost:3000")
 @Slf4j
 public class ApprovalController {
 
@@ -213,6 +214,25 @@ public class ApprovalController {
                     .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
         }
     }
+
+    @PostMapping("/put/biz1")
+    public ResponseEntity<ResponseDTO> putApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
+        System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+
+        Boolean serviceResponse = approvalBizService.putApvFormWithLines(apvFormWithLinesDTO);
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+    }
+
 
 
     /* 전자결재 - 업무 : biz2 회의록 */
