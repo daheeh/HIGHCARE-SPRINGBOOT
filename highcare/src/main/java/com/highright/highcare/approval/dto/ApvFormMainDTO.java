@@ -23,6 +23,10 @@ public class ApvFormMainDTO {
     private String contents1;
     private String contents2;
     private int empNo;
-    private PmEmployeeDTO employee;
+//    private PmEmployeeDTO employee;
+
+    private String empName;
+    private String deptName;
+    private String jobName;
 
 }

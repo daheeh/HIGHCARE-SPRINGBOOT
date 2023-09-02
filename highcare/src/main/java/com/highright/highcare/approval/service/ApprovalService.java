@@ -106,6 +106,7 @@ public class ApprovalService {
 
         List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
 
+        System.out.println("WriteBox-writeApvList = " + writeApvList);
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
     }
@@ -130,7 +131,7 @@ public class ApprovalService {
 
         }
 
-        System.out.println("receiveApvList = " + receiveApvList);
+        System.out.println("ReceiveBox-receiveApvList = " + receiveApvList);
 
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return receiveApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());

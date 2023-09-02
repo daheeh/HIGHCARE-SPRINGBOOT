@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @SequenceGenerator(
         name = "APV_SEQ_NO",
         sequenceName = "SEQ_APV_NO",
@@ -61,6 +60,22 @@ public class ApvFormMain {
 
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
-    private PmEmployee employee;
+    private ApvEmployee apvEmployee;
 
+    @Override
+    public String toString() {
+        return "ApvFormMain{" +
+                "apvNo=" + apvNo +
+                ", title='" + title +
+                ", writeDate=" + writeDate +
+                ", apvStatus='" + apvStatus +
+                ", isUrgency='" + isUrgency +
+                ", category='" + category +
+                ", contents1='" + contents1 +
+                ", contents2='" + contents2 +
+                ", empNo=" + empNo +
+                ", apvLines=" + apvLines +
+                ", apvEmployee=" + apvEmployee +
+                '\'';
+    }
 }
