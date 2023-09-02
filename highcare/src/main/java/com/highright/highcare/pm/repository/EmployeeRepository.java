@@ -5,6 +5,7 @@ import com.highright.highcare.pm.dto.PmEmployeeDTO;
 //import com.highright.highcare.pm.entity.AnEmployee;
 import com.highright.highcare.pm.entity.MgEmployee;
 import com.highright.highcare.pm.entity.PmEmployee;
+import com.highright.highcare.pm.entity.ReEmployee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,18 +31,18 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
 
     Page<PmEmployee> findByIsResignation(char isResignation,Pageable paging);
 
+    /* 사원 번호 조회 */
+    PmEmployee findByEmpNo(int empNo);
 
     /* 사원 상세 조회 및 검색 */
     List<PmEmployee> findByEmpName(String empName);
 
 
+    Page<PmEmployeeDTO> findByEmpNo(int empNo, Pageable paging);
 
-    /* 퇴근 전 조회 */
-//    Page<PmEmployeeDTO> findByEmpNo(int empNo, Pageable paging);
+    Page<PmEmployee> findByEmpName(String search, Pageable paging);
 
-    Page<MgEmployee> findByEmpName(String search, Pageable paging);
-
-//    Page<PmEmployee> findByIsResignation(String empNo, Pageable paging);
+    Page<PmEmployee> findByIsResignation(String empNo, Pageable paging);
 
 //    Page<AnEmployee> findByannaul(int empNo, Pageable paging);
 }

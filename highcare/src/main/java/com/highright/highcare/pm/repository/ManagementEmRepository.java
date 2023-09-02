@@ -22,7 +22,5 @@ public interface ManagementEmRepository extends JpaRepository<Management, Intege
     Page<Management> findByEmpNo(int empNo, Pageable paging);
     Management findByEmpNo(int empNo);
     Page<Management> findByEmpNo(int empNo, String manDate, Pageable paging);
-
-
     Management findByEmpNoAndEndTimeIsNull(Integer empNo);
 }

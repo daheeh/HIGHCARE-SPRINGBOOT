@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 public class ManagementDTO {
 
-    private String manNo;
+    private Long manNo;
     private String startTime;
     private String endTime;
     private String manDate;
