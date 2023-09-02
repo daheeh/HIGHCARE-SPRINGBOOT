@@ -45,14 +45,26 @@ public class ApvLine {
     @Column(name = "EMP_NO")
     private int empNo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
-//    private ApvEmployee apvEmployee;
+    @Transient
+    private String empName;
 
-        @ManyToOne
+    @Transient
+    private String deptName;
+
+    @Transient
+    private String jobName;
+
+    @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
-    private PmEmployee employee;
+    private ApvEmployee apvEmployee;
 
+    public void getEmployee() {
+        if (apvEmployee != null) {
+            this.empName = apvEmployee.getName();
+            this.deptName = apvEmployee.getDeptCode().getDeptName();
+            this.jobName = apvEmployee.getJobCode().getJobName();
+        }
+    }
 
     @Override
     public String toString() {
@@ -62,8 +74,10 @@ public class ApvLine {
                 ", isApproval='" + isApproval +
                 ", apvDate='" + apvDate +
                 ", apvNo=" + apvNo +
-                ", empNo=" + empNo +
-//                ", empName=" + apvEmployee.getEmpName() +
+                ", apvEmployee=" + apvEmployee +
+                ", empName=" + empName +
+                ", deptName=" + deptName +
+                ", jobName=" + jobName +
                 '\'';
     }
 

@@ -19,7 +19,7 @@ public class ApvEmployee {
 
     @OneToOne
     @JoinColumn(name="DEPT_CODE")
-    private ADMDepartment deptCode;
+    private ApvDepartment deptCode;
 
     @Column(name="PHONE")
     private String phone;
@@ -29,7 +29,7 @@ public class ApvEmployee {
 
     @OneToOne
     @JoinColumn(name="JOB_CODE")
-    private ADMJob jobCode;
+    private ApvJob jobCode;
 
     @Override
     public String toString() {

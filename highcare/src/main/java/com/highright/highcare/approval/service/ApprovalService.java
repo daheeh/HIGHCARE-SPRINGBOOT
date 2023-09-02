@@ -95,7 +95,7 @@ public class ApprovalService {
         log.info("[ApprovalService] selectMyApvList --------------- start ");
 
         List<ApvFormMain> writeApvList = apvFormMainRepository.findTitlesByEmpNo(empNo);
-
+        writeApvList.forEach(ApvFormMain::getEmployee);
         log.info("[ApprovalService] selectMyApvList --------------- end ");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
     }
@@ -107,6 +107,7 @@ public class ApprovalService {
 
         List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
 
+        writeApvList.forEach(ApvFormMain::getEmployee);
         System.out.println("WriteBox-writeApvList = " + writeApvList);
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
@@ -134,6 +135,10 @@ public class ApprovalService {
 
         System.out.println("ReceiveBox-receiveApvList = " + receiveApvList);
 
+        receiveApvList.forEach(ApvFormMain::getEmployee);
+
+        System.out.println("ReceiveBox-receiveApvList ============= " + receiveApvList);
+
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
         return receiveApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
     }
@@ -159,6 +164,7 @@ public class ApprovalService {
 
         Page<ApvFormMain> result1 = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus, paging);
         List<ApvFormMain> writeApvList = (List<ApvFormMain>) result1.getContent();
+        writeApvList.forEach(ApvFormMain::getEmployee);
 
         log.info("[ApprovalService] selectListWithPaging => end =============");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());

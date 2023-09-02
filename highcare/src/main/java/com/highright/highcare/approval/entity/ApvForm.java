@@ -53,6 +53,18 @@ public class ApvForm {
     @Column(name = "EMP_NO")
     private int empNo;
 
+    @Transient
+    private String empName;
+
+    @Transient
+    private String deptName;
+
+    @Transient
+    private String jobName;
+
+
+
+
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
     private ApvEmployee apvEmployee;
@@ -99,6 +111,14 @@ public class ApvForm {
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 
+    public void getEmployee() {
+        if (apvEmployee != null) {
+            this.empName = apvEmployee.getName();
+            this.deptName = apvEmployee.getDeptCode().getDeptName();
+            this.jobName = apvEmployee.getJobCode().getJobName();
+            this.apvLines = apvLines;
+        }
+    }
 
     @Override
     public String toString() {
@@ -112,7 +132,9 @@ public class ApvForm {
                 ", contents1='" + contents1 +
                 ", contents2='" + contents2 +
                 ", empNo=" + empNo +
-                ", apvEmployee=" + apvEmployee + '\'' +
+                ", empName=" + empName +
+                ", deptName=" + deptName +
+                ", jobName=" + jobName +
                 ", apvMeetingLogs=" + apvMeetingLogs + '\'' +
                 ", apvBusinessTrips=" + apvBusinessTrips + '\'' +
                 ", apvExpForms=" + apvExpForms + '\'' +
