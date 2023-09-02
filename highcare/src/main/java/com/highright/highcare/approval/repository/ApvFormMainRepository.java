@@ -25,6 +25,7 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
             "JOIN TBL_JOB J ON E.JOB_CODE = J.JOB_CODE " +
             "WHERE AL.EMP_NO = :empNo " +
             "AND AL.ISAPPROVAL = :isApproval " +
+            "AND AL.DEGREE <> 0 " +
             "ORDER BY AF.WRITE_DATE " , nativeQuery = true)
     List<ApvFormMain> findByEmpNoAndApvStatus2(@Param("empNo") int empNo, @Param("isApproval")String isApproval);
 
@@ -38,6 +39,7 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
             "JOIN TBL_JOB J ON E.JOB_CODE = J.JOB_CODE " +
             "WHERE AL.EMP_NO = :empNo " +
             "AND AF.APV_STATUS = :apvStatus " +
+            "AND AL.DEGREE <> 0 " +
             "ORDER BY AF.WRITE_DATE " , nativeQuery = true)
     List<ApvFormMain> findByEmpNoAndApvStatus3(@Param("empNo") int empNo, @Param("apvStatus")String apvStatus);
 

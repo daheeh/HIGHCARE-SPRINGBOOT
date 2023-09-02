@@ -59,9 +59,9 @@ public class ApvFormMain {
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
-    private ApvEmployee apvEmployee;
+//    @ManyToOne
+//    @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
+//    private ApvEmployee apvEmployee;
 
     @Override
     public String toString() {
@@ -76,7 +76,7 @@ public class ApvFormMain {
                 ", contents2='" + contents2 +
                 ", empNo=" + empNo +
                 ", apvLines=" + apvLines +
-                ", apvEmployee=" + apvEmployee +
+//                ", apvEmployee=" + apvEmployee +
                 '\'';
     }
 }

@@ -143,22 +143,33 @@ public class ApprovalController {
     String responseMessage;
 
 
-    /* 전자결재 승인 */
+    /* 전자결재 승인 / 반려*/
     @PutMapping("/put/line/{apvLineNo}")
-    public ResponseEntity<ResponseDTO> updateApprovalStatus(@PathVariable Long apvLineNo, @RequestParam Long apvNo) {
+    public ResponseEntity<ResponseDTO> updateApprovalStatus(@PathVariable Long apvLineNo, @RequestParam Long apvNo, @RequestParam String apvStatus) {
 
-        boolean updatedResponse = approvalService.updateApprovalStatus(apvLineNo, apvNo);
+        System.out.println("apvLineNo = " + apvLineNo);
+        System.out.println("apvNo = " + apvNo);
+        System.out.println("apvStatus = " + apvStatus);
+        boolean updatedResponse = false;
+
+        if(apvStatus == null || apvStatus.isEmpty()) {
+            updatedResponse = approvalService.updateApprovalStatus(apvLineNo, apvNo);
+        } else {
+            updatedResponse = approvalService.updateApvStatusReject(apvNo);
+        }
+
 
         if (!updatedResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
-            responseMessage = "승인 실패";
+            responseMessage = "실패";
         } else {
             statusCode = HttpStatus.OK.value();
-            responseMessage = "승인 성공";
+            responseMessage = "성공";
         }
         return ResponseEntity
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, updatedResponse));
+
     }
 
 
