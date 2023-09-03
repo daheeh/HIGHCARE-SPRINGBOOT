@@ -79,7 +79,7 @@ public class ApprovalHrmService {
             // 승인 상태 확인 후 결재 상태 변경
             int approved = apvLineRepository.apvNoAllApproved(apvForm.getApvNo());
             if (approved == 0) {
-                apvFormRepository.updateApvStatusToPaymentCompleted(apvForm.getApvNo());
+                apvFormRepository.updateApvStatusToCompleted(apvForm.getApvNo());
             }
             log.info("[ApprovalService] hrm1-insertApvVacation --------------- end ");
             return true;
