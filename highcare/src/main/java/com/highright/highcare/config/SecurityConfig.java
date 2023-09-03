@@ -84,14 +84,32 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(Arrays.asList("http://localhost:8080", "https://kauth.kakao.com",
+        // 허용할 출처(origin) 목록
+        config.setAllowedOrigins(Arrays.asList(
+                "http://localhost:8080",
+                "https://kauth.kakao.com",
                 "https://kapi.kakao.com",
-                "http://" + hostname));
-        config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST","OPTIONS", "DELETE"));
-        config.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-type"
-                , "Access-Control-Allow-Headers", "Authorization", "Access-Control-Allow-Credentials"
-                , "X-Requested-With", " application/json"));
+                "http://localhost:3000",
+                "https://localhost:3000"
+        ));
+
+        // 허용할 HTTP 메서드 목록
+        config.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "OPTIONS", "DELETE"));
+
+        // 허용할 HTTP 헤더 목록
+        config.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials",
+                "X-Requested-With",
+                "application/json",
+                "RefreshToken"
+        ));
+
+        // 자격 증명 포함 설정
         config.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 
