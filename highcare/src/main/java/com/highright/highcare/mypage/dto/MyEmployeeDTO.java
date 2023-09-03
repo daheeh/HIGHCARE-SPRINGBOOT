@@ -2,6 +2,7 @@ package com.highright.highcare.mypage.dto;
 
 import com.highright.highcare.mypage.entity.Department;
 import com.highright.highcare.mypage.entity.Job;
+import com.highright.highcare.mypage.entity.MyProfile;
 import lombok.*;
 
 import java.util.List;
@@ -27,11 +28,15 @@ public class MyEmployeeDTO {
 //    private String edu;
     private String tel;    // 내선전화
 
-    private List<MyAnnualDTO> myAnnual;
-
     private Department deptName;
 
     private Job jobName;
+
+    // 이것 추가***
+    private List<MyAnnualDTO> myAnnual;
+//    private MyProfile myProfile;
+//    private MyProfileFileDTO myProfileFile;
+
 
     private List<MyManegementDTO> manegementList;
 }

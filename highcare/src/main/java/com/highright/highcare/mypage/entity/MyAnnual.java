@@ -3,6 +3,7 @@ package com.highright.highcare.mypage.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_ANNUAL")
@@ -38,13 +39,15 @@ public class MyAnnual {
     @Column(name="APV_NO")
     private String  apvNo;
 
+    // 이것 추가
 //    @OneToMany
 //    @JoinColumn(name="EMP_NO", insertable = false, updatable = false)
 //    private List<AnnEmployee> annEmployee;
-    // referencedColumnName : iITEM_NO랑 계속 매핑되어서 이걸 해줬더니 올바르게 매핑됨
+
     @OneToOne
     @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
     private MyApvVation myApvVation;
+
 
 }
 

@@ -7,7 +7,7 @@ import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
 import com.highright.highcare.mypage.dto.*;
-import com.highright.highcare.mypage.entity.AnnEmployee;
+//import com.highright.highcare.mypage.entity.AnnEmployee;
 import com.highright.highcare.mypage.entity.MyProfile;
 import com.highright.highcare.mypage.entity.MyProfileFile;
 import com.highright.highcare.mypage.service.MypageService;
@@ -101,7 +101,7 @@ public class MypageController {
 //        log.info("start=================");
 //        log.info("offset=========== : {}", offset);
 
-        MyManegementDTO mymanagementDTO = mypageService.selectManList(empNo);
+        Object mymanagementDTO = mypageService.selectManList(empNo);
 //        int total = mypageService.manselect(empNo);     // 데이터이 총 개수 반환
 
         log.info("Controller] managementDTO selectManList^^^^^^ {}", mymanagementDTO);

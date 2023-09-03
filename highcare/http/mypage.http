@@ -1,11 +1,5 @@
 ### 프로필 회원아이디로 조회
 GET http://localhost:8080/api/mypage/profile/10002
-
-
-Accept: */*
-
-### 프로필 회원아이디로 조회
-GET http://localhost:8080/api/mypage/profile/empNo=999999
 Accept: */*
 
 
@@ -23,4 +17,7 @@ Access-Control-Allow-Origin: *
 }
 
 ###회원 아이디로 연차조회
-GET http://localhost:8080/api/mypage/anselect/10001
+GET http://localhost:8080/api/mypage/anselect/10002
+
+### 회원아이디로 근태조회
+GET http://localhost:8080/api/mypage/manselect/10003

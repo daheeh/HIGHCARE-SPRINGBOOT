@@ -1,9 +1,6 @@
 package com.highright.highcare.mypage.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,6 +16,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Getter
 @ToString
+@Setter
 public class MyManegement {
     @Id
     @GeneratedValue(strategy =GenerationType.SEQUENCE, generator = "MYMANAGEMENT_SEQ_GENERATOR")
@@ -38,7 +36,7 @@ public class MyManegement {
     @Column(name = "EMP_NO")
     private int empNo;
     @Column(name = "WORK_TIME")
-    private int workDate;
+    private String workDate;
     @Column(name = "TOTAL_WORK_TIME")
-    private int tWorkDate;
+    private String tWorkDate;
 }
