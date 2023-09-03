@@ -99,26 +99,6 @@ public class ApprovalBizService {
         }
     }
 
-    public ApvFormDTO searchApvFormWithLines(Long apvNo) {
-        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- start ");
-
-        ApvForm apvForm = apvFormRepository.findByApvNo(apvNo);
-        apvForm.getApvLines().forEach(ApvLine::getEmployee);
-        apvForm.getEmployee();
-
-        if (apvForm == null) {
-            log.error("[ApprovalService] Error: ApvForm not found with apvNo {}", apvNo);
-            return null;
-        }
-
-        ApvFormDTO apvFormDTO = modelMapper.map(apvForm, ApvFormDTO.class);
-
-
-        System.out.println("apvFormDTO = " + apvFormDTO);
-
-        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- end ");
-        return apvFormDTO;
-    }
 
     @Transactional
     public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {

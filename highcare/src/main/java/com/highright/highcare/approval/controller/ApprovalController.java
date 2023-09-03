@@ -196,6 +196,28 @@ public class ApprovalController {
     }
 
 
+    // 기안 조회
+    @GetMapping("/search/{apvNo}")
+    public ResponseEntity<?> searchApvFormWithLines(@PathVariable Long apvNo) {
+        System.out.println("biz1View searchApvFormWithLines = " + apvNo);
+
+        ApvFormDTO serviceResponse = approvalService.searchApvFormWithLines(apvNo);
+
+        if (serviceResponse == null) {
+            statusCode = HttpStatus.NOT_FOUND.value();
+            responseMessage = "ApvForm not found with apvNo: " + apvNo;
+            return ResponseEntity
+                    .status(statusCode)
+                    .body(new ResponseDTO(statusCode, responseMessage, null));
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "조회 성공";
+            return ResponseEntity
+                    .status(statusCode)
+                    .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+        }
+    }
+
 
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
@@ -214,27 +236,6 @@ public class ApprovalController {
         return ResponseEntity
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
-    }
-
-    @GetMapping("/search/biz1/{apvNo}")
-    public ResponseEntity<?> searchApvFormWithLines(@PathVariable Long apvNo) {
-        System.out.println("biz1View searchApvFormWithLines = " + apvNo);
-
-        ApvFormDTO serviceResponse = approvalBizService.searchApvFormWithLines(apvNo);
-
-        if (serviceResponse == null) {
-            statusCode = HttpStatus.NOT_FOUND.value();
-            responseMessage = "ApvForm not found with apvNo: " + apvNo;
-            return ResponseEntity
-                    .status(statusCode)
-                    .body(new ResponseDTO(statusCode, responseMessage, null));
-        } else {
-            statusCode = HttpStatus.OK.value();
-            responseMessage = "조회 성공";
-            return ResponseEntity
-                    .status(statusCode)
-                    .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
-        }
     }
 
     @PutMapping("/put/biz1/{apvNo}")
@@ -389,6 +390,8 @@ public class ApprovalController {
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
+
+
 //
 //    /* 전자결재 - 인사 : hrm3 서류발급신청서 */
 //    @PostMapping("/insert/hrm3")

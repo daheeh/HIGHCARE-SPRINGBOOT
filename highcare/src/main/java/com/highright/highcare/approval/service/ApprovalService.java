@@ -76,7 +76,6 @@ public class ApprovalService {
         int countRejected = apvFormMainRepository.countByEmpNoAndApvStatus(empNo, "결재반려");
 
 
-
         Map<String, Integer> counts = new HashMap<>();
         counts.put("countTodayInProgress", countTodayInProgress);
         counts.put("countTodayUrgency", countTodayUrgency);
@@ -147,9 +146,8 @@ public class ApprovalService {
     }
 
 
-
     /* 전자결재 조회 - 페이징 */
-    public int selectApvStatusTotal(int empNo, String apvStatus){
+    public int selectApvStatusTotal(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectApvStatusTotal --------------- start ");
 
         List<ApvFormMain> apvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
@@ -158,6 +156,7 @@ public class ApprovalService {
 
         return apvList.size();
     }
+
     public Object selectListWithPaging(int empNo, String apvStatus, Criteria criteria) {
         log.info("[ApprovalService] selectListWithPaging => Start =============");
 
@@ -234,17 +233,17 @@ public class ApprovalService {
     @Transactional
     public boolean updateApprovalStatus(Long apvLineNo, Long apvNo) {
         log.info("[ApprovalService] updateApprovalStatus --------------- start ");
-    try {
+        try {
 
-        apvLineRepository.updateIsApproval(apvLineNo);
-        int approved = apvLineRepository.areAllApproved(apvLineNo);
-        if (approved == 0) {
-            apvFormRepository.updateApvStatusToCompleted(apvNo);
-        } else if (approved >= 0) {
-            apvFormRepository.updateApvStatusToProcess(apvNo);
-        }
-        log.info("[ApprovalService] updateApprovalStatus --------------- end ");
-         return true;
+            apvLineRepository.updateIsApproval(apvLineNo);
+            int approved = apvLineRepository.areAllApproved(apvLineNo);
+            if (approved == 0) {
+                apvFormRepository.updateApvStatusToCompleted(apvNo);
+            } else if (approved >= 0) {
+                apvFormRepository.updateApvStatusToProcess(apvNo);
+            }
+            log.info("[ApprovalService] updateApprovalStatus --------------- end ");
+            return true;
         } catch (Exception e) {
             log.error("[ApprovalService] Error updateApprovalStatus : " + e.getMessage());
             return false;
@@ -281,6 +280,30 @@ public class ApprovalService {
             return false;
         }
 
+    }
+
+
+    // 기안 조회
+
+    public ApvFormDTO searchApvFormWithLines(Long apvNo) {
+        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- start ");
+
+        ApvForm apvForm = apvFormRepository.findByApvNo(apvNo);
+        apvForm.getApvLines().forEach(ApvLine::getEmployee);
+        apvForm.getEmployee();
+
+        if (apvForm == null) {
+            log.error("[ApprovalService] Error: ApvForm not found with apvNo {}", apvNo);
+            return null;
+        }
+
+        ApvFormDTO apvFormDTO = modelMapper.map(apvForm, ApvFormDTO.class);
+
+
+        System.out.println("apvFormDTO = " + apvFormDTO);
+
+        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- end ");
+        return apvFormDTO;
     }
 }
 

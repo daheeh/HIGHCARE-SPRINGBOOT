@@ -99,11 +99,8 @@ public class ApprovalHrmService {
                         apvForm.getApvVacations().set(i, apvApvVacationToUpdate);
                     });
 
-
             System.out.println("=========== 7. savedExpFormList ===========");
             System.out.println(savedExpFormList);
-
-
 
             System.out.println("=========== 7-2. apvVacationList ===========");
             System.out.println(apvVacationList);
@@ -115,7 +112,6 @@ public class ApprovalHrmService {
             System.out.println(apvLineDTO);
 
             List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
-//            savedApvForm.setApvLines(apvLineList);
             apvFormMain.setApvLines(apvLineList);
 
             System.out.println("=========== 9. apvLineList ===========");
@@ -124,9 +120,6 @@ public class ApprovalHrmService {
             System.out.println(apvFormMain);
             System.out.println("=========== 11. savedApvForm ===========");
             System.out.println(savedApvForm);
-
-
-
 
             // 승인 상태 확인 후 결재 상태 변경
             int approved = apvLineRepository.apvNoAllApproved(apvFormMain.getApvNo());
@@ -141,26 +134,6 @@ public class ApprovalHrmService {
         }
     }
 
-    public ApvFormDTO searchApvFormWithLines(Long apvNo) {
-        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- start ");
-
-        ApvForm apvForm = apvFormRepository.findByApvNo(apvNo);
-        apvForm.getApvLines().forEach(ApvLine::getEmployee);
-        apvForm.getEmployee();
-
-        if (apvForm == null) {
-            log.error("[ApprovalService] Error: ApvForm not found with apvNo {}", apvNo);
-            return null;
-        }
-
-        ApvFormDTO apvFormDTO = modelMapper.map(apvForm, ApvFormDTO.class);
-
-
-        System.out.println("apvFormDTO = " + apvFormDTO);
-
-        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- end ");
-        return apvFormDTO;
-    }
 
     @Transactional
     public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
