@@ -1,7 +1,7 @@
 package com.highright.highcare.approval.entity;
 
-import com.highright.highcare.auth.entity.ADMDepartment;
-import com.highright.highcare.auth.entity.ADMJob;
+//import com.highright.highcare.auth.entity.ADMDepartment;
+//import com.highright.highcare.auth.entity.ADMJob;
 import lombok.Getter;
 
 import javax.persistence.*;
