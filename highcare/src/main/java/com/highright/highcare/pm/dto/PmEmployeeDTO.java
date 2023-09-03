@@ -1,6 +1,9 @@
 package com.highright.highcare.pm.dto;
 
 import com.highright.highcare.approval.dto.ApvLineDTO;
+import com.highright.highcare.pm.entity.Career;
+import com.highright.highcare.pm.entity.Certification;
+import com.highright.highcare.pm.entity.Military;
 import lombok.*;
 
 import java.sql.Date;
@@ -29,5 +32,8 @@ public class PmEmployeeDTO {
     private DepartmentDTO dt;
     private JobDTO job;
     private List<ManagementDTO> management;
+    private MilitaryDTO military;
+    private Career career;
+    private Certification certification;
 
 }
