@@ -32,8 +32,8 @@ public class PmEmployeeDTO {
     private DepartmentDTO dt;
     private JobDTO job;
     private List<ManagementDTO> management;
-    private MilitaryDTO military;
-    private Career career;
-    private Certification certification;
+//    private MilitaryDTO military;
+//    private Career career;
+//    private Certification certification;
 
 }
