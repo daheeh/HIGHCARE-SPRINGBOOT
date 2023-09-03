@@ -12,10 +12,12 @@ import java.sql.Time;
 @ToString
 public class ApvOvertimeDTO {
 
-    private String apvNo;
+    private Long itemNo;
     private Date workingDate;
     private Time startTime;
     private Time endTime;
     private String reason;
+    private Long apvNo;
 
+//    private ApvFormDTO apvFormDTO;
 }
