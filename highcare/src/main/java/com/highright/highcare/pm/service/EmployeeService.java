@@ -283,19 +283,43 @@ public class EmployeeService {
 
         return managementResult;
     }
+//
+//    public ManagementDTO userInfo(Integer empNo) {
+//
+//
+//        Management result = managementEmRepository.findByEmpNo(empNo);
+//
+//        System.out.println("result ==========================> " + result);
+//
+//
+//        String startTime = result.getStartTime();
+//        String endtime =  result.getEndTime();
+//       // Management manageList = result.get(); // 조회된 결과 리스트
+//        ManagementDTO managementDTO = modelMapper.map(result, ManagementDTO.class);
+//
+//
+//        return managementDTO;
+//    }
 
     public ManagementDTO userInfo(Integer empNo) {
-
-
         Management result = managementEmRepository.findByEmpNo(empNo);
 
-        System.out.println("result ==========================> " + result);
+        if (result != null) {
+            // Management 엔티티에서 startTime과 endTime 값을 가져와서 DTO에 설정
+            String startTime = result.getStartTime();
+            String endTime = result.getEndTime();
 
-       // Management manageList = result.get(); // 조회된 결과 리스트
-        ManagementDTO managementDTO = modelMapper.map(result, ManagementDTO.class);
+            ManagementDTO managementDTO = modelMapper.map(result, ManagementDTO.class);
 
+            // DTO에 startTime와 endTime 설정
+            managementDTO.setStartTime(startTime);
+            managementDTO.setEndTime(endTime);
 
-        return managementDTO;
+            return managementDTO;
+        } else {
+            // Management 엔티티가 없는 경우 처리
+            return null; // 또는 에러 처리를 수행할 수 있습니다.
+        }
     }
 
 
