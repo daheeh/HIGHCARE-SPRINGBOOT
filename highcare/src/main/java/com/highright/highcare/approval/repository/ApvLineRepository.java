@@ -31,4 +31,8 @@ public interface ApvLineRepository extends JpaRepository<ApvLine, Long> {
             "WHERE ISAPPROVAL = 'F' " +
             "AND APV_NO = :apvNo", nativeQuery = true)
     int apvNoAllApproved(@Param("apvNo") Long apvNo);
+
+    @Modifying
+    @Query("DELETE FROM ApvLine AL WHERE AL.apvNo = :apvNo")
+    void deleteByApvNo(@Param("apvNo") Long apvNo);
 }

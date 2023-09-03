@@ -105,7 +105,10 @@ public class ApprovalService {
     public List<ApvFormMainDTO> selectWriteApvStatusApvList(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
 
+        System.out.println("empNo = " + empNo);
         List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
+
+        System.out.println("writeApvList = " + writeApvList);
 
         writeApvList.forEach(ApvFormMain::getEmployee);
         System.out.println("WriteBox-writeApvList = " + writeApvList);
@@ -236,7 +239,9 @@ public class ApprovalService {
         apvLineRepository.updateIsApproval(apvLineNo);
         int approved = apvLineRepository.areAllApproved(apvLineNo);
         if (approved == 0) {
-            apvFormRepository.updateApvStatusToPaymentCompleted(apvNo);
+            apvFormRepository.updateApvStatusToCompleted(apvNo);
+        } else if (approved >= 0) {
+            apvFormRepository.updateApvStatusToProcess(apvNo);
         }
         log.info("[ApprovalService] updateApprovalStatus --------------- end ");
          return true;
@@ -262,8 +267,22 @@ public class ApprovalService {
         }
     }
 
+    // 기안 취소(삭제)
+    @Transactional
+    public Boolean deleteApvForm(Long apvNo) {
+        log.info("[ApprovalService] deleteApvForm --------------- start ");
+        try {
+            apvLineRepository.deleteByApvNo(apvNo);
+            apvFormRepository.deleteById(apvNo);
+            log.info("[ApprovalService] deleteApvForm --------------- end ");
+            return true;
+        } catch (Exception e) {
+            log.error("[ApprovalService] Error deleteApvForm : " + e.getMessage());
+            return false;
+        }
 
     }
+}
 
 
 //
