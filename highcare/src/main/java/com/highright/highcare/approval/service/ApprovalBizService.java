@@ -254,3 +254,100 @@ public class ApprovalBizService {
 
 
 }
+
+
+
+//    @Transactional
+//    public Boolean insertApvBusinessTrip(ApvFormWithLinesDTO apvFormWithLinesDTO) {
+//        log.info("[ApprovalService] insertApvBusinessTrip --------------- start ");
+//        log.info("[ApprovalService] insertApvBusinessTrip {}", apvFormWithLinesDTO);
+//
+//        try {
+//            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
+//            List<ApvLineDTO> apvLineDTOs = apvFormWithLinesDTO.getApvLineDTOs();
+//
+//            List<ApvBusinessTripDTO> apvBusinessTripDTO = apvFormDTO.getApvBusinessTrips();
+//
+//            System.out.println("1  apvFormDTO ======= " + apvFormDTO);
+//            System.out.println("1  apvLineDTOs ======= " + apvLineDTOs);
+//            System.out.println("1  meetingLogDTOs ======= " + apvBusinessTripDTO);
+//            System.out.println("=========================================================");
+//
+//            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+//
+//            // 1. apvForm만 등록하기
+//            ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+//            System.out.println("2-1  apvFormMain ======= " + apvFormMain);
+//
+//            ApvFormMain updateApvForm = apvFormMainRepository.save(apvFormMain);
+//            System.out.println("/////// updateApvForm = " + updateApvForm);
+//
+//            System.out.println("updateApvForm.getApvNo() = " + updateApvForm.getApvNo());
+//            System.out.println("2-1-2  apvFormMain  ======= " + apvFormMain);
+//            apvForm.setApvNo(updateApvForm.getApvNo());
+//            System.out.println("     2-1-  apvForm = " + apvForm);
+//            System.out.println("=========================================================");
+//
+//
+//            // 2. ApvLine 등록하기
+//
+//            List<ApvLine> apvLineList = apvLineDTOs.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+//            System.out.println("2-2 apvLineList ======= " + apvLineList);
+//
+//            apvLineList.forEach(item -> {
+//                item.setApvNo(updateApvForm.getApvNo());
+//                System.out.println("item = " + item);
+//            });
+//            updateApvForm.setApvLines(apvLineList);
+//
+//            System.out.println("2-2-2 apvLineList ======= " + apvLineList);
+//            List<ApvLine> savedApvLineList = apvLineRepository.saveAll(apvLineList);
+//            System.out.println("2-2-2 savedApvLineList ======= " + savedApvLineList);
+//
+//            apvForm.setApvLines(apvLineList);
+//            System.out.println("     2-2-  apvForm = " + apvForm);
+//
+//            System.out.println("=========================================================");
+//
+//
+//            // 3. apvBusinessTrips 등록하기
+//
+//            List<ApvBusinessTrip> businessTripList = apvBusinessTripDTO.stream()
+//                    .map(item -> {
+//                        ApvBusinessTrip businessTrip = modelMapper.map(item, ApvBusinessTrip.class);
+//                        businessTrip.setApvNo(updateApvForm.getApvNo());
+//                        return businessTrip;
+//                    })
+//                    .collect(Collectors.toList());
+//
+//            System.out.println("2-3-1 meetingLogList ======= " + businessTripList);
+//
+//            List<ApvBusinessTrip> savedBusinessTripList = apvBusinessTripRepository.saveAll(businessTripList);
+//            System.out.println("2-3-2 savedMeetingLogList ======= " + savedBusinessTripList);
+//            System.out.println("     2-3-  pre apvForm = " + apvForm);
+//
+//            IntStream.range(0, apvForm.getApvBusinessTrips().size())
+//                    .forEach(i -> {
+//                        ApvBusinessTrip apvBusinessTripToUpdate = apvForm.getApvBusinessTrips().get(i);
+//                        System.out.println("apvForm.getApvMeetingLogs().get(" + i + ") = " + apvBusinessTripToUpdate);
+//
+//                        apvBusinessTripToUpdate.setItemsNo(savedBusinessTripList.get(i).getItemsNo());
+//                        apvBusinessTripToUpdate.setApvNo(savedBusinessTripList.get(i).getApvNo());
+//
+//                        apvForm.getApvBusinessTrips().set(i, apvBusinessTripToUpdate);
+//                        System.out.println("apvMeetingLogToUpdate = " + apvForm.getApvBusinessTrips().get(i));
+//                    });
+//
+//            System.out.println("     2-3-  apvForm = " + apvForm);
+//
+//            System.out.println("=========================================================");
+//
+//            log.info("[ApprovalService] insertApvMeetingLog --------------- end ");
+//            return true;
+//        } catch (Exception e) {
+//            log.error("[ApprovalService] Error insertApvMeetingLog : " + e.getMessage());
+//            return false;
+//        }
+//    }
+
+
