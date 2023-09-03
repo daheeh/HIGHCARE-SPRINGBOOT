@@ -20,8 +20,8 @@ public class ApprovalHrmService {
     private final ApvFormMainRepository apvFormMainRepository;
     private final ApvFormRepository apvFormRepository;
     private final ApvLineRepository apvLineRepository;
-    private final ApvMeetingLogRepository apvMeetingLogRepository;
-    private final ApvBusinessTripRepository apvBusinessTripRepository;
+
+    private final ApvVacationRepository apvVacationRepository;
 
     private final ModelMapper modelMapper;
 
@@ -30,61 +30,113 @@ public class ApprovalHrmService {
                               ApvFormMainRepository apvFormMainRepository,
                               ApvFormRepository apvFormRepository,
                               ApvLineRepository apvLineRepository,
-                              ApvMeetingLogRepository apvMeetingLogRepository,
-                              ApvBusinessTripRepository apvBusinessTripRepository
+                              ApvVacationRepository apvVacationRepository
     ) {
         this.modelMapper = modelMapper;
         this.apvFormMainRepository = apvFormMainRepository;
         this.apvFormRepository = apvFormRepository;
         this.apvLineRepository = apvLineRepository;
-        this.apvMeetingLogRepository = apvMeetingLogRepository;
-        this.apvBusinessTripRepository = apvBusinessTripRepository;
+        this.apvVacationRepository = apvVacationRepository;
+
     }
 
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @Transactional
     public Boolean insertApvVacation(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalService] hrm1-insertApvVacation --------------- start ");
-        log.info("[ApprovalService] hrm1 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+        log.info("[ApprovalHrmService] hrm1-insertApvVacation --------------- start ");
+        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
         try {
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             System.out.println("=========== 1. apvFormDTO ===========");
             System.out.println(apvFormDTO);
 
+            List<ApvVacationDTO> apvVacationDTO = apvFormDTO.getApvVacations();
+            System.out.println("=========== 2. apvVacationDTO ===========");
+            System.out.println(apvVacationDTO);
+
             List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
-            System.out.println("=========== 2. apvLineDTO ===========");
+            System.out.println("=========== 3. apvLineDTO ===========");
             System.out.println(apvLineDTO);
 
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-            System.out.println("=========== 3. apvForm ===========");
+            System.out.println("=========== 4. apvForm ===========");
             System.out.println(apvForm);
 
-            ApvForm savedApvForm = apvFormRepository.save(apvForm);
-            System.out.println("=========== 4. savedApvForm ===========");
+
+            ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+            System.out.println("=========== 5. apvFormMain ===========");
+            System.out.println(apvFormMain);
+
+            ApvFormMain savedApvForm = apvFormMainRepository.save(apvFormMain);
+            apvForm.setApvNo(savedApvForm.getApvNo());
+            System.out.println("=========== 5. savedApvForm ===========");
             System.out.println(savedApvForm);
+            System.out.println("=========== 5. apvForm ===========");
+            System.out.println(apvForm);
+
+
+            apvVacationDTO.forEach(apvVacation -> apvVacation.setApvNo(savedApvForm.getApvNo()));
+            System.out.println("=========== 6. apvVacationDTO ===========");
+            System.out.println(apvVacationDTO);
+
+            List<ApvVacation> apvVacationList = apvVacationDTO.stream()
+                    .map(item ->{
+                        ApvVacation apvVacation = modelMapper.map(item, ApvVacation.class);
+                        apvVacation.setApvNo(savedApvForm.getApvNo());
+                        return apvVacation;
+                    })
+                    .collect(Collectors.toList());
+
+
+            List<ApvVacation> savedExpFormList = apvVacationRepository.saveAll(apvVacationList);
+
+            IntStream.range(0, apvForm.getApvVacations().size())
+                    .forEach(i -> {
+                        ApvVacation apvApvVacationToUpdate = apvForm.getApvVacations().get(i);
+                        apvApvVacationToUpdate.setApvNo(savedExpFormList.get(i).getApvNo());
+                        apvForm.getApvVacations().set(i, apvApvVacationToUpdate);
+                    });
+
+
+            System.out.println("=========== 7. savedExpFormList ===========");
+            System.out.println(savedExpFormList);
+
+
+
+            System.out.println("=========== 7-2. apvVacationList ===========");
+            System.out.println(apvVacationList);
+            System.out.println("=========== 7. apvForm ===========");
+            System.out.println(apvVacationList);
 
             apvLineDTO.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
-            System.out.println("=========== 5. apvLineDTO ===========");
+            System.out.println("=========== 8. apvLineDTO ===========");
             System.out.println(apvLineDTO);
 
             List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
-            savedApvForm.setApvLines(apvLineList);
-            apvForm.setApvLines(apvLineList);
+//            savedApvForm.setApvLines(apvLineList);
+            apvFormMain.setApvLines(apvLineList);
 
-            System.out.println("=========== 6. apvLineList ===========");
+            System.out.println("=========== 9. apvLineList ===========");
             System.out.println(apvLineList);
+            System.out.println("=========== 10. apvForm ===========");
+            System.out.println(apvFormMain);
+            System.out.println("=========== 11. savedApvForm ===========");
+            System.out.println(savedApvForm);
+
+
+
 
             // 승인 상태 확인 후 결재 상태 변경
-            int approved = apvLineRepository.apvNoAllApproved(apvForm.getApvNo());
+            int approved = apvLineRepository.apvNoAllApproved(apvFormMain.getApvNo());
             if (approved == 0) {
-                apvFormRepository.updateApvStatusToCompleted(apvForm.getApvNo());
+                apvFormRepository.updateApvStatusToCompleted(apvFormMain.getApvNo());
             }
-            log.info("[ApprovalService] hrm1-insertApvVacation --------------- end ");
+            log.info("[ApprovalHrmService] hrm1-insertApvVacation --------------- end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error hrm1-insertApvVacation : " + e.getMessage());
+            log.error("[ApprovalHrmService] Error hrm1-insertApvVacation : " + e.getMessage());
             return false;
         }
     }
