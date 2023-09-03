@@ -1,12 +1,9 @@
 package com.highright.highcare.approval.dto;
 
 import com.highright.highcare.approval.entity.ApvEmployee;
-import com.highright.highcare.auth.entity.ADMEmployee;
-import com.highright.highcare.pm.dto.PmEmployeeDTO;
 import lombok.*;
 
 import java.sql.Date;
-import java.util.List;
 
 
 @NoArgsConstructor

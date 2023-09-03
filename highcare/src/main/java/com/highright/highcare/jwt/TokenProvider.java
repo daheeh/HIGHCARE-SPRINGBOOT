@@ -199,16 +199,23 @@ public class TokenProvider {
     // 헤더 쿠키에 있는refresh토큰 resolver
     public AUTHRefreshToken resolveCookie(HttpServletRequest request) {
 
+        log.info("[TokenProvider] resolveCookie : request === {}",request);
+
         Cookie[] cookies = request.getCookies();
+        log.info("[TokenProvider] resolveCookie : cookies === {}",cookies);
+
         String refreshToken = "";
         String memberId = "";
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (REFRESHKEY_HEADER.equals(cookie.getName())) {
-                    refreshToken = cookie.getValue().split("=")[0];
-                    memberId = cookie.getValue().split("=")[1];
-                    break; // 원하는 쿠키를 찾으면 루프 종료
+                    String[] cookieValues = cookie.getValue().split("=");
+                    if (cookieValues.length >= 2) {
+                        refreshToken = cookieValues[0];
+                        memberId = cookieValues[1];
+                        break; // 원하는 쿠키를 찾으면 루프 종료
+                    }
                 }
             }
         }
