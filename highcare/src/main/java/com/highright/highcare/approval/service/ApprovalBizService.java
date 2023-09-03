@@ -28,6 +28,7 @@ public class ApprovalBizService {
 
     private final ApvFormMainRepository apvFormMainRepository;
     private final ApvFormRepository apvFormRepository;
+    private final ApvLineRepository apvLineRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
 
@@ -37,12 +38,14 @@ public class ApprovalBizService {
     public ApprovalBizService(ModelMapper modelMapper,
                               ApvFormMainRepository apvFormMainRepository,
                               ApvFormRepository apvFormRepository,
+                              ApvLineRepository apvLineRepository,
                               ApvMeetingLogRepository apvMeetingLogRepository,
                               ApvBusinessTripRepository apvBusinessTripRepository
     ) {
         this.modelMapper = modelMapper;
         this.apvFormMainRepository = apvFormMainRepository;
         this.apvFormRepository = apvFormRepository;
+        this.apvLineRepository = apvLineRepository;
         this.apvMeetingLogRepository = apvMeetingLogRepository;
         this.apvBusinessTripRepository = apvBusinessTripRepository;
     }
@@ -81,6 +84,12 @@ public class ApprovalBizService {
 
             System.out.println("=========== 6. apvLineList ===========");
             System.out.println(apvLineList);
+
+            // 승인 상태 확인 후 결재 상태 변경
+            int approved = apvLineRepository.apvNoAllApproved(apvForm.getApvNo());
+            if (approved == 0) {
+                apvFormRepository.updateApvStatusToPaymentCompleted(apvForm.getApvNo());
+            }
 
             log.info("[ApprovalService] biz1-insertApvForm --------------- end ");
             return true;

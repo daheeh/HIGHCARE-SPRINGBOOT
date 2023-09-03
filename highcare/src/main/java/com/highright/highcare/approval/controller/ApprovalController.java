@@ -7,6 +7,7 @@ import com.highright.highcare.approval.dto.ApvLineDTO;
 import com.highright.highcare.approval.entity.ApvForm;
 import com.highright.highcare.approval.service.ApprovalBizService;
 import com.highright.highcare.approval.service.ApprovalExpService;
+import com.highright.highcare.approval.service.ApprovalHrmService;
 import com.highright.highcare.approval.service.ApprovalService;
 import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
@@ -30,6 +31,7 @@ public class ApprovalController {
     private final ApprovalService approvalService;
     private final ApprovalBizService approvalBizService;
     private final ApprovalExpService approvalExpService;
+    private final ApprovalHrmService approvalHrmService;
 
 
 
@@ -38,11 +40,13 @@ public class ApprovalController {
     public ApprovalController(
             ApprovalService approvalService,
             ApprovalBizService approvalBizService,
-            ApprovalExpService approvalExpService
+            ApprovalExpService approvalExpService,
+            ApprovalHrmService approvalHrmService
     ) {
         this.approvalService = approvalService;
         this.approvalBizService = approvalBizService;
         this.approvalExpService = approvalExpService;
+        this.approvalHrmService = approvalHrmService;
 
     }
 
@@ -215,7 +219,7 @@ public class ApprovalController {
         }
     }
 
-    @PostMapping("/put/biz1")
+    @PutMapping("/put/biz1")
     public ResponseEntity<ResponseDTO> putApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
         System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
@@ -349,14 +353,14 @@ public class ApprovalController {
 //    }
 //
 //
-//    /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
-//    @PostMapping("/insert/hrm1")
-//    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvVacation(apvFormWithLinesDTO)));
-//    }
+    /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
+    @PostMapping("/insert/hrm1")
+    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalHrmService.insertApvVacation(apvFormWithLinesDTO)));
+    }
 //
 //    /* 전자결재 - 인사 : hrm3 서류발급신청서 */
 //    @PostMapping("/insert/hrm3")
