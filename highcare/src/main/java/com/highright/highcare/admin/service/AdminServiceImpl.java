@@ -51,7 +51,12 @@ public class AdminServiceImpl implements AdminService {
                     .email(findMember.getEmail())
                     .build();
         }
+        if(admEmployeeRepository.findById(empNo).isPresent()){
         return "이미 존재하는 회원입니다.";
+
+        } else {
+            return "사원정보를 찾을 수 없습니다. 사원번호를 다시 확인하세요.";
+        }
     }
 
     @Transactional
