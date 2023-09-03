@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -13,22 +12,28 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ADMAccount {
+public class AUTHAccount {
 
     @Id
     @Column(name="ID")
     private String memberId;
 
-    @OneToOne
-    @JoinColumn(name="EMP_NO")
-    private ADMEmployee employee;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="EMP_NO", insertable = false, updatable = false)
+    private AUTHEmployee employee;
 
     @Column(name="PASSWORD")
     private String password;
 
-    @OneToMany
+    @Column(name="IS_TEMP_PWD")
+    private String isTempPwd;
+
+
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="ID")
-    private List<ADMAuthAccount> roleList;
+    private List<AUTHAuthAccount> roleList;
+
+
 
 
 

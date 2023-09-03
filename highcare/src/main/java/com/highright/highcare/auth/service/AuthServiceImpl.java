@@ -1,9 +1,12 @@
 package com.highright.highcare.auth.service;
 
+import com.highright.highcare.auth.dto.AccountDTO;
 import com.highright.highcare.auth.dto.LoginMemberDTO;
 import com.highright.highcare.auth.dto.TokenDTO;
-import com.highright.highcare.auth.entity.ADMAccount;
-import com.highright.highcare.auth.entity.ADMRefreshToken;
+import com.highright.highcare.auth.entity.AUTHAccount;
+import com.highright.highcare.auth.entity.AUTHPassword;
+import com.highright.highcare.auth.entity.AUTHRefreshToken;
+import com.highright.highcare.auth.repository.AUTHPasswordRepository;
 import com.highright.highcare.auth.repository.AccountRepository;
 import com.highright.highcare.auth.repository.RefreshTokenRepository;
 import com.highright.highcare.exception.LoginFailedException;
@@ -17,10 +20,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,10 +36,11 @@ public class AuthServiceImpl implements AuthService {
 
     private final AccountRepository accountRepository;
     private final OAuthRepository oAuthRepository;
-    private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final AUTHPasswordRepository passwordRepository;
+    private final PasswordEncoder passwordEncoder;
 
     private final String SOCIAL_LOGIN_TYPE = "oauth";   // 로그인타입(소셜인경우만)
 
@@ -57,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
         response.addCookie(cookie);
         try {
             // 리프레시토큰 레디스에 id와 저장
-            refreshTokenSave(ADMRefreshToken.builder().id(setMemberDTO.getId())
+            refreshTokenSave(AUTHRefreshToken.builder().id(setMemberDTO.getId())
                                                     .refreshToken(cookie.getValue().split("=")[0])
                                                     .build());
             return token;
@@ -68,8 +72,8 @@ public class AuthServiceImpl implements AuthService {
 
 
     // 멤버조회
-    private ADMAccount memberFindById(String id){
-        ADMAccount member = accountRepository.findByMemberId(id);
+    private AUTHAccount memberFindById(String id){
+        AUTHAccount member = accountRepository.findByMemberId(id);
         if (member == null) {
             throw new LoginFailedException("ID not found : " + id + "를 찾을 수 없습니다");
         }
@@ -81,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
     public Object reIssueToken(HttpServletRequest request) {
 
         // 리프레시토큰 쿠키 resolve
-        ADMRefreshToken refreshToken = tokenProvider.resolveCookie(request);
+        AUTHRefreshToken refreshToken = tokenProvider.resolveCookie(request);
         log.info("[AuthServiceImpl] reIssueToken : refreshToken======{}", refreshToken);
 
         // 리프레시토큰 db와 일치하는지 검증 - true면 access토큰 발급
@@ -94,19 +98,6 @@ public class AuthServiceImpl implements AuthService {
         throw new TokenException("액세트 토큰 재발급 실패");
     }
 
-    // 소셜로그인 jwt 토큰 발급
-//    @Override
-//    public Object insertOauthJwt(Map<String, Object> data, HttpServletResponse response) {
-//
-//        log.info("[AuthServiceImpl] oauthJwtLogin : data.get(profileObj) ==== {}", data.get("profileObj"));
-//        OAuthUserInfo googleUser = new GoogleUser((Map<String, Object>)data.get("profileObj"));
-//
-//        // 롤 넣어주기
-//
-////        OAuthUser oAuthUser = oAuthRepository.findById(googleUser.getProvider() + "_");
-//
-//        return null;
-//    }
 
     // 소셜로그인 연동 데이터 인서트, jwt토큰 발급 요청
     @Override
@@ -166,7 +157,7 @@ public class AuthServiceImpl implements AuthService {
         response.addCookie(cookie);
         try {
             // 리프레시토큰 레디스에 id와 저장
-            refreshTokenSave(ADMRefreshToken.builder().id(setMemberDTO.getId())
+            refreshTokenSave(AUTHRefreshToken.builder().id(setMemberDTO.getId())
                     .refreshToken(cookie.getValue().split("=")[0])
                     .build());
             return token;
@@ -175,18 +166,49 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    @Transactional
+    @Override
+    public Object updateAndInsertPassword(AccountDTO accountDTO) {
+
+        Optional<AUTHAccount> authAccount = accountRepository.findById(accountDTO.getMemberId());
+        log.info("[AuthServiceImpl] updateAndInsertPassword : authAccount======{}", authAccount);
+
+        if (authAccount.isPresent()){
+
+            AUTHPassword authPassword = AUTHPassword.builder()
+                    .prevPassword(authAccount.get().getPassword())
+                    .id(authAccount.get().getMemberId())
+                    .changeDate(new Timestamp(System.currentTimeMillis()))
+                    .build();
+            log.info("[AuthServiceImpl] updateAndInsertPassword : authPassword======{}", authPassword);
+
+            // 비밀번호 변경이력 테이블 insert
+            passwordRepository.save(authPassword);
+            // 계정 테이블 비밀번호 변경 업데이트
+            authAccount.get().setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+            authAccount.get().setIsTempPwd("N");
+
+
+
+            return "비밀번호 업데이트 완료";
+        } else {
+            return "비밀번호 업데이트 실패";
+        }
+
+    }
+
 
     @Transactional
-    public void refreshTokenSave(ADMRefreshToken refreshToken) {
+    public void refreshTokenSave(AUTHRefreshToken refreshToken) {
         log.info("[AuthServiceImpl] refreshTokenSave : refreshToken ==== {}", refreshToken);
         refreshTokenRepository.save(refreshToken);
     }
 
     @Transactional
-    public boolean findRefreshToken(ADMRefreshToken refreshToken) {
+    public boolean findRefreshToken(AUTHRefreshToken refreshToken) {
         log.info("[AuthServiceImpl] findRefreshToken : refreshToken ==== {}", refreshToken);
 
-            Optional<ADMRefreshToken> findRefreshToken = (refreshTokenRepository.findById(refreshToken.getId()));
+            Optional<AUTHRefreshToken> findRefreshToken = (refreshTokenRepository.findById(refreshToken.getId()));
         if (findRefreshToken.isPresent() && findRefreshToken.get().getRefreshToken().equals(refreshToken.getRefreshToken())) {
                 log.info("[AuthServiceImpl] refreshTokenSave : findRefreshToken ==== {}", findRefreshToken);
 
@@ -202,7 +224,7 @@ public class AuthServiceImpl implements AuthService {
         log.info("[AuthServiceImpl] login : loginInfo ====== {} ", loginInfo);
 
         // 멤버 조회
-        ADMAccount member = memberFindById(loginInfo.getId());
+        AUTHAccount member = memberFindById(loginInfo.getId());
         // 패스워드 검증
         // 비번 조회
 
@@ -223,6 +245,7 @@ public class AuthServiceImpl implements AuthService {
         setMemberDTO.setName(member.getEmployee().getName());
         setMemberDTO.setDeptName(member.getEmployee().getDeptCode().getDeptName());
         setMemberDTO.setJobName(member.getEmployee().getJobCode().getJobName());
+
 
         return setMemberDTO;
     }

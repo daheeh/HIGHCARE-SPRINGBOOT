@@ -1,16 +1,13 @@
 package com.highright.highcare.admin.entity;
 
-import com.highright.highcare.auth.entity.ADMAuthAccount;
-import com.highright.highcare.auth.entity.ADMEmployee;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 
-@Entity(name = "adminAccount")
+@Entity
 @Table(name="TBL_ACCOUNT")
 @Getter
 @Setter

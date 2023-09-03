@@ -8,7 +8,7 @@ import com.highright.highcare.admin.repository.ADMAccountRepository;
 import com.highright.highcare.admin.repository.ADMAuthAccountRepository;
 import com.highright.highcare.admin.repository.ADMEmployeeRepository;
 import com.highright.highcare.auth.dto.AccountDTO;
-import com.highright.highcare.auth.entity.ADMEmployee;
+import com.highright.highcare.auth.entity.AUTHEmployee;
 import com.highright.highcare.common.AdminCustomBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
         if(isExist != null){
 
             // 리빌딩 --- 전체 사원 조회 (if 이미 회원인 사원은 조회불가)
-            ADMEmployee findMember = admEmployeeRepository.findById(empNo).get();
+            AUTHEmployee findMember = admEmployeeRepository.findById(empNo).get();
 
             log.info("[AdminServiceImpl] selectMember : findMember ==== {}",findMember);
 

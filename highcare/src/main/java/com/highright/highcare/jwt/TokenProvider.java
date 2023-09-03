@@ -1,8 +1,9 @@
 package com.highright.highcare.jwt;
 
+import com.highright.highcare.auth.dto.AccountDTO;
 import com.highright.highcare.auth.dto.LoginMemberDTO;
 import com.highright.highcare.auth.dto.TokenDTO;
-import com.highright.highcare.auth.entity.ADMRefreshToken;
+import com.highright.highcare.auth.entity.AUTHRefreshToken;
 import com.highright.highcare.common.AdminCustomBean;
 import com.highright.highcare.exception.TokenException;
 import io.jsonwebtoken.*;
@@ -38,14 +39,13 @@ public class TokenProvider {
 
 
     private final UserDetailsService userDetailsService;
-    private final AdminCustomBean customBean;
-
+    private final AdminCustomBean adminCustomBean;
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String REFRESHKEY_HEADER = "RefreshToken";
 
-    public TokenProvider(@Value("${jwt.secret}") String secretAccessKey, UserDetailsService userDetailsService, AdminCustomBean customBean) {
+    public TokenProvider(@Value("${jwt.secret}") String secretAccessKey, UserDetailsService userDetailsService, AdminCustomBean adminCustomBean) {
         this.userDetailsService = userDetailsService;
-        this.customBean = customBean;
+        this.adminCustomBean = adminCustomBean;
         byte[] AkeyBytes = Decoders.BASE64.decode(secretAccessKey);
         this.key = Keys.hmacShaKeyFor(AkeyBytes);
 
@@ -83,6 +83,7 @@ public class TokenProvider {
                 .deptName(loginMemberDTO.getDeptName())
                 .jobName(loginMemberDTO.getJobName())
                 .role(loginMemberDTO.getRoleList().toString())
+                .accountDTO(AccountDTO.builder().isTempPwd(loginMemberDTO.getIsTempPwd()).pwdExpiredDate(loginMemberDTO.getPwdExpiredDate()).build())
                 .build();
     }
 
@@ -171,8 +172,8 @@ public class TokenProvider {
     **/
     public Cookie generateRefreshTokenInCookie(LoginMemberDTO loginMemberDTO){
 
-        // 리프레쉬 토큰 생성 ( "uuid id")
-        String refreshToken = customBean.randomRefreshToken() + loginMemberDTO.getId();
+        // 리프레쉬 토큰 생성 ( "uuid + id")
+        String refreshToken = adminCustomBean.randomRefreshToken() + loginMemberDTO.getId();
         // 쿠키에 헤더와 담는다
         String cookieName = REFRESHKEY_HEADER;
         String cookieValue = refreshToken;
@@ -196,7 +197,7 @@ public class TokenProvider {
      *작성일 2023-08-21
      **/
     // 헤더 쿠키에 있는refresh토큰 resolver
-    public ADMRefreshToken resolveCookie(HttpServletRequest request) {
+    public AUTHRefreshToken resolveCookie(HttpServletRequest request) {
 
         Cookie[] cookies = request.getCookies();
         String refreshToken = "";
@@ -214,7 +215,7 @@ public class TokenProvider {
         //f04b112a-1c52-4ecf-9a18-b9385192403b=user01
         log.info("[TokenProvider] resolveCookie : refreshToken === {}",refreshToken);
         log.info("[TokenProvider] resolveCookie : memberId === {}",memberId);
-        return ADMRefreshToken.builder()
+        return AUTHRefreshToken.builder()
                 .refreshToken(refreshToken)
                 .id(memberId)
                 .build();
