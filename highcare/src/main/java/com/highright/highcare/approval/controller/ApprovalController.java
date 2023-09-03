@@ -148,7 +148,7 @@ public class ApprovalController {
     String responseMessage;
 
 
-    /* 전자결재 승인 / 반려*/
+    /* 전자결재 승인 + 반려*/
     @PutMapping("/put/line/{apvLineNo}")
     public ResponseEntity<ResponseDTO> updateApprovalStatus(@PathVariable Long apvLineNo, @RequestParam Long apvNo, @RequestParam String apvStatus) {
 
@@ -175,6 +175,24 @@ public class ApprovalController {
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, updatedResponse));
 
+    }
+
+    // 기안 취소(삭제)
+    @DeleteMapping("/delete/{apvNo}")
+    public ResponseEntity<ResponseDTO> deleteApvForm(@PathVariable Long apvNo) {
+
+        Boolean serviceResponse = approvalService.deleteApvForm(apvNo);
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 
 
@@ -219,7 +237,7 @@ public class ApprovalController {
         }
     }
 
-    @PutMapping("/put/biz1")
+    @PutMapping("/put/biz1/{apvNo}")
     public ResponseEntity<ResponseDTO> putApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
         System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
@@ -356,10 +374,20 @@ public class ApprovalController {
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @PostMapping("/insert/hrm1")
     public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+        System.out.println("hrm1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
+        Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormWithLinesDTO);
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
         return ResponseEntity
-                .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalHrmService.insertApvVacation(apvFormWithLinesDTO)));
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 //
 //    /* 전자결재 - 인사 : hrm3 서류발급신청서 */
