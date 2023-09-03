@@ -1,13 +1,18 @@
 package com.highright.highcare.auth.entity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="TBL_EMPLOYEE")
 @Getter
-public class ADMEmployee {
+@Setter
+@NoArgsConstructor
+public class AUTHEmployee {
 
     @Id
     @Column(name="EMP_NO")
@@ -18,7 +23,7 @@ public class ADMEmployee {
 
     @OneToOne
     @JoinColumn(name="DEPT_CODE")
-    private ADMDepartment deptCode;
+    private AUTHDepartment deptCode;
 
     @Column(name="PHONE")
     private String phone;
@@ -28,7 +33,17 @@ public class ADMEmployee {
 
     @OneToOne
     @JoinColumn(name="JOB_CODE")
-    private ADMJob jobCode;
+    private AUTHJob jobCode;
+
+    @Builder
+    public AUTHEmployee(int empNo, String name, AUTHDepartment deptCode, String phone, String email, AUTHJob jobCode) {
+        this.empNo = empNo;
+        this.name = name;
+        this.deptCode = deptCode;
+        this.phone = phone;
+        this.email = email;
+        this.jobCode = jobCode;
+    }
 
     @Override
     public String toString() {

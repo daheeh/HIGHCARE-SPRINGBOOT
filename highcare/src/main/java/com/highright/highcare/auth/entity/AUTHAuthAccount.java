@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class ADMAuthAccount implements Serializable {
+public class AUTHAuthAccount implements Serializable {
 
     private static final long serialVersionUID = 1L; // 추가
 

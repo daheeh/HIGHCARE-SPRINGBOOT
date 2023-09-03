@@ -1,6 +1,5 @@
 package com.highright.highcare.approval.entity;
 
-import com.highright.highcare.auth.entity.ADMEmployee;
 import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.*;
 
