@@ -11,11 +11,12 @@ import java.util.List;
 
 public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> {
 
-    List<ApvFormMain> findByEmpNoAndApvStatus(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus);
-    Page<ApvFormMain> findByEmpNoAndApvStatus(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus, Pageable paging);
+    List<ApvFormMain> findByEmpNoAndApvStatusOrderByWriteDateDesc(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus);
+    Page<ApvFormMain> findByEmpNoAndApvStatusOrderByWriteDateDesc(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus, Pageable paging);
 
     // 수신함
     @Query(value = "SELECT AF.* " +
+            ", AL.ISAPPROVAL " +
             ", E.EMP_NAME " +
             ", J.JOB_NAME AS jobName " +
             "FROM TBL_APV_FORM AF " +
@@ -23,11 +24,24 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
             "JOIN TBL_EMPLOYEE E ON AF.EMP_NO = E.EMP_NO " +
             "JOIN TBL_JOB J ON E.JOB_CODE = J.JOB_CODE " +
             "WHERE AL.EMP_NO = :empNo " +
-            "AND AL.ISAPPROVAL = 'F'" +
-            "AND AF.APV_STATUS = :apvStatus " , nativeQuery = true)
-    List<ApvFormMain> findByEmpNoAndApvStatus2(@Param("empNo") int empNo, @Param("apvStatus")String apvStatus);
+            "AND AL.ISAPPROVAL = :isApproval " +
+            "AND AL.DEGREE <> 0 " +
+            "ORDER BY AF.WRITE_DATE " , nativeQuery = true)
+    List<ApvFormMain> findByEmpNoAndApvStatus2(@Param("empNo") int empNo, @Param("isApproval")String isApproval);
 
-
+    @Query(value = "SELECT AF.* " +
+            ", AL.ISAPPROVAL " +
+            ", E.EMP_NAME " +
+            ", J.JOB_NAME AS jobName " +
+            "FROM TBL_APV_FORM AF " +
+            "JOIN TBL_APV_LINE AL ON AL.APV_NO = AF.APV_NO " +
+            "JOIN TBL_EMPLOYEE E ON AF.EMP_NO = E.EMP_NO " +
+            "JOIN TBL_JOB J ON E.JOB_CODE = J.JOB_CODE " +
+            "WHERE AL.EMP_NO = :empNo " +
+            "AND AF.APV_STATUS = :apvStatus " +
+            "AND AL.DEGREE <> 0 " +
+            "ORDER BY AF.WRITE_DATE " , nativeQuery = true)
+    List<ApvFormMain> findByEmpNoAndApvStatus3(@Param("empNo") int empNo, @Param("apvStatus")String apvStatus);
 
     // 메인페이지 리스트
     @Query(value = "SELECT A.* " +

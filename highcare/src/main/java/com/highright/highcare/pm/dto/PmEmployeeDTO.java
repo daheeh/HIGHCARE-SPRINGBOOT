@@ -30,13 +30,10 @@ public class PmEmployeeDTO {
     private String education;
     private String telephone;
     private DepartmentDTO dt;
-//    private JobDTO job;
+    private JobDTO job;
     private List<ManagementDTO> management;
     private MilitaryDTO military;
     private Career career;
     private Certification certification;
-
-    private List<ApvLineDTO> apvLines;
-
 
 }

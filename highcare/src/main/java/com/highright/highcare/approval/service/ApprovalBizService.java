@@ -4,6 +4,7 @@ import com.highright.highcare.approval.dto.*;
 import com.highright.highcare.approval.entity.*;
 import com.highright.highcare.approval.repository.*;
 import com.highright.highcare.common.Criteria;
+import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,8 @@ import java.util.stream.IntStream;
 public class ApprovalBizService {
 
     private final ApvFormMainRepository apvFormMainRepository;
+    private final ApvFormRepository apvFormRepository;
+    private final ApvLineRepository apvLineRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
 
@@ -33,11 +37,15 @@ public class ApprovalBizService {
     @Autowired
     public ApprovalBizService(ModelMapper modelMapper,
                               ApvFormMainRepository apvFormMainRepository,
+                              ApvFormRepository apvFormRepository,
+                              ApvLineRepository apvLineRepository,
                               ApvMeetingLogRepository apvMeetingLogRepository,
                               ApvBusinessTripRepository apvBusinessTripRepository
     ) {
         this.modelMapper = modelMapper;
         this.apvFormMainRepository = apvFormMainRepository;
+        this.apvFormRepository = apvFormRepository;
+        this.apvLineRepository = apvLineRepository;
         this.apvMeetingLogRepository = apvMeetingLogRepository;
         this.apvBusinessTripRepository = apvBusinessTripRepository;
     }
@@ -46,35 +54,108 @@ public class ApprovalBizService {
     /* 전자결재 - 업무 : biz1 기안서 */
     @Transactional
     public Boolean insertApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalService] insertApvForm --------------- start ");
+        log.info("[ApprovalService] biz1-insertApvForm --------------- start ");
         log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
         try {
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
+            System.out.println("=========== 1. apvFormDTO ===========");
+            System.out.println(apvFormDTO);
+
             List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
+            System.out.println("=========== 2. apvLineDTO ===========");
+            System.out.println(apvLineDTO);
+
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+            System.out.println("=========== 3. apvForm ===========");
+            System.out.println(apvForm);
 
-            // 1. apvForm만 등록하기
-            ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
-            ApvFormMain updateApvForm = apvFormMainRepository.save(apvFormMain);
-            apvForm.setApvNo(updateApvForm.getApvNo());
+            ApvForm savedApvForm = apvFormRepository.save(apvForm);
+            System.out.println("=========== 4. savedApvForm ===========");
+            System.out.println(savedApvForm);
 
-            // 2. ApvLine 등록하기
+            apvLineDTO.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
+            System.out.println("=========== 5. apvLineDTO ===========");
+            System.out.println(apvLineDTO);
+
             List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
-
-            apvLineList.forEach(item -> {
-                item.setApvNo(updateApvForm.getApvNo());
-            });
-            updateApvForm.setApvLines(apvLineList);
+            savedApvForm.setApvLines(apvLineList);
             apvForm.setApvLines(apvLineList);
 
-            log.info("[ApprovalService] insertApvForm --------------- end ");
+            System.out.println("=========== 6. apvLineList ===========");
+            System.out.println(apvLineList);
+
+            // 승인 상태 확인 후 결재 상태 변경
+            int approved = apvLineRepository.apvNoAllApproved(apvForm.getApvNo());
+            if (approved == 0) {
+                apvFormRepository.updateApvStatusToPaymentCompleted(apvForm.getApvNo());
+            }
+
+            log.info("[ApprovalService] biz1-insertApvForm --------------- end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error insertApvForm : " + e.getMessage());
+            log.error("[ApprovalService] Error biz1-insertApvForm : " + e.getMessage());
             return false;
         }
     }
+
+    public ApvFormDTO searchApvFormWithLines(Long apvNo) {
+        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- start ");
+
+        ApvForm apvForm = apvFormRepository.findByApvNo(apvNo);
+        apvForm.getApvLines().forEach(ApvLine::getEmployee);
+        apvForm.getEmployee();
+
+        if (apvForm == null) {
+            log.error("[ApprovalService] Error: ApvForm not found with apvNo {}", apvNo);
+            return null;
+        }
+
+        ApvFormDTO apvFormDTO = modelMapper.map(apvForm, ApvFormDTO.class);
+
+
+        System.out.println("apvFormDTO = " + apvFormDTO);
+
+        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- end ");
+        return apvFormDTO;
+    }
+
+    @Transactional
+    public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
+        log.info("[ApprovalService] biz1-putApvFormWithLines --------------- start ");
+        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+
+        try {
+            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
+            System.out.println("=========== 1. apvFormDTO ===========");
+            System.out.println(apvFormDTO);
+
+            List<ApvLineDTO> apvLineDTO = apvFormDTO.getApvLines();
+            System.out.println("=========== 2. apvLineDTO ===========");
+            System.out.println(apvLineDTO);
+
+            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+            System.out.println("=========== 3. apvForm ===========");
+            System.out.println(apvForm);
+
+            List<ApvLine> apvLineList = apvForm.getApvLines();
+            System.out.println("apvLineList = " + apvLineList);
+
+            ApvForm savedApvForm = apvFormRepository.save(apvForm);
+            System.out.println("=========== 4. savedApvForm ===========");
+            System.out.println(savedApvForm);
+
+
+
+            log.info("[ApprovalService] biz1-putApvFormWithLines --------------- end ");
+            return true;
+        } catch (Exception e) {
+            log.error("[ApprovalService] Error biz1-putApvFormWithLines : " + e.getMessage());
+            return false;
+        }
+    }
+
+
 
     /* 전자결재 - 업무 : biz2 회의록 */
     @Transactional
@@ -190,4 +271,6 @@ public class ApprovalBizService {
             return false;
         }
     }
+
+
 }

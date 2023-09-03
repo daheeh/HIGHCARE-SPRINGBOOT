@@ -23,4 +23,6 @@ public class TokenDTO {
     private String jobName;
     private String role;
 
+    private AccountDTO accountDTO;
+
 }
