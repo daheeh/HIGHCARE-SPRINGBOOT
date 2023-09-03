@@ -16,7 +16,11 @@ public interface ApvFormRepository extends JpaRepository<ApvForm, Long> {
 
     @Modifying
     @Query("UPDATE ApvForm af SET af.apvStatus = '결재완료' WHERE af.apvNo = :apvNo")
-    void updateApvStatusToPaymentCompleted(@Param("apvNo") Long apvNo);
+    void updateApvStatusToCompleted(@Param("apvNo") Long apvNo);
+
+    @Modifying
+    @Query("UPDATE ApvForm af SET af.apvStatus = '결재진행중' WHERE af.apvNo = :apvNo")
+    void updateApvStatusToProcess(@Param("apvNo") Long apvNo);
 
     @Modifying
     @Query("UPDATE ApvForm af SET af.apvStatus = '결재반려' WHERE af.apvNo = :apvNo")

@@ -236,7 +236,9 @@ public class ApprovalService {
         apvLineRepository.updateIsApproval(apvLineNo);
         int approved = apvLineRepository.areAllApproved(apvLineNo);
         if (approved == 0) {
-            apvFormRepository.updateApvStatusToPaymentCompleted(apvNo);
+            apvFormRepository.updateApvStatusToCompleted(apvNo);
+        } else if (approved >= 0) {
+            apvFormRepository.updateApvStatusToProcess(apvNo);
         }
         log.info("[ApprovalService] updateApprovalStatus --------------- end ");
          return true;
