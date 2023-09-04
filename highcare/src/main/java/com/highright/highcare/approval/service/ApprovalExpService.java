@@ -57,101 +57,103 @@ public class ApprovalExpService {
         log.info("[ApprovalHrmService] Exp1 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
         try {
+            // ApvFormWithLinesDTO에서 필요한 데이터 추출
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-            List<ApvExpFormDTO> apvExpFormDTO = apvFormDTO.getApvExpForms();
+            List<ApvExpFormDTO> apvExpFormDTOList = apvFormDTO.getApvExpForms();
+            List<ApvLineDTO> apvLineDTOList = apvFormWithLinesDTO.getApvLineDTOs();
 
-            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
-
+            // ApvForm 및 ApvFormMain 생성 및 저장
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+            apvFormMain = apvFormMainRepository.save(apvFormMain);
+            Long apvNo = apvFormMain.getApvNo();
 
-            ApvFormMain savedApvForm = apvFormMainRepository.save(apvFormMain);
-            apvForm.setApvNo(savedApvForm.getApvNo());
-
-            apvExpFormDTO.forEach(apvExpForm -> apvExpForm.setApvNo(savedApvForm.getApvNo()));
-
-            List<ApvExpForm> apvExpFormList = apvExpFormDTO.stream()
-                    .map(item ->{
-                        ApvExpForm apvExpForm = modelMapper.map(item, ApvExpForm.class);
-                        apvExpForm.setApvNo(savedApvForm.getApvNo());
+            // ApvExpFormDTO를 ApvExpForm 엔티티로 매핑하고 ApvNo 설정
+            List<ApvExpForm> apvExpFormList = apvExpFormDTOList.stream()
+                    .map(apvExpFormDTO -> {
+                        ApvExpForm apvExpForm = modelMapper.map(apvExpFormDTO, ApvExpForm.class);
+                        apvExpForm.setApvNo(apvNo);
+//                        apvExpForm.getApvForm().setApvNo(apvNo);
                         return apvExpForm;
                     })
                     .collect(Collectors.toList());
 
-            List<ApvExpForm> savedApvExpFormList = apvExpFormRepository.saveAll(apvExpFormList);
+            // ApvExpForm 엔티티 저장
+            apvExpFormList = apvExpFormRepository.saveAll(apvExpFormList);
 
-            IntStream.range(0, apvForm.getApvVacations().size())
-                    .forEach(i -> {
-                        ApvExpForm apvExpFormToUpdate = apvForm.getApvExpForms().get(i);
-                        apvExpFormToUpdate.setApvNo(savedApvExpFormList.get(i).getApvNo());
-                        apvForm.getApvExpForms().set(i, apvExpFormToUpdate);
-                    });
+            // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
+            List<ApvLine> apvLineList = apvLineDTOList.stream()
+                    .map(apvLineDTO -> {
+                        ApvLine apvLine = modelMapper.map(apvLineDTO, ApvLine.class);
+                        apvLine.setApvNo(apvNo);
+                        return apvLine;
+                    })
+                    .collect(Collectors.toList());
 
-            apvLineDTO.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
-
-            List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+            // ApvFormMain에 ApvLines 설정
             apvFormMain.setApvLines(apvLineList);
 
             // 승인 상태 확인 후 결재 상태 변경
-            int approved = apvLineRepository.apvNoAllApproved(apvFormMain.getApvNo());
-            if (approved == 0) {
-                apvFormRepository.updateApvStatusToCompleted(apvFormMain.getApvNo());
+            if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
+                apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
-            log.info("[ApprovalService] Exp1 insertApvExpense --------------- end ");
+
+            log.info("[ApprovalService] Exp1 insertApvExpense --------------- 종료 ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error Exp1 insertApvExpense : " + e.getMessage());
+            log.error("[ApprovalService] 오류 발생 - Exp1 insertApvExpense : " + e.getMessage());
             return false;
         }
     }
 
 
     /* 전자결재 - 지출 : exp6 경조금 신청서 */
+    @Transactional
     public Boolean insertApvFamilyEvent(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalService] insertApvFamilyEvent --------------- start ");
+        log.info("[ApprovalService] Exp6 insertApvFamilyEvent --------------- start ");
         log.info("[ApprovalHrmService] Exp6 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
         try {
+            // ApvFormWithLinesDTO에서 필요한 데이터 추출
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvFamilyEventDTO> apvFamilyEventDTO = apvFormDTO.getApvFamilyEvents();
-
             List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
-            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+            // ApvFormMain을 저장하고 생성된 ApvNo를 가져오기
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+            apvFormMain = apvFormMainRepository.save(apvFormMain);
+            Long apvNo = apvFormMain.getApvNo();
 
-            ApvFormMain savedApvForm = apvFormMainRepository.save(apvFormMain);
-            apvForm.setApvNo(savedApvForm.getApvNo());
-
-            apvFamilyEventDTO.forEach(apvFamilyEvent -> apvFamilyEvent.setApvNo(savedApvForm.getApvNo()));
-
+            // ApvFamilyEventDTO를 ApvFamilyEvent 엔티티로 매핑하고 ApvNo를 설정
             List<ApvFamilyEvent> apvFamilyEventList = apvFamilyEventDTO.stream()
-                    .map(item ->{
-                        ApvFamilyEvent apvFamilyEvent = modelMapper.map(item, ApvFamilyEvent.class);
-                        apvFamilyEvent.setApvNo(savedApvForm.getApvNo());
+                    .map(dto -> {
+                        ApvFamilyEvent apvFamilyEvent = modelMapper.map(dto, ApvFamilyEvent.class);
+                        apvFamilyEvent.setApvNo(apvNo);
+//                        apvFamilyEvent.getApvForm().setApvNo(apvNo);
                         return apvFamilyEvent;
                     })
                     .collect(Collectors.toList());
 
-            List<ApvFamilyEvent> savedApvFamilyEventList = apvFamilyEventRepository.saveAll(apvFamilyEventList);
+            // ApvFamilyEvent 엔티티를 저장
+            apvFamilyEventList = apvFamilyEventRepository.saveAll(apvFamilyEventList);
 
-            IntStream.range(0, apvForm.getApvVacations().size())
-                    .forEach(i -> {
-                        ApvFamilyEvent apvFamilyEventToUpdate = apvForm.getApvFamilyEvents().get(i);
-                        apvFamilyEventToUpdate.setApvNo(savedApvFamilyEventList.get(i).getApvNo());
-                        apvForm.getApvFamilyEvents().set(i, apvFamilyEventToUpdate);
-                    });
+            // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo를 설정
+            List<ApvLine> apvLineList = apvLineDTO.stream()
+                    .map(dto -> {
+                        ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
+                        apvLine.setApvNo(apvNo);
+                        return apvLine;
+                    })
+                    .collect(Collectors.toList());
 
-            apvLineDTO.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
-
-            List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+            // ApvLine 엔티티를 ApvFormMain에 설정
             apvFormMain.setApvLines(apvLineList);
 
-            // 승인 상태 확인 후 결재 상태 변경
-            int approved = apvLineRepository.apvNoAllApproved(apvFormMain.getApvNo());
-            if (approved == 0) {
-                apvFormRepository.updateApvStatusToCompleted(apvFormMain.getApvNo());
+            // 승인 상태를 확인하고 업데이트
+            if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
+                apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
+
             log.info("[ApprovalService] Exp6 insertApvFamilyEvent --------------- end ");
             return true;
         } catch (Exception e) {
@@ -161,73 +163,58 @@ public class ApprovalExpService {
     }
 
 
-
-//
-//    /* 전자결재 - 지출 : exp4 출장경비정산서 */
-//    public List<ApvFormDTO> selectApvBusinessTripExp(int empNo, String title) {
-//        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
-//
-//        List<ApvForm> apvBusinessTripList = approvalRepository.findByEmpNoAndTitle(empNo, title);
-//        System.out.println("empNo = " + empNo);
-//        System.out.println("title = " + title);
-//        System.out.println("apvBusinessTripList = " + apvBusinessTripList);
-//        log.info("[ApprovalService] selectWriteApvStatusApvList --------------- end ");
-//        return apvBusinessTripList.stream().map(apvForm -> modelMapper.map(apvForm, ApvFormDTO.class)).collect(Collectors.toList());
-//    }
-//
-
-//
-//    /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
+    /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
     @Transactional
     public Boolean insertApvCorpCard(ApvFormWithLinesDTO apvFormWithLinesDTO) {
         log.info("[ApprovalService] insertApvCorpCard --------------- start ");
         log.info("[ApprovalHrmService] Exp7 insertApvCorpCard {}", apvFormWithLinesDTO);
 
         try {
+            // ApvFormWithLinesDTO에서 필요한 데이터 추출
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvCorpCardDTO> apvCorpCardDTO = apvFormDTO.getApvCorpCards();
-
             List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
+            // ApvFormMain과 ApvForm 생성 및 저장
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+            apvFormMain = apvFormMainRepository.save(apvFormMain);
+            Long apvNo = apvFormMain.getApvNo();
 
-            ApvFormMain savedApvForm = apvFormMainRepository.save(apvFormMain);
-            apvForm.setApvNo(savedApvForm.getApvNo());
-
-            apvCorpCardDTO.forEach(apvCorpCard -> apvCorpCard.setApvNo(savedApvForm.getApvNo()));
-
+            // ApvCorpCardDTO를 ApvCorpCard 엔티티로 매핑하고 ApvNo 설정
             List<ApvCorpCard> apvCorpCardList = apvCorpCardDTO.stream()
-                    .map(item -> {
-                        ApvCorpCard apvCorpCard = modelMapper.map(item, ApvCorpCard.class);
-                        apvCorpCard.setApvNo(savedApvForm.getApvNo());
+                    .map(dto -> {
+                        ApvCorpCard apvCorpCard = modelMapper.map(dto, ApvCorpCard.class);
+                        apvCorpCard.setApvNo(apvNo);
+//                    apvCorpCard.getApvForm().setApvNo(apvNo);
                         return apvCorpCard;
                     })
                     .collect(Collectors.toList());
 
-            List<ApvCorpCard> savedApvCorpCardList = apvCorpCardRepository.saveAll(apvCorpCardList);
+            // ApvCorpCard 엔티티를 저장
+            apvCorpCardList = apvCorpCardRepository.saveAll(apvCorpCardList);
 
-            IntStream.range(0, apvForm.getApvCorpCards().size())
-                    .forEach(i -> {
-                        ApvCorpCard apvCorpCardToUpdate = apvForm.getApvCorpCards().get(i);
-                        apvCorpCardToUpdate.setApvNo(savedApvCorpCardList.get(i).getApvNo());
-                        apvForm.getApvCorpCards().set(i, apvCorpCardToUpdate);
-                    });
+            // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
+            List<ApvLine> apvLineList = apvLineDTO.stream()
+                    .map(dto -> {
+                        ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
+                        apvLine.setApvNo(apvNo);
+                        return apvLine;
+                    })
+                    .collect(Collectors.toList());
 
-            apvLineDTO.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
-
-            List<ApvLine> apvLineList = apvLineDTO.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+            // ApvFormMain에 ApvLines 설정
             apvFormMain.setApvLines(apvLineList);
 
             // 승인 상태 확인 후 결재 상태 변경
-            int approved = apvLineRepository.apvNoAllApproved(apvFormMain.getApvNo());
-            if (approved == 0) {
-                apvFormRepository.updateApvStatusToCompleted(apvFormMain.getApvNo());
+            if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
+                apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
-            log.info("[ApprovalService] Exp6 insertApvCorpCard --------------- end ");
+
+            log.info("[ApprovalService] Exp7 insertApvCorpCard --------------- end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error Exp6 insertApvCorpCard : " + e.getMessage());
+            log.error("[ApprovalService] Error Exp7 insertApvCorpCard : " + e.getMessage());
             return false;
         }
     }
