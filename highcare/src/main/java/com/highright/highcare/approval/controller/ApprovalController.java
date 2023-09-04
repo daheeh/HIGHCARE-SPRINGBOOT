@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/approval")
@@ -218,10 +220,13 @@ public class ApprovalController {
 
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping("/insert/biz1")
-    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
+    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestPart("apvFormWithLinesDTO") ApvFormWithLinesDTO apvFormWithLinesDTO,
+                                                              @RequestPart("apvFileDTOs") List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+        System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormWithLinesDTO);
+        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
+        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormWithLinesDTO, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
@@ -415,10 +420,15 @@ public class ApprovalController {
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @PostMapping("/insert/hrm1")
-    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
-        System.out.println("hrm1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                         @RequestPart("apvFileDTOs") List<MultipartFile> apvFileDTO) {
+        System.out.println("hrm1 apvFormWithLinesDTO = " + apvFormDTO);
+        System.out.println("hrm1 apvFormWithLinesDTO = " + apvLineDTOs);
+        System.out.println("hrm1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormWithLinesDTO);
+        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
+        Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormDTO, apvLineDTOs, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();

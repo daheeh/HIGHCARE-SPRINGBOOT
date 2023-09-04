@@ -6,6 +6,7 @@ import com.highright.highcare.approval.entity.*;
 import com.highright.highcare.approval.repository.*;
 import com.highright.highcare.common.Criteria;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -314,23 +323,52 @@ public class ApprovalService {
     @Value("${file.base-url}")
     private String FILE_URL;
 
+
     // 파일 첨부
-
-    public List<ApvFile> insertFiles(Long apvNo, List<ApvFileDTO> apvFileDTOList) {
-
+    @Transactional
+    public List<ApvFile> insertFiles(Long apvNo, List<MultipartFile> apvFileDTO) {
+        System.out.println("insertFiles =============================== ");
+        System.out.println("apvFileDTO = " + apvFileDTO);
         List<ApvFile> apvFiles = new ArrayList<>();
+        System.out.println("apvFiles = " + apvFiles);
 
-        for (ApvFileDTO apvFileDTO : apvFileDTOList) {
-            String fileName = UUID.randomUUID().toString().replace("-", "");
-
-            ApvFile apvFile = new ApvFile();
-            apvFile.setApvNo(apvNo);
-            apvFile.setOriginalFileName(apvFileDTO.getOriginalFileName());
-            apvFile.setSavedFileName(fileName);
-            apvFile.setFileUrl(FILE_URL + fileName);
-            apvFiles.add(apvFileRepository.save(apvFile));
+        // 디렉터리가 존재하지 않으면 필요시 생성합니다.
+        File directory = new File(FILE_DIR);
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
+        System.out.println("directory = " + directory);
+
+        for (MultipartFile multipartFile : apvFileDTO) {
+            try {
+                // 고유한 파일 이름을 생성
+                String fileName = UUID.randomUUID().toString().replace("-", "") + "_" + multipartFile.getOriginalFilename();
+
+                // 파일이 저장될 경로를 정의
+                String filePath = FILE_DIR + File.separator + fileName;
+
+                // 서버에 새 파일을 생성
+                File file = new File(filePath);
+
+                // 파일을 저장
+                multipartFile.transferTo(file);
+
+                // ApvFile 객체를 생성하고 필요한 정보를 설정
+                ApvFile apvFile = new ApvFile();
+                apvFile.setApvNo(apvNo);
+                apvFile.setOriginalFileName(multipartFile.getOriginalFilename());
+                apvFile.setSavedFileName(fileName);
+                apvFile.setFileUrl(FILE_URL + fileName);
+                apvFiles.add(apvFile); // 데이터베이스 삽입을 위해 ApvFile 객체를 리스트에 추가
+
+                System.out.println("apvFiles1111111111111 = " + apvFiles);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("apvFiles222222222222222222 = " + apvFiles);
         return apvFiles;
     }
-
 }
+

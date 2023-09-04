@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import java.util.stream.IntStream;
 public class ApprovalHrmService {
 
     private final ModelMapper modelMapper;
+    private final ApprovalService approvalService;
     private final ApvFormMainRepository apvFormMainRepository;
     private final ApvFormRepository apvFormRepository;
     private final ApvLineRepository apvLineRepository;
@@ -27,6 +29,7 @@ public class ApprovalHrmService {
 
     @Autowired
     public ApprovalHrmService(ModelMapper modelMapper,
+                              ApprovalService approvalService,
                               ApvFormMainRepository apvFormMainRepository,
                               ApvFormRepository apvFormRepository,
                               ApvLineRepository apvLineRepository,
@@ -34,6 +37,7 @@ public class ApprovalHrmService {
                               ApvIssuanceRepository apvIssuanceRepository
     ) {
         this.modelMapper = modelMapper;
+        this.approvalService = approvalService;
         this.apvFormMainRepository = apvFormMainRepository;
         this.apvFormRepository = apvFormRepository;
         this.apvLineRepository = apvLineRepository;
@@ -45,15 +49,17 @@ public class ApprovalHrmService {
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @Transactional
-    public Boolean insertApvVacation(ApvFormWithLinesDTO apvFormWithLinesDTO) {
+    public Boolean insertApvVacation(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
         log.info("[ApprovalHrmService] hrm1-insertApvVacation --------------- start ");
-        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFormDTO);
+        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvLineDTOs);
+        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFileDTO);
 
         try {
             // ApvFormWithLinesDTO에서 필요한 데이터 추출
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
+//            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvVacationDTO> apvVacationDTO = apvFormDTO.getApvVacations();
-            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
+//            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
             // ApvFormMain을 저장하고 생성된 ApvNo를 가져오기
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
@@ -65,7 +71,6 @@ public class ApprovalHrmService {
                     .map(item -> {
                         ApvVacation apvVacation = modelMapper.map(item, ApvVacation.class);
                         apvVacation.setApvNo(apvNo);
-//                        apvVacation.getApvForm().setApvNo(apvNo);
                         return apvVacation;
                     })
                     .collect(Collectors.toList());
@@ -74,7 +79,7 @@ public class ApprovalHrmService {
             apvVacationList = apvVacationRepository.saveAll(apvVacationList);
 
             // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo를 설정
-            List<ApvLine> apvLineList = apvLineDTO.stream()
+            List<ApvLine> apvLineList = apvLineDTOs.stream()
                     .map(dto -> {
                         ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
                         apvLine.setApvNo(apvNo);
@@ -82,8 +87,15 @@ public class ApprovalHrmService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvLine 엔티티를 ApvFormMain에 설정
+            // 첨부파일 등록을 위해 서비스로 DTO전달
+            List<ApvFile> apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            System.out.println("apvFiles = " + apvFiles);
+
+
+            // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
             apvFormMain.setApvLines(apvLineList);
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFormMain = " + apvFormMain);
 
             // 승인 상태를 확인하고 업데이트
             if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {

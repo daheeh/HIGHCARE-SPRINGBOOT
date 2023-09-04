@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class ApprovalBizService {
 
     /* 전자결재 - 업무: biz1 기안서 */
     @Transactional
-    public Boolean insertApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
+    public Boolean insertApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO, List<MultipartFile> apvFileDTO) {
         log.info("[ApprovalService] biz1-insertApvForm --------------- 시작 ");
         log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
@@ -63,7 +64,6 @@ public class ApprovalBizService {
             // ApvFormWithLinesDTO에서 필요한 데이터 추출
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvLineDTO> apvLineDTOList = apvFormWithLinesDTO.getApvLineDTOs();
-            List<ApvFileDTO> apvFileDTOList = apvFormDTO.getApvFiles();
 
             // ApvForm 생성 및 저장
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
@@ -75,10 +75,13 @@ public class ApprovalBizService {
 
             // ApvLines 설정
             savedApvForm.setApvLines(apvLineList);
+            System.out.println("apvLineList = " + apvLineList);
 
             // 첨부파일 등록을 위해 서비스로 DTO전달
-            List<ApvFile> apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTOList);
+            List<ApvFile> apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTO);
             savedApvForm.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+
 
             // 승인 상태 확인 후 결재 상태 변경
             int approved = apvLineRepository.apvNoAllApproved(savedApvForm.getApvNo());
