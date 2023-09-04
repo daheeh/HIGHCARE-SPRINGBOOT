@@ -108,6 +108,10 @@ public class ApvForm {
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private List<ApvFile> apvFiles = new ArrayList<>();
+
     public void getEmployee() {
         if (apvEmployee != null) {
             this.empName = apvEmployee.getName();

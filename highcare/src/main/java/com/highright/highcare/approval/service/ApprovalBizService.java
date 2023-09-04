@@ -8,6 +8,7 @@ import com.highright.highcare.pm.entity.PmEmployee;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,27 +16,27 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
 @Slf4j
 public class ApprovalBizService {
-    private final ApvFormMainRepository apvFormMainRepository;
 
+    private final ModelMapper modelMapper;
+    private final ApprovalService approvalService;
+    private final ApvFormMainRepository apvFormMainRepository;
     private final ApvFormRepository apvFormRepository;
     private final ApvLineRepository apvLineRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
 
-    private final ModelMapper modelMapper;
+
 
     @Autowired
     public ApprovalBizService(ModelMapper modelMapper,
+                              ApprovalService approvalService,
                               ApvFormMainRepository apvFormMainRepository,
                               ApvFormRepository apvFormRepository,
                               ApvLineRepository apvLineRepository,
@@ -43,6 +44,7 @@ public class ApprovalBizService {
                               ApvBusinessTripRepository apvBusinessTripRepository
     ) {
         this.modelMapper = modelMapper;
+        this.approvalService = approvalService;
         this.apvFormMainRepository = apvFormMainRepository;
         this.apvFormRepository = apvFormRepository;
         this.apvLineRepository = apvLineRepository;
@@ -61,6 +63,7 @@ public class ApprovalBizService {
             // ApvFormWithLinesDTO에서 필요한 데이터 추출
             ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvLineDTO> apvLineDTOList = apvFormWithLinesDTO.getApvLineDTOs();
+            List<ApvFileDTO> apvFileDTOList = apvFormDTO.getApvFiles();
 
             // ApvForm 생성 및 저장
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
@@ -72,6 +75,10 @@ public class ApprovalBizService {
 
             // ApvLines 설정
             savedApvForm.setApvLines(apvLineList);
+
+            // 첨부파일 등록을 위해 서비스로 DTO전달
+            List<ApvFile> apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTOList);
+            savedApvForm.setApvFiles(apvFiles);
 
             // 승인 상태 확인 후 결재 상태 변경
             int approved = apvLineRepository.apvNoAllApproved(savedApvForm.getApvNo());
