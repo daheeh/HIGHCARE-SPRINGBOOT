@@ -2,6 +2,7 @@ package com.highright.highcare.admin.controller;
 
 
 import com.highright.highcare.admin.dto.RequestMemberDTO;
+import com.highright.highcare.admin.dto.UpdateAccountDTO;
 import com.highright.highcare.admin.service.AdminService;
 import com.highright.highcare.common.ResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -37,20 +38,41 @@ public class AdminController {
 
     // 인서트 회원신청
     @PostMapping("/memberjoin")
-    public ResponseEntity<ResponseDTO> insertMember(@RequestBody RequestMemberDTO requestMemberDTO){
-        log.info("[AdminController] insertMember requestMemberDTO===={}", requestMemberDTO);
+    public ResponseEntity<ResponseDTO> insertAccount(@RequestBody RequestMemberDTO requestMemberDTO){
+        log.info("[AdminController] insertAccount requestMemberDTO===={}", requestMemberDTO);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "회원등록 신청", adminService.insertMember(requestMemberDTO)));
+                "회원 등록 신청", adminService.insertAccount(requestMemberDTO)));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/memberlist")
-    public ResponseEntity<ResponseDTO> selectMemberList(){
+    public ResponseEntity<ResponseDTO> selectAccountList(){
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "전체회원조회", adminService.selectMemberList()));
+                "전체 회원 조회", adminService.selectAccountList()));
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PutMapping("/member")
+    public ResponseEntity<ResponseDTO> updateAccount( @RequestBody UpdateAccountDTO updateAccountDTO){
+
+        log.info("[AdminController] updateAccount updateAccountDTO===={}", updateAccountDTO);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "회원 계정상태 수정", adminService.updateAccount(updateAccountDTO)));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/member/{id}")
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id){
+        log.info("[AdminController] updateAccount id===={}", id);
+
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "회원 삭제(탈퇴)", adminService.deleteAccount(id)));
+    }
+
 
 
 

@@ -1,11 +1,17 @@
 package com.highright.highcare.admin.service;
 
 import com.highright.highcare.admin.dto.RequestMemberDTO;
+import com.highright.highcare.admin.dto.UpdateAccountDTO;
 
 public interface AdminService {
     Object selectMember(int empNo);
 
-    Object insertMember(RequestMemberDTO requestMemberDTO);
+    Object insertAccount(RequestMemberDTO requestMemberDTO);
 
-    Object selectMemberList();
+    Object selectAccountList();
+
+
+    Object deleteAccount(String id);
+
+    Object updateAccount(UpdateAccountDTO updateAccountDTO);
 }

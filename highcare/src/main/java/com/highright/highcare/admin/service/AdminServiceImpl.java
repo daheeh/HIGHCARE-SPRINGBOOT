@@ -1,8 +1,8 @@
 package com.highright.highcare.admin.service;
 
 import com.highright.highcare.admin.dto.ADMAccountDTO;
-import com.highright.highcare.admin.dto.ADMAuthAccountDTO;
 import com.highright.highcare.admin.dto.RequestMemberDTO;
+import com.highright.highcare.admin.dto.UpdateAccountDTO;
 import com.highright.highcare.admin.entity.ADMAccount;
 import com.highright.highcare.admin.entity.ADMAuthAccount;
 import com.highright.highcare.admin.entity.ADMAuthAccountId;
@@ -10,13 +10,11 @@ import com.highright.highcare.admin.repository.ADMAccountRepository;
 import com.highright.highcare.admin.repository.ADMAuthAccountRepository;
 import com.highright.highcare.admin.repository.ADMEmployeeRepository;
 import com.highright.highcare.auth.dto.AccountDTO;
-import com.highright.highcare.auth.entity.AUTHAccount;
 import com.highright.highcare.auth.entity.AUTHEmployee;
 import com.highright.highcare.common.AdminCustomBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     @Override
-    public Object insertMember(RequestMemberDTO requestMemberDTO) {
+    public Object insertAccount(RequestMemberDTO requestMemberDTO) {
 
         // 일반계정 등록 -> 계정별권한(임시회원) 까지만 진행됨(이후 절차는 회원등록 승인 후)
         log.info("[AdminServiceImpl] insertMember ===== start " );
@@ -97,12 +95,10 @@ public class AdminServiceImpl implements AdminService {
             return "회원 임시등록 실패";
         }
 
-
-
     }
 
     @Override
-    public Object selectMemberList() {
+    public Object selectAccountList() {
 
         List<ADMAccount> authAccountList = admAccountRepository.findAll();
 
@@ -113,4 +109,18 @@ public class AdminServiceImpl implements AdminService {
 
         return accountDTOList;
     }
+
+
+
+    @Override
+    public Object deleteAccount(String id) {
+        return null;
+    }
+
+    @Override
+    public Object updateAccount(UpdateAccountDTO updateAccountDTO) {
+        return null;
+    }
+
+
 }
