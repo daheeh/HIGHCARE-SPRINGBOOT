@@ -23,7 +23,7 @@ public class OAuthController {
     private final OAuthService oAuthService;
 
     // 소셜로그인 연동 신청
-    @PreAuthorize("hasAnyRole('USER')")
+//    @PreAuthorize("hasAnyRole('USER')")
     @PostMapping("/api/oauth/regist")
     public ResponseEntity<ResponseDTO> insertOauthRegist(@RequestBody Map<String, Object> data, HttpServletResponse response){
         log.info("[OAuthController] insertOauthRegist data====  {} ", data);

@@ -6,4 +6,6 @@ public interface AdminService {
     Object selectMember(int empNo);
 
     Object insertMember(RequestMemberDTO requestMemberDTO);
+
+    Object selectMemberList();
 }
