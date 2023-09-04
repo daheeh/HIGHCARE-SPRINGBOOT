@@ -8,6 +8,7 @@ import com.highright.highcare.common.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -28,6 +27,7 @@ public class ApprovalService {
     private final ApvFormRepository apvFormRepository;
     private final ApvFormMainRepository apvFormMainRepository;
     private final ApvLineRepository apvLineRepository;
+    private final ApvFileRepository apvFileRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
     private final ApvExpFormRepository apvExpFormRepository;
@@ -39,6 +39,7 @@ public class ApprovalService {
                            ApvFormRepository apvFormRepository,
                            ApvFormMainRepository apvFormMainRepository,
                            ApvLineRepository apvLineRepository,
+                           ApvFileRepository apvFileRepository,
                            ApvMeetingLogRepository apvMeetingLogRepository,
                            ApvBusinessTripRepository apvBusinessTripRepository,
                            ApvExpFormRepository apvExpFormRepository
@@ -47,10 +48,12 @@ public class ApprovalService {
         this.apvFormRepository = apvFormRepository;
         this.apvFormMainRepository = apvFormMainRepository;
         this.apvLineRepository = apvLineRepository;
+        this.apvFileRepository = apvFileRepository;
         this.apvMeetingLogRepository = apvMeetingLogRepository;
         this.apvBusinessTripRepository = apvBusinessTripRepository;
         this.apvExpFormRepository = apvExpFormRepository;
     }
+
 
     /* Apv메인페이지 - 조건별 현황 */
     public Map<String, Integer> selectApvMainCount(int empNo) {
@@ -303,4 +306,31 @@ public class ApprovalService {
         log.info("[ApprovalService] searchApvFormWithLines --------------- end ");
         return apvFormDTO;
     }
+
+
+    /* 파일 저장 할 위치 및 응답 할 주소 */
+    @Value("${file.upload-dir}")
+    private String FILE_DIR;
+    @Value("${file.base-url}")
+    private String FILE_URL;
+
+    // 파일 첨부
+
+    public List<ApvFile> insertFiles(Long apvNo, List<ApvFileDTO> apvFileDTOList) {
+
+        List<ApvFile> apvFiles = new ArrayList<>();
+
+        for (ApvFileDTO apvFileDTO : apvFileDTOList) {
+            String fileName = UUID.randomUUID().toString().replace("-", "");
+
+            ApvFile apvFile = new ApvFile();
+            apvFile.setApvNo(apvNo);
+            apvFile.setOriginalFileName(apvFileDTO.getOriginalFileName());
+            apvFile.setSavedFileName(fileName);
+            apvFile.setFileUrl(FILE_URL + fileName);
+            apvFiles.add(apvFileRepository.save(apvFile));
+        }
+        return apvFiles;
+    }
+
 }
