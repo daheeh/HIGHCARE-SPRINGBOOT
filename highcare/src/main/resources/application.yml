@@ -10,8 +10,8 @@ spring:
   servlet:
     multipart:
       enabled: true
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 30MB
+      max-request-size: 30MB
   web:
     resources:
       static-locations: classpath:/images/
@@ -94,7 +94,10 @@ jwt:
 image:
   add-resource-locations: classpath:/static/images/
   add-resource-handler: /images/**
-
-  image-dir: src/main/resources/static/images
+  image-dir: C:/dev/profileImages/
   image-url: http://localhost:8080/images/
+
+#  image-dir: src/main/resources/static/images
+#image:
+
 

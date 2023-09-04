@@ -41,9 +41,10 @@ public class MypageService {
     private final ModelMapper modelMapper;
 
     /* 이미지 저장 할 위치 및 응답 할 이미지 주소 */
-    @Value("${image.image-dir}")
+//    @Value("file:C:/dev/profileImages/")
+    @Value("C:/dev/profileImages/")
     private String IMAGE_DIR;
-    @Value("${image.image-url}")
+    @Value("http://localhost:8080/images/")
     private String IMAGE_URL;
 
     @Autowired
@@ -87,11 +88,15 @@ public class MypageService {
         try {
             // 기존 데이터 조회
             Optional<MyProfileFile> existingProfileFileOptional = myProfileFileRepository.findByCode(myProfileFileDTO.getCode());
+
+            System.out.println("existingProfileFileOptional =============== " + existingProfileFileOptional);
             if (existingProfileFileOptional.isPresent()) {
                 MyProfileFile existingProfileFile = existingProfileFileOptional.get();
 
                 String imageName = UUID.randomUUID().toString().replace("-", "");
                 String replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, profileImage);
+//                String imgUrl = saveProfileImageAndGetUrl(profileImage);
+//                myProfileFileDTO.setProfileImgUrl(imgUrl);
 
                 // 기존 데이터 업데이트
                 // set은 내가 디티오 엔티티에 정해준 이름, getOriginalFilename은 메소드가  정의되어있어서 getOriginalFilename를 하면
@@ -99,13 +104,18 @@ public class MypageService {
                 existingProfileFile.setName(profileImage.getOriginalFilename());
                 existingProfileFile.setChName(replaceFileName);
                 existingProfileFile.setDate(new Date(System.currentTimeMillis())); // 현재 시간 등록 (이 부분은 필요에 따라 수정)
+                // url 저장 코드 추가
+                String imageUrl = IMAGE_URL + replaceFileName;
+                existingProfileFile.setProfileImgUrl(imageUrl);
 
-                myProfileFileRepository.save(existingProfileFile);
+                existingProfileFile = myProfileFileRepository.save(existingProfileFile);
 
                 log.info("ProfileService update 이미지 oname : {}", profileImage.getOriginalFilename());
                 log.info("ProfileService update 이미지 name : {}", replaceFileName);
+                MyProfileFileDTO result = modelMapper.map(existingProfileFile, MyProfileFileDTO.class);
+                System.out.println("result = " + result);
 
-                return myProfileFileDTO;
+                return result;
 
             } else {
                 throw new RuntimeException("해당 코드의 프로필 파일을 찾을 수 없습니다.");
@@ -115,6 +125,7 @@ public class MypageService {
             throw new RuntimeException("파일 업데이트 실패");
         }
     }
+
 
     @Transactional
     public Object selectAnnList(int empNo) {

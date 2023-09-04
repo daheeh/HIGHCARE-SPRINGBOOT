@@ -1,5 +1,6 @@
 ### 프로필 회원아이디로 조회
-GET http://localhost:8080/api/mypage/profile/10002
+GET http://localhost:8080/api/mypage/profile/10001
+
 Accept: */*
 
 

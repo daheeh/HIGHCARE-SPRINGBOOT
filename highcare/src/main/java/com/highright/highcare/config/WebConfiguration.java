@@ -25,6 +25,9 @@ public class WebConfiguration implements WebMvcConfigurer {
         // 이미지 경로 매핑
         registry.addResourceHandler(ADD_RESOURCE_HANDLER)
                 .addResourceLocations(ADD_RESOURCE_LOCATION);
+
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:C:/dev/profileImages/");
     }
 
 
