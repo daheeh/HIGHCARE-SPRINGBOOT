@@ -300,7 +300,7 @@ public class ApprovalController {
 
 
 
-//    /* 전자결재 - 지출 : exp1 지출결의서 */
+    //    /* 전자결재 - 지출 : exp1 지출결의서 */
     @PostMapping("/insert/exp1")
     public ResponseEntity<ResponseDTO> insertApvExpense(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
 
@@ -320,33 +320,40 @@ public class ApprovalController {
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 
-//
-//    /* 전자결재 - 지출 : exp2 지출결의서 */
-//    @PostMapping("/insert/exp2")
-//    public ResponseEntity<ResponseDTO> insertApvExpense2(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormWithLinesDTO)));
-//    }
-//
+
+    /* 전자결재 - 지출 : exp2 지출결의서 */
+    @PostMapping("/insert/exp2")
+    public ResponseEntity<ResponseDTO> insertApvExpense2(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormWithLinesDTO)));
+    }
+
 
 
     /* 전자결재 - 지출 : exp4 출장경비정산서 */
-//    @GetMapping("/search/exp4")
-//    public ResponseEntity<ResponseDTO> selectApvBusinessTripExp(@RequestParam int empNo, @RequestParam String title){
-//        List<ApvFormDTO> apvBusinessTripList = approvalExpService.selectApvBusinessTripExp(empNo, title);
-//
-//        if(apvBusinessTripList.isEmpty()){
-//            return ResponseEntity
-//                    .ok()
-//                    .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
-//        }
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(),  "작성 기안 상태 조회 성공" , apvBusinessTripList));
-//    }
+    @GetMapping("/search/exp4/{empNo}")
+    public ResponseEntity<ResponseDTO> selectApvBusinessTrip(@PathVariable int empNo) {
+        System.out.println("exp4-searchApvFormWithLines = " + empNo);
+
+        ApvFormMainDTO serviceResponse = approvalBizService.selectApvBusinessTrip(empNo);
+
+        if (serviceResponse == null) {
+            statusCode = HttpStatus.NOT_FOUND.value();
+            responseMessage = "ApvForm not found with apvNo: " + empNo;
+            return ResponseEntity
+                    .status(statusCode)
+                    .body(new ResponseDTO(statusCode, responseMessage, null));
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "조회 성공";
+            return ResponseEntity
+                    .status(statusCode)
+                    .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+        }
+    }
+
     @PostMapping("/insert/exp4")
     public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){
 

@@ -206,6 +206,7 @@ public class ApprovalService {
                     .map(item -> {
                         ApvExpForm expForm = modelMapper.map(item, ApvExpForm.class);
                         expForm.setApvNo(updateApvForm.getApvNo());
+//                        expForm.getApvForm().setApvNo(updateApvForm.getApvNo());
                         return expForm;
                     })
                     .collect(Collectors.toList());
@@ -217,6 +218,7 @@ public class ApprovalService {
                         ApvExpForm apvExpFormToUpdate = apvForm.getApvExpForms().get(i);
                         apvExpFormToUpdate.setItemsNo(savedExpFormList.get(i).getItemsNo());
                         apvExpFormToUpdate.setApvNo(savedExpFormList.get(i).getApvNo());
+//                        apvExpFormToUpdate.getApvForm().setApvNo(savedExpFormList.get(i).getApvForm().getApvNo());
                         apvForm.getApvExpForms().set(i, apvExpFormToUpdate);
                     });
 
@@ -285,7 +287,7 @@ public class ApprovalService {
     // 기안 조회
 
     public ApvFormDTO searchApvFormWithLines(Long apvNo) {
-        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- start ");
+        log.info("[ApprovalService] searchApvFormWithLines --------------- start ");
 
         ApvForm apvForm = apvFormRepository.findByApvNo(apvNo);
         apvForm.getApvLines().forEach(ApvLine::getEmployee);
@@ -297,11 +299,8 @@ public class ApprovalService {
         }
 
         ApvFormDTO apvFormDTO = modelMapper.map(apvForm, ApvFormDTO.class);
-
-
         System.out.println("apvFormDTO = " + apvFormDTO);
-
-        log.info("[ApprovalService] biz1-searchApvFormWithLines --------------- end ");
+        log.info("[ApprovalService] searchApvFormWithLines --------------- end ");
         return apvFormDTO;
     }
 }

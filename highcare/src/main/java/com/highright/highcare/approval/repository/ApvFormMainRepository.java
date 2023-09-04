@@ -84,8 +84,10 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
         "AND AL.ISAPPROVAL =:isApproval " , nativeQuery = true)
     int countByEmpNoAndIsApprovalReceive(@Param("empNo")int empNo, @Param("isApproval")String isApproval);
 
-
-
-
-
+    // 출장신청서 조회
+    @Query(value = "SELECT BT.* FROM TBL_APV_BUSINESS_TRIP BT " +
+            "JOIN TBL_APV_FORM AF ON AF.APV_NO = BT.APV_NO " +
+            "WHERE AF.EMP_NO = :empNo " +
+            "AND AF.TITLE='출장신청서'", nativeQuery = true)
+    ApvFormMain findByEmpNo(@Param("empNo") int empNo);
 }
