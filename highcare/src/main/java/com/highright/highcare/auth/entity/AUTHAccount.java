@@ -1,5 +1,7 @@
 package com.highright.highcare.auth.entity;
 
+import com.highright.highcare.admin.entity.ADMAuthAccount;
+import com.highright.highcare.admin.entity.AccessManager;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,6 +34,11 @@ public class AUTHAccount {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="ID")
     private List<AUTHAuthAccount> roleList;
+
+
+//    @OneToOne
+//    @JoinColumn(name="ID", insertable = false, updatable = false)
+//    private AccessManager accessManager;
 
 
 

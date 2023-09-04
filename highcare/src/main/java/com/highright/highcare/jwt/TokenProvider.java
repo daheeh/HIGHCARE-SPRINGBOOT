@@ -33,9 +33,9 @@ public class TokenProvider {
     private final Key key;     // access 토큰 전용 시크릿키
 
 //    @Value("${jwt.expire-time}")
-    public static long ACCESS_TOKEN_EXPIRE_TIME = 360000;   // 0.1시간
+    public static long ACCESS_TOKEN_EXPIRE_TIME = 3600000/2;   // 30분
 //    @Value("${jwt.refresh-expire-time}")
-    public static long REFRESH_TOKEN_EXPIRE_TIME = 3600000;    // 1시간
+    public static long REFRESH_TOKEN_EXPIRE_TIME = 36000000;    // 10시간
 
 
     private final UserDetailsService userDetailsService;

@@ -1,5 +1,7 @@
 package com.highright.highcare.admin.service;
 
+import com.highright.highcare.admin.dto.ADMAccountDTO;
+import com.highright.highcare.admin.dto.ADMAuthAccountDTO;
 import com.highright.highcare.admin.dto.RequestMemberDTO;
 import com.highright.highcare.admin.entity.ADMAccount;
 import com.highright.highcare.admin.entity.ADMAuthAccount;
@@ -8,16 +10,20 @@ import com.highright.highcare.admin.repository.ADMAccountRepository;
 import com.highright.highcare.admin.repository.ADMAuthAccountRepository;
 import com.highright.highcare.admin.repository.ADMEmployeeRepository;
 import com.highright.highcare.auth.dto.AccountDTO;
+import com.highright.highcare.auth.entity.AUTHAccount;
 import com.highright.highcare.auth.entity.AUTHEmployee;
 import com.highright.highcare.common.AdminCustomBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -93,5 +99,18 @@ public class AdminServiceImpl implements AdminService {
 
 
 
+    }
+
+    @Override
+    public Object selectMemberList() {
+
+        List<ADMAccount> authAccountList = admAccountRepository.findAll();
+
+        log.info("[AdminServiceImpl] selectMemberList authAccountList ==={}", authAccountList);
+        List<ADMAccountDTO> accountDTOList = authAccountList.stream().map(account -> modelMapper.map(account, ADMAccountDTO.class)).collect(Collectors.toList());
+        log.info("[AdminServiceImpl] selectMemberList accountDTOList ==={}", accountDTOList);
+
+
+        return accountDTOList;
     }
 }
