@@ -259,20 +259,29 @@ public class ApprovalBizService {
     }
 
     /* 전자결재 - 업무 : biz3 출장신청서 조회 */
-    public ApvFormMainDTO selectApvBusinessTrip(int empNo) {
+    public List<ApvBusinessTripDTO> selectApvBusinessTrip(int empNo) {
         log.info("[ApprovalService] biz3-searchApvFormWithLines --------------- start ");
 
-        ApvFormMain apvFormMain = apvFormMainRepository.findByEmpNo(empNo);
+        List<ApvBusinessTrip> apvBusinessTripList = apvBusinessTripRepository.findByEmpNo(empNo);
 
-        if (apvFormMain == null) {
-            log.error("[ApprovalService] Error: ApvForm not found with empNo {}", empNo);
+        if (apvBusinessTripList == null || apvBusinessTripList.isEmpty()) {
+            log.error("[ApprovalService] Error: ApvBusinessTrip not found with empNo {}", empNo);
             return null;
         }
 
-        ApvFormMainDTO apvFormMainDTO = modelMapper.map(apvFormMain, ApvFormMainDTO.class);
-        System.out.println("apvFormDTO = " + apvFormMainDTO);
-        log.info("[ApprovalService] biz3-searchApvFormWithLines --------------- end ");
-        return apvFormMainDTO;
+        // DTO 객체를 저장할 빈 목록을 생성
+        List<ApvBusinessTripDTO> apvBusinessTripDTOList = new ArrayList<>();
+
+        // 엔터티 목록을 순회하고 각각의 엔터티를 DTO로 변환하여 목록에 추가
+        for (ApvBusinessTrip apvBusinessTrip : apvBusinessTripList) {
+            ApvBusinessTripDTO apvBusinessTripDTO = modelMapper.map(apvBusinessTrip, ApvBusinessTripDTO.class);
+            apvBusinessTripDTOList.add(apvBusinessTripDTO);
+        }
+        System.out.println("apvBusinessTripDTOList = " + apvBusinessTripDTOList);
+        log.info("[ApprovalService] biz3-searchApvFormWithLines --------------- 끝 ");
+
+        // DTO 객체들의 목록을 반환
+        return apvBusinessTripDTOList;
     }
 }
 

@@ -62,9 +62,6 @@ public class ApvForm {
     @Transient
     private String jobName;
 
-
-
-
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
     private ApvEmployee apvEmployee;

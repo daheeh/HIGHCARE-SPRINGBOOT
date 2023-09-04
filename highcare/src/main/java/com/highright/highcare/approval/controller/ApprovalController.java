@@ -1,9 +1,6 @@
 package com.highright.highcare.approval.controller;
 
-import com.highright.highcare.approval.dto.ApvFormDTO;
-import com.highright.highcare.approval.dto.ApvFormMainDTO;
-import com.highright.highcare.approval.dto.ApvFormWithLinesDTO;
-import com.highright.highcare.approval.dto.ApvLineDTO;
+import com.highright.highcare.approval.dto.*;
 import com.highright.highcare.approval.entity.ApvForm;
 import com.highright.highcare.approval.service.ApprovalBizService;
 import com.highright.highcare.approval.service.ApprovalExpService;
@@ -337,11 +334,11 @@ public class ApprovalController {
     public ResponseEntity<ResponseDTO> selectApvBusinessTrip(@PathVariable int empNo) {
         System.out.println("exp4-searchApvFormWithLines = " + empNo);
 
-        ApvFormMainDTO serviceResponse = approvalBizService.selectApvBusinessTrip(empNo);
+        List<ApvBusinessTripDTO> serviceResponse = approvalBizService.selectApvBusinessTrip(empNo);
 
-        if (serviceResponse == null) {
+        if (serviceResponse == null || serviceResponse.isEmpty()) {
             statusCode = HttpStatus.NOT_FOUND.value();
-            responseMessage = "ApvForm not found with apvNo: " + empNo;
+            responseMessage = "ApvForm not found with empNo: " + empNo;
             return ResponseEntity
                     .status(statusCode)
                     .body(new ResponseDTO(statusCode, responseMessage, null));
@@ -353,6 +350,7 @@ public class ApprovalController {
                     .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
         }
     }
+
 
     @PostMapping("/insert/exp4")
     public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO){

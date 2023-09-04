@@ -28,10 +28,9 @@ public interface ApvFormRepository extends JpaRepository<ApvForm, Long> {
 
     @Modifying
     @Query(value = "UPDATE TBL_APV_LINE AL " +
-                    "SET AL.ISAPPROVAL = 'F' " +
-                    "WHERE AL.APV_NO = :apvNo " +
-                    "AND AL.ISAPPROVAL <> 'F'", nativeQuery = true)
+            "SET AL.ISAPPROVAL = 'F' " +
+            "WHERE AL.APV_NO = :apvNo " +
+            "AND AL.ISAPPROVAL <> 'F'", nativeQuery = true)
     void updateIsApprovalToFalse(@Param("apvNo") Long apvNo);
-
 
 }
