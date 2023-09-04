@@ -38,5 +38,18 @@ public class ReservationController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "시설추가 성공", resService.insertRes(resourceDTO, image)));
     }
+    @GetMapping("/resList")
+    public ResponseEntity<ResponseDTO> selectRes(@RequestParam(name = "categoryCode") String code) {
+        int categoryCode = Integer.parseInt(code);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "시설 지역 조회 성공", resService.selectRes(categoryCode)));
+    }
+
+    @GetMapping("content")
+    public ResponseEntity<ResponseDTO> selectContent(@RequestParam(name = "resourceCode") int resourceCode){
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "시설 조회 성공", resService.selectContent(resourceCode)));
+
+    }
+
 
     }

@@ -4,6 +4,7 @@ import com.highright.highcare.reservation.dto.ResourceCategoryDTO;
 import com.highright.highcare.reservation.dto.ResourceDTO;
 import com.highright.highcare.reservation.dto.ResourceFileDTO;
 import com.highright.highcare.reservation.entity.Resource;
+import com.highright.highcare.reservation.entity.ResourceArea;
 import com.highright.highcare.reservation.entity.ResourceCategory;
 import com.highright.highcare.reservation.entity.ResourceFile;
 import com.highright.highcare.reservation.repository.ResourceCategoryRepository;
@@ -95,6 +96,18 @@ public class ResService {
             throw new RuntimeException(e);
         }
         return (result > 0) ? " 입력 성공": "입력 실페";
+
+    }
+
+    public Object selectRes(int categoryCode) {
+        List<ResourceArea> resources= resourceRespository.findByResourceCategoryAndDeleteYn(resourceCategoryRepository.findById(categoryCode).get(), 'N');
+        return resources.stream()
+                .map(res-> modelMapper.map(res,ResourceDTO.class)).collect(Collectors.toList());
+    }
+
+    public Object selectContent(int resourceCode) {
+        Resource resource = resourceRespository.findById(resourceCode).get();
+        return modelMapper.map(resource, ResourceDTO.class);
 
     }
 }
