@@ -51,5 +51,10 @@ public class ReservationController {
 
     }
 
+    @GetMapping("dateRes")
+    public ResponseEntity<ResponseDTO> selectDateRes(@RequestParam(name = "reservationDate")java.sql.Date reservationDate){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "예약 시간 조회 성공", resService.selectDate(reservationDate)));
+    }
+
 
     }
