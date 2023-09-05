@@ -50,8 +50,9 @@ public class ApprovalHrmService {
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @Transactional
     public Boolean insertApvVacation(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+//    public Boolean insertApvVacation(ApvFormWithLinesDTO apvFormWithLinesDTO, List<MultipartFile> apvFileDTO) {
         log.info("[ApprovalHrmService] hrm1-insertApvVacation --------------- start ");
-        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFormDTO);
+//        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
         log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvLineDTOs);
         log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFileDTO);
 
@@ -67,7 +68,8 @@ public class ApprovalHrmService {
             Long apvNo = apvFormMain.getApvNo();
 
             // ApvVacationDTO를 ApvVacation 엔티티로 매핑하고 ApvNo를 설정
-            List<ApvVacation> apvVacationList = apvVacationDTO.stream()
+//            List<ApvVacation> apvVacationList = apvVacationDTO.stream()
+            List<ApvVacation> apvVacationList = apvFormDTO.getApvVacations().stream()
                     .map(item -> {
                         ApvVacation apvVacation = modelMapper.map(item, ApvVacation.class);
                         apvVacation.setApvNo(apvNo);

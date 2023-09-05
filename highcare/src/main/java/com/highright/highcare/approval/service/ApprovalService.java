@@ -8,6 +8,7 @@ import com.highright.highcare.common.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -246,14 +247,20 @@ public class ApprovalService {
     @Transactional
     public boolean updateApprovalStatus(Long apvLineNo, Long apvNo) {
         log.info("[ApprovalService] updateApprovalStatus --------------- start ");
+        System.out.println("updateIsApproval???????????????==============");
+
         try {
 
             apvLineRepository.updateIsApproval(apvLineNo);
+            System.out.println("updateIsApproval==============");
             int approved = apvLineRepository.areAllApproved(apvLineNo);
+            System.out.println("approved = " + approved);
             if (approved == 0) {
                 apvFormRepository.updateApvStatusToCompleted(apvNo);
+                System.out.println("11111111111111==============");
             } else if (approved >= 0) {
                 apvFormRepository.updateApvStatusToProcess(apvNo);
+                System.out.println("222222222222222==============");
             }
             log.info("[ApprovalService] updateApprovalStatus --------------- end ");
             return true;
@@ -369,6 +376,90 @@ public class ApprovalService {
         }
         System.out.println("apvFiles222222222222222222 = " + apvFiles);
         return apvFiles;
+    }
+
+    // 기안 수정
+    @Transactional
+    public Boolean updateApvFormWithLines(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+        log.info("[ApprovalService] updateApvFormWithLines --------------- Start ");
+        log.info("[ApprovalService] apvNo {}", apvNo);
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
+        try {
+            ApvForm savedApvForm;
+
+            if (apvNo != null) {
+                // 기존의 ApvForm을 검색
+                savedApvForm = apvFormRepository.findById(apvNo).orElse(null);
+
+                if (savedApvForm == null) {
+                    return false;
+                }
+                ApvForm updateApvForm = modelMapper.map(apvFormDTO, ApvForm.class);
+                ApvFormMain updateApvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+
+                savedApvForm.setTitle(updateApvForm.getTitle());
+                savedApvForm.setWriteDate(updateApvForm.getWriteDate());
+                savedApvForm.setApvStatus("결재진행중");
+                savedApvForm.setIsUrgency(updateApvForm.getIsUrgency());
+                savedApvForm.setCategory(updateApvForm.getCategory());
+                savedApvForm.setContents1(updateApvForm.getContents1());
+                savedApvForm.setContents2(updateApvForm.getContents2());
+
+                savedApvForm.setApvMeetingLogs(updateApvForm.getApvMeetingLogs());
+                savedApvForm.setApvBusinessTrips(updateApvForm.getApvBusinessTrips());
+
+                System.out.println("updateApvFormWithLines1111111111111111111111111111111111111111");
+                savedApvForm.setApvExpForms(updateApvForm.getApvExpForms());
+                savedApvForm.setApvFamilyEvents(updateApvForm.getApvFamilyEvents());
+                savedApvForm.setApvCorpCards(updateApvForm.getApvCorpCards());
+                System.out.println("updateApvFormWithLines22222222222222222222222222222222222222222");
+
+                savedApvForm.setApvVacations(updateApvForm.getApvVacations());
+                savedApvForm.setApvIssuances(updateApvForm.getApvIssuances());
+                System.out.println("updateApvFormWithLines33333333333333333333333333333333333333333");
+                apvFormRepository.save(savedApvForm);
+
+                // 결재라인 설정 (삭제 후 재등록)
+                apvLineRepository.deleteByApvNo(apvNo);
+
+
+                List<ApvLine> apvLineList = apvLineDTOs.stream()
+                        .map(dto -> {
+                            ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
+                            apvLine.setApvNo(apvNo);
+                            return apvLine;
+                        })
+                        .collect(Collectors.toList());
+
+                System.out.println("updateApvFormWithLines4544444444444444444444444444444444444444444");
+
+
+                // 첨부파일 등록
+                apvFileRepository.deleteByApvNo(apvNo);
+
+                List<ApvFile> apvFiles = new ArrayList<>();
+                if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                    apvFiles = insertFiles(savedApvForm.getApvNo(), apvFileDTO);
+                }
+                updateApvFormMain.setApvLines(apvLineList);
+                updateApvFormMain.setApvFiles(apvFiles);
+
+                // 승인 상태 확인 후 결재 상태 변경
+                int approved = apvLineRepository.apvNoAllApproved(savedApvForm.getApvNo());
+                if (approved == 0) {
+                    apvFormRepository.updateApvStatusToCompleted(savedApvForm.getApvNo());
+                }
+            }
+
+
+            log.info("[ApprovalService] updateApvFormWithLines --------------- 종료 ");
+            return true;
+        } catch (Exception e) {
+            log.error("[ApprovalService] 오류 발생 - biz1-insertOrUpdateApvForm: " + e.getMessage());
+            return false;
+        }
     }
 }
 
