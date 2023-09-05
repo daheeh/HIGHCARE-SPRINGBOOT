@@ -12,4 +12,5 @@ import java.util.List;
 public interface ApvFileRepository extends JpaRepository<ApvFile, Long> {
 
 
+    void deleteByApvNo(Long apvNo);
 }

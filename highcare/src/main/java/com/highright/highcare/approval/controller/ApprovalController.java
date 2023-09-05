@@ -219,14 +219,17 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz1 기안서 */
-    @PostMapping("/insert/biz1")
-    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestPart("apvFormWithLinesDTO") ApvFormWithLinesDTO apvFormWithLinesDTO,
-                                                              @RequestPart("apvFileDTOs") List<MultipartFile> apvFileDTO) {
-        System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+    @PostMapping(value = "/insert/biz1", consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> insertApvFormWithLines(
+            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+        System.out.println("biz1 apvFormDTO = " + apvFormDTO);
+        System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
         // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
-        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormWithLinesDTO, apvFileDTO);
+        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormDTO, apvLineDTOs, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
@@ -240,24 +243,31 @@ public class ApprovalController {
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
 
-    @PutMapping("/put/biz1/{apvNo}")
-    public ResponseEntity<ResponseDTO> putApvFormWithLines(@RequestBody ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        System.out.println("biz1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
 
-        Boolean serviceResponse = approvalBizService.putApvFormWithLines(apvFormWithLinesDTO);
+    @PutMapping(value = "/put/{apvNo}", consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> putApvFormWithLines(
+            @PathVariable Long apvNo,
+            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+        System.out.println("biz1 apvFormDTO = " + apvFormDTO);
+        System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvFileDTO = " + apvFileDTO);
+
+        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
+        Boolean serviceResponse = approvalService.updateApvFormWithLines(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
-            responseMessage = "실패";
+            responseMessage = "상신 등록 실패";
         } else {
             statusCode = HttpStatus.OK.value();
-            responseMessage = "성공";
+            responseMessage = "상신 등록 성공";
         }
         return ResponseEntity
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
-
 
 
     /* 전자결재 - 업무 : biz2 회의록 */
@@ -419,16 +429,21 @@ public class ApprovalController {
 
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
-    @PostMapping("/insert/hrm1")
-    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+    @PostMapping(value = "/insert/hrm1", consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> insertApvVacation(@ModelAttribute ApvFormDTO apvFormDTO,
+                                                         @ModelAttribute List<ApvLineDTO> apvLineDTOs,
+//                                                         @ModelAttribute ApvFormWithLinesDTO apvFormWithLinesDTO,
                                                          @RequestPart("apvFileDTOs") List<MultipartFile> apvFileDTO) {
-        System.out.println("hrm1 apvFormWithLinesDTO = " + apvFormDTO);
-        System.out.println("hrm1 apvFormWithLinesDTO = " + apvLineDTOs);
+//        System.out.println("hrm1 apvFormWithLinesDTO = " + apvFormWithLinesDTO);
+
+        System.out.println("hrm1 apvFormDTO = " + apvFormDTO);
+        System.out.println("hrm1 apvLineDTOs = " + apvLineDTOs);
         System.out.println("hrm1 apvFileDTO = " + apvFileDTO);
 
-        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
+        // 서비스 메서드를 호출하여  ApvFormDTO, ApvLineDTOs, 파일 정보를 등록
+//        Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormWithLinesDTO, apvFileDTO);
         Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormDTO, apvLineDTOs, apvFileDTO);
+
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();

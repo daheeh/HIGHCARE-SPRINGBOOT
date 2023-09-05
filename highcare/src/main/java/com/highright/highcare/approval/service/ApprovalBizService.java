@@ -56,29 +56,30 @@ public class ApprovalBizService {
 
     /* 전자결재 - 업무: biz1 기안서 */
     @Transactional
-    public Boolean insertApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO, List<MultipartFile> apvFileDTO) {
+    public Boolean insertApvFormWithLines(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
         log.info("[ApprovalService] biz1-insertApvForm --------------- 시작 ");
-        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
 
         try {
-            // ApvFormWithLinesDTO에서 필요한 데이터 추출
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-            List<ApvLineDTO> apvLineDTOList = apvFormWithLinesDTO.getApvLineDTOs();
-
             // ApvForm 생성 및 저장
             ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
             ApvForm savedApvForm = apvFormRepository.save(apvForm);
 
             // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
-            apvLineDTOList.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
-            List<ApvLine> apvLineList = apvLineDTOList.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
+            apvLineDTOs.forEach(apvLine -> apvLine.setApvNo(savedApvForm.getApvNo()));
+            List<ApvLine> apvLineList = apvLineDTOs.stream().map(item -> modelMapper.map(item, ApvLine.class)).collect(Collectors.toList());
 
             // ApvLines 설정
             savedApvForm.setApvLines(apvLineList);
             System.out.println("apvLineList = " + apvLineList);
 
             // 첨부파일 등록을 위해 서비스로 DTO전달
-            List<ApvFile> apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTO);
+            List<ApvFile> apvFiles = new ArrayList<>();
+            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTO);
+            }
             savedApvForm.setApvFiles(apvFiles);
             System.out.println("apvFiles = " + apvFiles);
 
@@ -96,7 +97,6 @@ public class ApprovalBizService {
             return false;
         }
     }
-
 
     /* 전자결재 - 업무: biz1 기안서 수정 */
     @Transactional
