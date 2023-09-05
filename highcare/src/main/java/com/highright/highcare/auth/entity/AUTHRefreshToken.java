@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.RedisHash;
 @RedisHash(value="id", timeToLive = 36000)     // 10시간 test
 @ToString
 @Builder
-public class ADMRefreshToken {
+public class AUTHRefreshToken {
 
     @Id
     private String id;

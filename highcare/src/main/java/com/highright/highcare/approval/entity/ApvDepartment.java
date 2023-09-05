@@ -1,4 +1,4 @@
-package com.highright.highcare.auth.entity;
+package com.highright.highcare.approval.entity;
 
 import lombok.Getter;
 
@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TBL_DEPARTMENT")
 @Getter
-public class ADMDepartment {
+public class ApvDepartment {
 
     @Id
     @Column(name="DEPT_CODE")
@@ -21,9 +21,9 @@ public class ADMDepartment {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "deptCode=" + deptCode +
-                ", deptName='" + deptName + '\'' +
+        return "ApvDepartment//////////" +
+                "ApvDeptCode=" + deptCode +
+                ", ApvDeptName='" + deptName + '\'' +
                 '}';
     }
 }

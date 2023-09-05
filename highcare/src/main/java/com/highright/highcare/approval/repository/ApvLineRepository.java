@@ -24,6 +24,15 @@ public interface ApvLineRepository extends JpaRepository<ApvLine, Long> {
     @Query(value = "SELECT COUNT(*) FROM TBL_APV_LINE " +
             "WHERE ISAPPROVAL = 'F' " +
             "AND APV_NO = (SELECT APV_NO FROM TBL_APV_LINE " +
-            "WHERE APV_LINE_NO = :apvLineNo)", nativeQuery = true)
+            "WHERE APV_LINE_NO = :apvLineNo", nativeQuery = true)
     int areAllApproved(@Param("apvLineNo") Long apvLineNo);
+
+    @Query(value = "SELECT COUNT(*) FROM TBL_APV_LINE " +
+            "WHERE ISAPPROVAL = 'F' " +
+            "AND APV_NO = :apvNo", nativeQuery = true)
+    int apvNoAllApproved(@Param("apvNo") Long apvNo);
+
+    @Modifying
+    @Query("DELETE FROM ApvLine AL WHERE AL.apvNo = :apvNo")
+    void deleteByApvNo(@Param("apvNo") Long apvNo);
 }

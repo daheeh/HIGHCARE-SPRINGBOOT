@@ -130,7 +130,7 @@ public class PmEmployeeContorller {
 
     /* 출/퇴근 조회 */
     @GetMapping("management")
-    public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset){
+    public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset, ManagementDTO ManagementDTO){
 
         log.info("start============================================");
         log.info("offset=============================== : {}", offset);
@@ -145,10 +145,11 @@ public class PmEmployeeContorller {
 
 
 
+
         Map<String, Object> map = new HashMap<>();
         // 로그인 아이디를
         map.put("manage", employeeService.manageMent(cri));
-//        map.put("user", employeeService.userInfo(10001));
+//        map.put("user", employeeService.userInfo(ManagementDTO));
         return ResponseEntity
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공", map));

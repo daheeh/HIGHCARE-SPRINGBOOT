@@ -1,4 +1,4 @@
-package com.highright.highcare.auth.entity;
+package com.highright.highcare.approval.entity;
 
 import lombok.Getter;
 
@@ -7,8 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="TBL_EMPLOYEE")
 @Getter
-public class ADMEmployee {
-
+public class ApvEmployee {
     @Id
     @Column(name="EMP_NO")
     private int empNo;
@@ -18,7 +17,7 @@ public class ADMEmployee {
 
     @OneToOne
     @JoinColumn(name="DEPT_CODE")
-    private ADMDepartment deptCode;
+    private ApvDepartment deptCode;
 
     @Column(name="PHONE")
     private String phone;
@@ -28,7 +27,7 @@ public class ADMEmployee {
 
     @OneToOne
     @JoinColumn(name="JOB_CODE")
-    private ADMJob jobCode;
+    private ApvJob jobCode;
 
     @Override
     public String toString() {

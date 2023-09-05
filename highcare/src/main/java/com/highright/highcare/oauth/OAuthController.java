@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ public class OAuthController {
     private final OAuthService oAuthService;
 
     // 소셜로그인 연동 신청
+//    @PreAuthorize("hasAnyRole('USER')")
     @PostMapping("/api/oauth/regist")
     public ResponseEntity<ResponseDTO> insertOauthRegist(@RequestBody Map<String, Object> data, HttpServletResponse response){
         log.info("[OAuthController] insertOauthRegist data====  {} ", data);

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -64,6 +65,17 @@ public class PmEmployee {
     @JoinColumn(name="JOB_CODE")
     private PmJob job;
 
+//    @ManyToOne
+//    @JoinColumn(name = "MIL_NO")
+//    private Military milNo;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "CER_NO")
+//    private Certification certifications;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "CAR_NO")
+//    private Career careers;
 
 }
 

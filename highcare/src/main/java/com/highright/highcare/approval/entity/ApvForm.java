@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @SequenceGenerator(
         name = "APV_SEQ_NO",
         sequenceName = "SEQ_APV_NO",
@@ -54,9 +53,18 @@ public class ApvForm {
     @Column(name = "EMP_NO")
     private int empNo;
 
+    @Transient
+    private String empName;
+
+    @Transient
+    private String deptName;
+
+    @Transient
+    private String jobName;
+
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
-    private PmEmployee employee;
+    private ApvEmployee apvEmployee;
 
     //    @Where(clause = "category = '업무'")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -96,6 +104,46 @@ public class ApvForm {
 
     // 결재라인
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("apvLineNo ASC")
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private List<ApvFile> apvFiles = new ArrayList<>();
+
+    public void getEmployee() {
+        if (apvEmployee != null) {
+            this.empName = apvEmployee.getName();
+            this.deptName = apvEmployee.getDeptCode().getDeptName();
+            this.jobName = apvEmployee.getJobCode().getJobName();
+            this.apvLines = apvLines;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ApvForm{" +
+                "apvNo=" + apvNo +
+                ", title='" + title +
+                ", writeDate=" + writeDate +
+                ", apvStatus='" + apvStatus +
+                ", isUrgency='" + isUrgency +
+                ", category='" + category +
+                ", contents1='" + contents1 +
+                ", contents2='" + contents2 +
+                ", empNo=" + empNo +
+                ", empName=" + empName +
+                ", deptName=" + deptName +
+                ", jobName=" + jobName +
+                ", apvMeetingLogs=" + apvMeetingLogs + '\'' +
+                ", apvBusinessTrips=" + apvBusinessTrips + '\'' +
+                ", apvExpForms=" + apvExpForms + '\'' +
+                ", apvFamilyEvents=" + apvFamilyEvents + '\'' +
+                ", apvCorpCards=" + apvCorpCards + '\'' +
+                ", apvVacations=" + apvVacations + '\'' +
+                ", apvIssuances=" + apvIssuances + '\'' +
+                ", apvLines=" + apvLines + '\'' +
+                '}';
+    }
 }

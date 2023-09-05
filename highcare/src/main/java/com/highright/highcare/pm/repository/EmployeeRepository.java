@@ -38,7 +38,7 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
     List<PmEmployee> findByEmpName(String empName);
 
 
-    Page<PmEmployeeDTO> findByEmpNo(int empNo, Pageable paging);
+    Page<PmEmployee> findByEmpNo(int empNo, Pageable paging);
 
     Page<PmEmployee> findByEmpName(String search, Pageable paging);
 

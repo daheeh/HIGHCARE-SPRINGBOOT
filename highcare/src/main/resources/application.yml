@@ -94,10 +94,7 @@ jwt:
 image:
   add-resource-locations: classpath:/static/images/
   add-resource-handler: /images/**
-  image-dir: C:/dev/profileImages/
+
+  image-dir: src/main/resources/static/images
   image-url: http://localhost:8080/images/
-
-#  image-dir: src/main/resources/static/images
-#image:
-
 
