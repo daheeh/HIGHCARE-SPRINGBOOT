@@ -1,5 +1,7 @@
 package com.highright.highcare.reservation.service;
 
+import com.highright.highcare.bulletin.entity.BulletinEmployee;
+import com.highright.highcare.bulletin.repository.BulletinEmployeeRepository;
 import com.highright.highcare.reservation.dto.ResourceCategoryDTO;
 import com.highright.highcare.reservation.dto.ResourceDTO;
 import com.highright.highcare.reservation.dto.ResourceFileDTO;
@@ -29,6 +31,8 @@ public class ResService {
     private final ResourceRespository resourceRespository;
     private final ResourceFileRepository resourceFileRepository;
     private final ResourceStatusRepository resourceStatusRepository;
+
+    private final BulletinEmployeeRepository bulletinEmployeeRepository;
     private final ModelMapper modelMapper;
     @Value("${image.image-dir}")
     String IMAGE_DIR; // src/main/resources/static/images
@@ -39,12 +43,14 @@ public class ResService {
                       ModelMapper modelMapper,
                       ResourceRespository resourceRespository,
                       ResourceFileRepository resourceFileRepository,
-                      ResourceStatusRepository resourceStatusRepository){
+                      ResourceStatusRepository resourceStatusRepository,
+                      BulletinEmployeeRepository bulletinEmployeeRepository){
         this.resourceCategoryRepository = resourceCategoryRepository;
         this.modelMapper = modelMapper;
         this.resourceRespository = resourceRespository;
         this.resourceFileRepository =resourceFileRepository;
         this.resourceStatusRepository = resourceStatusRepository;
+        this.bulletinEmployeeRepository = bulletinEmployeeRepository;
     }
     public List<ResourceCategoryDTO> selectResCategory() {
         List<ResourceCategory> resList = resourceCategoryRepository.findAll();
@@ -62,6 +68,28 @@ public class ResService {
 
     }
     @Transactional
+    public Object insertResStatus(ResourceReservationStatusDTO resourceReservationStatusDTO) {
+        Resource resource = resourceRespository.findById(resourceReservationStatusDTO.getResourceCode()).get();
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(resourceReservationStatusDTO.getEmpNo()).get();
+        ResourceReservationStatus res = modelMapper.map(resourceReservationStatusDTO, ResourceReservationStatus.class);
+        res.setBulletinEmployee(bulletinEmployee);
+        res.setResource(resource);
+        String reservationDate = res.getReservationDate();
+        String startTime = res.getStartTime();
+        String endTime = res.getEndTime();
+        int resourceCode =resourceReservationStatusDTO.getResourceCode();
+        res.setReservationStatus("SCREENING");
+        List<ResourceReservationStatus> resList = resourceStatusRepository.findByresList(reservationDate, startTime, endTime, resourceCode);
+
+        if(resList.size() ==0){
+            resourceStatusRepository.save(res);
+            return "하이";
+        }else{
+            return "실패";
+        }
+
+    }
+    @Transactional
     public Object insertRes(ResourceDTO resourceDTO, MultipartFile image) throws IOException {
 
         java.util.Date utilDate = new java.util.Date();
@@ -72,6 +100,7 @@ public class ResService {
         resource.setDeleteYn('N');
         resource.setCreationDate(sqlDate);
         resource.setModifiedDate(sqlDate);
+
         resource.setResourceCategory(resourceCategoryRepository.findById(resourceDTO.getCategoryCode()).get());
 
         resourceRespository.save(resource);
@@ -114,10 +143,13 @@ public class ResService {
 
     }
 
-    public Object selectDate(Date reservationDate) {
-        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.findAllByReservationDateAndReservationStatus(reservationDate,"APPROVAL");
+    public Object selectDate(String reservationDate,int resourceCode) {
+        Resource resource = resourceRespository.findById(resourceCode).get();
+        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.findAllByReservationDateAndReservationStatusAndResource(reservationDate,"APPROVAL",resource);
         System.out.println("list" + resourceReservationStatuses);
         return resourceReservationStatuses.stream()
                 .map(status -> modelMapper.map(status, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
     }
+
+
 }
