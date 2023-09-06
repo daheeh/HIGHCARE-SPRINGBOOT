@@ -1,6 +1,6 @@
 package com.highright.highcare.chatting.service;
 
-import com.highright.highcare.auth.entity.ADMAccount;
+import com.highright.highcare.admin.entity.ADMAccount;
 import com.highright.highcare.chatting.Repository.UserRepository;
 import com.highright.highcare.chatting.storage.UserStorage;
 import lombok.RequiredArgsConstructor;
