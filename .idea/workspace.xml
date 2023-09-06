@@ -4,40 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="dahee merge">
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/auth/entity/ADMAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/Repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/MessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/UsersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/dto/Conversation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/dto/MessageModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/dto/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/service/ADMAccountEntityListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/storage/ConversationStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/storage/UserStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/Entity/Chat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/Entity/Room.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/ChatController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/RoomController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/RoomForm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/dto/ChatMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/pubsub/RedisPublisher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/pubsub/RedisSubscriber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/repository/ChatRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/repository/RoomRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/service/ChatService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/service/WebSocketChatSession.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/test/java/com/highright/highcare/service/ChatServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/test/java/com/highright/highcare/service/ChatServiceTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="dahee merge" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
