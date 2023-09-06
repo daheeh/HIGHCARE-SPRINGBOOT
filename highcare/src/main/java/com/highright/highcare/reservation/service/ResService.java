@@ -90,6 +90,46 @@ public class ResService {
 
     }
     @Transactional
+    public Object updateRes(ResourceDTO resourceDTO, MultipartFile image) throws IOException{
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+
+        Resource resource = resourceRespository.findById(resourceDTO.getResourceCode()).get();
+        resource.setResourceCategory(resourceCategoryRepository.findById(resourceDTO.getCategoryCode()).get());
+        resource.setArea(resourceDTO.getArea());
+        resource.setLocation(resourceDTO.getLocation());
+        resource.setServiceGuide(resourceDTO.getServiceGuide());
+        resource.setModifiedDate(sqlDate);
+        resource.setStartTime(resourceDTO.getStartTime());
+        resource.setEndTime(resourceDTO.getEndTime());
+        resource.setResourceName(resourceDTO.getResourceName());
+        resourceRespository.save(resource);
+        resourceFileRepository.deleteByResourceCode(resource.getResourceCode());
+        String imageName = UUID.randomUUID().toString().replace("-","");
+        String replaceFileName = null;
+
+        int result = 0;
+        ResourceFileDTO resourceFileDTO = new ResourceFileDTO();
+        try{
+            replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, image);
+            resourceFileDTO.setChangedFileName(imageName);
+            resourceFileDTO.setModifiedDate(sqlDate);
+            resourceFileDTO.setCreationDate(sqlDate);
+            resourceFileDTO.setDeleteYn('N');
+            resourceFileDTO.setResourceCode(resource.getResourceCode());
+
+            ResourceFile resourceFile = modelMapper.map(resourceFileDTO, ResourceFile.class);
+            resourceFileRepository.save(resourceFile);
+
+            result = 1;
+        } catch (Exception e) {
+            FileUploadUtils.deleteFile(IMAGE_DIR, replaceFileName);
+            throw new RuntimeException(e);
+        }
+        return (result > 0) ? " 수정 성공": "수정 실페";
+    }
+    @Transactional
     public Object insertRes(ResourceDTO resourceDTO, MultipartFile image) throws IOException {
 
         java.util.Date utilDate = new java.util.Date();
@@ -150,6 +190,7 @@ public class ResService {
         return resourceReservationStatuses.stream()
                 .map(status -> modelMapper.map(status, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
     }
+
 
 
 }

@@ -62,4 +62,11 @@ public class ReservationController {
         System.out.println("reservationDate : " + resourceReservationStatusDTO.getReservationDate());
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "예약 성공", resService.insertResStatus(resourceReservationStatusDTO)));
     }
+
+    @PutMapping("/modRes")
+    public ResponseEntity<ResponseDTO> updateRes(@ModelAttribute ResourceDTO resourceDTO, MultipartFile image) throws IOException {
+
+                return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "시설수정 성공", resService.updateRes(resourceDTO, image)));
+    }
 }
