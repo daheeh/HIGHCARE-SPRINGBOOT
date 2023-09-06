@@ -39,8 +39,21 @@ public class PmJob {
     @OneToMany(mappedBy = "parent")
     private List<PmJob> children = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false  )
-    private PmEmployee employees;
+//    @ManyToOne
+//    @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false  )
+//    private PmEmployee employees;
 
+
+    @Override
+    public String toString() {
+        return "PmJob{" +
+                "jobCode=" + jobCode +
+                ", name='" + name + '\'' +
+                ", upperJobCode=" + upperJobCode +
+                ", upperJobName='" + upperJobName + '\'' +
+                ", parent=" + parent +
+                ", children=" + children +
+//                ", employees=" + employees +
+                '}';
+    }
 }

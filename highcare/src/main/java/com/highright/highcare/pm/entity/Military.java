@@ -11,6 +11,11 @@ import java.util.List;
 
 @Entity
 @Table(name="TBL_MILITARY")
+@SequenceGenerator(
+        name="MILITARY_SEQ_GENERATOR",
+        sequenceName = "SEQ_MILITARY_CODE",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,7 +23,10 @@ import java.util.List;
 public class Military {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "MILITARY_SEQ_GENERATOR"
+    )
     @Column(name = "MIL_NO")
     private Integer milNo;
 
@@ -35,13 +43,13 @@ public class Military {
     @JoinColumn(name = "EMP_NO")
     private PmEmployee employees;
 
-//    @Override
-//    public String toString() {
-//        return "Military{" +
-//                "milNo=" + milNo +
-//                ", status='" + status + '\'' +
-//                ", isWhether=" + isWhether +
+    @Override
+    public String toString() {
+        return "Military{" +
+                "milNo=" + milNo +
+                ", status='" + status + '\'' +
+                ", isWhether=" + isWhether +
 //                ", employees=" + employees +
-//                '}';
-//    }
+                '}';
+    }
 }

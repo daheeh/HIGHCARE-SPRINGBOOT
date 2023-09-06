@@ -19,8 +19,8 @@ Content-Type: application/json; boundary=WebAppBoundary
 Accept: */*
 
 {
-  "empName": "첫번째",
-  "empEmail": "aa@masda.com",
+  "empName": "조다혜",
+  "empEmail": "secon223d@masda.com",
   "phone": "010-1321-4564",
   "residentNo": "1321546-5464578",
   "startDate": "2023-08-22",
@@ -31,10 +31,28 @@ Accept: */*
   "address": "서울시",
   "education": "종로대학교",
   "telephone": "013-2441-6454",
-  "cerName": "SQL전문가",
-  "cerStartDate": "2023-09-06",
-  "cerEndDate": "2025-09-06",
-  "institution": "국가공인자격증"
+  "military": [
+    {
+      "status": "면제"
+    }
+  ],
+  "certification": [
+    {
+      "name": "SQL박사",
+      "startDate": "2023-09-06",
+      "endDate": "2025-09-06",
+      "institution": "국가공인자격증"
+    }
+  ],
+  "career": [
+    {
+      "name": "2하이",
+      "history": 2,
+      "startDate": "2023-09-06",
+      "endDate": "2025-09-06",
+      "job": "대리"
+    }
+  ]
 }
 
 

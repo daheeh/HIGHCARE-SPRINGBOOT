@@ -12,6 +12,11 @@ import java.util.List;
 
 @Entity
 @Table(name="TBL_CAREER")
+@SequenceGenerator(
+        name="CAREER_SEQ_GENERATOR",
+        sequenceName = "SEQ_CAREER_CODE",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,7 +24,8 @@ import java.util.List;
 public class Career {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "CAREER_SEQ_GENERATOR")
     @Column(name = "CAR_NO")
     private Integer carNo;
 
@@ -47,4 +53,7 @@ public class Career {
     @ManyToOne
     @JoinColumn(name = "EMP_NO")
     private PmEmployee employees;
+
+
+
 }

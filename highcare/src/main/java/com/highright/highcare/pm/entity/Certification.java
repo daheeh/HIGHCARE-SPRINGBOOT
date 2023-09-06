@@ -12,6 +12,11 @@ import java.util.List;
 
 @Entity
 @Table(name="TBL_CERTIFICATION")
+@SequenceGenerator(
+        name="CERTIFICATION_SEQ_GENERATOR",
+        sequenceName = "SEQ_CERTIFICATION_CODE",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,7 +24,10 @@ import java.util.List;
 public class Certification {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "CERTIFICATION_SEQ_GENERATOR"
+    )
     @Column(name = "CER_NO")
     private Integer cerNo;
 
