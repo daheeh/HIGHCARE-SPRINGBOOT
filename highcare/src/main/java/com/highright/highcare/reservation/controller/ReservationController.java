@@ -69,4 +69,10 @@ public class ReservationController {
                 return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "시설수정 성공", resService.updateRes(resourceDTO, image)));
     }
+
+    @PutMapping("/deleteRes")
+    public ResponseEntity<ResponseDTO> deleteRes(@RequestBody ResourceDTO resourceDTO)  {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "시설수정 성공", resService.deleteRes(resourceDTO)));
+    }
 }

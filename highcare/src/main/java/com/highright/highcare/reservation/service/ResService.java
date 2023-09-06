@@ -191,6 +191,17 @@ public class ResService {
                 .map(status -> modelMapper.map(status, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
     }
 
+    @Transactional
+    public Object deleteRes(ResourceDTO resourceDTO) {
 
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        Resource resource = resourceRespository.findById(resourceDTO.getResourceCode()).get();
+        resource.setModifiedDate(sqlDate);
+        resource.setDeleteYn('Y');
+        resourceRespository.save(resource);
+        return "삭제 성공";
 
+    }
 }
