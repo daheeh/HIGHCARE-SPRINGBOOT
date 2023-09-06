@@ -41,7 +41,7 @@ public class UsersController {
     @PostConstruct
     public void init() {
         userService.syncUsersFromDatabase();
-    }
+    } // 빈 생성과 동시에 Storage에 DB데이터 add
 
     @GetMapping("/search/{myId}/{userId}")
     public ResponseEntity<Integer> search(@PathVariable String userId, @PathVariable String myId){
