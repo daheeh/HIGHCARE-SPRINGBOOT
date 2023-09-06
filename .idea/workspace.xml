@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="local dahee merge">
+    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="#10 DB데이터 UserStorage에 add, 상대방 id입력해서 채팅방 생성하기 버튼까지 완료">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-08-30__6_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-08-30_오후_6_49_[Changes]/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-08-30_오후_6_49_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/chatting/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/WebConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/WebConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/WebSocketConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/WebsocketConfiguration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +123,8 @@
       <workItem from="1693572194811" duration="599000" />
       <workItem from="1693668381808" duration="1021000" />
       <workItem from="1693819269103" duration="40068000" />
+      <workItem from="1693992580960" duration="1638000" />
+      <workItem from="1693994464903" duration="1759000" />
     </task>
     <task id="LOCAL-00001" summary="dahee merge">
       <created>1693539950270</created>
