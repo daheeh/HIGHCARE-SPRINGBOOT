@@ -29,14 +29,16 @@ public class AdminController {
 //        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
 //                "관리자 페이지 접속 성공", null));
 //    }
-    @GetMapping("member")
-    public ResponseEntity<ResponseDTO> selectMember(@RequestParam int empNo){
-        log.info("empNo" , empNo);
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
+    @GetMapping("/member")
+    public ResponseEntity<ResponseDTO> selectMember(@RequestParam String empNo){
+        log.info("================= empNo ===== {}" , empNo);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "사원 조회 성공", adminService.selectMember(empNo)));
+                "사원 조회 성공", adminService.selectMember(Integer.valueOf(empNo))));
     }
 
     // 인서트 회원신청
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @PostMapping("/memberjoin")
     public ResponseEntity<ResponseDTO> insertAccount(@RequestBody RequestMemberDTO requestMemberDTO){
         log.info("[AdminController] insertAccount requestMemberDTO===={}", requestMemberDTO);
@@ -54,13 +56,15 @@ public class AdminController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("/member")
-    public ResponseEntity<ResponseDTO> updateAccount( @RequestBody UpdateAccountDTO updateAccountDTO){
+    @PutMapping("/member/{id}")
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id, @RequestBody UpdateAccountDTO updateAccountDTO){
 
-        log.info("[AdminController] updateAccount updateAccountDTO===={}", updateAccountDTO);
+        log.info("[AdminController] updateAccount id ===={}", id);
+        log.info("[AdminController] updateAccount updateAccountDTO===={}",updateAccountDTO);
+
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "회원 계정상태 수정", adminService.updateAccount(updateAccountDTO)));
+                "회원 계정상태 수정", adminService.updateAccount(id, updateAccountDTO)));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
