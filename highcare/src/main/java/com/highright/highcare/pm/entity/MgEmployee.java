@@ -65,4 +65,7 @@ public class MgEmployee {
     @JoinColumn(name = "MAN_NO")
     private List<Management> manNo;
 
+
+
+
 }

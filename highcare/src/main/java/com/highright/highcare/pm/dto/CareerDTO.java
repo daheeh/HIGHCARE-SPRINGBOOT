@@ -1,12 +1,16 @@
 package com.highright.highcare.pm.dto;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import java.sql.Date;
 
 @Embeddable
 @Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class CareerDTO {
 
     private int carNo;

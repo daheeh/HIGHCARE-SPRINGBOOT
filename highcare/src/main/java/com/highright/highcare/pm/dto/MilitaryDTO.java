@@ -1,11 +1,15 @@
 package com.highright.highcare.pm.dto;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class MilitaryDTO {
 
     private Integer milNo;

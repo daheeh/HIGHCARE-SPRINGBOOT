@@ -19,6 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+//@NamedEntityGraph(name = "employees-with-related-entities",
+//        attributeNodes = {
+//                @NamedAttributeNode("military")
+//        })
 public class PmEmployee {
     @Id
     @Column(name = "EMP_NO")
@@ -43,7 +47,7 @@ public class PmEmployee {
     @Column(name = "START_DATE")
     private Date startDate;
 
-    @Column(name = "END_DATE")
+    @Column(name = "END_DATE", nullable = true)
     private Date endDate;
 
     @Column(name = "IS_RESIGNATION")
@@ -65,18 +69,40 @@ public class PmEmployee {
     @JoinColumn(name="JOB_CODE")
     private PmJob job;
 
-//    @ManyToOne
-//    @JoinColumn(name = "MIL_NO")
-//    private Military milNo;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "CER_NO")
-//    private Certification certifications;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "CAR_NO")
-//    private Career careers;
+    @OneToMany(mappedBy = "employees")
+    private List<Military> military;
 
+    @OneToMany(mappedBy = "employees")
+    private List<Career> career;
+
+    @OneToMany(mappedBy = "employees")
+    private List<Certification> certification;
+
+    //    @Column(name="JOB_CODE")
+    //    private Integer job;
+
+
+    @Override
+    public String toString() {
+        return "PmEmployee{" +
+                "empNo=" + empNo +
+                ", empName='" + empName + '\'' +
+                ", empEmail='" + empEmail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", residentNo='" + residentNo + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", isResignation=" + isResignation +
+                ", deptCode=" + deptCode +
+                ", address='" + address + '\'' +
+                ", education='" + education + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", job=" + job +
+                ", military=" + military +
+                ", career=" + career +
+                ", certification=" + certification +
+                '}';
+    }
 }
 
 

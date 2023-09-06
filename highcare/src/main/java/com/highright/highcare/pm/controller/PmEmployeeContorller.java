@@ -5,9 +5,7 @@ import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
-import com.highright.highcare.pm.dto.DepartmentDTO;
-import com.highright.highcare.pm.dto.ManagementDTO;
-import com.highright.highcare.pm.dto.PmEmployeeDTO;
+import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.Management;
 import com.highright.highcare.pm.entity.ManagementResult;
 import com.highright.highcare.pm.entity.MgEmployee;
@@ -84,12 +82,13 @@ public class PmEmployeeContorller {
     }
 
     /* 사원 상세 조회 */
-    @GetMapping("/all/{empNo}")
-    public ResponseEntity<ResponseDTO> selectEmpDetail( @PathVariable int empNo){
+    @GetMapping("/member/{empNo}")
+    public ResponseEntity<ResponseDTO> selectEmpDetail(@PathVariable int empNo){
 
         log.info("empName==============> {}", empNo);
 
         PmEmployeeDTO selectEmpDetail = employeeService.selectEmpDetail(empNo);
+
 
         return ResponseEntity
                 .ok()
@@ -100,11 +99,13 @@ public class PmEmployeeContorller {
 
     /* 사원 등록 */
     @PostMapping("/all")
-    public ResponseEntity<ResponseDTO> insertPmEmployee(@RequestBody PmEmployeeDTO pmEmployeeDTO){
+    public ResponseEntity<ResponseDTO> insertPmEmployee(@RequestBody EmployeeTotalDTO pmEmployeeDTO){
         log.info("inserPmEmployee=========================>", pmEmployeeDTO);
+
         return ResponseEntity.ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(),"사원 등록 성공",
                         employeeService.insertPmEmployee(pmEmployeeDTO)));
+
     }
 
 
@@ -129,12 +130,17 @@ public class PmEmployeeContorller {
     }
 
     /* 출/퇴근 조회 */
-    @GetMapping("management")
-    public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset, ManagementDTO ManagementDTO){
+    @GetMapping("management/{empNo}")
+    public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset,
+                                                  @PathVariable String empNo )
+                                                {
 
         log.info("start============================================");
         log.info("offset=============================== : {}", offset);
+        log.info("empNo=============================== : {}", empNo);
 
+        int selectedEmpNo = employeeService.selectEmpNo(empNo);
+        log.info("selectedEmpNo=============================== : {}", selectedEmpNo);
         int total = employeeService.selectEmployeeTotal();
 
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
@@ -145,11 +151,10 @@ public class PmEmployeeContorller {
 
 
 
-
         Map<String, Object> map = new HashMap<>();
         // 로그인 아이디를
         map.put("manage", employeeService.manageMent(cri));
-//        map.put("user", employeeService.userInfo(ManagementDTO));
+        map.put("user", employeeService.userInfo(selectedEmpNo));
         return ResponseEntity
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공", map));

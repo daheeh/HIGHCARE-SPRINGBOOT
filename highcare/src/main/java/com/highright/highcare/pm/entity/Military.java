@@ -18,11 +18,12 @@ import java.util.List;
 public class Military {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MIL_NO")
     private Integer milNo;
 
-    @Column(name = "EMP_NO")
-    private int empNo;
+//    @Column(name = "EMP_NO")
+//    private int empNo;
 
     @Column(name = "STATUS")
     private String status;
@@ -30,7 +31,17 @@ public class Military {
     @Column(name = "IS_WHETHER")
     private char isWhether;
 
-    @OneToMany
-    @Column(name = "EMP_NO")
-    private List<PmEmployee> pmEmployee;
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO")
+    private PmEmployee employees;
+
+//    @Override
+//    public String toString() {
+//        return "Military{" +
+//                "milNo=" + milNo +
+//                ", status='" + status + '\'' +
+//                ", isWhether=" + isWhether +
+//                ", employees=" + employees +
+//                '}';
+//    }
 }

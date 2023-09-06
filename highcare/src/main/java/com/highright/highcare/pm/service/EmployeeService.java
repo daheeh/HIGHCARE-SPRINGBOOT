@@ -1,29 +1,21 @@
 package com.highright.highcare.pm.service;
 
+import com.highright.highcare.auth.entity.AUTHAccount;
+import com.highright.highcare.auth.repository.AccountRepository;
 import com.highright.highcare.common.Criteria;
 
-import com.highright.highcare.mypage.dto.MyProfileDTO;
-import com.highright.highcare.mypage.entity.MyProfile;
-import com.highright.highcare.pm.dto.AnnualDTO;
-import com.highright.highcare.pm.dto.DeAndEmpDTO;
-import com.highright.highcare.pm.dto.ManagementDTO;
-import com.highright.highcare.pm.dto.PmEmployeeDTO;
+import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.*;
-import com.highright.highcare.pm.repository.EmployeeRepository;
-import com.highright.highcare.pm.repository.ManagementEmRepository;
-import com.highright.highcare.pm.repository.PmDepartmentRepository;
-import com.highright.highcare.pm.repository.ReEmployeeRepository;
+import com.highright.highcare.pm.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,15 +43,31 @@ public class EmployeeService {
 
     private final ManagementEmRepository managementEmRepository;
 
+    private final AccountRepository accountRepository;
+
+    private final CareerRepository careerRepository;
+
+    private final CertificationRepository certificationRepository;
+
+    private final MilitaryRepository militaryRepository;
+
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
                             PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
-                            , ManagementEmRepository managementEmRepository){
+                            , ManagementEmRepository managementEmRepository
+                            , AccountRepository accountRepository
+    ,CareerRepository careerRepository
+    ,CertificationRepository certificationRepository
+    ,MilitaryRepository militaryRepository){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
         this.reEmployeeRepository = reEmployeeRepository;
         this.managementEmRepository = managementEmRepository;
+        this.accountRepository = accountRepository;
+        this.careerRepository = careerRepository;
+        this.certificationRepository = certificationRepository;
+        this.militaryRepository = militaryRepository;
     }
 
     /* 토탈 */
@@ -89,11 +97,14 @@ public class EmployeeService {
 
         return employeeallList;
     }
-    /*사원 상세 조회 */
+
+    /* 사원 상세 조회 */
     public PmEmployeeDTO selectEmpDetail(int empNo){
 
         PmEmployee empDetail = employeeRepository.findByEmpNo(empNo);
         System.out.println("result ==========================> " + empDetail);
+        System.out.println("result ==========================> " + empNo);
+
 
         PmEmployeeDTO pmEmployee = modelMapper.map(empDetail, PmEmployeeDTO.class);
         System.out.println("pmEmployee ==========================> " + pmEmployee);
@@ -127,6 +138,14 @@ public class EmployeeService {
         return pmEmployeeList.size();
     }
 
+    public int selectEmpNo(String empNo){
+
+        Optional<AUTHAccount> authAccount = accountRepository.findById(empNo);
+        System.out.println(authAccount.get().getEmployee().getEmpNo());
+        int result = authAccount.get().getEmployee().getEmpNo();
+        return result;
+    }
+
 //    /* 사원 번호 조회 */
 //    public int selectEmpDatail(int empNo) {
 //       PmEmployee pmEmployee = employeeRepository.findByEmpNo(empNo);
@@ -155,25 +174,69 @@ public class EmployeeService {
     }
 
     /* 사원 등록 */
+//    @Transactional
+//    public String insertPmEmployee(@ModelAttribute EmployeeTotalDTO employeeTotalDTO) {
+//        log.info("insertPmEmployee start==================");
+//        log.info("insertPmEmployee pmEmployeeDTO ================== " + employeeTotalDTO );
+//
+//
+//        int result = 0;
+//
+//        try {
+//            PmEmployee insertPmEmployee = modelMapper.map(employeeTotalDTO, PmEmployee.class);
+//            employeeRepository.save(insertPmEmployee);
+//
+//            result = 1;
+//        }catch (Exception e){
+//            System.out.println("check");
+//            throw new RuntimeException(e);
+//        }
+//
+//        log.info("insertpmEmployee ============================end");
+//        return (result > 0)? "사원 등록 성공": "사원 등록 실패";
+//    }
+
     @Transactional
-    public String insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO) {
+    public String insertPmEmployee(@ModelAttribute EmployeeTotalDTO pmEmployeeDTO) {
         log.info("insertPmEmployee start==================");
         log.info("insertPmEmployee pmEmployeeDTO ================== " + pmEmployeeDTO );
 
-        int result = 0;
-
         try {
+            // PmEmployee 엔터티 생성 및 저장
             PmEmployee insertPmEmployee = modelMapper.map(pmEmployeeDTO, PmEmployee.class);
             employeeRepository.save(insertPmEmployee);
 
-            result = 1;
-        }catch (Exception e){
-            System.out.println("check");
-            throw new RuntimeException(e);
-        }
+            // Career 테이블에 데이터 삽입
+            for (CareerDTO careerDTO : pmEmployeeDTO.getCareer()) {
+                Career career = modelMapper.map(careerDTO, Career.class);
+                // PmEmployee와 연관 설정
+                career.setEmployees(insertPmEmployee);
 
-        log.info("insertpmEmployee ============================end");
-        return (result > 0)? "사원 등록 성공": "사원 등록 실패";
+                careerRepository.save(career);
+            }
+
+            // Certification 테이블에 데이터 삽입
+            for (CertificationDTO certificationDTO : pmEmployeeDTO.getCertification()) {
+                Certification certification = modelMapper.map(certificationDTO, Certification.class);
+                // PmEmployee와 연관 설정
+                certification.setEmployees(insertPmEmployee);
+                certificationRepository.save(certification);
+            }
+
+            // Military 테이블에 데이터 삽입
+            for (MilitaryDTO militaryDTO : pmEmployeeDTO.getMilitary()) {
+                Military military = modelMapper.map(militaryDTO, Military.class);
+                // PmEmployee와 연관 설정
+                military.setEmployees(insertPmEmployee);
+                militaryRepository.save(military);
+            }
+
+            log.info("insertpmEmployee ============================end");
+            return "사원 등록 성공";
+        } catch (Exception e) {
+            log.error("사원 등록 실패", e);
+            return "사원 등록 실패";
+        }
     }
 
 
@@ -275,6 +338,8 @@ public class EmployeeService {
         System.out.println("result ==========================> " + result);
 
         List<Management> manageList = result.getContent(); // 조회된 결과 리스트
+
+        System.out.println("manageList ==========================> " + manageList);
         List<ManagementResult> managementResult = manageList.stream()
                 .sorted(Comparator.comparing(Management::getManNo).reversed()) // manNo 내림차순 정렬
                 .map(ManagementResult::new)
@@ -291,14 +356,18 @@ public class EmployeeService {
 
         System.out.println("result ==========================> " + result);
 
+        ManagementDTO management = null;
+        if(result != null){
 
-        String startTime = result.getStartTime();
-        String endtime =  result.getEndTime();
+            management = modelMapper.map(result, ManagementDTO.class);
+            management.setStartTime(result.getStartTime());
+            System.out.println("result ==========111================> " + management);
+            management.setEndTime(result.getEndTime());
+            System.out.println("result ===========111===============> " + management);
+        }
        // Management manageList = result.get(); // 조회된 결과 리스트
-        ManagementDTO managementDTO = modelMapper.map(result, ManagementDTO.class);
 
-
-        return managementDTO;
+        return management;
     }
 
 //    public ManagementDTO userInfo(Integer empNo) {
@@ -376,30 +445,30 @@ public class EmployeeService {
     }
 
     /* 퇴근 조회 */
-    public List<ManagementResult> manageMentsearch(Criteria cri, int empNo) { // Remove @RequestBody
-        System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
-        System.out.println("selectEmployeeSearchList  empNo ==========================> " + empNo);
-
-        int index = cri.getPageNum() -1;
-        int count = cri.getAmount();
-
-        Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
-        System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
-
-        Page<Management> result = managementEmRepository.findByEmpNo(empNo, paging);
-        System.out.println("selectEmployeeSearchList result ==========================> " + result);
-
-        List<Management> manageList = result.getContent(); // 조회된 결과 리스트
-
-
-
-        List<ManagementResult> manageMentsearchlist = manageList.stream()
-                .sorted(Comparator.comparing(Management::getEmpNo).reversed()) // manNo 내림차순 정렬
-                .map(ManagementResult::new)
-                .collect(Collectors.toList());
-
-        return manageMentsearchlist;
-    }
+//    public List<ManagementResult> manageMentsearch(Criteria cri, int empNo) { // Remove @RequestBody
+//        System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
+//        System.out.println("selectEmployeeSearchList  empNo ==========================> " + empNo);
+//
+//        int index = cri.getPageNum() -1;
+//        int count = cri.getAmount();
+//
+//        Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
+//        System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
+//
+//        Page<Management> result = managementEmRepository.findByEmpNo(empNo, paging);
+//        System.out.println("selectEmployeeSearchList result ==========================> " + result);
+//
+//        List<Management> manageList = result.getContent(); // 조회된 결과 리스트
+//
+//
+//
+//        List<ManagementResult> manageMentsearchlist = manageList.stream()
+//                .sorted(Comparator.comparing(Management::getEmpNo).reversed()) // manNo 내림차순 정렬
+//                .map(ManagementResult::new)
+//                .collect(Collectors.toList());
+//
+//        return manageMentsearchlist;
+//    }
 
     public String hasAttendanceRecord(ManagementDTO managementDTO) {
 
@@ -433,7 +502,7 @@ public class EmployeeService {
         return result;
     }
 
-//    /* 연차 조회 */
+    /* 연차 조회 */
 //
 //    public List<AnnualDTO> selectedAnnaul(Criteria cri){
 //        System.out.println("cri ==========================> " + cri);

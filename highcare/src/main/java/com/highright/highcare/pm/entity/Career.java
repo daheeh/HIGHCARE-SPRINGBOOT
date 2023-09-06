@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -21,6 +19,7 @@ import java.sql.Date;
 public class Career {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CAR_NO")
     private Integer carNo;
 
@@ -39,6 +38,13 @@ public class Career {
     @Column(name = "JOB")
     private String job;
 
-    @Column(name = "EMP_NO")
-    private int empNo;
+//    @Column(name = "EMP_NO")
+//    private int empNo;
+
+//    @OneToMany(mappedBy = "career")
+//    private List<PmEmployee> employees;
+
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO")
+    private PmEmployee employees;
 }
