@@ -57,7 +57,7 @@ public class ApprovalBizService {
     /* 전자결재 - 업무: biz1 기안서 */
     @Transactional
     public Boolean insertApvFormWithLines(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
-        log.info("[ApprovalService] biz1-insertApvForm --------------- 시작 ");
+        log.info("[ApprovalService] Biz1-insertApvForm --------------- 기안서 상신 start ");
         log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
         log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
         log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
@@ -75,13 +75,12 @@ public class ApprovalBizService {
             savedApvForm.setApvLines(apvLineList);
             System.out.println("apvLineList = " + apvLineList);
 
-            // 첨부파일 등록을 위해 서비스로 DTO전달
-            List<ApvFile> apvFiles = new ArrayList<>();
+            // 첨부파일 등록
             if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
-                apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTO);
+                List<ApvFile> apvFiles = approvalService.insertFiles(savedApvForm.getApvNo(), apvFileDTO);
+                savedApvForm.setApvFiles(apvFiles);
+                System.out.println("apvFiles = " + apvFiles);
             }
-            savedApvForm.setApvFiles(apvFiles);
-            System.out.println("apvFiles = " + apvFiles);
 
 
             // 승인 상태 확인 후 결재 상태 변경
@@ -90,10 +89,10 @@ public class ApprovalBizService {
                 apvFormRepository.updateApvStatusToCompleted(savedApvForm.getApvNo());
             }
 
-            log.info("[ApprovalService] biz1-insertApvForm --------------- 종료 ");
+            log.info("[ApprovalService] Biz1-insertApvForm --------------- 기안서 상신 end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] 오류 발생 - biz1-insertApvForm : " + e.getMessage());
+            log.error("[ApprovalService] Error - Biz1-insertApvForm : " + e.getMessage());
             return false;
         }
     }
@@ -101,7 +100,7 @@ public class ApprovalBizService {
     /* 전자결재 - 업무: biz1 기안서 수정 */
     @Transactional
     public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalService] biz1-putApvFormWithLines --------------- start ");
+        log.info("[ApprovalService] Biz1-putApvFormWithLines --------------- start ");
         log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
 
         try {
@@ -126,10 +125,10 @@ public class ApprovalBizService {
 
 
 
-            log.info("[ApprovalService] biz1-putApvFormWithLines --------------- end ");
+            log.info("[ApprovalService] Biz1-putApvFormWithLines --------------- end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error biz1-putApvFormWithLines : " + e.getMessage());
+            log.error("[ApprovalService] Error Biz1-putApvFormWithLines : " + e.getMessage());
             return false;
         }
     }
@@ -161,15 +160,14 @@ public class ApprovalBizService {
 
     /* 전자결재 - 업무: biz2 회의록 */
     @Transactional
-    public Boolean insertApvMeetingLog(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalHrmService] Biz2-insertApvMeetingLog --------------- 시작 ");
-        log.info("[ApprovalHrmService] Biz2 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+    public Boolean insertApvMeetingLog(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+        log.info("[ApprovalHrmService] Biz2-insertApvMeetingLog --------------- 회의록 상신 start ");
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
 
         try {
-            // ApvFormWithLinesDTO에서 필요한 데이터 추출
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvMeetingLogDTO> apvMeetingLogDTO = apvFormDTO.getApvMeetingLogs();
-            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
             // ApvFormMain을 저장하고 생성된 ApvNo를 가져오기
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
@@ -190,7 +188,7 @@ public class ApprovalBizService {
             apvMeetingLogList = apvMeetingLogRepository.saveAll(apvMeetingLogList);
 
             // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo를 설정
-            List<ApvLine> apvLineList = apvLineDTO.stream()
+            List<ApvLine> apvLineList = apvLineDTOs.stream()
                     .map(dto -> {
                         ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
                         apvLine.setApvNo(apvNo);
@@ -198,14 +196,24 @@ public class ApprovalBizService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvLine 엔티티를 ApvFormMain에 설정
+            // 첨부파일 등록을 위해 서비스로 DTO전달
+            List<ApvFile> apvFiles = new ArrayList<>();
+            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            }
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+
+            // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
             apvFormMain.setApvLines(apvLineList);
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFormMain = " + apvFormMain);
 
             // 승인 상태를 확인하고 업데이트
             if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
                 apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
-            log.info("[ApprovalService] Biz2 insertApvMeetingLog --------------- end ");
+            log.info("[ApprovalService] Biz2 insertApvMeetingLog --------------- 회의록 상신 end ");
             return true;
         } catch (Exception e) {
             log.error("[ApprovalService] Error Biz2 insertApvMeetingLog : " + e.getMessage());
@@ -216,15 +224,14 @@ public class ApprovalBizService {
 
     /* 전자결재 - 업무 : biz3 출장신청서 */
     @Transactional
-    public Boolean insertApvBusinessTrip(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalHrmService] Biz3-insertApvBusinessTrip --------------- start ");
-        log.info("[ApprovalHrmService] Biz3 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+    public Boolean insertApvBusinessTrip(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+        log.info("[ApprovalHrmService] Biz3-insertApvBusinessTrip --------------- 출장신청서 상신 start ");
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
 
         try {
-            // ApvFormWithLinesDTO에서 필요한 데이터 추출
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvBusinessTripDTO> apvBusinessTripDTO = apvFormDTO.getApvBusinessTrips();
-            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
             // ApvFormMain을 저장하고 생성된 ApvNo를 가져오기
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
@@ -245,7 +252,7 @@ public class ApprovalBizService {
             apvBusinessTripList = apvBusinessTripRepository.saveAll(apvBusinessTripList);
 
             // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo를 설정
-            List<ApvLine> apvLineList = apvLineDTO.stream()
+            List<ApvLine> apvLineList = apvLineDTOs.stream()
                     .map(dto -> {
                         ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
                         apvLine.setApvNo(apvNo);
@@ -253,14 +260,25 @@ public class ApprovalBizService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvLine 엔티티를 ApvFormMain에 설정
+            // 첨부파일 등록을 위해 서비스로 DTO전달
+            List<ApvFile> apvFiles = new ArrayList<>();
+            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            }
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+
+            // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
             apvFormMain.setApvLines(apvLineList);
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFormMain = " + apvFormMain);
 
             // 승인 상태를 확인하고 업데이트
             if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
                 apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
-            log.info("[ApprovalService] Biz3 insertApvBusinessTrip --------------- end ");
+
+            log.info("[ApprovalService] Biz3 insertApvBusinessTrip --------------- 출장신청서 상신 end ");
             return true;
         } catch (Exception e) {
             log.error("[ApprovalService] Error Biz3 insertApvBusinessTrip : " + e.getMessage());
@@ -270,7 +288,7 @@ public class ApprovalBizService {
 
     /* 전자결재 - 업무 : biz3 출장신청서 조회 */
     public List<ApvBusinessTripDTO> selectApvBusinessTrip(int empNo) {
-        log.info("[ApprovalService] biz3-searchApvFormWithLines --------------- start ");
+        log.info("[ApprovalService] Biz3-searchApvFormWithLines --------------- 출장신청서 조회 start ");
 
         List<ApvBusinessTrip> apvBusinessTripList = apvBusinessTripRepository.findByEmpNo(empNo);
 
@@ -288,7 +306,7 @@ public class ApprovalBizService {
             apvBusinessTripDTOList.add(apvBusinessTripDTO);
         }
         System.out.println("apvBusinessTripDTOList = " + apvBusinessTripDTOList);
-        log.info("[ApprovalService] biz3-searchApvFormWithLines --------------- 끝 ");
+        log.info("[ApprovalService] Biz3-searchApvFormWithLines --------------- 출장신청서 조회  end");
 
         // DTO 객체들의 목록을 반환
         return apvBusinessTripDTOList;
