@@ -5,6 +5,9 @@ import com.highright.highcare.approval.entity.*;
 
 import com.highright.highcare.approval.repository.*;
 import com.highright.highcare.common.Criteria;
+import com.highright.highcare.reservation.dto.ResourceFileDTO;
+import com.highright.highcare.reservation.entity.ResourceFile;
+import com.highright.highcare.util.FileUploadUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
@@ -336,47 +339,42 @@ public class ApprovalService {
     public List<ApvFile> insertFiles(Long apvNo, List<MultipartFile> apvFileDTO) {
         System.out.println("insertFiles =============================== ");
         System.out.println("apvFileDTO = " + apvFileDTO);
-        List<ApvFile> apvFiles = new ArrayList<>();
-        System.out.println("apvFiles = " + apvFiles);
 
-        // 디렉터리가 존재하지 않으면 필요시 생성합니다.
+        List<ApvFile> apvFiles = new ArrayList<>();
+
+        // 디렉토리가 존재하지 않으면 생성합니다.
         File directory = new File(FILE_DIR);
         if (!directory.exists()) {
             directory.mkdirs();
         }
-        System.out.println("directory = " + directory);
 
         for (MultipartFile multipartFile : apvFileDTO) {
             try {
-                // 고유한 파일 이름을 생성
-                String fileName = UUID.randomUUID().toString().replace("-", "") + "_" + multipartFile.getOriginalFilename();
+                String fileName = UUID.randomUUID().toString().replace("-", "");
+                String replaceFileName = null;
+                // 파일 저장
+                replaceFileName = FileUploadUtils.saveFile(FILE_DIR, fileName, multipartFile);
+                String saveFileUrl = FileUploadUtils.saveFile(FILE_DIR, fileName, multipartFile);
+                String originalFileName = multipartFile.getOriginalFilename();
 
-                // 파일이 저장될 경로를 정의
-                String filePath = FILE_DIR + File.separator + fileName;
-
-                // 서버에 새 파일을 생성
-                File file = new File(filePath);
-
-                // 파일을 저장
-                multipartFile.transferTo(file);
-
-                // ApvFile 객체를 생성하고 필요한 정보를 설정
+                // ApvFile 엔티티 생성 및 저장
                 ApvFile apvFile = new ApvFile();
                 apvFile.setApvNo(apvNo);
-                apvFile.setOriginalFileName(multipartFile.getOriginalFilename());
-                apvFile.setSavedFileName(fileName);
-                apvFile.setFileUrl(FILE_URL + fileName);
-                apvFiles.add(apvFile); // 데이터베이스 삽입을 위해 ApvFile 객체를 리스트에 추가
+                apvFile.setSavedFileName(replaceFileName);
+                apvFile.setOriginalFileName(originalFileName);
 
-                System.out.println("apvFiles1111111111111 = " + apvFiles);
+                apvFiles.add(apvFile); // 리스트에 추가
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                // 예외 처리
+//                throw new RuntimeException(e);
+                e.printStackTrace(); // 파일 등록 실패하면 기안 실패하는 걸로 수정해야함
             }
+
         }
-        System.out.println("apvFiles222222222222222222 = " + apvFiles);
         return apvFiles;
     }
+
 
     // 기안 수정
     @Transactional

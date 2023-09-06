@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -50,17 +51,13 @@ public class ApprovalHrmService {
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @Transactional
     public Boolean insertApvVacation(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
-//    public Boolean insertApvVacation(ApvFormWithLinesDTO apvFormWithLinesDTO, List<MultipartFile> apvFileDTO) {
-        log.info("[ApprovalHrmService] hrm1-insertApvVacation --------------- start ");
-//        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
-        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvLineDTOs);
-        log.info("[ApprovalHrmService] hrm1 apvFormWithLinesDTO {}", apvFileDTO);
+        log.info("[ApprovalService] Hrm1-insertApvVacation --------------- 연차신청서 상신 start ");
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
 
         try {
-            // ApvFormWithLinesDTO에서 필요한 데이터 추출
-//            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvVacationDTO> apvVacationDTO = apvFormDTO.getApvVacations();
-//            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
             // ApvFormMain을 저장하고 생성된 ApvNo를 가져오기
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
@@ -68,8 +65,7 @@ public class ApprovalHrmService {
             Long apvNo = apvFormMain.getApvNo();
 
             // ApvVacationDTO를 ApvVacation 엔티티로 매핑하고 ApvNo를 설정
-//            List<ApvVacation> apvVacationList = apvVacationDTO.stream()
-            List<ApvVacation> apvVacationList = apvFormDTO.getApvVacations().stream()
+            List<ApvVacation> apvVacationList = apvVacationDTO.stream()
                     .map(item -> {
                         ApvVacation apvVacation = modelMapper.map(item, ApvVacation.class);
                         apvVacation.setApvNo(apvNo);
@@ -90,9 +86,12 @@ public class ApprovalHrmService {
                     .collect(Collectors.toList());
 
             // 첨부파일 등록을 위해 서비스로 DTO전달
-            List<ApvFile> apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            List<ApvFile> apvFiles = new ArrayList<>();
+            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            }
+            apvFormMain.setApvFiles(apvFiles);
             System.out.println("apvFiles = " + apvFiles);
-
 
             // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
             apvFormMain.setApvLines(apvLineList);
@@ -104,10 +103,10 @@ public class ApprovalHrmService {
                 apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
 
-            log.info("[ApprovalService] hrm1 insertApvVacation --------------- end ");
+            log.info("[ApprovalService] Hrm1 insertApvVacation --------------- 연차신청서 상신 end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error hrm1 insertApvVacation : " + e.getMessage());
+            log.error("[ApprovalService] Error Hrm1 insertApvVacation : " + e.getMessage());
             return false;
         }
     }
@@ -150,15 +149,15 @@ public class ApprovalHrmService {
     /* 전자결재 - 인사 : hrm3 서류발급신청서 */
 
     @Transactional
-    public Boolean insertApvIssuance(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalHrmService] hrm3-insertApvIssuance --------------- start ");
-        log.info("[ApprovalHrmService] hrm3 apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+    public Boolean insertApvIssuance(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+        log.info("[ApprovalService] Hrm3-insertApvVacation --------------- 서류발급신청서 상신 start ");
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
+
 
         try {
-            // ApvFormWithLinesDTO에서 필요한 데이터 추출
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
             List<ApvIssuanceDTO> apvIssuanceDTO = apvFormDTO.getApvIssuances();
-            List<ApvLineDTO> apvLineDTO = apvFormWithLinesDTO.getApvLineDTOs();
 
             // ApvFormMain을 저장하고 생성된 ApvNo를 가져오기
             ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
@@ -179,7 +178,7 @@ public class ApprovalHrmService {
             apvIssuanceList = apvIssuanceRepository.saveAll(apvIssuanceList);
 
             // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo를 설정
-            List<ApvLine> apvLineList = apvLineDTO.stream()
+            List<ApvLine> apvLineList = apvLineDTOs.stream()
                     .map(dto -> {
                         ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
                         apvLine.setApvNo(apvNo);
@@ -187,18 +186,28 @@ public class ApprovalHrmService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvLine 엔티티를 ApvFormMain에 설정
+            // 첨부파일 등록을 위해 서비스로 DTO전달
+            List<ApvFile> apvFiles = new ArrayList<>();
+            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            }
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+
+            // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
             apvFormMain.setApvLines(apvLineList);
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFormMain = " + apvFormMain);
 
             // 승인 상태를 확인하고 업데이트
             if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
                 apvFormRepository.updateApvStatusToCompleted(apvNo);
             }
 
-            log.info("[ApprovalService] hrm3 insertApvIssuance --------------- end ");
+            log.info("[ApprovalService] Hrm3 insertApvIssuance --------------- 서류발급신청서 상신 end ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error hrm3 insertApvIssuance : " + e.getMessage());
+            log.error("[ApprovalService] Error Hrm3 insertApvIssuance : " + e.getMessage());
             return false;
         }
     }
