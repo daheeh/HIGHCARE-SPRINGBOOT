@@ -3,6 +3,7 @@ package com.highright.highcare.reservation.controller;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.reservation.dto.ResourceCategoryDTO;
 import com.highright.highcare.reservation.dto.ResourceDTO;
+import com.highright.highcare.reservation.dto.ResourceReservationStatusDTO;
 import com.highright.highcare.reservation.service.ResService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -52,9 +53,13 @@ public class ReservationController {
     }
 
     @GetMapping("dateRes")
-    public ResponseEntity<ResponseDTO> selectDateRes(@RequestParam(name = "reservationDate")java.sql.Date reservationDate){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "예약 시간 조회 성공", resService.selectDate(reservationDate)));
+    public ResponseEntity<ResponseDTO> selectDateRes(@RequestParam(name = "reservationDate")String reservationDate ,@RequestParam(name = "resourceCode")int resourceCode){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "예약 시간 조회 성공", resService.selectDate(reservationDate,resourceCode)));
     }
 
-
+    @PostMapping("/status")
+    public ResponseEntity<ResponseDTO> insertDateRes(@RequestBody ResourceReservationStatusDTO resourceReservationStatusDTO) {
+        System.out.println("reservationDate : " + resourceReservationStatusDTO.getReservationDate());
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "예약 성공", resService.insertResStatus(resourceReservationStatusDTO)));
     }
+}

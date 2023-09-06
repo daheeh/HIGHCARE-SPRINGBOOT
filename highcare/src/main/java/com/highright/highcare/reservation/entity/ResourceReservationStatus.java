@@ -7,6 +7,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_RESOURCE_RESERVATION_STATUS")
+@SequenceGenerator(
+        name = "RES_STATUS_SEQ_GENERATOR",
+        sequenceName = "SEQ_RESOURCE_STATUS",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,6 +20,10 @@ import javax.persistence.*;
 public class ResourceReservationStatus {
     @Id
     @Column(name = "STATUS_CODE")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "RES_STATUS_SEQ_GENERATOR"
+    )
     private int statusCode;
     @Column(name = "RESERVATION_STATUS")
     private String reservationStatus;
@@ -25,7 +34,7 @@ public class ResourceReservationStatus {
     @Column(name = "REASON")
     private String reason;
     @Column(name = "RESERVATION_DATE")
-    private java.sql.Date reservationDate;
+    private String  reservationDate;
     @ManyToOne
     @JoinColumn(name = "EMP_NO")
     private BulletinEmployee bulletinEmployee;
