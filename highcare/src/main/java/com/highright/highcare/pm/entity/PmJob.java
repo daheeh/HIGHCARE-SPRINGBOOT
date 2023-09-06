@@ -44,16 +44,5 @@ public class PmJob {
 //    private PmEmployee employees;
 
 
-    @Override
-    public String toString() {
-        return "PmJob{" +
-                "jobCode=" + jobCode +
-                ", name='" + name + '\'' +
-                ", upperJobCode=" + upperJobCode +
-                ", upperJobName='" + upperJobName + '\'' +
-                ", parent=" + parent +
-                ", children=" + children +
-//                ", employees=" + employees +
-                '}';
-    }
+
 }

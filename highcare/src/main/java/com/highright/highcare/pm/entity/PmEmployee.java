@@ -1,112 +1,3 @@
-//package com.highright.highcare.pm.entity;
-//
-//
-//import lombok.*;
-//
-//import javax.persistence.*;
-//import java.sql.Date;
-//import java.util.List;
-//
-//
-//@Entity
-//@Table(name="TBL_EMPLOYEE")
-//@SequenceGenerator(
-//        name="EMPLOYEE_SEQ_GENERATOR",
-//        sequenceName = "SEQ_EMPLOYEE_CODE",
-//        initialValue = 1, allocationSize = 1
-//)
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Getter
-//@Setter
-////@NamedEntityGraph(name = "employees-with-related-entities",
-////        attributeNodes = {
-////                @NamedAttributeNode("military")
-////        })
-//public class PmEmployee {
-//    @Id
-//    @Column(name = "EMP_NO")
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "EMPLOYEE_SEQ_GENERATOR"
-//    )
-//    private int empNo;
-//
-//    @Column(name = "EMP_NAME")
-//    private String empName;
-//
-//    @Column(name = "EMAIL")
-//    private String empEmail;
-//
-//    @Column(name = "PHONE")
-//    private String phone;
-//
-//    @Column(name = "RESIDENT_NO")
-//    private String residentNo;
-//
-//    @Column(name = "START_DATE")
-//    private Date startDate;
-//
-//    @Column(name = "END_DATE", nullable = true)
-//    private Date endDate;
-//
-//    @Column(name = "IS_RESIGNATION")
-//    private char isResignation;
-//
-//    @Column(name = "DEPT_CODE")
-//    private int deptCode;
-//
-//    @Column(name = "ADDRESS")
-//    private String address;
-//
-//    @Column(name = "EDUCATION")
-//    private String education;
-//
-//    @Column(name = "TELEPHONE")
-//    private String telephone;
-//
-//    @ManyToOne
-//    @JoinColumn(name="JOB_CODE")
-//    private PmJob job;
-//
-////    @OneToMany
-////    @JoinColumn(name = )
-////    private List<Military> military;
-////
-////    @OneToMany(mappedBy = "employees")
-////    private List<Career> career;
-////
-////    @OneToMany(mappedBy = "employees")
-////    private List<Certification> certification;
-//
-//    //    @Column(name="JOB_CODE")
-//    //    private Integer job;
-//
-//
-//    @Override
-//    public String toString() {
-//        return "PmEmployee{" +
-//                "empNo=" + empNo +
-//                ", empName='" + empName + '\'' +
-//                ", empEmail='" + empEmail + '\'' +
-//                ", phone='" + phone + '\'' +
-//                ", residentNo='" + residentNo + '\'' +
-//                ", startDate=" + startDate +
-//                ", endDate=" + endDate +
-//                ", isResignation=" + isResignation +
-//                ", deptCode=" + deptCode +
-//                ", address='" + address + '\'' +
-//                ", education='" + education + '\'' +
-//                ", telephone='" + telephone + '\'' +
-//                ", job=" + job +
-////                ", military=" + military +
-////                ", career=" + career +
-////                ", certification=" + certification +
-//                '}';
-//    }
-//}
-//
-// 이게 여태한거..
 package com.highright.highcare.pm.entity;
 
 
@@ -128,6 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+//@NamedEntityGraph(name = "employees-with-related-entities",
+//        attributeNodes = {
+//                @NamedAttributeNode("military")
+//        })
 public class PmEmployee {
     @Id
     @Column(name = "EMP_NO")
@@ -152,7 +47,7 @@ public class PmEmployee {
     @Column(name = "START_DATE")
     private Date startDate;
 
-    @Column(name = "END_DATE")
+    @Column(name = "END_DATE", nullable = true)
     private Date endDate;
 
     @Column(name = "IS_RESIGNATION")
@@ -174,17 +69,6 @@ public class PmEmployee {
     @JoinColumn(name="JOB_CODE")
     private PmJob job;
 
-//    @ManyToOne
-//    @JoinColumn(name = "MIL_NO")
-//    private Military milNo;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "CER_NO")
-//    private Certification certifications;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "CAR_NO")
-//    private Career careers;
     @OneToMany(mappedBy = "employees")
     private List<Military> military;
 
@@ -194,4 +78,11 @@ public class PmEmployee {
     @OneToMany(mappedBy = "employees")
     private List<Certification> certification;
 
+    //    @Column(name="JOB_CODE")
+    //    private Integer job;
+
+
+
 }
+
+

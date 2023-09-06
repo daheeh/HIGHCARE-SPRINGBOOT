@@ -210,7 +210,7 @@ public class EmployeeService {
             for (CareerDTO careerDTO : pmEmployeeDTO.getCareer()) {
                 Career career = modelMapper.map(careerDTO, Career.class);
                 // PmEmployee와 연관 설정
-//                career.setEmployees(insertPmEmployee);
+                career.setEmployees(insertPmEmployee);
 
                 careerRepository.save(career);
             }
@@ -219,7 +219,7 @@ public class EmployeeService {
             for (CertificationDTO certificationDTO : pmEmployeeDTO.getCertification()) {
                 Certification certification = modelMapper.map(certificationDTO, Certification.class);
                 // PmEmployee와 연관 설정
-//                certification.setEmployees(insertPmEmployee);
+                certification.setEmployees(insertPmEmployee);
                 certificationRepository.save(certification);
             }
 
@@ -227,7 +227,7 @@ public class EmployeeService {
             for (MilitaryDTO militaryDTO : pmEmployeeDTO.getMilitary()) {
                 Military military = modelMapper.map(militaryDTO, Military.class);
                 // PmEmployee와 연관 설정
-//                military.setEmployees(insertPmEmployee);
+                military.setEmployees(insertPmEmployee);
                 militaryRepository.save(military);
             }
 
