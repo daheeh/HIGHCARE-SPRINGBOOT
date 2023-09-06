@@ -1,5 +1,6 @@
 package com.highright.highcare.auth.entity;
 
+import com.highright.highcare.chatting.service.ADMAccountEntityListener;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@EntityListeners(ADMAccountEntityListener.class)
 public class ADMAccount {
 
     @Id

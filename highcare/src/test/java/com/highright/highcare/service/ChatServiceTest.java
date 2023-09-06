@@ -1,7 +1,5 @@
 package com.highright.highcare.service;
 
-import com.highright.highcare.chatting.Entity.Chat;
-import com.highright.highcare.chatting.Entity.Room;
 import com.highright.highcare.chatting.repository.ChatRepository;
 import com.highright.highcare.chatting.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;

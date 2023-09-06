@@ -19,7 +19,7 @@ public class ReJob {
     @Column(name="JOB_CODE")
     private int reJobCode;
 
-    @Column(name="NAME")
+    @Column(name="JOB_NAME")
     private String jobName;
 
     @Column(name = "UPPER_JOB_CODE", nullable = true)

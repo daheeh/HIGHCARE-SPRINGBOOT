@@ -19,9 +19,9 @@
     <schema id="3" parent="1" name="PUBLIC">
       <CreatedTimestamp>2019-02-04.13:45:23</CreatedTimestamp>
       <DbLinksHash>982955336</DbLinksHash>
-      <IntrospectionL1Timestamp>2023-08-31.21:40:34</IntrospectionL1Timestamp>
-      <IntrospectionL2Timestamp>2023-08-31.21:40:34</IntrospectionL2Timestamp>
-      <IntrospectionL3Timestamp>2023-08-31.21:40:34</IntrospectionL3Timestamp>
+      <IntrospectionL1Timestamp>2023-09-02.00:07:37</IntrospectionL1Timestamp>
+      <IntrospectionL2Timestamp>2023-09-02.00:07:37</IntrospectionL2Timestamp>
+      <IntrospectionL3Timestamp>2023-09-02.00:07:37</IntrospectionL3Timestamp>
       <IntrospectionVersion>200820</IntrospectionVersion>
       <ModifiedTimestamp>2023-05-01.20:43:07</ModifiedTimestamp>
       <ObjectId>1</ObjectId>
@@ -147,14 +147,14 @@
       <ObjectId>2147483638</ObjectId>
     </schema>
     <schema id="44" parent="1" name="C##HIGHCARE">
-      <CommentsHash>18080207525073</CommentsHash>
+      <CommentsHash>17998282500608</CommentsHash>
       <CreatedTimestamp>2023-08-24.00:34:02</CreatedTimestamp>
       <Current>1</Current>
-      <IntrospectionL1Timestamp>2023-08-31.21:40:34</IntrospectionL1Timestamp>
-      <IntrospectionL2Timestamp>2023-08-31.21:40:34</IntrospectionL2Timestamp>
-      <IntrospectionL3Timestamp>2023-08-31.21:40:34</IntrospectionL3Timestamp>
+      <IntrospectionL1Timestamp>2023-09-02.00:07:37</IntrospectionL1Timestamp>
+      <IntrospectionL2Timestamp>2023-09-02.00:07:37</IntrospectionL2Timestamp>
+      <IntrospectionL3Timestamp>2023-09-02.00:07:37</IntrospectionL3Timestamp>
       <IntrospectionVersion>200820</IntrospectionVersion>
-      <ModifiedTimestamp>2023-08-31.21:40:25</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-09-02.00:07:36</ModifiedTimestamp>
       <ObjectId>198</ObjectId>
     </schema>
     <schema id="45" parent="1" name="C##JONGGAKROAD">
@@ -56868,7 +56868,15 @@
       <ObjectId>238893</ObjectId>
       <SequenceIdentity>1(81)</SequenceIdentity>
     </sequence>
-    <sequence id="7245" parent="44" name="SEQ_COMMENT_CODE">
+    <sequence id="7245" parent="44" name="SEQ_CHTAROOM_ID">
+      <CacheSize>20</CacheSize>
+      <CreatedTimestamp>2023-09-01.23:44:51</CreatedTimestamp>
+      <DetailsLevel>2</DetailsLevel>
+      <ModifiedTimestamp>2023-09-01.23:44:51</ModifiedTimestamp>
+      <ObjectId>239809</ObjectId>
+      <SequenceIdentity>1(1)</SequenceIdentity>
+    </sequence>
+    <sequence id="7246" parent="44" name="SEQ_COMMENT_CODE">
       <CacheSize>20</CacheSize>
       <CreatedTimestamp>2023-08-28.23:55:44</CreatedTimestamp>
       <DetailsLevel>2</DetailsLevel>
@@ -56876,7 +56884,7 @@
       <ObjectId>238894</ObjectId>
       <SequenceIdentity>1(101)</SequenceIdentity>
     </sequence>
-    <sequence id="7246" parent="44" name="SEQ_MANAGEMENT_CODE">
+    <sequence id="7247" parent="44" name="SEQ_MANAGEMENT_CODE">
       <CacheSize>20</CacheSize>
       <CreatedTimestamp>2023-08-31.00:05:09</CreatedTimestamp>
       <DetailsLevel>2</DetailsLevel>
@@ -56884,7 +56892,7 @@
       <ObjectId>239351</ObjectId>
       <SequenceIdentity>1(81)</SequenceIdentity>
     </sequence>
-    <table id="7247" parent="44" name="TBL_ACCESS_MANAGER">
+    <table id="7248" parent="44" name="TBL_ACCESS_MANAGER">
       <Comment>접속관리</Comment>
       <CreatedTimestamp>2023-08-24.00:34:13</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56892,15 +56900,15 @@
       <ObjectId>237036</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7248" parent="44" name="TBL_ACCOUNT">
+    <table id="7249" parent="44" name="TBL_ACCOUNT">
       <Comment>일반계정</Comment>
       <CreatedTimestamp>2023-08-24.00:34:12</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2023-08-24.01:23:25</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-09-02.00:03:52</ModifiedTimestamp>
       <ObjectId>237030</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7249" parent="44" name="TBL_ACCOUNT_OAUTH">
+    <table id="7250" parent="44" name="TBL_ACCOUNT_OAUTH">
       <Comment>OAUTH계정</Comment>
       <CreatedTimestamp>2023-08-24.00:34:16</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56908,7 +56916,7 @@
       <ObjectId>237044</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7250" parent="44" name="TBL_ANNUAL">
+    <table id="7251" parent="44" name="TBL_ANNUAL">
       <Comment>연차조회</Comment>
       <CreatedTimestamp>2023-08-24.00:34:20</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56916,7 +56924,7 @@
       <ObjectId>237062</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7251" parent="44" name="TBL_APV_BUSINESS_TRIP">
+    <table id="7252" parent="44" name="TBL_APV_BUSINESS_TRIP">
       <Comment>출장신청서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:06</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56924,7 +56932,7 @@
       <ObjectId>237002</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7252" parent="44" name="TBL_APV_BUSINESS_TRIP_EXP">
+    <table id="7253" parent="44" name="TBL_APV_BUSINESS_TRIP_EXP">
       <Comment>출장경비신청서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:04</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56932,7 +56940,7 @@
       <ObjectId>236992</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7253" parent="44" name="TBL_APV_CORPORATE_CARD">
+    <table id="7254" parent="44" name="TBL_APV_CORPORATE_CARD">
       <Comment>법인카드사용상세내역</Comment>
       <CreatedTimestamp>2023-08-24.00:34:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56940,7 +56948,7 @@
       <ObjectId>237004</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7254" parent="44" name="TBL_APV_EXPFORM">
+    <table id="7255" parent="44" name="TBL_APV_EXPFORM">
       <Comment>지출결의서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:08</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56948,7 +56956,7 @@
       <ObjectId>237008</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7255" parent="44" name="TBL_APV_FAMILY_EVENT">
+    <table id="7256" parent="44" name="TBL_APV_FAMILY_EVENT">
       <Comment>경조금신청서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56956,7 +56964,7 @@
       <ObjectId>236984</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7256" parent="44" name="TBL_APV_FILE">
+    <table id="7257" parent="44" name="TBL_APV_FILE">
       <Comment>첨부파일</Comment>
       <CreatedTimestamp>2023-08-24.00:34:10</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56964,7 +56972,7 @@
       <ObjectId>237018</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7257" parent="44" name="TBL_APV_FORM">
+    <table id="7258" parent="44" name="TBL_APV_FORM">
       <Comment>대표결재서식</Comment>
       <CreatedTimestamp>2023-08-24.00:34:11</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56972,7 +56980,7 @@
       <ObjectId>237026</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7258" parent="44" name="TBL_APV_ISSUANCE">
+    <table id="7259" parent="44" name="TBL_APV_ISSUANCE">
       <Comment>서류발급신청서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:07</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56980,15 +56988,15 @@
       <ObjectId>237006</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7259" parent="44" name="TBL_APV_LINE">
+    <table id="7260" parent="44" name="TBL_APV_LINE">
       <Comment>결재라인</Comment>
       <CreatedTimestamp>2023-08-24.00:34:08</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2023-08-28.19:59:43</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-09-01.01:39:14</ModifiedTimestamp>
       <ObjectId>237010</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7260" parent="44" name="TBL_APV_MEETINGLOG">
+    <table id="7261" parent="44" name="TBL_APV_MEETINGLOG">
       <Comment>회의록</Comment>
       <CreatedTimestamp>2023-08-24.00:34:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -56996,7 +57004,7 @@
       <ObjectId>236998</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7261" parent="44" name="TBL_APV_OVERTIME">
+    <table id="7262" parent="44" name="TBL_APV_OVERTIME">
       <Comment>연장근무신청서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57004,7 +57012,7 @@
       <ObjectId>236986</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7262" parent="44" name="TBL_APV_VACATION">
+    <table id="7263" parent="44" name="TBL_APV_VACATION">
       <Comment>연차신청서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57012,7 +57020,7 @@
       <ObjectId>237016</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7263" parent="44" name="TBL_AUTH">
+    <table id="7264" parent="44" name="TBL_AUTH">
       <Comment>권한</Comment>
       <CreatedTimestamp>2023-08-24.00:34:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57020,7 +57028,7 @@
       <ObjectId>236996</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7264" parent="44" name="TBL_AUTH_ACCOUNT">
+    <table id="7265" parent="44" name="TBL_AUTH_ACCOUNT">
       <Comment>계정별권한</Comment>
       <CreatedTimestamp>2023-08-24.00:34:12</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57028,7 +57036,7 @@
       <ObjectId>237032</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7265" parent="44" name="TBL_AUTH_TOKEN_1">
+    <table id="7266" parent="44" name="TBL_AUTH_TOKEN_1">
       <Comment>인증토큰_1</Comment>
       <CreatedTimestamp>2023-08-24.00:34:02</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57036,7 +57044,7 @@
       <ObjectId>236982</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7266" parent="44" name="TBL_BSCD">
+    <table id="7267" parent="44" name="TBL_BSCD">
       <Comment>명함수집</Comment>
       <CreatedTimestamp>2023-08-24.00:34:06</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57044,7 +57052,7 @@
       <ObjectId>237000</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7267" parent="44" name="TBL_BSNS_LOG">
+    <table id="7268" parent="44" name="TBL_BSNS_LOG">
       <Comment>업무일지</Comment>
       <CreatedTimestamp>2023-08-24.00:34:03</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57052,7 +57060,7 @@
       <ObjectId>236988</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7268" parent="44" name="TBL_BULLETIN_BOARD">
+    <table id="7269" parent="44" name="TBL_BULLETIN_BOARD">
       <Comment>게시판</Comment>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57060,7 +57068,7 @@
       <ObjectId>237084</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7269" parent="44" name="TBL_BULLETIN_CATEGORIES">
+    <table id="7270" parent="44" name="TBL_BULLETIN_CATEGORIES">
       <Comment>게시판 카테고리</Comment>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57068,7 +57076,7 @@
       <ObjectId>237082</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7270" parent="44" name="TBL_BULLETIN_FILE">
+    <table id="7271" parent="44" name="TBL_BULLETIN_FILE">
       <Comment>게시판 파일</Comment>
       <CreatedTimestamp>2023-08-24.00:34:05</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57076,7 +57084,7 @@
       <ObjectId>236994</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7271" parent="44" name="TBL_CALENDER">
+    <table id="7272" parent="44" name="TBL_CALENDER">
       <Comment>캘린더</Comment>
       <CreatedTimestamp>2023-08-24.00:34:18</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57084,7 +57092,7 @@
       <ObjectId>237058</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7272" parent="44" name="TBL_CAREER">
+    <table id="7273" parent="44" name="TBL_CAREER">
       <Comment>경력사항</Comment>
       <CreatedTimestamp>2023-08-24.00:34:20</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57092,7 +57100,7 @@
       <ObjectId>237064</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7273" parent="44" name="TBL_CERTIFICATION">
+    <table id="7274" parent="44" name="TBL_CERTIFICATION">
       <Comment>자격증</Comment>
       <CreatedTimestamp>2023-08-24.00:34:17</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57100,7 +57108,7 @@
       <ObjectId>237054</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7274" parent="44" name="TBL_CHANGE_PASSWORD">
+    <table id="7275" parent="44" name="TBL_CHANGE_PASSWORD">
       <Comment>비밀번호변경이력</Comment>
       <CreatedTimestamp>2023-08-24.00:34:15</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57108,15 +57116,15 @@
       <ObjectId>237040</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7275" parent="44" name="TBL_CHATROOMS">
+    <table id="7276" parent="44" name="TBL_CHATROOMS">
       <Comment>채팅방</Comment>
       <CreatedTimestamp>2023-08-24.00:34:16</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2023-08-24.01:04:46</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-09-02.00:07:36</ModifiedTimestamp>
       <ObjectId>237046</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7276" parent="44" name="TBL_CHAT_MESSAGE">
+    <table id="7277" parent="44" name="TBL_CHAT_MESSAGE">
       <Comment>채팅메세지</Comment>
       <CreatedTimestamp>2023-08-24.00:34:16</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57124,7 +57132,7 @@
       <ObjectId>237048</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7277" parent="44" name="TBL_CNS_LOG">
+    <table id="7278" parent="44" name="TBL_CNS_LOG">
       <Comment>상담일지</Comment>
       <CreatedTimestamp>2023-08-24.00:34:04</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57132,7 +57140,7 @@
       <ObjectId>236990</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7278" parent="44" name="TBL_COMMENT">
+    <table id="7279" parent="44" name="TBL_COMMENT">
       <Comment>댓글</Comment>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57140,7 +57148,7 @@
       <ObjectId>237080</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7279" parent="44" name="TBL_DEPARTMENT">
+    <table id="7280" parent="44" name="TBL_DEPARTMENT">
       <Comment>부서</Comment>
       <CreatedTimestamp>2023-08-24.00:34:24</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57148,23 +57156,23 @@
       <ObjectId>237088</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7280" parent="44" name="TBL_EMPLOYEE">
+    <table id="7281" parent="44" name="TBL_EMPLOYEE">
       <Comment>사원</Comment>
       <CreatedTimestamp>2023-08-24.00:34:11</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2023-08-24.01:06:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-09-01.02:30:55</ModifiedTimestamp>
       <ObjectId>237028</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7281" parent="44" name="TBL_JOB">
+    <table id="7282" parent="44" name="TBL_JOB">
       <Comment>직급</Comment>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-09-01.02:31:11</ModifiedTimestamp>
       <ObjectId>237014</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7282" parent="44" name="TBL_LIST">
+    <table id="7283" parent="44" name="TBL_LIST">
       <Comment>참석자리스트</Comment>
       <CreatedTimestamp>2023-08-24.00:34:17</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57172,7 +57180,7 @@
       <ObjectId>237052</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7283" parent="44" name="TBL_LOGIN_FAIL">
+    <table id="7284" parent="44" name="TBL_LOGIN_FAIL">
       <Comment>로그인실패</Comment>
       <CreatedTimestamp>2023-08-24.00:34:15</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57180,7 +57188,7 @@
       <ObjectId>237038</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7284" parent="44" name="TBL_LOGIN_HISTORY">
+    <table id="7285" parent="44" name="TBL_LOGIN_HISTORY">
       <Comment>로그인</Comment>
       <CreatedTimestamp>2023-08-24.00:34:10</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57188,15 +57196,15 @@
       <ObjectId>237022</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7285" parent="44" name="TBL_MANAGEMENT">
+    <table id="7286" parent="44" name="TBL_MANAGEMENT">
       <Comment>근태관리</Comment>
       <CreatedTimestamp>2023-08-24.00:34:21</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2023-08-31.21:40:25</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-08-31.23:48:41</ModifiedTimestamp>
       <ObjectId>237068</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7286" parent="44" name="TBL_MENU">
+    <table id="7287" parent="44" name="TBL_MENU">
       <Comment>접근메뉴</Comment>
       <CreatedTimestamp>2023-08-24.00:34:15</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57204,7 +57212,7 @@
       <ObjectId>237042</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7287" parent="44" name="TBL_MENU_GROUP">
+    <table id="7288" parent="44" name="TBL_MENU_GROUP">
       <Comment>메뉴그룹</Comment>
       <CreatedTimestamp>2023-08-24.00:34:11</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57212,7 +57220,7 @@
       <ObjectId>237024</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7288" parent="44" name="TBL_MILITARY">
+    <table id="7289" parent="44" name="TBL_MILITARY">
       <Comment>병역</Comment>
       <CreatedTimestamp>2023-08-24.00:34:18</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57220,7 +57228,7 @@
       <ObjectId>237056</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7289" parent="44" name="TBL_MY_PROFILE">
+    <table id="7290" parent="44" name="TBL_MY_PROFILE">
       <Comment>프로필</Comment>
       <CreatedTimestamp>2023-08-24.00:34:19</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57228,7 +57236,7 @@
       <ObjectId>237060</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7290" parent="44" name="TBL_MY_PROFILE_FILE">
+    <table id="7291" parent="44" name="TBL_MY_PROFILE_FILE">
       <Comment>프로필사진파일</Comment>
       <CreatedTimestamp>2023-08-24.00:34:17</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57236,7 +57244,7 @@
       <ObjectId>237050</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7291" parent="44" name="TBL_NOTE_BOX">
+    <table id="7292" parent="44" name="TBL_NOTE_BOX">
       <Comment>쪽지함</Comment>
       <CreatedTimestamp>2023-08-24.00:34:10</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57244,7 +57252,7 @@
       <ObjectId>237020</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7292" parent="44" name="TBL_NOTE_MESSAGE">
+    <table id="7293" parent="44" name="TBL_NOTE_MESSAGE">
       <Comment>쪽지메세지</Comment>
       <CreatedTimestamp>2023-08-24.00:34:13</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57252,7 +57260,7 @@
       <ObjectId>237034</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7293" parent="44" name="TBL_OFFICIAL_LETTER">
+    <table id="7294" parent="44" name="TBL_OFFICIAL_LETTER">
       <Comment>공문</Comment>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57260,7 +57268,7 @@
       <ObjectId>237012</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7294" parent="44" name="TBL_RESOURCE">
+    <table id="7295" parent="44" name="TBL_RESOURCE">
       <Comment>자원</Comment>
       <CreatedTimestamp>2023-08-24.00:34:22</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57268,7 +57276,7 @@
       <ObjectId>237074</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7295" parent="44" name="TBL_RESOURCE_CATEGORY">
+    <table id="7296" parent="44" name="TBL_RESOURCE_CATEGORY">
       <Comment>자원 카테고리</Comment>
       <CreatedTimestamp>2023-08-24.00:34:22</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57276,7 +57284,7 @@
       <ObjectId>237078</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7296" parent="44" name="TBL_RESOURCE_FILE">
+    <table id="7297" parent="44" name="TBL_RESOURCE_FILE">
       <Comment>자원파일</Comment>
       <CreatedTimestamp>2023-08-24.00:34:21</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57284,7 +57292,7 @@
       <ObjectId>237070</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7297" parent="44" name="TBL_RESOURCE_RESERVATION_STATUS">
+    <table id="7298" parent="44" name="TBL_RESOURCE_RESERVATION_STATUS">
       <Comment>자원예약현황</Comment>
       <CreatedTimestamp>2023-08-24.00:34:22</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57292,7 +57300,7 @@
       <ObjectId>237072</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="7298" parent="44" name="TBL_WORK">
+    <table id="7299" parent="44" name="TBL_WORK">
       <Comment>업무 일정 관리</Comment>
       <CreatedTimestamp>2023-08-24.00:34:21</CreatedTimestamp>
       <DetailsLevel>3</DetailsLevel>
@@ -57300,80 +57308,80 @@
       <ObjectId>237066</ObjectId>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <column id="7299" parent="7247" name="ID">
+    <column id="7300" parent="7248" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7300" parent="7247" name="REGIST_DATE">
+    <column id="7301" parent="7248" name="REGIST_DATE">
       <Comment>회원가입일시</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7301" parent="7247" name="LOGIN_TOTAL_COUNT">
+    <column id="7302" parent="7248" name="LOGIN_TOTAL_COUNT">
       <Comment>누적로그인횟수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7302" parent="7247" name="LOGIN_FAIL_COUNT">
+    <column id="7303" parent="7248" name="LOGIN_FAIL_COUNT">
       <Comment>로그인연속실패횟수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7303" parent="7247" name="IS_LOCK">
+    <column id="7304" parent="7248" name="IS_LOCK">
       <Comment>계정잠금여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;N&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7304" parent="7247" name="IS_INACTIVE">
+    <column id="7305" parent="7248" name="IS_INACTIVE">
       <Comment>계정비활성화여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;N&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7305" parent="7247" name="EXPIRED_DATE">
+    <column id="7306" parent="7248" name="EXPIRED_DATE">
       <Comment>계정만료일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7306" parent="7247" name="IS_EXPIRED">
+    <column id="7307" parent="7248" name="IS_EXPIRED">
       <Comment>계정만료여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;N&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="7307" parent="7247" name="WITHDRAW_DATE">
+    <column id="7308" parent="7248" name="WITHDRAW_DATE">
       <Comment>계정탈퇴일시</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <column id="7308" parent="7247" name="IS_WITHDRAW">
+    <column id="7309" parent="7248" name="IS_WITHDRAW">
       <Comment>계정탈퇴여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;N&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <foreign-key id="7309" parent="7247" name="TBL_ACCESS_MANAGER_FK">
+    <foreign-key id="7310" parent="7248" name="TBL_ACCESS_MANAGER_FK">
       <ColNames>ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:53</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_ACCOUNT_PK</RefKeyName>
       <RefTableName>TBL_ACCOUNT</RefTableName>
     </foreign-key>
-    <index id="7310" parent="7247" name="TBL_ACCESS_MANAGER_PK">
+    <index id="7311" parent="7248" name="TBL_ACCESS_MANAGER_PK">
       <ColNames>ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:14</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:14</ModifiedTimestamp>
@@ -57381,51 +57389,56 @@
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7311" parent="7247" name="TBL_ACCESS_MANAGER_PK">
+    <key id="7312" parent="7248" name="TBL_ACCESS_MANAGER_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:14</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_ACCESS_MANAGER_PK</UnderlyingIndexName>
     </key>
-    <column id="7312" parent="7248" name="ID">
+    <column id="7313" parent="7249" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7313" parent="7248" name="EMP_NO">
+    <column id="7314" parent="7249" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7314" parent="7248" name="PASSWORD">
+    <column id="7315" parent="7249" name="PASSWORD">
       <Comment>회원비밀번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7315" parent="7248" name="IS_TEMP_PWD">
+    <column id="7316" parent="7249" name="IS_TEMP_PWD">
       <Comment>임시비밀번호여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;Y&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7316" parent="7248" name="PWD_EXPIRED_DATE">
+    <column id="7317" parent="7249" name="PWD_EXPIRED_DATE">
       <Comment>회원비밀번호만료일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <foreign-key id="7317" parent="7248" name="TBL_ACCOUNT_FK">
+    <column id="7318" parent="7249" name="AUTHNUMBER">
+      <Comment>인증번호</Comment>
+      <DasType>NUMBER(*)|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="7319" parent="7249" name="TBL_ACCOUNT_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:23:25</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7318" parent="7248" name="TBL_ACCOUNT_PK">
+    <index id="7320" parent="7249" name="TBL_ACCOUNT_PK">
       <ColNames>ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:12</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:12</ModifiedTimestamp>
@@ -57433,53 +57446,53 @@
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7319" parent="7248" name="TBL_ACCOUNT_PK">
+    <key id="7321" parent="7249" name="TBL_ACCOUNT_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:12</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_ACCOUNT_PK</UnderlyingIndexName>
     </key>
-    <column id="7320" parent="7249" name="OAUTH_ID">
+    <column id="7322" parent="7250" name="OAUTH_ID">
       <Comment>OAUTH아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7321" parent="7249" name="PROVIDER">
+    <column id="7323" parent="7250" name="PROVIDER">
       <Comment>인증서버명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7322" parent="7249" name="PROVIDE_EMAIL">
+    <column id="7324" parent="7250" name="PROVIDE_EMAIL">
       <Comment>정보제공이메일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7323" parent="7249" name="PROVIDE_NICKNAME">
+    <column id="7325" parent="7250" name="PROVIDE_NICKNAME">
       <Comment>정보제공이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7324" parent="7249" name="PROVIDE_NAME">
+    <column id="7326" parent="7250" name="PROVIDE_NAME">
       <Comment>정보제공이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7325" parent="7249" name="ID">
+    <column id="7327" parent="7250" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="7326" parent="7249" name="TBL_ACCOUNT_OAUTH_FK">
+    <foreign-key id="7328" parent="7250" name="TBL_ACCOUNT_OAUTH_FK">
       <ColNames>ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:44</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_ACCOUNT_PK</RefKeyName>
       <RefTableName>TBL_ACCOUNT</RefTableName>
     </foreign-key>
-    <index id="7327" parent="7249" name="TBL_ACCOUNT_OAUTH_PK">
+    <index id="7329" parent="7250" name="TBL_ACCOUNT_OAUTH_PK">
       <ColNames>OAUTH_ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:16</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:16</ModifiedTimestamp>
@@ -57487,74 +57500,74 @@
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7328" parent="7249" name="TBL_ACCOUNT_OAUTH_PK">
+    <key id="7330" parent="7250" name="TBL_ACCOUNT_OAUTH_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:16</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_ACCOUNT_OAUTH_PK</UnderlyingIndexName>
     </key>
-    <column id="7329" parent="7250" name="EMP_NO">
+    <column id="7331" parent="7251" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7330" parent="7250" name="BASIC_ANNUAL">
+    <column id="7332" parent="7251" name="BASIC_ANNUAL">
       <Comment>기본 연차 수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7331" parent="7250" name="USE_ANNUAL">
+    <column id="7333" parent="7251" name="USE_ANNUAL">
       <Comment>연차 사용 수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7332" parent="7250" name="ADD_ANNUAL">
+    <column id="7334" parent="7251" name="ADD_ANNUAL">
       <Comment>조정 연차 수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7333" parent="7250" name="TOTAL_ANNUAL">
+    <column id="7335" parent="7251" name="TOTAL_ANNUAL">
       <Comment>잔여 연차수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7334" parent="7250" name="REASON">
+    <column id="7336" parent="7251" name="REASON">
       <Comment>사유</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7335" parent="7250" name="ANN_NO">
+    <column id="7337" parent="7251" name="ANN_NO">
       <Comment>연차 코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7336" parent="7250" name="APV_NO">
+    <column id="7338" parent="7251" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="7337" parent="7250" name="TBL_ANNUAL_FK1">
+    <foreign-key id="7339" parent="7251" name="TBL_ANNUAL_FK1">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <foreign-key id="7338" parent="7250" name="TBL_ANNUAL_FK">
+    <foreign-key id="7340" parent="7251" name="TBL_ANNUAL_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7339" parent="7250" name="TBL_ANNUAL_PK">
+    <index id="7341" parent="7251" name="TBL_ANNUAL_PK">
       <ColNames>ANN_NO
 EMP_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:20</CreatedTimestamp>
@@ -57563,64 +57576,64 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7340" parent="7250" name="TBL_ANNUAL_PK">
+    <key id="7342" parent="7251" name="TBL_ANNUAL_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:20</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_ANNUAL_PK</UnderlyingIndexName>
     </key>
-    <column id="7341" parent="7251" name="BT_PURPOSE">
+    <column id="7343" parent="7252" name="BT_PURPOSE">
       <Comment>출장목적</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7342" parent="7251" name="START_DATE">
+    <column id="7344" parent="7252" name="START_DATE">
       <Comment>출장시작일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7343" parent="7251" name="END_DATE">
+    <column id="7345" parent="7252" name="END_DATE">
       <Comment>출장종료일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7344" parent="7251" name="BT_LOCATION">
+    <column id="7346" parent="7252" name="BT_LOCATION">
       <Comment>출장지</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7345" parent="7251" name="ITEMS_NO">
+    <column id="7347" parent="7252" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7346" parent="7251" name="APV_NO">
+    <column id="7348" parent="7252" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7347" parent="7251" name="START_TIME">
+    <column id="7349" parent="7252" name="START_TIME">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7348" parent="7251" name="END_TIME">
+    <column id="7350" parent="7252" name="END_TIME">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>8</Position>
     </column>
-    <foreign-key id="7349" parent="7251" name="TBL_APV_BUSINESS_TRIP_FK">
+    <foreign-key id="7351" parent="7252" name="TBL_APV_BUSINESS_TRIP_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:36</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7350" parent="7251" name="TBL_APV_BUSINESS_TRIP_PK">
+    <index id="7352" parent="7252" name="TBL_APV_BUSINESS_TRIP_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:07</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:07</ModifiedTimestamp>
@@ -57628,53 +57641,53 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7351" parent="7251" name="TBL_APV_BUSINESS_TRIP_PK">
+    <key id="7353" parent="7252" name="TBL_APV_BUSINESS_TRIP_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:07</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_BUSINESS_TRIP_PK</UnderlyingIndexName>
     </key>
-    <column id="7352" parent="7252" name="BT_PERIOD">
+    <column id="7354" parent="7253" name="BT_PERIOD">
       <Comment>출장기간</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="7353" parent="7252" name="BT_LOCATION">
+    <column id="7355" parent="7253" name="BT_LOCATION">
       <Comment>출장지</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7354" parent="7252" name="BT_NUMBER">
+    <column id="7356" parent="7253" name="BT_NUMBER">
       <Comment>출장인원</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7355" parent="7252" name="REF_APV_NO">
+    <column id="7357" parent="7253" name="REF_APV_NO">
       <Comment>관련기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7356" parent="7252" name="APV_NO">
+    <column id="7358" parent="7253" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7357" parent="7252" name="ITEMS_NO">
+    <column id="7359" parent="7253" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="7358" parent="7252" name="TBL_APV_BUSINESS_TRIP_EXP_FK">
+    <foreign-key id="7360" parent="7253" name="TBL_APV_BUSINESS_TRIP_EXP_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:35</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7359" parent="7252" name="TBL_APV_BUSINESS_TRIP_EXP_PK">
+    <index id="7361" parent="7253" name="TBL_APV_BUSINESS_TRIP_EXP_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:05</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:05</ModifiedTimestamp>
@@ -57682,66 +57695,66 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7360" parent="7252" name="TBL_APV_BUSINESS_TRIP_EXP_PK">
+    <key id="7362" parent="7253" name="TBL_APV_BUSINESS_TRIP_EXP_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:05</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_BUSINESS_TRIP_EXP_PK</UnderlyingIndexName>
     </key>
-    <column id="7361" parent="7253" name="ITEMS_NO">
+    <column id="7363" parent="7254" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7362" parent="7253" name="DETAILS">
+    <column id="7364" parent="7254" name="DETAILS">
       <Comment>내역</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7363" parent="7253" name="ACCOUNT">
+    <column id="7365" parent="7254" name="ACCOUNT">
       <Comment>계정과목</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7364" parent="7253" name="AMOUNT">
+    <column id="7366" parent="7254" name="AMOUNT">
       <Comment>금액</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7365" parent="7253" name="CARD_COMMENT">
+    <column id="7367" parent="7254" name="CARD_COMMENT">
       <Comment>적요</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7366" parent="7253" name="CARD_NO">
+    <column id="7368" parent="7254" name="CARD_NO">
       <Comment>카드번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7367" parent="7253" name="PAYMENT_MONTH">
+    <column id="7369" parent="7254" name="PAYMENT_MONTH">
       <Comment>결제월</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7368" parent="7253" name="APV_NO">
+    <column id="7370" parent="7254" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="7369" parent="7253" name="TBL_APV_CORPORATE_CARD_DETAIL_FK">
+    <foreign-key id="7371" parent="7254" name="TBL_APV_CORPORATE_CARD_DETAIL_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:36</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7370" parent="7253" name="TBL_APV_CORPORATE_CARD_DETAIL_PK">
+    <index id="7372" parent="7254" name="TBL_APV_CORPORATE_CARD_DETAIL_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:07</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:07</ModifiedTimestamp>
@@ -57749,84 +57762,84 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7371" parent="7253" name="TBL_APV_CORPORATE_CARD_DETAIL_PK">
+    <key id="7373" parent="7254" name="TBL_APV_CORPORATE_CARD_DETAIL_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:07</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_CORPORATE_CARD_DETAIL_PK</UnderlyingIndexName>
     </key>
-    <column id="7372" parent="7254" name="APV_NO">
+    <column id="7374" parent="7255" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7373" parent="7254" name="REQUEST_DATE">
+    <column id="7375" parent="7255" name="REQUEST_DATE">
       <Comment>지급요청일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7374" parent="7254" name="PAYEE">
+    <column id="7376" parent="7255" name="PAYEE">
       <Comment>지급처</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7375" parent="7254" name="BANK">
+    <column id="7377" parent="7255" name="BANK">
       <Comment>은행명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7376" parent="7254" name="ACCOUNTHOLDER">
+    <column id="7378" parent="7255" name="ACCOUNTHOLDER">
       <Comment>수취인</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7377" parent="7254" name="ACCOUNNUMBER">
+    <column id="7379" parent="7255" name="ACCOUNNUMBER">
       <Comment>계좌번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7378" parent="7254" name="ITEMS_NO">
+    <column id="7380" parent="7255" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7379" parent="7254" name="DETAILS">
+    <column id="7381" parent="7255" name="DETAILS">
       <Comment>내역</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="7380" parent="7254" name="ACCOUNT">
+    <column id="7382" parent="7255" name="ACCOUNT">
       <Comment>계정과목</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="7381" parent="7254" name="AMOUNT">
+    <column id="7383" parent="7255" name="AMOUNT">
       <Comment>금액</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <column id="7382" parent="7254" name="EXP_COMMENT">
+    <column id="7384" parent="7255" name="EXP_COMMENT">
       <Comment>적요</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>11</Position>
     </column>
-    <foreign-key id="7383" parent="7254" name="TBL_APV_EXPFORM_FK">
+    <foreign-key id="7385" parent="7255" name="TBL_APV_EXPFORM_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7384" parent="7254" name="TBL_APV_EXPENSE_PK">
+    <index id="7386" parent="7255" name="TBL_APV_EXPENSE_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:08</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:08</ModifiedTimestamp>
@@ -57834,86 +57847,86 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7385" parent="7254" name="TBL_APV_EXPENSE_PK">
+    <key id="7387" parent="7255" name="TBL_APV_EXPENSE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:08</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_EXPENSE_PK</UnderlyingIndexName>
     </key>
-    <column id="7386" parent="7255" name="APV_NO">
+    <column id="7388" parent="7256" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7387" parent="7255" name="TYPE">
+    <column id="7389" parent="7256" name="TYPE">
       <Comment>경조분류</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7388" parent="7255" name="FAMILY_DATE">
+    <column id="7390" parent="7256" name="FAMILY_DATE">
       <Comment>경조일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7389" parent="7255" name="BANK">
+    <column id="7391" parent="7256" name="BANK">
       <Comment>은행명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7390" parent="7255" name="ACCOUNTHOLDER">
+    <column id="7392" parent="7256" name="ACCOUNTHOLDER">
       <Comment>예금주</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7391" parent="7255" name="ACCOUNNUMBER">
+    <column id="7393" parent="7256" name="ACCOUNNUMBER">
       <Comment>계좌번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7392" parent="7255" name="ITEMS_NO">
+    <column id="7394" parent="7256" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7393" parent="7255" name="PAYMENT">
+    <column id="7395" parent="7256" name="PAYMENT">
       <DasType>NUMBER(*)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="7394" parent="7255" name="ISSENDINGWREATH">
+    <column id="7396" parent="7256" name="ISSENDINGWREATH">
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="7395" parent="7255" name="SENDINGADDRESS">
+    <column id="7397" parent="7256" name="SENDINGADDRESS">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="7396" parent="7255" name="SENDINGPHONE">
+    <column id="7398" parent="7256" name="SENDINGPHONE">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>11</Position>
     </column>
-    <column id="7397" parent="7255" name="REQUESTSNOTE">
+    <column id="7399" parent="7256" name="REQUESTSNOTE">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>12</Position>
     </column>
-    <column id="7398" parent="7255" name="SENDINGNAME">
+    <column id="7400" parent="7256" name="SENDINGNAME">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>13</Position>
     </column>
-    <foreign-key id="7399" parent="7255" name="TBL_APV_FAMILY_EVENT_FK">
+    <foreign-key id="7401" parent="7256" name="TBL_APV_FAMILY_EVENT_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:34</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7400" parent="7255" name="TBL_APV_FAMILY_EVENT_PK">
+    <index id="7402" parent="7256" name="TBL_APV_FAMILY_EVENT_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:03</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:03</ModifiedTimestamp>
@@ -57921,43 +57934,43 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7401" parent="7255" name="TBL_APV_FAMILY_EVENT_PK">
+    <key id="7403" parent="7256" name="TBL_APV_FAMILY_EVENT_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:03</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_FAMILY_EVENT_PK</UnderlyingIndexName>
     </key>
-    <column id="7402" parent="7256" name="FILE_NO">
+    <column id="7404" parent="7257" name="FILE_NO">
       <Comment>첨부파일번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7403" parent="7256" name="ORIGINAL_FILE_NAME">
+    <column id="7405" parent="7257" name="ORIGINAL_FILE_NAME">
       <Comment>원본파일명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7404" parent="7256" name="SAVED_FILE_NAME">
+    <column id="7406" parent="7257" name="SAVED_FILE_NAME">
       <Comment>저장파일명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7405" parent="7256" name="APV_NO">
+    <column id="7407" parent="7257" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="7406" parent="7256" name="TBL_APV_FILE_FK">
+    <foreign-key id="7408" parent="7257" name="TBL_APV_FILE_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7407" parent="7256" name="TBL_APV_FILE_PK">
+    <index id="7409" parent="7257" name="TBL_APV_FILE_PK">
       <ColNames>FILE_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:10</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:10</ModifiedTimestamp>
@@ -57965,62 +57978,62 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7408" parent="7256" name="TBL_APV_FILE_PK">
+    <key id="7410" parent="7257" name="TBL_APV_FILE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:10</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_FILE_PK</UnderlyingIndexName>
     </key>
-    <column id="7409" parent="7257" name="APV_NO">
+    <column id="7411" parent="7258" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7410" parent="7257" name="TITLE">
+    <column id="7412" parent="7258" name="TITLE">
       <Comment>문서제목</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7411" parent="7257" name="WRITE_DATE">
+    <column id="7413" parent="7258" name="WRITE_DATE">
       <Comment>작성일자</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7412" parent="7257" name="APV_STATUS">
+    <column id="7414" parent="7258" name="APV_STATUS">
       <Comment>결재상태</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7413" parent="7257" name="ISURGENCY">
+    <column id="7415" parent="7258" name="ISURGENCY">
       <Comment>긴급여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7414" parent="7257" name="APV_CATEGORY">
+    <column id="7416" parent="7258" name="APV_CATEGORY">
       <Comment>결재분류</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7415" parent="7257" name="CONTENTS1">
+    <column id="7417" parent="7258" name="CONTENTS1">
       <Comment>내용1</Comment>
       <DasType>VARCHAR2(4000 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7416" parent="7257" name="CONTENTS2">
+    <column id="7418" parent="7258" name="CONTENTS2">
       <Comment>내용2</Comment>
       <DasType>VARCHAR2(4000 byte)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="7417" parent="7257" name="EMP_NO">
+    <column id="7419" parent="7258" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>9</Position>
     </column>
-    <index id="7418" parent="7257" name="TBL_APV_FORM_PK">
+    <index id="7420" parent="7258" name="TBL_APV_FORM_PK">
       <ColNames>APV_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:11</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:11</ModifiedTimestamp>
@@ -58028,56 +58041,56 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7419" parent="7257" name="TBL_APV_FORM_PK">
+    <key id="7421" parent="7258" name="TBL_APV_FORM_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:11</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_FORM_PK</UnderlyingIndexName>
     </key>
-    <column id="7420" parent="7258" name="TYPE">
+    <column id="7422" parent="7259" name="TYPE">
       <Comment>서류종류</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="7421" parent="7258" name="SUBMISSION">
+    <column id="7423" parent="7259" name="SUBMISSION">
       <Comment>제출처</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7422" parent="7258" name="USES">
+    <column id="7424" parent="7259" name="USES">
       <Comment>용도</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7423" parent="7258" name="REQUESTS">
+    <column id="7425" parent="7259" name="REQUESTS">
       <Comment>요청사항</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7424" parent="7258" name="ITEMS_NO">
+    <column id="7426" parent="7259" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7425" parent="7258" name="APV_NO">
+    <column id="7427" parent="7259" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7426" parent="7258" name="SUBTYPE">
+    <column id="7428" parent="7259" name="SUBTYPE">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <foreign-key id="7427" parent="7258" name="TBL_APV_ISSUANCE_FK">
+    <foreign-key id="7429" parent="7259" name="TBL_APV_ISSUANCE_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:36</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7428" parent="7258" name="TBL_APV_ISSUANCE_PK">
+    <index id="7430" parent="7259" name="TBL_APV_ISSUANCE_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:08</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:08</ModifiedTimestamp>
@@ -58085,60 +58098,60 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7429" parent="7258" name="TBL_APV_ISSUANCE_PK">
+    <key id="7431" parent="7259" name="TBL_APV_ISSUANCE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:08</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_ISSUANCE_PK</UnderlyingIndexName>
     </key>
-    <column id="7430" parent="7259" name="APV_LINE_NO">
+    <column id="7432" parent="7260" name="APV_LINE_NO">
       <Comment>결재라인번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7431" parent="7259" name="DEGREE">
+    <column id="7433" parent="7260" name="DEGREE">
       <Comment>결재차수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7432" parent="7259" name="ISAPPROVAL">
+    <column id="7434" parent="7260" name="ISAPPROVAL">
       <Comment>승인여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
-      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;F&apos;</DefaultExpression>
       <Position>3</Position>
     </column>
-    <column id="7433" parent="7259" name="APV_NO">
+    <column id="7435" parent="7260" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7434" parent="7259" name="EMP_NO">
+    <column id="7436" parent="7260" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7435" parent="7259" name="APV_DATE">
+    <column id="7437" parent="7260" name="APV_DATE">
       <DasType>TIMESTAMP(6)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="7436" parent="7259" name="TBL_APV_LINE_FK">
+    <foreign-key id="7438" parent="7260" name="TBL_APV_LINE_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <foreign-key id="7437" parent="7259" name="TBL_APV_LINE_FK1">
+    <foreign-key id="7439" parent="7260" name="TBL_APV_LINE_FK1">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7438" parent="7259" name="TBL_APV_LINE_PK">
+    <index id="7440" parent="7260" name="TBL_APV_LINE_PK">
       <ColNames>APV_LINE_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
@@ -58146,54 +58159,54 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7439" parent="7259" name="TBL_APV_LINE_PK">
+    <key id="7441" parent="7260" name="TBL_APV_LINE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_LINE_PK</UnderlyingIndexName>
     </key>
-    <column id="7440" parent="7260" name="MEETING_DATE">
+    <column id="7442" parent="7261" name="MEETING_DATE">
       <Comment>회의일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7441" parent="7260" name="LOCATION">
+    <column id="7443" parent="7261" name="LOCATION">
       <Comment>회의장소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7442" parent="7260" name="PARTICIPANTS">
+    <column id="7444" parent="7261" name="PARTICIPANTS">
       <Comment>참석자</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7443" parent="7260" name="APV_NO">
+    <column id="7445" parent="7261" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7444" parent="7260" name="ITEMS_NO">
+    <column id="7446" parent="7261" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7445" parent="7260" name="MEETING_TITLE">
+    <column id="7447" parent="7261" name="MEETING_TITLE">
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="7446" parent="7260" name="TBL_APV_MEETINGLOG_FK">
+    <foreign-key id="7448" parent="7261" name="TBL_APV_MEETINGLOG_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:35</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7447" parent="7260" name="TBL_APV_MEETINGLOG_PK">
+    <index id="7449" parent="7261" name="TBL_APV_MEETINGLOG_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:06</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:06</ModifiedTimestamp>
@@ -58201,56 +58214,56 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7448" parent="7260" name="TBL_APV_MEETINGLOG_PK">
+    <key id="7450" parent="7261" name="TBL_APV_MEETINGLOG_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:06</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_MEETINGLOG_PK</UnderlyingIndexName>
     </key>
-    <column id="7449" parent="7261" name="WORKING_DATE">
+    <column id="7451" parent="7262" name="WORKING_DATE">
       <Comment>근무일자</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7450" parent="7261" name="START_TIME">
+    <column id="7452" parent="7262" name="START_TIME">
       <Comment>근무시작시간</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7451" parent="7261" name="END_TIME">
+    <column id="7453" parent="7262" name="END_TIME">
       <Comment>근무종료시간</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7452" parent="7261" name="REASON">
+    <column id="7454" parent="7262" name="REASON">
       <Comment>사유</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7453" parent="7261" name="APV_NO">
+    <column id="7455" parent="7262" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7454" parent="7261" name="ITEMS_NO">
+    <column id="7456" parent="7262" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="7455" parent="7261" name="TBL_APV_OVERTIME_FK">
+    <foreign-key id="7457" parent="7262" name="TBL_APV_OVERTIME_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:34</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7456" parent="7261" name="TBL_APV_OVERTIME_PK">
+    <index id="7458" parent="7262" name="TBL_APV_OVERTIME_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:03</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:03</ModifiedTimestamp>
@@ -58258,70 +58271,70 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7457" parent="7261" name="TBL_APV_OVERTIME_PK">
+    <key id="7459" parent="7262" name="TBL_APV_OVERTIME_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:03</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_OVERTIME_PK</UnderlyingIndexName>
     </key>
-    <column id="7458" parent="7262" name="START_DATE">
+    <column id="7460" parent="7263" name="START_DATE">
       <Comment>연차시작일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7459" parent="7262" name="END_DATE">
+    <column id="7461" parent="7263" name="END_DATE">
       <Comment>연차종료일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7460" parent="7262" name="TYPE">
+    <column id="7462" parent="7263" name="TYPE">
       <Comment>휴가종류</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7461" parent="7262" name="APV_COMMENT">
+    <column id="7463" parent="7263" name="APV_COMMENT">
       <Comment>사유</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7462" parent="7262" name="ITEMS_NO">
+    <column id="7464" parent="7263" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7463" parent="7262" name="APV_NO">
+    <column id="7465" parent="7263" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7464" parent="7262" name="OFFTYPE1">
+    <column id="7466" parent="7263" name="OFFTYPE1">
       <Comment>시작일반차</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7465" parent="7262" name="OFFTYPE2">
+    <column id="7467" parent="7263" name="OFFTYPE2">
       <Comment>종료일반차</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="7466" parent="7262" name="AMOUNT">
+    <column id="7468" parent="7263" name="AMOUNT">
       <Comment>연차사용개수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>9</Position>
     </column>
-    <foreign-key id="7467" parent="7262" name="TBL_APV_VACATION_FK">
+    <foreign-key id="7469" parent="7263" name="TBL_APV_VACATION_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7468" parent="7262" name="TBL_APV_VACATION_PK">
+    <index id="7470" parent="7263" name="TBL_APV_VACATION_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
@@ -58329,30 +58342,30 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7469" parent="7262" name="TBL_APV_VACATION_PK">
+    <key id="7471" parent="7263" name="TBL_APV_VACATION_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_APV_VACATION_PK</UnderlyingIndexName>
     </key>
-    <column id="7470" parent="7263" name="AUTH_CODE">
+    <column id="7472" parent="7264" name="AUTH_CODE">
       <Comment>권한코드</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7471" parent="7263" name="AUTH_NAME">
+    <column id="7473" parent="7264" name="AUTH_NAME">
       <Comment>권한이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7472" parent="7263" name="AUTH_DESC">
+    <column id="7474" parent="7264" name="AUTH_DESC">
       <Comment>권한설명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <index id="7473" parent="7263" name="TBL_AUTH_PK">
+    <index id="7475" parent="7264" name="TBL_AUTH_PK">
       <ColNames>AUTH_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:05</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:05</ModifiedTimestamp>
@@ -58360,39 +58373,39 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7474" parent="7263" name="TBL_AUTH_PK">
+    <key id="7476" parent="7264" name="TBL_AUTH_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:05</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_AUTH_PK</UnderlyingIndexName>
     </key>
-    <column id="7475" parent="7264" name="AUTH_CODE">
+    <column id="7477" parent="7265" name="AUTH_CODE">
       <Comment>권한코드</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7476" parent="7264" name="ID">
+    <column id="7478" parent="7265" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="7477" parent="7264" name="TBL_AUTH_ACCOUNT_FK1">
+    <foreign-key id="7479" parent="7265" name="TBL_AUTH_ACCOUNT_FK1">
       <ColNames>AUTH_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:15</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_AUTH_PK</RefKeyName>
       <RefTableName>TBL_AUTH</RefTableName>
     </foreign-key>
-    <foreign-key id="7478" parent="7264" name="TBL_AUTH_ACCOUNT_FK">
+    <foreign-key id="7480" parent="7265" name="TBL_AUTH_ACCOUNT_FK">
       <ColNames>ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:14</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_ACCOUNT_PK</RefKeyName>
       <RefTableName>TBL_ACCOUNT</RefTableName>
     </foreign-key>
-    <index id="7479" parent="7264" name="TBL_AUTH_ACCOUNT_pk">
+    <index id="7481" parent="7265" name="TBL_AUTH_ACCOUNT_pk">
       <ColNames>AUTH_CODE
 ID</ColNames>
       <CreatedTimestamp>2023-08-24.01:40:19</CreatedTimestamp>
@@ -58401,25 +58414,25 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7480" parent="7264" name="TBL_AUTH_ACCOUNT_pk">
+    <key id="7482" parent="7265" name="TBL_AUTH_ACCOUNT_pk">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.01:40:19</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_AUTH_ACCOUNT_pk</UnderlyingIndexName>
     </key>
-    <column id="7481" parent="7265" name="ID">
+    <column id="7483" parent="7266" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7482" parent="7265" name="REFRESH_TOKEN">
+    <column id="7484" parent="7266" name="REFRESH_TOKEN">
       <Comment>리프레시토큰</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="7483" parent="7265" name="TBL_AUTH_TOKEN_1_PK">
+    <index id="7485" parent="7266" name="TBL_AUTH_TOKEN_1_PK">
       <ColNames>ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:03</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:03</ModifiedTimestamp>
@@ -58427,63 +58440,63 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7484" parent="7265" name="TBL_AUTH_TOKEN_1_PK">
+    <key id="7486" parent="7266" name="TBL_AUTH_TOKEN_1_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:03</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_AUTH_TOKEN_1_PK</UnderlyingIndexName>
     </key>
-    <column id="7485" parent="7266" name="BSCD_CODE">
+    <column id="7487" parent="7267" name="BSCD_CODE">
       <Comment>명함코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7486" parent="7266" name="BSCD_NAME">
+    <column id="7488" parent="7267" name="BSCD_NAME">
       <Comment>수집명함이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7487" parent="7266" name="PHONE_NUMBER">
+    <column id="7489" parent="7267" name="PHONE_NUMBER">
       <Comment>전화번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7488" parent="7266" name="EMAIL">
+    <column id="7490" parent="7267" name="EMAIL">
       <Comment>이메일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7489" parent="7266" name="COMPANY">
+    <column id="7491" parent="7267" name="COMPANY">
       <Comment>회사</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7490" parent="7266" name="ADDRESS">
+    <column id="7492" parent="7267" name="ADDRESS">
       <Comment>주소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7491" parent="7266" name="CONTENT">
+    <column id="7493" parent="7267" name="CONTENT">
       <Comment>내용</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7492" parent="7266" name="EMP_NO">
+    <column id="7494" parent="7267" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>8</Position>
     </column>
-    <foreign-key id="7493" parent="7266" name="TBL_BSCD_FK">
+    <foreign-key id="7495" parent="7267" name="TBL_BSCD_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:35</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7494" parent="7266" name="TBL_BSCD_PK">
+    <index id="7496" parent="7267" name="TBL_BSCD_PK">
       <ColNames>BSCD_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:06</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:06</ModifiedTimestamp>
@@ -58491,57 +58504,57 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7495" parent="7266" name="TBL_BSCD_PK">
+    <key id="7497" parent="7267" name="TBL_BSCD_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:06</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_BSCD_PK</UnderlyingIndexName>
     </key>
-    <column id="7496" parent="7267" name="WORK_CODE">
+    <column id="7498" parent="7268" name="WORK_CODE">
       <Comment>업무번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7497" parent="7267" name="W_DATE">
+    <column id="7499" parent="7268" name="W_DATE">
       <Comment>작성일자</Comment>
       <DasType>DATE|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7498" parent="7267" name="STATUS">
+    <column id="7500" parent="7268" name="STATUS">
       <Comment>상태</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7499" parent="7267" name="WORK_CONTENT">
+    <column id="7501" parent="7268" name="WORK_CONTENT">
       <Comment>일지내용</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7500" parent="7267" name="START_DATE">
+    <column id="7502" parent="7268" name="START_DATE">
       <Comment>시작일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7501" parent="7267" name="END_DATE">
+    <column id="7503" parent="7268" name="END_DATE">
       <Comment>종료일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7502" parent="7267" name="EMP_NO">
+    <column id="7504" parent="7268" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <foreign-key id="7503" parent="7267" name="TBL_BSNS_LOG_FK">
+    <foreign-key id="7505" parent="7268" name="TBL_BSNS_LOG_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:34</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7504" parent="7267" name="TBL_BSNS_LOG_PK">
+    <index id="7506" parent="7268" name="TBL_BSNS_LOG_PK">
       <ColNames>WORK_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:04</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:04</ModifiedTimestamp>
@@ -58549,80 +58562,80 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7505" parent="7267" name="TBL_BSNS_LOG_PK">
+    <key id="7507" parent="7268" name="TBL_BSNS_LOG_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:04</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_BSNS_LOG_PK</UnderlyingIndexName>
     </key>
-    <column id="7506" parent="7268" name="BULLETIN_CODE">
+    <column id="7508" parent="7269" name="BULLETIN_CODE">
       <Comment>게시글번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7507" parent="7268" name="TITLE">
+    <column id="7509" parent="7269" name="TITLE">
       <Comment>제목</Comment>
       <DasType>VARCHAR2(150 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7508" parent="7268" name="VIEWS">
+    <column id="7510" parent="7269" name="VIEWS">
       <Comment>조회수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7509" parent="7268" name="CONTENT">
+    <column id="7511" parent="7269" name="CONTENT">
       <Comment>내용</Comment>
       <DasType>CLOB|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7510" parent="7268" name="CREATION_DATE">
+    <column id="7512" parent="7269" name="CREATION_DATE">
       <Comment>생성날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7511" parent="7268" name="DELETE_YN">
+    <column id="7513" parent="7269" name="DELETE_YN">
       <Comment>삭제여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7512" parent="7268" name="MODIFIED_DATE">
+    <column id="7514" parent="7269" name="MODIFIED_DATE">
       <Comment>수정날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7513" parent="7268" name="ALLOW_COMMENTS">
+    <column id="7515" parent="7269" name="ALLOW_COMMENTS">
       <Comment>댓글허용</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="7514" parent="7268" name="CATEGORY_CODE">
+    <column id="7516" parent="7269" name="CATEGORY_CODE">
       <Comment>카테고리 번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <column id="7515" parent="7268" name="EMP_NO">
+    <column id="7517" parent="7269" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <foreign-key id="7516" parent="7268" name="TBL_BULLETIN_BOARD_FK">
+    <foreign-key id="7518" parent="7269" name="TBL_BULLETIN_BOARD_FK">
       <ColNames>CATEGORY_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:32</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_BULLETIN_CATEGORIES_PK</RefKeyName>
       <RefTableName>TBL_BULLETIN_CATEGORIES</RefTableName>
     </foreign-key>
-    <foreign-key id="7517" parent="7268" name="TBL_BULLETIN_BOARD_FK1">
+    <foreign-key id="7519" parent="7269" name="TBL_BULLETIN_BOARD_FK1">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:34</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7518" parent="7268" name="TBL_BULLETIN_BOARD_PK">
+    <index id="7520" parent="7269" name="TBL_BULLETIN_BOARD_PK">
       <ColNames>BULLETIN_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
@@ -58630,24 +58643,24 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7519" parent="7268" name="TBL_BULLETIN_BOARD_PK">
+    <key id="7521" parent="7269" name="TBL_BULLETIN_BOARD_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_BULLETIN_BOARD_PK</UnderlyingIndexName>
     </key>
-    <column id="7520" parent="7269" name="CATEGORY_CODE">
+    <column id="7522" parent="7270" name="CATEGORY_CODE">
       <Comment>카테고리 번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7521" parent="7269" name="NAME_BOARD">
+    <column id="7523" parent="7270" name="NAME_BOARD">
       <Comment>게시판 이름</Comment>
       <DasType>VARCHAR2(50 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <index id="7522" parent="7269" name="TBL_BULLETIN_CATEGORIES_PK">
+    <index id="7524" parent="7270" name="TBL_BULLETIN_CATEGORIES_PK">
       <ColNames>CATEGORY_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
@@ -58655,57 +58668,57 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7523" parent="7269" name="TBL_BULLETIN_CATEGORIES_PK">
+    <key id="7525" parent="7270" name="TBL_BULLETIN_CATEGORIES_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_BULLETIN_CATEGORIES_PK</UnderlyingIndexName>
     </key>
-    <column id="7524" parent="7270" name="FILE_CODE">
+    <column id="7526" parent="7271" name="FILE_CODE">
       <Comment>파일번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7525" parent="7270" name="TYPE">
+    <column id="7527" parent="7271" name="TYPE">
       <Comment>유형</Comment>
       <DasType>VARCHAR2(20 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7526" parent="7270" name="ORIGINAL_FILE_NAME">
+    <column id="7528" parent="7271" name="ORIGINAL_FILE_NAME">
       <Comment>원본파일명</Comment>
       <DasType>VARCHAR2(600 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7527" parent="7270" name="CHANGED_FILE_NAME">
+    <column id="7529" parent="7271" name="CHANGED_FILE_NAME">
       <Comment>변경된파일명</Comment>
       <DasType>VARCHAR2(600 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7528" parent="7270" name="CREATION_DATE">
+    <column id="7530" parent="7271" name="CREATION_DATE">
       <Comment>등록일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7529" parent="7270" name="DELETE_YN">
+    <column id="7531" parent="7271" name="DELETE_YN">
       <Comment>삭제여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7530" parent="7270" name="BULLETIN_CODE">
+    <column id="7532" parent="7271" name="BULLETIN_CODE">
       <Comment>게시글번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <foreign-key id="7531" parent="7270" name="TBL_BULLETIN_FILE_FK">
+    <foreign-key id="7533" parent="7271" name="TBL_BULLETIN_FILE_FK">
       <ColNames>BULLETIN_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:35</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_BULLETIN_BOARD_PK</RefKeyName>
       <RefTableName>TBL_BULLETIN_BOARD</RefTableName>
     </foreign-key>
-    <index id="7532" parent="7270" name="TBL_BULLETIN_FILE_PK">
+    <index id="7534" parent="7271" name="TBL_BULLETIN_FILE_PK">
       <ColNames>FILE_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:05</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:05</ModifiedTimestamp>
@@ -58713,52 +58726,52 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7533" parent="7270" name="TBL_BULLETIN_FILE_PK">
+    <key id="7535" parent="7271" name="TBL_BULLETIN_FILE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:05</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_BULLETIN_FILE_PK</UnderlyingIndexName>
     </key>
-    <column id="7534" parent="7271" name="CALENDAR_CODE">
+    <column id="7536" parent="7272" name="CALENDAR_CODE">
       <Comment>일정코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7535" parent="7271" name="CALENDAR_CONTENTS">
+    <column id="7537" parent="7272" name="CALENDAR_CONTENTS">
       <Comment>일정내용</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7536" parent="7271" name="CALENDER_DATE">
+    <column id="7538" parent="7272" name="CALENDER_DATE">
       <Comment>날짜</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7537" parent="7271" name="START_TIME">
+    <column id="7539" parent="7272" name="START_TIME">
       <Comment>시작시간</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7538" parent="7271" name="END_TIME">
+    <column id="7540" parent="7272" name="END_TIME">
       <Comment>종료시간</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7539" parent="7271" name="EMP_NO">
+    <column id="7541" parent="7272" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="7540" parent="7271" name="TBL_CALENDER_FK">
+    <foreign-key id="7542" parent="7272" name="TBL_CALENDER_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7541" parent="7271" name="TBL_CALENDER_PK">
+    <index id="7543" parent="7272" name="TBL_CALENDER_PK">
       <ColNames>CALENDAR_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:18</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:18</ModifiedTimestamp>
@@ -58766,61 +58779,61 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7542" parent="7271" name="TBL_CALENDER_PK">
+    <key id="7544" parent="7272" name="TBL_CALENDER_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:18</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CALENDER_PK</UnderlyingIndexName>
     </key>
-    <column id="7543" parent="7272" name="CAR_NO">
+    <column id="7545" parent="7273" name="CAR_NO">
       <Comment>경력번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7544" parent="7272" name="NAME">
+    <column id="7546" parent="7273" name="NAME">
       <Comment>회사이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7545" parent="7272" name="HISTORY">
+    <column id="7547" parent="7273" name="HISTORY">
       <Comment>경력년수</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7546" parent="7272" name="START_DATE">
+    <column id="7548" parent="7273" name="START_DATE">
       <Comment>입사날짜</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7547" parent="7272" name="END_DATE">
+    <column id="7549" parent="7273" name="END_DATE">
       <Comment>퇴사날짜</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7548" parent="7272" name="JOB">
+    <column id="7550" parent="7273" name="JOB">
       <Comment>직위</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7549" parent="7272" name="EMP_NO">
+    <column id="7551" parent="7273" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>7</Position>
     </column>
-    <foreign-key id="7550" parent="7272" name="TBL_CAREER_FK">
+    <foreign-key id="7552" parent="7273" name="TBL_CAREER_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:20</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7551" parent="7272" name="TBL_CAREER_PK">
+    <index id="7553" parent="7273" name="TBL_CAREER_PK">
       <ColNames>CAR_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:20</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:20</ModifiedTimestamp>
@@ -58828,55 +58841,55 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7552" parent="7272" name="TBL_CAREER_PK">
+    <key id="7554" parent="7273" name="TBL_CAREER_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:20</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CAREER_PK</UnderlyingIndexName>
     </key>
-    <column id="7553" parent="7273" name="NAME">
+    <column id="7555" parent="7274" name="NAME">
       <Comment>자격증이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7554" parent="7273" name="START_DATE">
+    <column id="7556" parent="7274" name="START_DATE">
       <Comment>발급일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7555" parent="7273" name="END_DATE">
+    <column id="7557" parent="7274" name="END_DATE">
       <Comment>만료일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7556" parent="7273" name="INSTITUTION">
+    <column id="7558" parent="7274" name="INSTITUTION">
       <Comment>발급기관</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7557" parent="7273" name="CER_NO">
+    <column id="7559" parent="7274" name="CER_NO">
       <Comment>자격증번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7558" parent="7273" name="EMP_NO">
+    <column id="7560" parent="7274" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="7559" parent="7273" name="TBL_CERTIFICATION_FK">
+    <foreign-key id="7561" parent="7274" name="TBL_CERTIFICATION_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:51</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7560" parent="7273" name="TBL_CERTIFICATION_PK">
+    <index id="7562" parent="7274" name="TBL_CERTIFICATION_PK">
       <ColNames>CER_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:17</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:17</ModifiedTimestamp>
@@ -58884,44 +58897,44 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7561" parent="7273" name="TBL_CERTIFICATION_PK">
+    <key id="7563" parent="7274" name="TBL_CERTIFICATION_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:17</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CERTIFICATION_PK</UnderlyingIndexName>
     </key>
-    <column id="7562" parent="7274" name="CHANGE_NO">
+    <column id="7564" parent="7275" name="CHANGE_NO">
       <Comment>비밀번호변경이력번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7563" parent="7274" name="PREV_PASSWORD">
+    <column id="7565" parent="7275" name="PREV_PASSWORD">
       <Comment>변경전비밀번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7564" parent="7274" name="CHANGE_DATE">
+    <column id="7566" parent="7275" name="CHANGE_DATE">
       <Comment>변경일시</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7565" parent="7274" name="ID">
+    <column id="7567" parent="7275" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="7566" parent="7274" name="TBL_CHANGE_PASSWORD_FK">
+    <foreign-key id="7568" parent="7275" name="TBL_CHANGE_PASSWORD_FK">
       <ColNames>ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_ACCESS_MANAGER_PK</RefKeyName>
       <RefTableName>TBL_ACCESS_MANAGER</RefTableName>
     </foreign-key>
-    <index id="7567" parent="7274" name="TBL_CHANGE_PASSWORD_PK">
+    <index id="7569" parent="7275" name="TBL_CHANGE_PASSWORD_PK">
       <ColNames>CHANGE_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:15</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:15</ModifiedTimestamp>
@@ -58929,32 +58942,37 @@ ID</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7568" parent="7274" name="TBL_CHANGE_PASSWORD_PK">
+    <key id="7570" parent="7275" name="TBL_CHANGE_PASSWORD_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:15</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CHANGE_PASSWORD_PK</UnderlyingIndexName>
     </key>
-    <column id="7569" parent="7275" name="ROOM_ID">
+    <column id="7571" parent="7276" name="ROOM_ID">
       <Comment>채팅방번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7570" parent="7275" name="EMP_NO">
+    <column id="7572" parent="7276" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="7571" parent="7275" name="TBL_CHATROOMS_FK">
+    <column id="7573" parent="7276" name="ROOM_NAME">
+      <DasType>VARCHAR2(255 byte)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="7574" parent="7276" name="TBL_CHATROOMS_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:04:46</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7572" parent="7275" name="TBL_CHATROOMS_PK">
+    <index id="7575" parent="7276" name="TBL_CHATROOMS_PK">
       <ColNames>ROOM_ID
 EMP_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:16</CreatedTimestamp>
@@ -58963,60 +58981,60 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7573" parent="7275" name="TBL_CHATROOMS_PK">
+    <key id="7576" parent="7276" name="TBL_CHATROOMS_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:16</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CHATROOMS_PK</UnderlyingIndexName>
     </key>
-    <column id="7574" parent="7276" name="MESSAGE_ID">
+    <column id="7577" parent="7277" name="MESSAGE_ID">
       <Comment>메세지번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7575" parent="7276" name="ROOM_NAME">
+    <column id="7578" parent="7277" name="ROOM_NAME">
       <Comment>채팅방 이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7576" parent="7276" name="CONTENT">
+    <column id="7579" parent="7277" name="CONTENT">
       <Comment>내용</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7577" parent="7276" name="SENT_TIME">
+    <column id="7580" parent="7277" name="SENT_TIME">
       <Comment>보낸시간</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7578" parent="7276" name="ISCHEKED">
+    <column id="7581" parent="7277" name="ISCHEKED">
       <Comment>확인여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7579" parent="7276" name="CHAT_TYPE">
+    <column id="7582" parent="7277" name="CHAT_TYPE">
       <Comment>채팅타입</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7580" parent="7276" name="ROOM_ID">
+    <column id="7583" parent="7277" name="ROOM_ID">
       <Comment>채팅방번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7581" parent="7276" name="EMP_NO">
+    <column id="7584" parent="7277" name="EMP_NO">
       <Comment>사원번호_보낸사람</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="7582" parent="7276" name="TBL_CHAT_MESSAGE_FK">
+    <foreign-key id="7585" parent="7277" name="TBL_CHAT_MESSAGE_FK">
       <ColNames>ROOM_ID
 EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:29</ModifiedTimestamp>
@@ -59024,7 +59042,7 @@ EMP_NO</ColNames>
       <RefKeyName>TBL_CHATROOMS_PK</RefKeyName>
       <RefTableName>TBL_CHATROOMS</RefTableName>
     </foreign-key>
-    <index id="7583" parent="7276" name="TBL_CHAT_MESSAGE_PK">
+    <index id="7586" parent="7277" name="TBL_CHAT_MESSAGE_PK">
       <ColNames>MESSAGE_ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:16</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:16</ModifiedTimestamp>
@@ -59032,86 +59050,86 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7584" parent="7276" name="TBL_CHAT_MESSAGE_PK">
+    <key id="7587" parent="7277" name="TBL_CHAT_MESSAGE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:16</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CHAT_MESSAGE_PK</UnderlyingIndexName>
     </key>
-    <column id="7585" parent="7277" name="CUS_CODE1">
+    <column id="7588" parent="7278" name="CUS_CODE1">
       <Comment>상담번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7586" parent="7277" name="W_DATE">
+    <column id="7589" parent="7278" name="W_DATE">
       <Comment>작성일자</Comment>
       <DasType>DATE|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7587" parent="7277" name="CUS_CODE">
+    <column id="7590" parent="7278" name="CUS_CODE">
       <Comment>고객번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7588" parent="7277" name="CUS_NAME">
+    <column id="7591" parent="7278" name="CUS_NAME">
       <Comment>고객이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7589" parent="7277" name="BIRTHDAY">
+    <column id="7592" parent="7278" name="BIRTHDAY">
       <Comment>고객생년월일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7590" parent="7277" name="SOCL_SEC_NUM">
+    <column id="7593" parent="7278" name="SOCL_SEC_NUM">
       <Comment>고객주민번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7591" parent="7277" name="PHONE">
+    <column id="7594" parent="7278" name="PHONE">
       <Comment>고객연락처</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7592" parent="7277" name="INSR_PRD_NAME">
+    <column id="7595" parent="7278" name="INSR_PRD_NAME">
       <Comment>보험상품명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="7593" parent="7277" name="INSR_COST">
+    <column id="7596" parent="7278" name="INSR_COST">
       <Comment>설계비용</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="7594" parent="7277" name="CONSULT_CONTENT">
+    <column id="7597" parent="7278" name="CONSULT_CONTENT">
       <Comment>상담내용</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="7595" parent="7277" name="STATUS">
+    <column id="7598" parent="7278" name="STATUS">
       <Comment>상담진행상태</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>11</Position>
     </column>
-    <column id="7596" parent="7277" name="EMP_NO">
+    <column id="7599" parent="7278" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>12</Position>
     </column>
-    <foreign-key id="7597" parent="7277" name="TBL_CNS_LOG_FK">
+    <foreign-key id="7600" parent="7278" name="TBL_CNS_LOG_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:35</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7598" parent="7277" name="TBL_CNS_LOG_PK">
+    <index id="7601" parent="7278" name="TBL_CNS_LOG_PK">
       <ColNames>CUS_CODE1</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:04</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:04</ModifiedTimestamp>
@@ -59119,77 +59137,77 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7599" parent="7277" name="TBL_CNS_LOG_PK">
+    <key id="7602" parent="7278" name="TBL_CNS_LOG_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:04</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_CNS_LOG_PK</UnderlyingIndexName>
     </key>
-    <column id="7600" parent="7278" name="COMMENT_CODE">
+    <column id="7603" parent="7279" name="COMMENT_CODE">
       <Comment>댓글번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7601" parent="7278" name="COMMENT_CONTENT">
+    <column id="7604" parent="7279" name="COMMENT_CONTENT">
       <Comment>댓글 내용</Comment>
       <DasType>VARCHAR2(2000 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7602" parent="7278" name="TOP_COMMENT_CODE">
+    <column id="7605" parent="7279" name="TOP_COMMENT_CODE">
       <Comment>상위댓글</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7603" parent="7278" name="MODIFIED_DATE">
+    <column id="7606" parent="7279" name="MODIFIED_DATE">
       <Comment>수정날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7604" parent="7278" name="DELETE_YN">
+    <column id="7607" parent="7279" name="DELETE_YN">
       <Comment>삭제여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7605" parent="7278" name="CREATION_DATE">
+    <column id="7608" parent="7279" name="CREATION_DATE">
       <Comment>등록날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7606" parent="7278" name="EMP_NO">
+    <column id="7609" parent="7279" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7607" parent="7278" name="BULLETIN_CODE">
+    <column id="7610" parent="7279" name="BULLETIN_CODE">
       <Comment>게시글번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="7608" parent="7278" name="TBL_COMMENT_FK">
+    <foreign-key id="7611" parent="7279" name="TBL_COMMENT_FK">
       <ColNames>TOP_COMMENT_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:45</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_COMMENT_PK</RefKeyName>
       <RefTableName>TBL_COMMENT</RefTableName>
     </foreign-key>
-    <foreign-key id="7609" parent="7278" name="TBL_COMMENT_FK2">
+    <foreign-key id="7612" parent="7279" name="TBL_COMMENT_FK2">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:48</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <foreign-key id="7610" parent="7278" name="TBL_COMMENT_FK1">
+    <foreign-key id="7613" parent="7279" name="TBL_COMMENT_FK1">
       <ColNames>BULLETIN_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:46</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_BULLETIN_BOARD_PK</RefKeyName>
       <RefTableName>TBL_BULLETIN_BOARD</RefTableName>
     </foreign-key>
-    <index id="7611" parent="7278" name="TBL_COMMENT_PK">
+    <index id="7614" parent="7279" name="TBL_COMMENT_PK">
       <ColNames>COMMENT_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
@@ -59197,41 +59215,41 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7612" parent="7278" name="TBL_COMMENT_PK">
+    <key id="7615" parent="7279" name="TBL_COMMENT_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_COMMENT_PK</UnderlyingIndexName>
     </key>
-    <column id="7613" parent="7279" name="DEPT_CODE">
+    <column id="7616" parent="7280" name="DEPT_CODE">
       <Comment>부서코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7614" parent="7279" name="NAME">
+    <column id="7617" parent="7280" name="NAME">
       <Comment>부서명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7615" parent="7279" name="TEL">
+    <column id="7618" parent="7280" name="TEL">
       <Comment>부서전화번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7616" parent="7279" name="UPPER_NAME">
+    <column id="7619" parent="7280" name="UPPER_NAME">
       <Comment>상위 부서명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7617" parent="7279" name="UPPER_CODE">
+    <column id="7620" parent="7280" name="UPPER_CODE">
       <Comment>상위 부서코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>5</Position>
     </column>
-    <index id="7618" parent="7279" name="TBL_DEPARTMENT_PK">
+    <index id="7621" parent="7280" name="TBL_DEPARTMENT_PK">
       <ColNames>DEPT_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:24</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:24</ModifiedTimestamp>
@@ -59239,105 +59257,105 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7619" parent="7279" name="TBL_DEPARTMENT_PK">
+    <key id="7622" parent="7280" name="TBL_DEPARTMENT_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:24</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_DEPARTMENT_PK</UnderlyingIndexName>
     </key>
-    <column id="7620" parent="7280" name="EMP_NO">
+    <column id="7623" parent="7281" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7621" parent="7280" name="NAME">
+    <column id="7624" parent="7281" name="EMP_NAME">
       <Comment>이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7622" parent="7280" name="EMAIL">
+    <column id="7625" parent="7281" name="EMAIL">
       <Comment>이메일</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7623" parent="7280" name="PHONE">
+    <column id="7626" parent="7281" name="PHONE">
       <Comment>핸드폰</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7624" parent="7280" name="RESIDENT_NO">
+    <column id="7627" parent="7281" name="RESIDENT_NO">
       <Comment>주민등록번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7625" parent="7280" name="START_DATE">
+    <column id="7628" parent="7281" name="START_DATE">
       <Comment>입사일</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7626" parent="7280" name="END_DATE">
+    <column id="7629" parent="7281" name="END_DATE">
       <Comment>퇴사일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7627" parent="7280" name="IS_RESIGNATION">
+    <column id="7630" parent="7281" name="IS_RESIGNATION">
       <Comment>퇴사여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;N&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="7628" parent="7280" name="DEPT_CODE">
+    <column id="7631" parent="7281" name="DEPT_CODE">
       <Comment>부서코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <column id="7629" parent="7280" name="JOB_CODE">
+    <column id="7632" parent="7281" name="JOB_CODE">
       <Comment>직급코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <column id="7630" parent="7280" name="ADDRESS">
+    <column id="7633" parent="7281" name="ADDRESS">
       <Comment>주소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>11</Position>
     </column>
-    <column id="7631" parent="7280" name="EDUCATION">
+    <column id="7634" parent="7281" name="EDUCATION">
       <Comment>최종학력</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>12</Position>
     </column>
-    <column id="7632" parent="7280" name="TELEPHONE">
+    <column id="7635" parent="7281" name="TELEPHONE">
       <Comment>내선전화</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>13</Position>
     </column>
-    <foreign-key id="7633" parent="7280" name="TBL_EMPLOYEE_FK">
+    <foreign-key id="7636" parent="7281" name="TBL_EMPLOYEE_FK">
       <ColNames>DEPT_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:42</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_DEPARTMENT_PK</RefKeyName>
       <RefTableName>TBL_DEPARTMENT</RefTableName>
     </foreign-key>
-    <foreign-key id="7634" parent="7280" name="TBL_EMPLOYEE_FK1">
+    <foreign-key id="7637" parent="7281" name="TBL_EMPLOYEE_FK1">
       <ColNames>JOB_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:44</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_JOB_PK</RefKeyName>
       <RefTableName>TBL_JOB</RefTableName>
     </foreign-key>
-    <index id="7635" parent="7280" name="TBL_EMPLOYEE_PK">
+    <index id="7638" parent="7281" name="TBL_EMPLOYEE_PK">
       <ColNames>EMP_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:12</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:12</ModifiedTimestamp>
@@ -59345,35 +59363,35 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7636" parent="7280" name="TBL_EMPLOYEE_PK">
+    <key id="7639" parent="7281" name="TBL_EMPLOYEE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:12</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_EMPLOYEE_PK</UnderlyingIndexName>
     </key>
-    <column id="7637" parent="7281" name="JOB_CODE">
+    <column id="7640" parent="7282" name="JOB_CODE">
       <Comment>직급코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7638" parent="7281" name="NAME">
+    <column id="7641" parent="7282" name="JOB_NAME">
       <Comment>직급명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7639" parent="7281" name="UPPER_JOB_CODE">
+    <column id="7642" parent="7282" name="UPPER_JOB_CODE">
       <Comment>상위직급코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7640" parent="7281" name="UPPER_JOB_NAME">
+    <column id="7643" parent="7282" name="UPPER_JOB_NAME">
       <Comment>상위직급명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <index id="7641" parent="7281" name="TBL_JOB_PK">
+    <index id="7644" parent="7282" name="TBL_JOB_PK">
       <ColNames>JOB_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
@@ -59381,39 +59399,39 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7642" parent="7281" name="TBL_JOB_PK">
+    <key id="7645" parent="7282" name="TBL_JOB_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_JOB_PK</UnderlyingIndexName>
     </key>
-    <column id="7643" parent="7282" name="WSD_NO">
+    <column id="7646" parent="7283" name="WSD_NO">
       <Comment>업무번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7644" parent="7282" name="EMP_NO">
+    <column id="7647" parent="7283" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="7645" parent="7282" name="TBL_LIST_FK1">
+    <foreign-key id="7648" parent="7283" name="TBL_LIST_FK1">
       <ColNames>WSD_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:36</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_WORK_PK</RefKeyName>
       <RefTableName>TBL_WORK</RefTableName>
     </foreign-key>
-    <foreign-key id="7646" parent="7282" name="TBL_LIST_FK">
+    <foreign-key id="7649" parent="7283" name="TBL_LIST_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:34</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7647" parent="7282" name="TBL_LIST_PK">
+    <index id="7650" parent="7283" name="TBL_LIST_PK">
       <ColNames>WSD_NO
 EMP_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:17</CreatedTimestamp>
@@ -59422,53 +59440,53 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7648" parent="7282" name="TBL_LIST_PK">
+    <key id="7651" parent="7283" name="TBL_LIST_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:17</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_LIST_PK</UnderlyingIndexName>
     </key>
-    <column id="7649" parent="7283" name="FAIL_NO">
+    <column id="7652" parent="7284" name="FAIL_NO">
       <Comment>회원로그인실패이력번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7650" parent="7283" name="FAIL_DATE">
+    <column id="7653" parent="7284" name="FAIL_DATE">
       <Comment>로그인실패일시</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7651" parent="7283" name="FAIL_REASON">
+    <column id="7654" parent="7284" name="FAIL_REASON">
       <Comment>로그인실패사유</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7652" parent="7283" name="ID">
+    <column id="7655" parent="7284" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7653" parent="7283" name="DEVICE">
+    <column id="7656" parent="7284" name="DEVICE">
       <Comment>디바이스</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7654" parent="7283" name="BROWSER">
+    <column id="7657" parent="7284" name="BROWSER">
       <Comment>브라우저</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="7655" parent="7283" name="TBL_LOGIN_FAIL_FK">
+    <foreign-key id="7658" parent="7284" name="TBL_LOGIN_FAIL_FK">
       <ColNames>ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_ACCESS_MANAGER_PK</RefKeyName>
       <RefTableName>TBL_ACCESS_MANAGER</RefTableName>
     </foreign-key>
-    <index id="7656" parent="7283" name="TBL_LOGIN_FAIL_PK">
+    <index id="7659" parent="7284" name="TBL_LOGIN_FAIL_PK">
       <ColNames>FAIL_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:15</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:15</ModifiedTimestamp>
@@ -59476,53 +59494,53 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7657" parent="7283" name="TBL_LOGIN_FAIL_PK">
+    <key id="7660" parent="7284" name="TBL_LOGIN_FAIL_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:15</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_LOGIN_FAIL_PK</UnderlyingIndexName>
     </key>
-    <column id="7658" parent="7284" name="LOGIN_NO">
+    <column id="7661" parent="7285" name="LOGIN_NO">
       <Comment>회원로그인이력번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7659" parent="7284" name="LOGIN_DATE">
+    <column id="7662" parent="7285" name="LOGIN_DATE">
       <Comment>로그인일시</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7660" parent="7284" name="PREV_URL">
+    <column id="7663" parent="7285" name="PREV_URL">
       <Comment>이전페이지주소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7661" parent="7284" name="ID">
+    <column id="7664" parent="7285" name="ID">
       <Comment>아이디</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7662" parent="7284" name="LOGIN_DEVICE">
+    <column id="7665" parent="7285" name="LOGIN_DEVICE">
       <Comment>디바이스</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7663" parent="7284" name="LOGIN_BROWSER">
+    <column id="7666" parent="7285" name="LOGIN_BROWSER">
       <Comment>브라우저</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="7664" parent="7284" name="TBL_LOGIN_HISTORY_FK">
+    <foreign-key id="7667" parent="7285" name="TBL_LOGIN_HISTORY_FK">
       <ColNames>ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:38</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_ACCESS_MANAGER_PK</RefKeyName>
       <RefTableName>TBL_ACCESS_MANAGER</RefTableName>
     </foreign-key>
-    <index id="7665" parent="7284" name="TBL_LOGIN_HISTORY_PK">
+    <index id="7668" parent="7285" name="TBL_LOGIN_HISTORY_PK">
       <ColNames>LOGIN_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:11</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:11</ModifiedTimestamp>
@@ -59530,66 +59548,66 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7666" parent="7284" name="TBL_LOGIN_HISTORY_PK">
+    <key id="7669" parent="7285" name="TBL_LOGIN_HISTORY_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:11</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_LOGIN_HISTORY_PK</UnderlyingIndexName>
     </key>
-    <column id="7667" parent="7285" name="MAN_NO">
+    <column id="7670" parent="7286" name="MAN_NO">
       <Comment>근태관리번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7668" parent="7285" name="START_TIME">
+    <column id="7671" parent="7286" name="START_TIME">
       <Comment>출근시간</Comment>
-      <DasType>TIMESTAMP(6)|0s</DasType>
+      <DasType>VARCHAR2(20 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7669" parent="7285" name="END_TIME">
+    <column id="7672" parent="7286" name="END_TIME">
       <Comment>퇴근시간</Comment>
-      <DasType>TIMESTAMP(6)|0s</DasType>
+      <DasType>VARCHAR2(20 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7670" parent="7285" name="MAN_DATE">
+    <column id="7673" parent="7286" name="MAN_DATE">
       <Comment>일자</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <DefaultExpression>SYSDATE</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7671" parent="7285" name="STATUS">
+    <column id="7674" parent="7286" name="STATUS">
       <Comment>상태</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7672" parent="7285" name="EMP_NO">
+    <column id="7675" parent="7286" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7673" parent="7285" name="WORK_TIME">
+    <column id="7676" parent="7286" name="WORK_TIME">
       <Comment>근무시간</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7674" parent="7285" name="TOTAL_WORK_TIME">
+    <column id="7677" parent="7286" name="TOTAL_WORK_TIME">
       <Comment>총 근무시간</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>8</Position>
     </column>
-    <foreign-key id="7675" parent="7285" name="TBL_MANAGEMENT_FK">
+    <foreign-key id="7678" parent="7286" name="TBL_MANAGEMENT_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:40</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7676" parent="7285" name="TBL_MANAGEMENT_PK">
+    <index id="7679" parent="7286" name="TBL_MANAGEMENT_PK">
       <ColNames>MAN_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:21</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:21</ModifiedTimestamp>
@@ -59597,67 +59615,67 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7677" parent="7285" name="TBL_MANAGEMENT_PK">
+    <key id="7680" parent="7286" name="TBL_MANAGEMENT_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:21</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_MANAGEMENT_PK</UnderlyingIndexName>
     </key>
-    <column id="7678" parent="7286" name="MENU_CODE">
+    <column id="7681" parent="7287" name="MENU_CODE">
       <Comment>접근메뉴코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7679" parent="7286" name="MENU_NAME">
+    <column id="7682" parent="7287" name="MENU_NAME">
       <Comment>메뉴이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7680" parent="7286" name="MENU_URL">
+    <column id="7683" parent="7287" name="MENU_URL">
       <Comment>메뉴주소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7681" parent="7286" name="MENU_DESC">
+    <column id="7684" parent="7287" name="MENU_DESC">
       <Comment>메뉴설명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7682" parent="7286" name="METHOD">
+    <column id="7685" parent="7287" name="METHOD">
       <Comment>사용메소드</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7683" parent="7286" name="GROUP_CODE">
+    <column id="7686" parent="7287" name="GROUP_CODE">
       <Comment>메뉴그룹코드</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7684" parent="7286" name="AUTH_CODE">
+    <column id="7687" parent="7287" name="AUTH_CODE">
       <Comment>권한코드</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <foreign-key id="7685" parent="7286" name="TBL_MENU_FK1">
+    <foreign-key id="7688" parent="7287" name="TBL_MENU_FK1">
       <ColNames>GROUP_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:28</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_MENU_GROUP_PK</RefKeyName>
       <RefTableName>TBL_MENU_GROUP</RefTableName>
     </foreign-key>
-    <foreign-key id="7686" parent="7286" name="TBL_MENU_FK">
+    <foreign-key id="7689" parent="7287" name="TBL_MENU_FK">
       <ColNames>AUTH_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:05:26</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_AUTH_PK</RefKeyName>
       <RefTableName>TBL_AUTH</RefTableName>
     </foreign-key>
-    <index id="7687" parent="7286" name="TBL_MENU_PK">
+    <index id="7690" parent="7287" name="TBL_MENU_PK">
       <ColNames>MENU_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:15</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:15</ModifiedTimestamp>
@@ -59665,31 +59683,31 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7688" parent="7286" name="TBL_MENU_PK">
+    <key id="7691" parent="7287" name="TBL_MENU_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:15</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_MENU_PK</UnderlyingIndexName>
     </key>
-    <column id="7689" parent="7287" name="GROUP_CODE">
+    <column id="7692" parent="7288" name="GROUP_CODE">
       <Comment>메뉴그룹코드</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7690" parent="7287" name="GROUP_NAME">
+    <column id="7693" parent="7288" name="GROUP_NAME">
       <Comment>메뉴그룹이름</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7691" parent="7287" name="GROUP_START_URL">
+    <column id="7694" parent="7288" name="GROUP_START_URL">
       <Comment>메뉴그룹시작주소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="7692" parent="7287" name="TBL_MENU_GROUP_PK">
+    <index id="7695" parent="7288" name="TBL_MENU_GROUP_PK">
       <ColNames>GROUP_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:11</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:11</ModifiedTimestamp>
@@ -59697,45 +59715,45 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7693" parent="7287" name="TBL_MENU_GROUP_PK">
+    <key id="7696" parent="7288" name="TBL_MENU_GROUP_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:11</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_MENU_GROUP_PK</UnderlyingIndexName>
     </key>
-    <column id="7694" parent="7288" name="STATUS">
+    <column id="7697" parent="7289" name="STATUS">
       <Comment>병역상태</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7695" parent="7288" name="IS_WHETHER">
+    <column id="7698" parent="7289" name="IS_WHETHER">
       <Comment>병역여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <DefaultExpression>&apos;N&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7696" parent="7288" name="MIL_NO">
+    <column id="7699" parent="7289" name="MIL_NO">
       <Comment>병역코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7697" parent="7288" name="EMP_NO">
+    <column id="7700" parent="7289" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="7698" parent="7288" name="TBL_MILITARY_FK">
+    <foreign-key id="7701" parent="7289" name="TBL_MILITARY_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7699" parent="7288" name="TBL_MILITARY_PK">
+    <index id="7702" parent="7289" name="TBL_MILITARY_PK">
       <ColNames>MIL_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:18</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:18</ModifiedTimestamp>
@@ -59743,32 +59761,32 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7700" parent="7288" name="TBL_MILITARY_PK">
+    <key id="7703" parent="7289" name="TBL_MILITARY_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:18</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_MILITARY_PK</UnderlyingIndexName>
     </key>
-    <column id="7701" parent="7289" name="PROFILE_CODE">
+    <column id="7704" parent="7290" name="PROFILE_CODE">
       <Comment>프로필코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7702" parent="7289" name="EMP_NO">
+    <column id="7705" parent="7290" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="7703" parent="7289" name="TBL_PROFILE_FK">
+    <foreign-key id="7706" parent="7290" name="TBL_PROFILE_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:38</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7704" parent="7289" name="TBL_PROFILE_PK">
+    <index id="7707" parent="7290" name="TBL_PROFILE_PK">
       <ColNames>PROFILE_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:20</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:20</ModifiedTimestamp>
@@ -59776,48 +59794,48 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7705" parent="7289" name="TBL_PROFILE_PK">
+    <key id="7708" parent="7290" name="TBL_PROFILE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:20</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_PROFILE_PK</UnderlyingIndexName>
     </key>
-    <column id="7706" parent="7290" name="ORIGINAL_FILE_NAME">
+    <column id="7709" parent="7291" name="ORIGINAL_FILE_NAME">
       <Comment>원본파일명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7707" parent="7290" name="CHANGED_FILE_NAME">
+    <column id="7710" parent="7291" name="CHANGED_FILE_NAME">
       <Comment>저장파일명</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7708" parent="7290" name="CREATION_DATE">
+    <column id="7711" parent="7291" name="CREATION_DATE">
       <Comment>변경일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7709" parent="7290" name="PHOTO_FILE_CODE">
+    <column id="7712" parent="7291" name="PHOTO_FILE_CODE">
       <Comment>사진파일코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7710" parent="7290" name="PROFILE_CODE">
+    <column id="7713" parent="7291" name="PROFILE_CODE">
       <Comment>프로필코드</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <Position>5</Position>
     </column>
-    <foreign-key id="7711" parent="7290" name="TBL_PROFILE_FILE_FK">
+    <foreign-key id="7714" parent="7291" name="TBL_PROFILE_FILE_FK">
       <ColNames>PROFILE_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_PROFILE_PK</RefKeyName>
       <RefTableName>TBL_MY_PROFILE</RefTableName>
     </foreign-key>
-    <index id="7712" parent="7290" name="TBL_PROFILE_FILE_PK">
+    <index id="7715" parent="7291" name="TBL_PROFILE_FILE_PK">
       <ColNames>PHOTO_FILE_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:17</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:17</ModifiedTimestamp>
@@ -59825,32 +59843,32 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7713" parent="7290" name="TBL_PROFILE_FILE_PK">
+    <key id="7716" parent="7291" name="TBL_PROFILE_FILE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:17</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_PROFILE_FILE_PK</UnderlyingIndexName>
     </key>
-    <column id="7714" parent="7291" name="ROOM_ID">
+    <column id="7717" parent="7292" name="ROOM_ID">
       <Comment>쪽지함번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7715" parent="7291" name="EMP_NO">
+    <column id="7718" parent="7292" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="7716" parent="7291" name="TBL_NOTE_BOX_FK">
+    <foreign-key id="7719" parent="7292" name="TBL_NOTE_BOX_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:38</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7717" parent="7291" name="TBL_NOTE_BOX_PK">
+    <index id="7720" parent="7292" name="TBL_NOTE_BOX_PK">
       <ColNames>ROOM_ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:10</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:10</ModifiedTimestamp>
@@ -59858,63 +59876,63 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7718" parent="7291" name="TBL_NOTE_BOX_PK">
+    <key id="7721" parent="7292" name="TBL_NOTE_BOX_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:10</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_NOTE_BOX_PK</UnderlyingIndexName>
     </key>
-    <column id="7719" parent="7292" name="NOTE_ID">
+    <column id="7722" parent="7293" name="NOTE_ID">
       <Comment>쪽지번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7720" parent="7292" name="ROOM_ID">
+    <column id="7723" parent="7293" name="ROOM_ID">
       <Comment>쪽지함번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7721" parent="7292" name="NOTE_CONTENT">
+    <column id="7724" parent="7293" name="NOTE_CONTENT">
       <Comment>쪽지내용</Comment>
       <DasType>VARCHAR2(4000 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7722" parent="7292" name="NOTE_TYPE">
+    <column id="7725" parent="7293" name="NOTE_TYPE">
       <Comment>수신발신여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7723" parent="7292" name="SENT_TIME">
+    <column id="7726" parent="7293" name="SENT_TIME">
       <Comment>보낸시간</Comment>
       <DasType>TIMESTAMP(6)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="7724" parent="7292" name="EMP_NO">
+    <column id="7727" parent="7293" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="7725" parent="7292" name="TBL_NOTE_MESSAGE_FK1">
+    <foreign-key id="7728" parent="7293" name="TBL_NOTE_MESSAGE_FK1">
       <ColNames>ROOM_ID</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_NOTE_BOX_PK</RefKeyName>
       <RefTableName>TBL_NOTE_BOX</RefTableName>
     </foreign-key>
-    <foreign-key id="7726" parent="7292" name="TBL_NOTE_MESSAGE_FK">
+    <foreign-key id="7729" parent="7293" name="TBL_NOTE_MESSAGE_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:57</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <index id="7727" parent="7292" name="TBL_NOTE_MESSAGE_PK">
+    <index id="7730" parent="7293" name="TBL_NOTE_MESSAGE_PK">
       <ColNames>NOTE_ID</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:13</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:13</ModifiedTimestamp>
@@ -59922,38 +59940,38 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7728" parent="7292" name="TBL_NOTE_MESSAGE_PK">
+    <key id="7731" parent="7293" name="TBL_NOTE_MESSAGE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:13</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_NOTE_MESSAGE_PK</UnderlyingIndexName>
     </key>
-    <column id="7729" parent="7293" name="OFFICIAL_RECIPIENT">
+    <column id="7732" parent="7294" name="OFFICIAL_RECIPIENT">
       <Comment>수신처</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7730" parent="7293" name="ITEMS_NO">
+    <column id="7733" parent="7294" name="ITEMS_NO">
       <Comment>상세내역번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7731" parent="7293" name="APV_NO">
+    <column id="7734" parent="7294" name="APV_NO">
       <Comment>기안번호</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <foreign-key id="7732" parent="7293" name="TBL_OFFICIAL_LETTER_FK">
+    <foreign-key id="7735" parent="7294" name="TBL_OFFICIAL_LETTER_FK">
       <ColNames>APV_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:02:37</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_APV_FORM_PK</RefKeyName>
       <RefTableName>TBL_APV_FORM</RefTableName>
     </foreign-key>
-    <index id="7733" parent="7293" name="TBL_OFFICIAL_LETTER_PK">
+    <index id="7736" parent="7294" name="TBL_OFFICIAL_LETTER_PK">
       <ColNames>ITEMS_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:09</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
@@ -59961,77 +59979,77 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7734" parent="7293" name="TBL_OFFICIAL_LETTER_PK">
+    <key id="7737" parent="7294" name="TBL_OFFICIAL_LETTER_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:09</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_OFFICIAL_LETTER_PK</UnderlyingIndexName>
     </key>
-    <column id="7735" parent="7294" name="RESOURCE_CODE">
+    <column id="7738" parent="7295" name="RESOURCE_CODE">
       <Comment>자원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7736" parent="7294" name="RESOURCE_NAME">
+    <column id="7739" parent="7295" name="RESOURCE_NAME">
       <Comment>자원명</Comment>
       <DasType>VARCHAR2(150 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7737" parent="7294" name="AREA">
+    <column id="7740" parent="7295" name="AREA">
       <Comment>지역</Comment>
       <DasType>VARCHAR2(150 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7738" parent="7294" name="LOCATION">
+    <column id="7741" parent="7295" name="LOCATION">
       <Comment>위치</Comment>
       <DasType>VARCHAR2(1000 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7739" parent="7294" name="SERVICE_GUIDE">
+    <column id="7742" parent="7295" name="SERVICE_GUIDE">
       <Comment>이용안내</Comment>
       <DasType>CLOB|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7740" parent="7294" name="CREATION_DATE">
+    <column id="7743" parent="7295" name="CREATION_DATE">
       <Comment>생성날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7741" parent="7294" name="MODIFIED_DATE">
+    <column id="7744" parent="7295" name="MODIFIED_DATE">
       <Comment>수정날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7742" parent="7294" name="DELETE_YN">
+    <column id="7745" parent="7295" name="DELETE_YN">
       <Comment>삭제여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="7743" parent="7294" name="START_TIME">
+    <column id="7746" parent="7295" name="START_TIME">
       <Comment>시작시간</Comment>
       <DasType>VARCHAR2(50 byte)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="7744" parent="7294" name="END_TIME">
+    <column id="7747" parent="7295" name="END_TIME">
       <Comment>끝시간</Comment>
       <DasType>VARCHAR2(50 byte)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="7745" parent="7294" name="CATEGORY_CODE">
+    <column id="7748" parent="7295" name="CATEGORY_CODE">
       <Comment>카테고리 번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>11</Position>
     </column>
-    <foreign-key id="7746" parent="7294" name="TBL_RESOURCE_FK">
+    <foreign-key id="7749" parent="7295" name="TBL_RESOURCE_FK">
       <ColNames>CATEGORY_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:12</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_RESOURCE_CATEGORY_PK</RefKeyName>
       <RefTableName>TBL_RESOURCE_CATEGORY</RefTableName>
     </foreign-key>
-    <index id="7747" parent="7294" name="TBL_RESOURCE_PK">
+    <index id="7750" parent="7295" name="TBL_RESOURCE_PK">
       <ColNames>RESOURCE_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:22</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:22</ModifiedTimestamp>
@@ -60039,24 +60057,24 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7748" parent="7294" name="TBL_RESOURCE_PK">
+    <key id="7751" parent="7295" name="TBL_RESOURCE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:22</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_RESOURCE_PK</UnderlyingIndexName>
     </key>
-    <column id="7749" parent="7295" name="CATEGORY_CODE">
+    <column id="7752" parent="7296" name="CATEGORY_CODE">
       <Comment>카테고리 번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7750" parent="7295" name="NAME">
+    <column id="7753" parent="7296" name="NAME">
       <Comment>이름</Comment>
       <DasType>VARCHAR2(50 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <index id="7751" parent="7295" name="TBL_RESOURCE_CATEGORY_PK">
+    <index id="7754" parent="7296" name="TBL_RESOURCE_CATEGORY_PK">
       <ColNames>CATEGORY_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:23</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
@@ -60064,62 +60082,62 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7752" parent="7295" name="TBL_RESOURCE_CATEGORY_PK">
+    <key id="7755" parent="7296" name="TBL_RESOURCE_CATEGORY_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:23</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_RESOURCE_CATEGORY_PK</UnderlyingIndexName>
     </key>
-    <column id="7753" parent="7296" name="FILE_CODE">
+    <column id="7756" parent="7297" name="FILE_CODE">
       <Comment>파일번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7754" parent="7296" name="TYPE">
+    <column id="7757" parent="7297" name="TYPE">
       <Comment>유형</Comment>
       <DasType>VARCHAR2(20 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7755" parent="7296" name="ORIGINAL_FILE_NAME">
+    <column id="7758" parent="7297" name="ORIGINAL_FILE_NAME">
       <Comment>원본파일명</Comment>
       <DasType>VARCHAR2(600 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7756" parent="7296" name="CHANGED_FILE_NAME">
+    <column id="7759" parent="7297" name="CHANGED_FILE_NAME">
       <Comment>변경된파일명</Comment>
       <DasType>VARCHAR2(600 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7757" parent="7296" name="CREATION_DATE">
+    <column id="7760" parent="7297" name="CREATION_DATE">
       <Comment>등록일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7758" parent="7296" name="DELETE_YN">
+    <column id="7761" parent="7297" name="DELETE_YN">
       <Comment>삭제여부</Comment>
       <DasType>CHAR(1 byte)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7759" parent="7296" name="MODIFIED_DATE">
+    <column id="7762" parent="7297" name="MODIFIED_DATE">
       <Comment>수정일</Comment>
       <DasType>DATE|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="7760" parent="7296" name="RESOURCE_CODE">
+    <column id="7763" parent="7297" name="RESOURCE_CODE">
       <Comment>자원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="7761" parent="7296" name="TBL_RESOURCE_FILE_FK">
+    <foreign-key id="7764" parent="7297" name="TBL_RESOURCE_FILE_FK">
       <ColNames>RESOURCE_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:09:08</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_RESOURCE_PK</RefKeyName>
       <RefTableName>TBL_RESOURCE</RefTableName>
     </foreign-key>
-    <index id="7762" parent="7296" name="TBL_RESOURCE_FILE_PK">
+    <index id="7765" parent="7297" name="TBL_RESOURCE_FILE_PK">
       <ColNames>FILE_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:21</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:21</ModifiedTimestamp>
@@ -60127,70 +60145,70 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7763" parent="7296" name="TBL_RESOURCE_FILE_PK">
+    <key id="7766" parent="7297" name="TBL_RESOURCE_FILE_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:21</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_RESOURCE_FILE_PK</UnderlyingIndexName>
     </key>
-    <column id="7764" parent="7297" name="STATUS_CODE">
+    <column id="7767" parent="7298" name="STATUS_CODE">
       <Comment>현황번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7765" parent="7297" name="RESERVATION_STATUS">
+    <column id="7768" parent="7298" name="RESERVATION_STATUS">
       <Comment>예약상태</Comment>
       <DasType>VARCHAR2(100 byte)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="7766" parent="7297" name="START_TIME">
+    <column id="7769" parent="7298" name="START_TIME">
       <Comment>시작시간</Comment>
       <DasType>VARCHAR2(50 byte)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="7767" parent="7297" name="END_TIME">
+    <column id="7770" parent="7298" name="END_TIME">
       <Comment>끝시간</Comment>
       <DasType>VARCHAR2(50 byte)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="7768" parent="7297" name="REASON">
+    <column id="7771" parent="7298" name="REASON">
       <Comment>사유</Comment>
       <DasType>VARCHAR2(2000 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7769" parent="7297" name="RESERVATION_DATE">
+    <column id="7772" parent="7298" name="RESERVATION_DATE">
       <Comment>날짜</Comment>
       <DasType>DATE|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="7770" parent="7297" name="EMP_NO">
+    <column id="7773" parent="7298" name="EMP_NO">
       <Comment>사원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="7771" parent="7297" name="RESOURCE_CODE">
+    <column id="7774" parent="7298" name="RESOURCE_CODE">
       <Comment>자원번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <foreign-key id="7772" parent="7297" name="TBL_RESOURCE_RESERVATION_STATUS_FK">
+    <foreign-key id="7775" parent="7298" name="TBL_RESOURCE_RESERVATION_STATUS_FK">
       <ColNames>EMP_NO</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:05</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_EMPLOYEE_PK</RefKeyName>
       <RefTableName>TBL_EMPLOYEE</RefTableName>
     </foreign-key>
-    <foreign-key id="7773" parent="7297" name="TBL_RESOURCE_RESERVATION_STATUS_FK1">
+    <foreign-key id="7776" parent="7298" name="TBL_RESOURCE_RESERVATION_STATUS_FK1">
       <ColNames>RESOURCE_CODE</ColNames>
       <ModifiedTimestamp>2023-08-24.01:06:03</ModifiedTimestamp>
       <OnDelete>restrict</OnDelete>
       <RefKeyName>TBL_RESOURCE_PK</RefKeyName>
       <RefTableName>TBL_RESOURCE</RefTableName>
     </foreign-key>
-    <index id="7774" parent="7297" name="TBL_RESOURCE_RESERVATION_STATUS_PK">
+    <index id="7777" parent="7298" name="TBL_RESOURCE_RESERVATION_STATUS_PK">
       <ColNames>STATUS_CODE</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:22</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:22</ModifiedTimestamp>
@@ -60198,53 +60216,53 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7775" parent="7297" name="TBL_RESOURCE_RESERVATION_STATUS_PK">
+    <key id="7778" parent="7298" name="TBL_RESOURCE_RESERVATION_STATUS_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:22</ModifiedTimestamp>
       <Primary>1</Primary>
       <UnderlyingIndexName>TBL_RESOURCE_RESERVATION_STATUS_PK</UnderlyingIndexName>
     </key>
-    <column id="7776" parent="7298" name="WSD_NO">
+    <column id="7779" parent="7299" name="WSD_NO">
       <Comment>업무번호</Comment>
       <DasType>NUMBER(*)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="7777" parent="7298" name="TITLE">
+    <column id="7780" parent="7299" name="TITLE">
       <Comment>제목</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="7778" parent="7298" name="START_DATE">
+    <column id="7781" parent="7299" name="START_DATE">
       <Comment>시작일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="7779" parent="7298" name="END_DATE">
+    <column id="7782" parent="7299" name="END_DATE">
       <Comment>종료일자</Comment>
       <DasType>DATE|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="7780" parent="7298" name="PLACE">
+    <column id="7783" parent="7299" name="PLACE">
       <Comment>장소</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="7781" parent="7298" name="ATTENDEES">
+    <column id="7784" parent="7299" name="ATTENDEES">
       <Comment>등록자</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="7782" parent="7298" name="CONTENT">
+    <column id="7785" parent="7299" name="CONTENT">
       <Comment>내용</Comment>
       <DasType>VARCHAR2(255 byte)|0s</DasType>
       <Position>7</Position>
     </column>
-    <index id="7783" parent="7298" name="TBL_WORK_PK">
+    <index id="7786" parent="7299" name="TBL_WORK_PK">
       <ColNames>WSD_NO</ColNames>
       <CreatedTimestamp>2023-08-24.00:34:21</CreatedTimestamp>
       <ModifiedTimestamp>2023-08-24.00:34:21</ModifiedTimestamp>
@@ -60252,7 +60270,7 @@ EMP_NO</ColNames>
       <Unique>1</Unique>
       <TablespaceName>USERS</TablespaceName>
     </index>
-    <key id="7784" parent="7298" name="TBL_WORK_PK">
+    <key id="7787" parent="7299" name="TBL_WORK_PK">
       <InitiallyDeferred>1</InitiallyDeferred>
       <ModifiedTimestamp>2023-08-24.00:34:21</ModifiedTimestamp>
       <Primary>1</Primary>
