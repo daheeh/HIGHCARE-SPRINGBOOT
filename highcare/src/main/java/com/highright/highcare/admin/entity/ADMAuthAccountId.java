@@ -16,6 +16,7 @@ public class ADMAuthAccountId implements Serializable {
 
     @Column(name ="AUTH_CODE")
     private String code;
+
     @Column(name="ID")
     private String id;
 

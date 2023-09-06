@@ -17,15 +17,18 @@ import javax.persistence.*;
 public class ADMEmployee {
 
     @Id
-    @Column(name="EMP_NO")
+    @Column(name="EMP_NO", updatable = false)
     private int empNo;
 
     @Column(name="EMP_NAME")
     private String name;
 
+    @Column(name="DEPT_CODE")
+    private int deptCode;
+
     @OneToOne
-    @JoinColumn(name="DEPT_CODE")
-    private AUTHDepartment deptCode;
+    @JoinColumn(name="DEPT_CODE", insertable = false, updatable = false)
+    private AUTHDepartment dept;
 
     @Column(name="PHONE")
     private String phone;
@@ -33,12 +36,15 @@ public class ADMEmployee {
     @Column(name="EMAIL")
     private String email;
 
+    @Column(name="JOB_CODE")
+    private int jobCode;
+
     @OneToOne
-    @JoinColumn(name="JOB_CODE")
-    private AUTHJob jobCode;
+    @JoinColumn(name="JOB_CODE", insertable = false, updatable = false)
+    private AUTHJob job;
 
     @Builder
-    public ADMEmployee(int empNo, String name, AUTHDepartment deptCode, String phone, String email, AUTHJob jobCode) {
+    public ADMEmployee(int empNo, String name, int deptCode, String phone, String email, int jobCode) {
         this.empNo = empNo;
         this.name = name;
         this.deptCode = deptCode;

@@ -13,5 +13,5 @@ public interface AdminService {
 
     Object deleteAccount(String id);
 
-    Object updateAccount(UpdateAccountDTO updateAccountDTO);
+    Object updateAccount(String id, UpdateAccountDTO updateAccountDTO);
 }
