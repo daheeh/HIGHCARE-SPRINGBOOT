@@ -34,6 +34,7 @@ spring:
           auth: true
           starttls:
             enable: true
+
   # redis cache config
   redis:
     host: localhost
