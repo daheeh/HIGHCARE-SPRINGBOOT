@@ -11,7 +11,7 @@ public class ADMAccountEntityListener {
 
     // 엔티티 업데이트 될 때마다 데이터 동기화
     @PostUpdate
-    public void onPostUpdate(ADMAccount account) throws Exception {
+    public void onPostUpdate(ADMAccount account) {
 
         userService.syncUsersFromDatabase();
     }
