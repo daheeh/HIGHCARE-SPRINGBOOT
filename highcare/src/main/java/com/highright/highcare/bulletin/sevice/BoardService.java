@@ -79,7 +79,7 @@ public class BoardService {
     public int selectCommentTotal(String bulletinCode) {
 
         Board board = boardRepository.findById(Integer.valueOf(bulletinCode)).get();
-        List<Comment> comments = commentRepository.findByBoard(board);
+        List<Comment> comments = commentRepository.findByBoardAndDeleteYn(board,'N');
         return comments.size();
     }
     public int selectSearchTotal(int boardCategoryCode, String content,int empNo) {
@@ -184,7 +184,7 @@ public class BoardService {
         board.setViews(board.getViews()+1);
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
 
-        List<Comment> comment = commentRepository.findByBoard(board);
+        List<Comment> comment = commentRepository.findByBoardAndDeleteYn(board,'N');
         List<CommentDTO> commentList = comment.stream().map(comment1 -> modelMapper.map(comment1, CommentDTO.class)).collect(Collectors.toList());
         boardDTO.setCommentCnt(commentList.size());
         return boardDTO;
@@ -262,7 +262,27 @@ public class BoardService {
         return 1;
 
     }
+    @Transactional
+    public Object deleteComment(CommentDTO commentDTO) {
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        Comment comment = commentRepository.findById(commentDTO.getCommentCode()).get();
+        comment.setDeleteYn('Y');
+        comment.setModifiedDate(sqlDate);
 
+        return 1;
 
+    }
 
+    @Transactional
+    public Object updateComment(CommentDTO commentDTO) {
+        java.util.Date utilDate = new java.util.Date();
+        long currentMilliseconds = utilDate.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+        Comment comment = commentRepository.findById(commentDTO.getCommentCode()).get();
+        comment.setModifiedDate(sqlDate);
+        comment.setCommentContent(commentDTO.getCommentContent());
+        return 1;
+    }
 }

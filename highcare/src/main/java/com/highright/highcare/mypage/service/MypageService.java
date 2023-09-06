@@ -1,12 +1,15 @@
 package com.highright.highcare.mypage.service;
 
+//import com.highright.highcare.mypage.Repository.AnnRepository;
+import com.highright.highcare.mypage.Repository.AnnRepository;
+import com.highright.highcare.mypage.dto.MyAnnualDTO;
+import com.highright.highcare.mypage.dto.MyEmployeeDTO;
+import com.highright.highcare.mypage.entity.*;
 import com.highright.highcare.util.FileUploadUtils;
 import com.highright.highcare.mypage.Repository.MyProfileFileRepository;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.mypage.dto.MyProfileFileDTO;
-import com.highright.highcare.mypage.entity.MyProfile;
-import com.highright.highcare.mypage.entity.MyProfileFile;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -27,12 +32,10 @@ public class MypageService {
     private final ProfileRepository profileRepository;
 
     private final MyProfileFileRepository myProfileFileRepository;
+
+    private final AnnRepository annRepository;
     private final ModelMapper modelMapper;
 
-//    @Value("src/main/resources/static/profileimg")
-//    private String IMAGE_DIR;
-//    @Value("http://localhost:8080/profileimg")
-//    private String IMAGE_URL;
     /* 이미지 저장 할 위치 및 응답 할 이미지 주소 */
     @Value("${image.image-dir}")
     private String IMAGE_DIR;
@@ -40,10 +43,10 @@ public class MypageService {
     private String IMAGE_URL;
 
     @Autowired
-    public MypageService(ProfileRepository profileRepository, MyProfileFileRepository myProfileFileRepository, ModelMapper modelMapper) {
+    public MypageService(ProfileRepository profileRepository, MyProfileFileRepository myProfileFileRepository, AnnRepository annRepository, ModelMapper modelMapper) {
         this.profileRepository = profileRepository;
         this.myProfileFileRepository = myProfileFileRepository;
-
+        this.annRepository = annRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -106,7 +109,22 @@ public class MypageService {
         }
     }
 
+    @Transactional
+    public Object selectAnnList(int empNo) {
+        log.info("[MyPageService] empNo^^^^222222222 {}", empNo);
+
+        List<MyAnnual> annEmployee = annRepository.findByEmpNo(empNo);
+
+        log.info("[MyPageService] annEmployee^^^^222222222 {}", annEmployee);
 
 
+//        AmmEmployee랑 MyEmployeeDTO랑 연결이 알아서 됨?
+        List<MyAnnualDTO> myAnnualDTOList = annEmployee.stream().map(item -> modelMapper.map(item, MyAnnualDTO.class)).collect(Collectors.toList());
+        log.info("[MyPageService] MyEmployeeDTO^^^^ {}",myAnnualDTOList);
+
+
+
+        return myAnnualDTOList;
+    }
 }
 

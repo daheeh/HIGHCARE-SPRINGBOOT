@@ -1,6 +1,8 @@
 package com.highright.highcare.admin.service;
 
+import com.highright.highcare.admin.dto.ADMAccountDTO;
 import com.highright.highcare.admin.dto.RequestMemberDTO;
+import com.highright.highcare.admin.dto.UpdateAccountDTO;
 import com.highright.highcare.admin.entity.ADMAccount;
 import com.highright.highcare.admin.entity.ADMAuthAccount;
 import com.highright.highcare.admin.entity.ADMAuthAccountId;
@@ -8,7 +10,7 @@ import com.highright.highcare.admin.repository.ADMAccountRepository;
 import com.highright.highcare.admin.repository.ADMAuthAccountRepository;
 import com.highright.highcare.admin.repository.ADMEmployeeRepository;
 import com.highright.highcare.auth.dto.AccountDTO;
-import com.highright.highcare.auth.entity.ADMEmployee;
+import com.highright.highcare.auth.entity.AUTHEmployee;
 import com.highright.highcare.common.AdminCustomBean;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -38,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
         if(isExist != null){
 
             // 리빌딩 --- 전체 사원 조회 (if 이미 회원인 사원은 조회불가)
-            ADMEmployee findMember = admEmployeeRepository.findById(empNo).get();
+            AUTHEmployee findMember = admEmployeeRepository.findById(empNo).get();
 
             log.info("[AdminServiceImpl] selectMember : findMember ==== {}",findMember);
 
@@ -51,12 +55,17 @@ public class AdminServiceImpl implements AdminService {
                     .email(findMember.getEmail())
                     .build();
         }
+        if(admEmployeeRepository.findById(empNo).isPresent()){
         return "이미 존재하는 회원입니다.";
+
+        } else {
+            return "사원정보를 찾을 수 없습니다. 사원번호를 다시 확인하세요.";
+        }
     }
 
     @Transactional
     @Override
-    public Object insertMember(RequestMemberDTO requestMemberDTO) {
+    public Object insertAccount(RequestMemberDTO requestMemberDTO) {
 
         // 일반계정 등록 -> 계정별권한(임시회원) 까지만 진행됨(이후 절차는 회원등록 승인 후)
         log.info("[AdminServiceImpl] insertMember ===== start " );
@@ -86,7 +95,32 @@ public class AdminServiceImpl implements AdminService {
             return "회원 임시등록 실패";
         }
 
-
-
     }
+
+    @Override
+    public Object selectAccountList() {
+
+        List<ADMAccount> authAccountList = admAccountRepository.findAll();
+
+        log.info("[AdminServiceImpl] selectMemberList authAccountList ==={}", authAccountList);
+        List<ADMAccountDTO> accountDTOList = authAccountList.stream().map(account -> modelMapper.map(account, ADMAccountDTO.class)).collect(Collectors.toList());
+        log.info("[AdminServiceImpl] selectMemberList accountDTOList ==={}", accountDTOList);
+
+
+        return accountDTOList;
+    }
+
+
+
+    @Override
+    public Object deleteAccount(String id) {
+        return null;
+    }
+
+    @Override
+    public Object updateAccount(UpdateAccountDTO updateAccountDTO) {
+        return null;
+    }
+
+
 }

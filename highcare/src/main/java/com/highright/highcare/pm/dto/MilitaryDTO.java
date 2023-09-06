@@ -8,7 +8,9 @@ import javax.persistence.Embeddable;
 @Getter
 public class MilitaryDTO {
 
+    private Integer milNo;
     private int empNo;
     private String status;
     private char isWhether;
+
 }

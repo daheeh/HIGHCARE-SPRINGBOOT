@@ -2,7 +2,7 @@ package com.highright.highcare.admin.controller;
 
 
 import com.highright.highcare.admin.dto.RequestMemberDTO;
-import com.highright.highcare.auth.dto.LoginMemberDTO;
+import com.highright.highcare.admin.dto.UpdateAccountDTO;
 import com.highright.highcare.admin.service.AdminService;
 import com.highright.highcare.common.ResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
 @Slf4j
 @RequestMapping("/api/admin")
 @RestController
@@ -22,15 +20,15 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping("main")
-    public ResponseEntity<ResponseDTO> selectAdmin(LoginMemberDTO loginMemberDTO
-            , HttpServletResponse response){
-        log.info("[AdminController] Admin : Admin ==== {}", "관리자페이지 접속 성공");
-
-
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "관리자 페이지 접속 성공", null));
-    }
+//    @GetMapping("main")
+//    public ResponseEntity<ResponseDTO> selectAdmin(LoginMemberDTO loginMemberDTO
+//            , HttpServletResponse response){
+//        log.info("[AdminController] Admin : Admin ==== {}", "관리자페이지 접속 성공");
+//
+//
+//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+//                "관리자 페이지 접속 성공", null));
+//    }
     @GetMapping("member")
     public ResponseEntity<ResponseDTO> selectMember(@RequestParam int empNo){
         log.info("empNo" , empNo);
@@ -39,14 +37,42 @@ public class AdminController {
     }
 
     // 인서트 회원신청
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/memberjoin")
-    public ResponseEntity<ResponseDTO> insertMember(@RequestBody RequestMemberDTO requestMemberDTO){
-        log.info("[AdminController] insertMember requestMemberDTO===={}", requestMemberDTO);
+    public ResponseEntity<ResponseDTO> insertAccount(@RequestBody RequestMemberDTO requestMemberDTO){
+        log.info("[AdminController] insertAccount requestMemberDTO===={}", requestMemberDTO);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "회원등록 신청", adminService.insertMember(requestMemberDTO)));
+                "회원 등록 신청", adminService.insertAccount(requestMemberDTO)));
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/memberlist")
+    public ResponseEntity<ResponseDTO> selectAccountList(){
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "전체 회원 조회", adminService.selectAccountList()));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PutMapping("/member")
+    public ResponseEntity<ResponseDTO> updateAccount( @RequestBody UpdateAccountDTO updateAccountDTO){
+
+        log.info("[AdminController] updateAccount updateAccountDTO===={}", updateAccountDTO);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "회원 계정상태 수정", adminService.updateAccount(updateAccountDTO)));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/member/{id}")
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id){
+        log.info("[AdminController] updateAccount id===={}", id);
+
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "회원 삭제(탈퇴)", adminService.deleteAccount(id)));
+    }
+
 
 
 

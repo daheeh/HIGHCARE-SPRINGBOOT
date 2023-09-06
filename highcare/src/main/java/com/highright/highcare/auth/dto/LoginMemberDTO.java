@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,10 +19,15 @@ public class LoginMemberDTO implements UserDetails {
     private String Name;
     private String password;
 
+    private String isTempPwd;
+    private Date pwdExpiredDate;
+
     private String deptName;
     private String jobName;
 
     private String loginType;
+
+    private String authNumber;
 
     private List<AuthAccountDTO> roleList;
 

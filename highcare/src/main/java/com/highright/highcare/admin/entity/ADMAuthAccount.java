@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "adminAuthAccount")
+@Entity
 @Table(name="TBL_AUTH_ACCOUNT")
 @Getter
 @Setter

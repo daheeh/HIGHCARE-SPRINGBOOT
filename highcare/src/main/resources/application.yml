@@ -1,5 +1,6 @@
 server:
   port: 8080
+
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
@@ -9,12 +10,12 @@ spring:
   servlet:
     multipart:
       enabled: true
-      max-file-size: 10MB
-      max-request-size: 10MB
+      file-size-threshold: 10KB
+      max-file-size: 100MB
+      max-request-size: 100MB
   web:
     resources:
       static-locations: classpath:/images/
-      add-mappings: false
   # cookie
   server:
     servlet:
@@ -37,8 +38,7 @@ spring:
   redis:
     host: localhost
     port: 6379
-
-# jpa config
+  # jpa config
   jpa:
     generate-ddl: false
     show-sql: true
@@ -92,10 +92,19 @@ jwt:
   logging:
     level:
       root: info
+
 image:
   add-resource-locations: classpath:/static/images/
   add-resource-handler: /images/**
 
   image-dir: src/main/resources/static/images
   image-url: http://localhost:8080/images/
+
+file:
+  add-resource-locations: classpath:/static/apvFiles/
+  add-resource-handler: /apvFiles/**
+
+  upload-dir: src/main/resources/static/apvFiles
+  base-url: http://localhost:8080/apvFiles/
+
 

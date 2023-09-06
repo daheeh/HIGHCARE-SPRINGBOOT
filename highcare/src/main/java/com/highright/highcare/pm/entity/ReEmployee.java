@@ -12,7 +12,6 @@ import java.sql.Date;
 
 @Entity
 @Table(name="TBL_EMPLOYEE")
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,7 +22,7 @@ public class ReEmployee {
     @Column(name = "EMP_NO")
     private int empNo;
 
-    @Column(name = "NAME")
+    @Column(name = "EMP_NAME")
     private String empName;
 
     @Column(name = "EMAIL")

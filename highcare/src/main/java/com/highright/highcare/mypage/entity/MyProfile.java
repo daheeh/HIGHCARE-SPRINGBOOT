@@ -20,6 +20,7 @@ import java.util.List;
 public class MyProfile {
 
     @Id
+    // pk에는 sequencgenerator
     @Column(name = "PROFILE_CODE")
     private int code;
 
@@ -39,7 +40,7 @@ public class MyProfile {
         return "MyProfile{" +
                 "code=" + code +
                 ", empNo=" + empNo +
-//
+
                 ", myEmployee=" + myEmployee +
                 ", myProfileFile=" + myProfileFile +
                 '}';
