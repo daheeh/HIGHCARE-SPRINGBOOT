@@ -14,4 +14,12 @@ public interface AdminService {
     Object deleteAccount(String id);
 
     Object updateAccount(String id, UpdateAccountDTO updateAccountDTO);
+
+    Object selectJobList();
+
+    Object selectDepartmentsList();
+
+    Object selectMenuGroupList();
+
+    Object selectMenuManagers();
 }
