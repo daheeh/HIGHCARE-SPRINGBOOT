@@ -1,13 +1,11 @@
 package com.highright.highcare.admin.service;
 
 import com.highright.highcare.admin.dto.ADMAccountDTO;
+import com.highright.highcare.admin.dto.MenuGroupDTO;
 import com.highright.highcare.admin.dto.RequestMemberDTO;
 import com.highright.highcare.admin.dto.UpdateAccountDTO;
 import com.highright.highcare.admin.entity.*;
-import com.highright.highcare.admin.repository.ADMAccountRepository;
-import com.highright.highcare.admin.repository.ADMAuthAccountRepository;
-import com.highright.highcare.admin.repository.ADMEmployeeRepository;
-import com.highright.highcare.admin.repository.AccessManagerRepository;
+import com.highright.highcare.admin.repository.*;
 import com.highright.highcare.auth.dto.AccountDTO;
 import com.highright.highcare.auth.entity.AUTHAccount;
 //import com.highright.highcare.auth.entity.AUTHEmployee;
@@ -15,12 +13,14 @@ import com.highright.highcare.common.AdminCustomBean;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.common.repository.DeptRespository;
 import com.highright.highcare.common.repository.JobRepository;
+import com.highright.highcare.mypage.dto.JobDTO;
 import com.highright.highcare.mypage.entity.Department;
 import com.highright.highcare.mypage.entity.Job;
 import com.highright.highcare.pm.repository.PmDepartmentRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -40,20 +40,19 @@ import java.util.stream.Collectors;
 public class AdminServiceImpl implements AdminService {
 
     private final ModelMapper modelMapper;
+
     private final ADMEmployeeRepository admEmployeeRepository;
     private final ADMAccountRepository admAccountRepository;
     private final ADMAuthAccountRepository admAuthAccountRepository;
-
     private final JobRepository jobRepository;
     private final DeptRespository deptRespository;
-
     private final AccessManagerRepository accessManagerRepository;
+    private final MenuGroupRepository menuGroupRepository;
+
+
     private final AdminCustomBean customBean;
 
     private final JavaMailSender javaMailSender;
-
-
-
 
     @Override
     public Object selectMember(int empNo) {
@@ -224,15 +223,37 @@ public class AdminServiceImpl implements AdminService {
             employee.setEmail(updateAccountDTO.getEmail());
             log.info("[AdminServiceImpl] updateAccount EMAIL CHANGE==={}");
         }
-
         return "사원정보 수정 성공";
     }
 
+    @Transactional
     @Override
     public Object deleteAccount(String id) {
+        admAccountRepository.deleteById(id);
+        return "계정 삭제 성공";
+    }
 
+    @Override
+    public Object selectJobList() {
+        return jobRepository.findAll().stream().map(job -> modelMapper.map(job, JobDTO.class)).collect(Collectors.toList());
+    }
 
+    @Override
+    public Object selectDepartmentsList() {
+        return deptRespository.findAll().stream().map(dept -> modelMapper.map(dept, Department.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Object selectMenuGroupList() {
+        return menuGroupRepository.findAllByOrderByGroupCodeAsc().stream().map(menu -> modelMapper.map(menu, MenuGroupDTO.class));
+    }
+
+    @Override
+    public Object selectMenuManagers() {
+
+//        menuGroupRepository.findAll
         return null;
     }
+
 
 }

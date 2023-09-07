@@ -3,10 +3,7 @@ package com.highright.highcare.admin.entity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -15,7 +12,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class AccessManager {
 
     @Id
@@ -54,6 +50,10 @@ public class AccessManager {
     @Column(name="WITHDRAW_DATE")
     private Date withDrawDate;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID")
+    private ADMAccount admaAccount;
+
     @Builder
     public AccessManager(String id, Timestamp registDate, int loginTotalCount, int loginFailCount, String isLock, String isInActive, String isExpired, Date expiredDate, String isWithDraw, Date withDrawDate) {
         this.id = id;
@@ -66,5 +66,21 @@ public class AccessManager {
         this.expiredDate = expiredDate;
         this.isWithDraw = isWithDraw;
         this.withDrawDate = withDrawDate;
+    }
+
+    @Override
+    public String toString() {
+        return "AccessManager{" +
+                "id='" + id + '\'' +
+                ", registDate=" + registDate +
+                ", loginTotalCount=" + loginTotalCount +
+                ", loginFailCount=" + loginFailCount +
+                ", isLock='" + isLock + '\'' +
+                ", isInActive='" + isInActive + '\'' +
+                ", isExpired='" + isExpired + '\'' +
+                ", isWithDraw='" + isWithDraw + '\'' +
+                ", expiredDate=" + expiredDate +
+                ", withDrawDate=" + withDrawDate +
+                '}';
     }
 }

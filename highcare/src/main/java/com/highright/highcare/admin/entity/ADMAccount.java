@@ -36,15 +36,14 @@ public class ADMAccount {
     @Column(name="PWD_EXPIRED_DATE")
     private Date pwdExpiredDate;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="ID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "admaAccount", cascade = CascadeType.REMOVE)
     private List<AUTHAuthAccount> roleList;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="EMP_NO", insertable = false, updatable = false)
     private AUTHEmployee employee;
 
-    @OneToOne
+    @OneToOne(mappedBy = "admaAccount", cascade = CascadeType.REMOVE)
     @JoinColumn(name="ID", insertable = false, updatable = false)
     private AccessManager accessManager;
 

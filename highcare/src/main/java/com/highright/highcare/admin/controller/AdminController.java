@@ -20,21 +20,12 @@ public class AdminController {
 
     private final AdminService adminService;
 
-//    @GetMapping("main")
-//    public ResponseEntity<ResponseDTO> selectAdmin(LoginMemberDTO loginMemberDTO
-//            , HttpServletResponse response){
-//        log.info("[AdminController] Admin : Admin ==== {}", "관리자페이지 접속 성공");
-//
-//
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-//                "관리자 페이지 접속 성공", null));
-//    }
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping("/member")
     public ResponseEntity<ResponseDTO> selectMember(@RequestParam String empNo){
         log.info("================= empNo ===== {}" , empNo);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "사원 조회 성공", adminService.selectMember(Integer.valueOf(empNo))));
+                "사원 조회", adminService.selectMember(Integer.valueOf(empNo))));
     }
 
     // 인서트 회원신청
@@ -78,6 +69,33 @@ public class AdminController {
     }
 
 
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
+    @GetMapping("/jobs")
+    public ResponseEntity<ResponseDTO> selectJobList(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "직급 조회", adminService.selectJobList()));
+    }
+
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
+    @GetMapping("/department")
+    public ResponseEntity<ResponseDTO> selectDepartmentList(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "부서 조회", adminService.selectDepartmentsList()));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/menugroup")
+    public ResponseEntity<ResponseDTO> selectMenuGroupList(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "메뉴그룹 조회", adminService.selectMenuGroupList()));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/managers")
+    public ResponseEntity<ResponseDTO> selectMenuManagers(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "매니저 조회", adminService.selectMenuManagers()));
+    }
 
 
 
