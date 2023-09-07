@@ -4,6 +4,7 @@ import com.highright.highcare.approval.dto.*;
 import com.highright.highcare.approval.entity.*;
 import com.highright.highcare.approval.repository.*;
 import com.highright.highcare.common.Criteria;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.stream.IntStream;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ApprovalExpService {
 
     private final ModelMapper modelMapper;
@@ -34,26 +36,6 @@ public class ApprovalExpService {
     private final ApvExpFormRepository apvExpFormRepository;
     private final ApvFamilyEventRepository apvFamilyEventRepository;
     private final ApvCorpCardRepository apvCorpCardRepository;
-
-    @Autowired
-    public ApprovalExpService(ModelMapper modelMapper,
-                              ApprovalService approvalService,
-                              ApvFormMainRepository apvFormMainRepository,
-                              ApvFormRepository apvFormRepository,
-                              ApvLineRepository apvLineRepository,
-                              ApvExpFormRepository apvExpFormRepository,
-                              ApvFamilyEventRepository apvFamilyEventRepository,
-                              ApvCorpCardRepository apvCorpCardRepository
-    ) {
-        this.modelMapper = modelMapper;
-        this.approvalService = approvalService;
-        this.apvFormMainRepository = apvFormMainRepository;
-        this.apvFormRepository = apvFormRepository;
-        this.apvLineRepository = apvLineRepository;
-        this.apvExpFormRepository = apvExpFormRepository;
-        this.apvFamilyEventRepository = apvFamilyEventRepository;
-        this.apvCorpCardRepository = apvCorpCardRepository;
-    }
 
     /* 전자결재 - 지출 : exp1 지출결의서, exp4 출장경비정산서 */
     @Transactional
@@ -98,7 +80,6 @@ public class ApprovalExpService {
             if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
                 apvFiles = approvalService.insertFiles(apvFormMain.getApvNo(), apvFileDTO);
             }
-            apvFormMain.setApvFiles(apvFiles);
             System.out.println("apvFiles = " + apvFiles);
 
             // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정

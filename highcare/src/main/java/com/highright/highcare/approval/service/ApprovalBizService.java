@@ -5,6 +5,7 @@ import com.highright.highcare.approval.entity.*;
 import com.highright.highcare.approval.repository.*;
 import com.highright.highcare.common.Criteria;
 import com.highright.highcare.pm.entity.PmEmployee;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.stream.IntStream;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ApprovalBizService {
 
     private final ModelMapper modelMapper;
@@ -30,28 +32,9 @@ public class ApprovalBizService {
     private final ApvFormMainRepository apvFormMainRepository;
     private final ApvFormRepository apvFormRepository;
     private final ApvLineRepository apvLineRepository;
+    private final ApvFileRepository apvFileRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
-
-
-
-    @Autowired
-    public ApprovalBizService(ModelMapper modelMapper,
-                              ApprovalService approvalService,
-                              ApvFormMainRepository apvFormMainRepository,
-                              ApvFormRepository apvFormRepository,
-                              ApvLineRepository apvLineRepository,
-                              ApvMeetingLogRepository apvMeetingLogRepository,
-                              ApvBusinessTripRepository apvBusinessTripRepository
-    ) {
-        this.modelMapper = modelMapper;
-        this.approvalService = approvalService;
-        this.apvFormMainRepository = apvFormMainRepository;
-        this.apvFormRepository = apvFormRepository;
-        this.apvLineRepository = apvLineRepository;
-        this.apvMeetingLogRepository = apvMeetingLogRepository;
-        this.apvBusinessTripRepository = apvBusinessTripRepository;
-    }
 
 
     /* 전자결재 - 업무: biz1 기안서 */
@@ -82,7 +65,6 @@ public class ApprovalBizService {
                 System.out.println("apvFiles = " + apvFiles);
             }
 
-
             // 승인 상태 확인 후 결재 상태 변경
             int approved = apvLineRepository.apvNoAllApproved(savedApvForm.getApvNo());
             if (approved == 0) {
@@ -97,65 +79,13 @@ public class ApprovalBizService {
         }
     }
 
-    /* 전자결재 - 업무: biz1 기안서 수정 */
-    @Transactional
-    public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalService] Biz1-putApvFormWithLines --------------- start ");
-        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
-
-        try {
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-            System.out.println("=========== 1. apvFormDTO ===========");
-            System.out.println(apvFormDTO);
-
-            List<ApvLineDTO> apvLineDTO = apvFormDTO.getApvLines();
-            System.out.println("=========== 2. apvLineDTO ===========");
-            System.out.println(apvLineDTO);
-
-            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-            System.out.println("=========== 3. apvForm ===========");
-            System.out.println(apvForm);
-
-            List<ApvLine> apvLineList = apvForm.getApvLines();
-            System.out.println("apvLineList = " + apvLineList);
-
-            ApvForm savedApvForm = apvFormRepository.save(apvForm);
-            System.out.println("=========== 4. savedApvForm ===========");
-            System.out.println(savedApvForm);
-
-
-
-            log.info("[ApprovalService] Biz1-putApvFormWithLines --------------- end ");
-            return true;
-        } catch (Exception e) {
-            log.error("[ApprovalService] Error Biz1-putApvFormWithLines : " + e.getMessage());
-            return false;
-        }
-    }
-//
-
+//    /* 전자결재 - 업무: biz1 기안서 수정 */
 //    @Transactional
-//    public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-//        log.info("[ApprovalService] biz1-putApvFormWithLines --------------- 시작 ");
-//        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+//    public Boolean updateApvForm(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
 //
-//        try {
-//            // ApvFormWithLinesDTO에서 필요한 데이터 추출
-//            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-//            List<ApvLineDTO> apvLineDTOList = apvFormDTO.getApvLines();
 //
-//            // ApvForm 생성 및 저장
-//            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-//            ApvForm savedApvForm = apvFormRepository.save(apvForm);
 //
-//            log.info("[ApprovalService] biz1-putApvFormWithLines --------------- 종료 ");
-//            return true;
-//        } catch (Exception e) {
-//            log.error("[ApprovalService] 오류 발생 - biz1-putApvFormWithLines : " + e.getMessage());
-//            return false;
-//        }
 //    }
-
 
 
     /* 전자결재 - 업무: biz2 회의록 */
@@ -219,6 +149,29 @@ public class ApprovalBizService {
             log.error("[ApprovalService] Error Biz2 insertApvMeetingLog : " + e.getMessage());
             return false;
         }
+    }
+
+    /* 전자결재 - 회의록 Biz2 수정*/
+    @Transactional
+    public Boolean updateApvMeetingLog(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+
+        apvMeetingLogRepository.deleteByApvNo(apvNo);
+
+        List<ApvMeetingLogDTO> apvMeetingLogDTO = apvFormDTO.getApvMeetingLogs();
+        // ApvMeetingLogDTO를 ApvMeetingLog 엔티티로 매핑하고 ApvNo를 설정
+        List<ApvMeetingLog> apvMeetingLogList = apvMeetingLogDTO.stream()
+                .map(dto -> {
+                    ApvMeetingLog apvMeetingLog = modelMapper.map(dto, ApvMeetingLog.class);
+                    apvMeetingLog.setApvNo(apvNo);
+//                        apvMeetingLog.getApvForm().setApvNo(apvNo);
+                    return apvMeetingLog;
+                })
+                .collect(Collectors.toList());
+
+        // ApvMeetingLog 엔티티를 저장
+        apvMeetingLogList = apvMeetingLogRepository.saveAll(apvMeetingLogList);
+
+        return true;
     }
 
 
@@ -311,5 +264,7 @@ public class ApprovalBizService {
         // DTO 객체들의 목록을 반환
         return apvBusinessTripDTOList;
     }
+
+
 }
 

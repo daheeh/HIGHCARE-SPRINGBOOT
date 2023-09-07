@@ -44,13 +44,18 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
     List<ApvFormMain> findByEmpNoAndApvStatus3(@Param("empNo") int empNo, @Param("apvStatus")String apvStatus);
 
     // 메인페이지 리스트
-    @Query(value = "SELECT A.* " +
-            "FROM TBL_APV_FORM A " +
-            "WHERE A.EMP_NO = :empNo " +
-            "ORDER BY A.WRITE_DATE DESC ", nativeQuery = true)
-    List<ApvFormMain> findTitlesByEmpNo(@Param("empNo")int empNo);
+//    @Query(value = "SELECT A.TITLE " +
+//            "FROM TBL_APV_FORM A " +
+//            "WHERE A.EMP_NO = :empNo " +
+//            "AND ROWNUM <=10 " +
+//            "ORDER BY A.WRITE_DATE DESC ", nativeQuery = true)
+//    List<ApvFormMain> findTitlesByEmpNo(@Param("empNo")int empNo);
 
-
+    @Query(value = "SELECT a.title " +
+            "FROM ApvForm a " +
+            "WHERE a.empNo = :empNo " +
+            "ORDER BY a.writeDate DESC ", nativeQuery = true)
+    List<String> findTitlesByEmpNoOrderByWriteDateDesc(@Param("empNo") int empNo);
 
     // 1. 오늘 - 결재진행중
     @Query(value = "SELECT COUNT(*) " +

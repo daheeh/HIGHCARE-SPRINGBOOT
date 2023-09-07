@@ -26,11 +26,20 @@ public interface ApvFormRepository extends JpaRepository<ApvForm, Long> {
     @Query("UPDATE ApvForm af SET af.apvStatus = '결재반려' WHERE af.apvNo = :apvNo")
     void updateApvStatusToReject(@Param("apvNo") Long apvNo);
 
+    @Query(value = "SELECT a.title " +
+            "FROM ApvForm a " +
+            "WHERE a.empNo = :empNo " +
+            "ORDER BY a.writeDate DESC ", nativeQuery = true)
+    List<String> findTitlesByEmpNoOrderByWriteDateDesc(@Param("empNo") int empNo);
+
+
     @Modifying
     @Query(value = "UPDATE TBL_APV_LINE AL " +
             "SET AL.ISAPPROVAL = 'F' " +
             "WHERE AL.APV_NO = :apvNo " +
             "AND AL.ISAPPROVAL <> 'F'", nativeQuery = true)
     void updateIsApprovalToFalse(@Param("apvNo") Long apvNo);
+
+    String findTitleById(Long apvNo);
 
 }
