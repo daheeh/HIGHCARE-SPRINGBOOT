@@ -1,7 +1,10 @@
 package com.highright.highcare.reservation.repository;
 
+import com.highright.highcare.bulletin.entity.BulletinEmployee;
 import com.highright.highcare.reservation.entity.Resource;
 import com.highright.highcare.reservation.entity.ResourceReservationStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,7 +25,15 @@ public interface ResourceStatusRepository extends JpaRepository<ResourceReservat
     "OR A.START_TIME < :startTime AND A.END_TIME > :startTime " +
     "OR A.START_TIME < :endTime AND A.END_TIME >= :endTime " +
     "OR A.START_TIME > :startTime AND A.START_TIME < :endTime) ", nativeQuery = true)
-    List<ResourceReservationStatus> findByresList(@Param("reservationDate") String reservationDate, @Param("startTime") String startTime,@Param("endTime") String endTime,@Param("resourceCode") int resourceCode);
+    List<ResourceReservationStatus> findByresList(@Param("reservationDate") java.sql.Date reservationDate, @Param("startTime") String startTime,@Param("endTime") String endTime,@Param("resourceCode") int resourceCode);
 
     List<ResourceReservationStatus> findAllByReservationDateAndReservationStatusAndResource(String reservationDate, String approval, Resource resource);
+
+    List<ResourceReservationStatus> findByBulletinEmployee(BulletinEmployee bulletinEmployee);
+
+    Page<ResourceReservationStatus> findByBulletinEmployee(BulletinEmployee bulletinEmployee, Pageable paging);
+    @Query(value = "UPDATE TBL_RESOURCE_RESERVATION_STATUS A " +
+            "SET A.RESERVATION_STATUS = 'APPROVAL' " +
+            "WHERE A.STATUS_CODE = :statusCode ", nativeQuery = true)
+    void updateStatus(@Param("statusCode") int statusCode);
 }

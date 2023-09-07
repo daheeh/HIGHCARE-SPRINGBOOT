@@ -14,7 +14,9 @@ public class ResourceReservationStatusDTO {
     private String startTime;
     private String endTime;
     private String reason;
-    private String reservationDate;
+//    private String reservationDate;
+private java.sql.Date  reservationDate;
+
     private BulletinEmployeeDTO bulletinEmployee;
     private ResourceDTO resource;
 
