@@ -1,7 +1,9 @@
 package com.highright.highcare.reservation.service;
 
+import com.highright.highcare.bulletin.entity.Board;
 import com.highright.highcare.bulletin.entity.BulletinEmployee;
 import com.highright.highcare.bulletin.repository.BulletinEmployeeRepository;
+import com.highright.highcare.common.Criteria;
 import com.highright.highcare.reservation.dto.ResourceCategoryDTO;
 import com.highright.highcare.reservation.dto.ResourceDTO;
 import com.highright.highcare.reservation.dto.ResourceFileDTO;
@@ -14,6 +16,10 @@ import com.highright.highcare.reservation.repository.ResourceStatusRepository;
 import com.highright.highcare.util.FileUploadUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,7 +80,8 @@ public class ResService {
         ResourceReservationStatus res = modelMapper.map(resourceReservationStatusDTO, ResourceReservationStatus.class);
         res.setBulletinEmployee(bulletinEmployee);
         res.setResource(resource);
-        String reservationDate = res.getReservationDate();
+//        String reservationDate = res.getReservationDate();
+        java.sql.Date reservationDate = res.getReservationDate();
         String startTime = res.getStartTime();
         String endTime = res.getEndTime();
         int resourceCode =resourceReservationStatusDTO.getResourceCode();
@@ -203,5 +210,58 @@ public class ResService {
         resourceRespository.save(resource);
         return "삭제 성공";
 
+    }
+
+    public int selectResTotal(int empNo) {
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
+
+        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.findByBulletinEmployee(bulletinEmployee);
+
+        return resourceReservationStatuses.size();
+    }
+
+    public Object selectStatusListWithPaging(Criteria cri, int empNo) {
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("reservationDate").descending());
+        BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
+        Page<ResourceReservationStatus> result = resourceStatusRepository.findByBulletinEmployee(bulletinEmployee, paging);
+
+        List<ResourceReservationStatus> resourceReservationStatuses = (List<ResourceReservationStatus>) result.getContent();
+        return resourceReservationStatuses.stream().map(statusRes -> modelMapper.map(statusRes, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
+
+    }
+
+    public int selectAllResTotal() {
+        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.findAll();
+
+        return resourceReservationStatuses.size();
+    }
+
+    public Object selectAllStatusListWithPaging(Criteria cri) {
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("reservationDate").descending());
+        Page<ResourceReservationStatus> result = resourceStatusRepository.findAll(paging);
+        List<ResourceReservationStatus> resourceReservationStatuses = (List<ResourceReservationStatus>) result.getContent();
+        return resourceReservationStatuses.stream().map(statusRes -> modelMapper.map(statusRes, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
+
+
+    }
+    @Transactional
+    public Object updateResStatus(ResourceReservationStatusDTO resourceReservationStatusDTO) {
+        int statusCode = resourceReservationStatusDTO.getStatusCode();
+        ResourceReservationStatus reservationStatus=resourceStatusRepository.findById(statusCode).get();
+        reservationStatus.setReservationStatus("APPROVAL");
+
+        return "수정 성공";
+    }
+    @Transactional
+    public Object updateResrejected(ResourceReservationStatusDTO resourceReservationStatusDTO) {
+        int statusCode = resourceReservationStatusDTO.getStatusCode();
+        ResourceReservationStatus reservationStatus=resourceStatusRepository.findById(statusCode).get();
+        reservationStatus.setReservationStatus("REJECTED");
+
+        return "거절 성공";
     }
 }

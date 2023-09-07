@@ -34,7 +34,8 @@ public class ResourceReservationStatus {
     @Column(name = "REASON")
     private String reason;
     @Column(name = "RESERVATION_DATE")
-    private String  reservationDate;
+//    private String  reservationDate;
+    private java.sql.Date  reservationDate;
     @ManyToOne
     @JoinColumn(name = "EMP_NO")
     private BulletinEmployee bulletinEmployee;
