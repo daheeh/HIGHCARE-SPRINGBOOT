@@ -3,6 +3,7 @@ package com.highright.highcare.approval.service;
 import com.highright.highcare.approval.dto.*;
 import com.highright.highcare.approval.entity.*;
 import com.highright.highcare.approval.repository.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ApprovalHrmService {
 
     private final ModelMapper modelMapper;
@@ -26,27 +29,6 @@ public class ApprovalHrmService {
     private final ApvLineRepository apvLineRepository;
     private final ApvVacationRepository apvVacationRepository;
     private final ApvIssuanceRepository apvIssuanceRepository;
-
-
-    @Autowired
-    public ApprovalHrmService(ModelMapper modelMapper,
-                              ApprovalService approvalService,
-                              ApvFormMainRepository apvFormMainRepository,
-                              ApvFormRepository apvFormRepository,
-                              ApvLineRepository apvLineRepository,
-                              ApvVacationRepository apvVacationRepository,
-                              ApvIssuanceRepository apvIssuanceRepository
-    ) {
-        this.modelMapper = modelMapper;
-        this.approvalService = approvalService;
-        this.apvFormMainRepository = apvFormMainRepository;
-        this.apvFormRepository = apvFormRepository;
-        this.apvLineRepository = apvLineRepository;
-        this.apvVacationRepository = apvVacationRepository;
-        this.apvIssuanceRepository = apvIssuanceRepository;
-
-    }
-
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
     @Transactional
@@ -111,39 +93,71 @@ public class ApprovalHrmService {
         }
     }
 
-
     @Transactional
-    public Boolean putApvFormWithLines(ApvFormWithLinesDTO apvFormWithLinesDTO) {
-        log.info("[ApprovalService] biz1-putApvFormWithLines --------------- start ");
-        log.info("[ApprovalService] apvFormWithLinesDTO {}", apvFormWithLinesDTO);
+    public Boolean updateApvVacation(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
+        log.info("[ApprovalService] Hrm1-updateApvVacation --------------- 연차 신청 업데이트 시작 ");
+        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
+        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
+        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
 
         try {
-            ApvFormDTO apvFormDTO = apvFormWithLinesDTO.getApvFormDTO();
-            System.out.println("=========== 1. apvFormDTO ===========");
-            System.out.println(apvFormDTO);
 
-            List<ApvLineDTO> apvLineDTO = apvFormDTO.getApvLines();
-            System.out.println("=========== 2. apvLineDTO ===========");
-            System.out.println(apvLineDTO);
+            List<ApvVacationDTO> apvVacationDTOList = apvFormDTO.getApvVacations();
 
-            ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-            System.out.println("=========== 3. apvForm ===========");
-            System.out.println(apvForm);
+            // 기존 ApvFormMain 검색
+            Optional<ApvFormMain> savedApvFormMain = apvFormMainRepository.findById(apvNo);
 
-            List<ApvLine> apvLineList = apvForm.getApvLines();
-            System.out.println("apvLineList = " + apvLineList);
+            // ApvForm 및 ApvFormMain 생성 및 저장
+            ApvFormMain apvFormMain = modelMapper.map(apvFormDTO, ApvFormMain.class);
+            apvFormMain = apvFormMainRepository.save(apvFormMain);
 
-            ApvForm savedApvForm = apvFormRepository.save(apvForm);
-            System.out.println("=========== 4. savedApvForm ===========");
-            System.out.println(savedApvForm);
+            // ApvVacation 엔터티 업데이트
+            List<ApvVacation> apvVacationList = apvVacationDTOList.stream()
+                    .map(item -> {
+                        ApvVacation apvVacation = modelMapper.map(item, ApvVacation.class);
+                        apvVacation.setApvNo(apvNo);
+                        return apvVacation;
+                    })
+                    .collect(Collectors.toList());
 
-            log.info("[ApprovalService] biz1-putApvFormWithLines --------------- end ");
+            // ApvVacation 엔티티 저장
+            apvVacationList = apvVacationRepository.saveAll(apvVacationList);
+
+            // ApvLine 엔터티 업데이트
+            List<ApvLine> apvLineList = apvLineDTOs.stream()
+                    .map(dto -> {
+                        ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
+                        apvLine.setApvNo(apvNo);
+                        return apvLine;
+                    })
+                    .collect(Collectors.toList());
+
+            // ApvFile 엔터티 업데이트
+            List<ApvFile> apvFiles = new ArrayList<>();
+            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+                apvFiles = approvalService.updateFiles(apvNo, apvFileDTO);
+            }
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+
+            // ApvFormMain에 ApvLine 및 ApvFile 엔터티 설정
+            apvFormMain.setApvLines(apvLineList);
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFormMain = " + apvFormMain);
+
+            // 승인 상태를 확인하고 업데이트
+            if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
+                apvFormRepository.updateApvStatusToCompleted(apvNo);
+            }
+
+            log.info("[ApprovalService] Hrm1 updateApvVacation --------------- 연차 신청 업데이트 종료 ");
             return true;
         } catch (Exception e) {
-            log.error("[ApprovalService] Error biz1-putApvFormWithLines : " + e.getMessage());
+            log.error("[ApprovalService] 오류: Hrm1 updateApvVacation : " + e.getMessage());
             return false;
         }
     }
+
 
 
     /* 전자결재 - 인사 : hrm3 서류발급신청서 */
