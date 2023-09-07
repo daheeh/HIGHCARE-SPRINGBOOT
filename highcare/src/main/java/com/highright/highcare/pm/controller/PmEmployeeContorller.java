@@ -82,7 +82,7 @@ public class PmEmployeeContorller {
     }
 
     /* 사원 상세 조회 */
-    @GetMapping("/member/{empNo}")
+    @GetMapping("/member/detail/{empNo}")
     public ResponseEntity<ResponseDTO> selectEmpDetail(@PathVariable int empNo){
 
         log.info("empName==============> {}", empNo);
@@ -98,7 +98,7 @@ public class PmEmployeeContorller {
 
 
     /* 사원 등록 */
-    @PostMapping("/all")
+    @PostMapping("/member/all")
     public ResponseEntity<ResponseDTO> insertPmEmployee(@RequestBody EmployeeTotalDTO pmEmployeeDTO){
         log.info("inserPmEmployee=========================>", pmEmployeeDTO);
 
