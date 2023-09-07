@@ -43,6 +43,7 @@ public class ApvFormDTO {
 
     /* 결재라인*/
     private List<ApvLineDTO> apvLines;
+    private List<ApvFileDTO> apvFiles;
 
     public void getEmployeeDTO() {
         if (apvEmployee != null) {

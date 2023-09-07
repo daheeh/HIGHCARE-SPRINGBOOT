@@ -62,9 +62,6 @@ public class ApvForm {
     @Transient
     private String jobName;
 
-
-
-
     @ManyToOne
     @JoinColumn(name = "EMP_NO", updatable = false, insertable = false)
     private ApvEmployee apvEmployee;
@@ -110,6 +107,10 @@ public class ApvForm {
     @OrderBy("apvLineNo ASC")
     @JoinColumn(name = "APV_NO")
     private List<ApvLine> apvLines = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private List<ApvFile> apvFiles = new ArrayList<>();
 
     public void getEmployee() {
         if (apvEmployee != null) {
