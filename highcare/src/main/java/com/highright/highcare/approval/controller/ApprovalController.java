@@ -206,30 +206,30 @@ public class ApprovalController {
     }
 
     // 기안 수정
-    @PutMapping(value = "/put/{apvNo}", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> putApvFormWithLines(
-            @PathVariable Long apvNo,
-            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
-        System.out.println("apvFormDTO = " + apvFormDTO);
-        System.out.println("apvLineDTOs = " + apvLineDTOs);
-        System.out.println("apvFileDTO = " + apvFileDTO);
-
-        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
-        Boolean serviceResponse = approvalService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-
-        if (!serviceResponse) {
-            statusCode = HttpStatus.BAD_REQUEST.value();
-            responseMessage = "상신 등록 실패";
-        } else {
-            statusCode = HttpStatus.OK.value();
-            responseMessage = "상신 등록 성공";
-        }
-        return ResponseEntity
-                .status(statusCode)
-                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
-    }
+//    @PutMapping(value = "/put/{apvNo}", consumes = "multipart/form-data")
+//    public ResponseEntity<ResponseDTO> putApvFormWithLines(
+//            @PathVariable Long apvNo,
+//            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+//            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+//            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+//        System.out.println("apvFormDTO = " + apvFormDTO);
+//        System.out.println("apvLineDTOs = " + apvLineDTOs);
+//        System.out.println("apvFileDTO = " + apvFileDTO);
+//
+//        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
+//        Boolean serviceResponse = approvalService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+//
+//        if (!serviceResponse) {
+//            statusCode = HttpStatus.BAD_REQUEST.value();
+//            responseMessage = "상신 등록 실패";
+//        } else {
+//            statusCode = HttpStatus.OK.value();
+//            responseMessage = "상신 등록 성공";
+//        }
+//        return ResponseEntity
+//                .status(statusCode)
+//                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+//    }
 
 
 
