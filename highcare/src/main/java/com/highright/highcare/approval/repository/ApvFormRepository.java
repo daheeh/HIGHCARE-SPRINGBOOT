@@ -40,6 +40,6 @@ public interface ApvFormRepository extends JpaRepository<ApvForm, Long> {
             "AND AL.ISAPPROVAL <> 'F'", nativeQuery = true)
     void updateIsApprovalToFalse(@Param("apvNo") Long apvNo);
 
-    String findTitleById(Long apvNo);
+//    String findTitleById(Long apvNo);
 
 }
