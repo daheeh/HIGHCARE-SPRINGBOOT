@@ -59,7 +59,7 @@ public class BoardController {
         int total = boardService.selectCommentTotal(bulletinCode);
         int code = Integer.parseInt(bulletinCode);
 
-        Criteria cri = new Criteria(Integer.valueOf(currentPage), 10);
+        Criteria cri = new Criteria(Integer.valueOf(currentPage), 5);
         BoardPagingResponseDTO pagingResponseDTO = new BoardPagingResponseDTO();
         pagingResponseDTO.setDetail(boardService.selectBoard(code));
         pagingResponseDTO.setData(boardService.selectBoardAndCommentPaging(cri, bulletinCode));
