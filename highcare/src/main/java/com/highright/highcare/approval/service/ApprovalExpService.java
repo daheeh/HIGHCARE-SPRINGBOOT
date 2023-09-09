@@ -38,6 +38,16 @@ public class ApprovalExpService {
     private final ApvFamilyEventRepository apvFamilyEventRepository;
     private final ApvCorpCardRepository apvCorpCardRepository;
 
+
+    /*
+     * Exp1 : 지출결의서
+     * Exp2 : 지출결의서2
+     * Exp4 : 출장경비정산서
+     * Exp6 : 경조금신청서
+     * Exp7 : 법인카드사용보고서
+     * */
+
+
     /* 전자결재 - 지출 : Exp1 지출결의서, Exp4 출장경비정산서 */
     @Transactional
     public Boolean insertApvExpense(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
@@ -123,7 +133,7 @@ public class ApprovalExpService {
             apvExpFormRepository.deleteByApvNo(apvNo);
 
             List<ApvExpFormDTO> apvExpFormDTO = apvFormDTO.getApvExpForms();
-            // ApvMeetingLogDTO를 ApvMeetingLog 엔티티로 매핑하고 ApvNo를 설정
+            // ApvExpFormDTO ApvExpForm 엔티티로 매핑하고 ApvNo를 설정
             List<ApvExpForm> apvExpFormList = apvExpFormDTO.stream()
                     .map(dto -> {
                         ApvExpForm apvExpForm = modelMapper.map(dto, ApvExpForm.class);
@@ -132,7 +142,7 @@ public class ApprovalExpService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvMeetingLog 엔티티를 저장
+            // ApvExpForm 엔티티를 저장
             apvExpFormList = apvExpFormRepository.saveAll(apvExpFormList);
 
             // 테이블에서 apvNo와 일치하는 데이터를 삭제합니다.
@@ -202,7 +212,6 @@ public class ApprovalExpService {
                     .map(dto -> {
                         ApvFamilyEvent apvFamilyEvent = modelMapper.map(dto, ApvFamilyEvent.class);
                         apvFamilyEvent.setApvNo(apvNo);
-//                        apvFamilyEvent.getApvForm().setApvNo(apvNo);
                         return apvFamilyEvent;
                     })
                     .collect(Collectors.toList());
@@ -268,7 +277,7 @@ public class ApprovalExpService {
             apvFamilyEventRepository.deleteByApvNo(apvNo);
 
             List<ApvFamilyEventDTO> apvFamilyEventDTO = apvFormDTO.getApvFamilyEvents();
-            // ApvMeetingLogDTO를 ApvMeetingLog 엔티티로 매핑하고 ApvNo를 설정
+            // ApvFamilyEventDTO를 ApvFamilyEvent 엔티티로 매핑하고 ApvNo를 설정
             List<ApvFamilyEvent> apvFamilyEventList = apvFamilyEventDTO.stream()
                     .map(dto -> {
                         ApvFamilyEvent apvFamilyEvent = modelMapper.map(dto, ApvFamilyEvent.class);
@@ -277,7 +286,7 @@ public class ApprovalExpService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvMeetingLog 엔티티를 저장
+            // ApvFamilyEvent 엔티티를 저장
             apvFamilyEventList = apvFamilyEventRepository.saveAll(apvFamilyEventList);
 
             // 테이블에서 apvNo와 일치하는 데이터를 삭제합니다.
@@ -349,7 +358,6 @@ public class ApprovalExpService {
                     .map(dto -> {
                         ApvCorpCard apvCorpCard = modelMapper.map(dto, ApvCorpCard.class);
                         apvCorpCard.setApvNo(apvNo);
-//                    apvCorpCard.getApvForm().setApvNo(apvNo);
                         return apvCorpCard;
                     })
                     .collect(Collectors.toList());
@@ -415,7 +423,7 @@ public class ApprovalExpService {
             apvCorpCardRepository.deleteByApvNo(apvNo);
 
             List<ApvCorpCardDTO> apvCorpCardDTO = apvFormDTO.getApvCorpCards();
-            // ApvMeetingLogDTO를 ApvMeetingLog 엔티티로 매핑하고 ApvNo를 설정
+            // ApvCorpCardDTO를 ApvCorpCard 엔티티로 매핑하고 ApvNo를 설정
             List<ApvCorpCard> apvCorpCardList = apvCorpCardDTO.stream()
                     .map(dto -> {
                         ApvCorpCard apvCorpCard = modelMapper.map(dto, ApvCorpCard.class);
@@ -424,7 +432,7 @@ public class ApprovalExpService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvMeetingLog 엔티티를 저장
+            // ApvCorpCard 엔티티를 저장
             apvCorpCardList = apvCorpCardRepository.saveAll(apvCorpCardList);
 
             // 테이블에서 apvNo와 일치하는 데이터를 삭제합니다.

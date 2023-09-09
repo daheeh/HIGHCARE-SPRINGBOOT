@@ -233,28 +233,40 @@ public class ApprovalController {
         Boolean serviceResponse = false;
         // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
         String title = apvFormRepository.findTitleByApvNo(apvNo);
-
+        System.out.println("title = " + title);
         switch (title) {
-                case "회의록":
-                    System.out.println("회의록으로 이동");
-                    serviceResponse = approvalBizService.updateApvMeetingLog(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-                    break;
-//            case "지출결의서" :
-//                return approvalExpService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//            case "경조금신청서" :
-//                return approvalExpService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//            case "회의록" :
-//                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//            case "회의록" :
-//                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//            case "회의록" :
-//                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+            case "회의록":
+                serviceResponse = approvalBizService.updateApvMeetingLog(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "출장신청서":
+                serviceResponse = approvalBizService.updateApvBusinessTrip(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "지출결의서" :
+                serviceResponse = approvalExpService.updateApvExpense(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "출장경비신청서" :
+                serviceResponse = approvalExpService.updateApvExpense(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "경조금신청서" :
+                serviceResponse = approvalExpService.updateFamilyEvent(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "법인카드사용보고서" :
+                serviceResponse = approvalExpService.updateApvCorpCard(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "연차신청서" :
+                serviceResponse = approvalHrmService.updateApvVacation(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "기타휴가신청서" :
+                serviceResponse = approvalHrmService.updateApvVacation(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
+            case "서류발급신청서" :
+                serviceResponse = approvalHrmService.updateApvIssuance(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                break;
                 default:
                     System.out.println("기안서로 이동");
                     serviceResponse = approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
                     break;
             }
-
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();

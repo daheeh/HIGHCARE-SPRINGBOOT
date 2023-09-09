@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
 
 @Service
 @Slf4j
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class ApprovalBizService {
 
     private final ModelMapper modelMapper;
@@ -36,27 +36,14 @@ public class ApprovalBizService {
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
 
-    @Autowired
-    public ApprovalBizService(
-                            ModelMapper modelMapper,
-                            ApprovalService approvalService,
-                            ApvFormMainRepository apvFormMainRepository,
-                            ApvFormRepository apvFormRepository,
-                            ApvLineRepository apvLineRepository,
-                            ApvFileRepository apvFileRepository,
-                            ApvMeetingLogRepository apvMeetingLogRepository,
-                            ApvBusinessTripRepository apvBusinessTripRepository
-    )
-    {
-        this.modelMapper = modelMapper;
-        this.approvalService = approvalService;
-        this.apvFormMainRepository = apvFormMainRepository;
-        this.apvFormRepository = apvFormRepository;
-        this.apvLineRepository = apvLineRepository;
-        this.apvFileRepository = apvFileRepository;
-        this.apvMeetingLogRepository = apvMeetingLogRepository;
-        this.apvBusinessTripRepository = apvBusinessTripRepository;
-    }
+
+    /*
+    * Biz1 : 기본 기안서
+    * Biz2 : 회의록
+    * Biz3 : 출장신청서
+    * Biz4 : 공문
+    * */
+
 
     /* 전자결재 - 업무: Biz1 기안서 */
     @Transactional
@@ -168,7 +155,6 @@ public class ApprovalBizService {
         }
     }
 
-
     /* 전자결재 - 업무: Biz2 회의록 */
     @Transactional
     public Boolean insertApvMeetingLog(ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
@@ -232,7 +218,7 @@ public class ApprovalBizService {
         }
     }
 
-    /* 전자결재 - 회의록 Biz2 수정*/
+    /* 전자결재 - 업무: Biz2 회의록 수정*/
     @Transactional
     public Boolean updateApvMeetingLog(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
         log.info("[ApprovalService] Biz2 updateApvMeetingLog --------------- 회의록 업데이트 start ");
@@ -405,7 +391,7 @@ public class ApprovalBizService {
         return apvBusinessTripDTOList;
     }
 
-    /* 전자결재 - 출장신청서 Biz3 수정*/
+    /* 전자결재 - 업무 : Biz3 출장신청서 수정*/
     @Transactional
     public Boolean updateApvBusinessTrip(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
         log.info("[ApprovalService] Biz3-updateApvBusinessTrip --------------- 출장신청서 업데이트 start");
@@ -428,7 +414,7 @@ public class ApprovalBizService {
             apvBusinessTripRepository.deleteByApvNo(apvNo);
 
             List<ApvBusinessTripDTO> apvBusinessTripDTO = apvFormDTO.getApvBusinessTrips();
-            // ApvMeetingLogDTO를 ApvMeetingLog 엔티티로 매핑하고 ApvNo를 설정
+            // ApvBusinessTripDTO를 ApvBusinessTrip 엔티티로 매핑하고 ApvNo를 설정
             List<ApvBusinessTrip> apvBusinessTripList = apvBusinessTripDTO.stream()
                     .map(dto -> {
                         ApvBusinessTrip apvBusinessTrip = modelMapper.map(dto, ApvBusinessTrip.class);
@@ -437,7 +423,7 @@ public class ApprovalBizService {
                     })
                     .collect(Collectors.toList());
 
-            // ApvMeetingLog 엔티티를 저장
+            // ApvBusinessTrip 엔티티를 저장
             apvBusinessTripList = apvBusinessTripRepository.saveAll(apvBusinessTripList);
 
             // 테이블에서 apvNo와 일치하는 데이터를 삭제합니다.
