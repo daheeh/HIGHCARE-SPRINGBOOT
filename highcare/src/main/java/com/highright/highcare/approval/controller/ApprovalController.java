@@ -27,8 +27,22 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/approval")
 @CrossOrigin(origins = "http://localhost:3000")
 @Slf4j
-@RequiredArgsConstructor
 public class ApprovalController {
+
+    @Autowired
+    public ApprovalController(
+                            ApprovalService approvalService,
+                            ApprovalBizService approvalBizService,
+                            ApprovalExpService approvalExpService,
+                            ApprovalHrmService approvalHrmService,
+                            ApvFormRepository apvFormRepository
+    ) {
+        this.approvalService = approvalService;
+        this.approvalBizService = approvalBizService;
+        this.approvalExpService = approvalExpService;
+        this.approvalHrmService = approvalHrmService;
+        this.apvFormRepository = apvFormRepository;
+    }
 
     private final ApprovalService approvalService;
     private final ApprovalBizService approvalBizService;
@@ -206,30 +220,53 @@ public class ApprovalController {
     }
 
     // 기안 수정
-//    @PutMapping(value = "/put/{apvNo}", consumes = "multipart/form-data")
-//    public ResponseEntity<ResponseDTO> putApvFormWithLines(
-//            @PathVariable Long apvNo,
-//            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-//            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-//            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
-//        System.out.println("apvFormDTO = " + apvFormDTO);
-//        System.out.println("apvLineDTOs = " + apvLineDTOs);
-//        System.out.println("apvFileDTO = " + apvFileDTO);
-//
-//        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
-//        Boolean serviceResponse = approvalService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//
-//        if (!serviceResponse) {
-//            statusCode = HttpStatus.BAD_REQUEST.value();
-//            responseMessage = "상신 등록 실패";
-//        } else {
-//            statusCode = HttpStatus.OK.value();
-//            responseMessage = "상신 등록 성공";
-//        }
-//        return ResponseEntity
-//                .status(statusCode)
-//                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
-//    }
+    @PutMapping(value = "/put/{apvNo}", consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> putApvFormWithLines(
+            @PathVariable Long apvNo,
+            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+        System.out.println("apvFormDTO = " + apvFormDTO);
+        System.out.println("apvLineDTOs = " + apvLineDTOs);
+        System.out.println("apvFileDTO = " + apvFileDTO);
+
+        Boolean serviceResponse = false;
+        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
+        String title = apvFormRepository.findTitleByApvNo(apvNo);
+
+        switch (title) {
+                case "회의록":
+                    System.out.println("회의록으로 이동");
+                    serviceResponse = approvalBizService.updateApvMeetingLog(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                    break;
+//            case "지출결의서" :
+//                return approvalExpService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+//            case "경조금신청서" :
+//                return approvalExpService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+//            case "회의록" :
+//                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+//            case "회의록" :
+//                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+//            case "회의록" :
+//                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                default:
+                    System.out.println("기안서로 이동");
+                    serviceResponse = approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                    break;
+            }
+
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+    }
 
 
 

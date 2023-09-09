@@ -28,9 +28,22 @@ import java.util.stream.IntStream;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class ApprovalService {
 
+    @Autowired
+    public ApprovalService(
+                        ApvFormRepository apvFormRepository,
+                        ApvFormMainRepository apvFormMainRepository,
+                        ApvLineRepository apvLineRepository,
+                        ApvFileRepository apvFileRepository,
+                        ModelMapper modelMapper
+    ) {
+        this.apvFormRepository = apvFormRepository;
+        this.apvFormMainRepository = apvFormMainRepository;
+        this.apvLineRepository = apvLineRepository;
+        this.apvFileRepository = apvFileRepository;
+        this.modelMapper = modelMapper;
+    }
 
     private final ApvFormRepository apvFormRepository;
     private final ApvFormMainRepository apvFormMainRepository;
@@ -250,102 +263,6 @@ public class ApprovalService {
         log.info("[ApprovalService] searchApvFormWithLines --------------- end ");
         return apvFormDTO;
     }
-
-
-    // 기안 수정
-//    @Transactional
-//    public Boolean updateApvForm(Long apvNo, ApvFormDTO apvFormDTO, List<ApvLineDTO> apvLineDTOs, List<MultipartFile> apvFileDTO) {
-//        log.info("[ApprovalService] updateApvForm --------------- Start ");
-//        log.info("[ApprovalService] Biz1-updateApvForm --------------- 문서 업데이트 시작 ");
-//        log.info("[ApprovalService] apvFormDTO {}", apvFormDTO);
-//        log.info("[ApprovalService] apvLineDTOs {}", apvLineDTOs);
-//        log.info("[ApprovalService] apvFileDTO {}", apvFileDTO);
-//
-//        try {
-//            // 기존 ApvForm을 검색
-//            ApvForm savedApvForm = apvFormRepository.findById(apvNo).orElse(null);
-//            ApvFormMain savedApvFormMain = apvFormMainRepository.findById(apvNo).orElse(null);
-//
-//            savedApvFormMain.setTitle(apvFormDTO.getTitle());
-//            savedApvFormMain.setWriteDate(apvFormDTO.getWriteDate());
-//            savedApvFormMain.setIsUrgency(apvFormDTO.getIsUrgency());
-//            savedApvFormMain.setCategory(apvFormDTO.getCategory());
-//            savedApvFormMain.setContents1(apvFormDTO.getContents1());
-//            savedApvFormMain.setContents2(apvFormDTO.getContents2());
-//
-//            apvFormMainRepository.save(savedApvFormMain);
-//            System.out.println("savedApvFormMain======================== = " + savedApvFormMain);
-//            System.out.println("============================================================ 1");
-
-//            String title = apvFormRepository.findTitleById(apvNo);
-//            Boolean serviceResponse = false;
-//            switch (title){
-//                case "회의록" :
-//                    approvalBizService.updateApvMeetingLog(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//                    break;
-////            case "지출결의서" :
-////                return approvalExpService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-////            case "경조금신청서" :
-////                return approvalExpService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-////            case "회의록" :
-////                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-////            case "회의록" :
-////                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-////            case "회의록" :
-////                return approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
-//                default:
-//                    break;
-//
-////            }
-//
-//
-//            // 테이블에서 apvNo와 일치하는 데이터를 삭제합니다.
-//            apvLineRepository.deleteByApvNo(apvNo);
-//            apvFileRepository.deleteByApvNo(apvNo);
-//
-//            System.out.println("savedApvFormMain======================== = " + savedApvFormMain);
-//            System.out.println("============================================================ 1-2");
-//
-//            // ApvLine 엔터티 업데이트
-//            List<ApvLine> apvLineList = apvLineDTOs.stream()
-//                    .map(dto -> {
-//                        ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
-//                        apvLine.setApvNo(apvNo);
-//                        log.info("apvLine = {}", apvLine);
-//                        return apvLine;
-//                    })
-//                    .collect(Collectors.toList());
-//            System.out.println("apvLineList ================================== " + apvLineList);
-//            System.out.println("============================================================ 2");
-//            // 첨부파일 등록을 위해 서비스로 DTO전달
-//            List<ApvFile> apvFiles = new ArrayList<>();
-//            if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
-//                apvFiles = insertFiles(apvNo, apvFileDTO);
-//            }
-//
-//            System.out.println("apvFiles ================================== " + apvFiles);
-//            System.out.println("============================================================ 3");
-//            // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
-//            apvLineRepository.saveAll(apvLineList);
-//            apvFileRepository.saveAll(apvFiles);
-//            System.out.println("savedApvForm = " + savedApvForm);
-//            System.out.println("============================================================ 4");
-//
-//            // 승인 상태를 확인하고 업데이트
-//            if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
-//                apvFormRepository.updateApvStatusToCompleted(apvNo);
-//            }
-//
-//            log.info("[ApprovalService] Biz1 updateApvForm --------------- 문서 업데이트 end ");
-//            return true;
-//        } catch (Exception e) {
-//            log.error("[ApprovalService] 오류 발생 - Biz1 updateApvForm : " + e.getMessage());
-//            return false;
-//        }
-//
-//
-//    }
-
 
 
     /* 파일 저장 할 위치 및 응답 할 주소 */
