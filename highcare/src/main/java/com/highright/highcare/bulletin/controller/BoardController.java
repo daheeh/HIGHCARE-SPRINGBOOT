@@ -53,6 +53,14 @@ public class BoardController {
 
     @GetMapping("/thread")
     public ResponseEntity<ResponseDTO> selectBoardDetail(
+            @RequestParam(name = "bulletinCode") String bulletinCode
+    ) {
+        int code = Integer.parseInt(bulletinCode);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "글 조회 성공", boardService.selectBoard(code)));
+    }
+    @GetMapping("/comment")
+    public ResponseEntity<ResponseDTO> selectCommentDetail(
             @RequestParam(name = "bulletinCode") String bulletinCode,
             @RequestParam(name = "currentPage") String currentPage
     ) {
@@ -61,11 +69,11 @@ public class BoardController {
 
         Criteria cri = new Criteria(Integer.valueOf(currentPage), 5);
         BoardPagingResponseDTO pagingResponseDTO = new BoardPagingResponseDTO();
-        pagingResponseDTO.setDetail(boardService.selectBoard(code));
         pagingResponseDTO.setData(boardService.selectBoardAndCommentPaging(cri, bulletinCode));
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+        pagingResponseDTO.setTotal(total);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "글 조회 성공", pagingResponseDTO));
+                "댓글 조회 성공", pagingResponseDTO));
     }
     @GetMapping("/thr")
     public ResponseEntity<ResponseDTO> selectBoardDetails(
