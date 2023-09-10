@@ -27,7 +27,7 @@ public interface ResourceStatusRepository extends JpaRepository<ResourceReservat
     "OR A.START_TIME > :startTime AND A.START_TIME < :endTime) ", nativeQuery = true)
     List<ResourceReservationStatus> findByresList(@Param("reservationDate") java.sql.Date reservationDate, @Param("startTime") String startTime,@Param("endTime") String endTime,@Param("resourceCode") int resourceCode);
 
-    List<ResourceReservationStatus> findAllByReservationDateAndReservationStatusAndResource(String reservationDate, String approval, Resource resource);
+//    List<ResourceReservationStatus> findAllByReservationDateAndReservationStatusAndResource(String reservationDate, String approval, Resource resource);
 
     List<ResourceReservationStatus> findByBulletinEmployee(BulletinEmployee bulletinEmployee);
 
@@ -36,4 +36,7 @@ public interface ResourceStatusRepository extends JpaRepository<ResourceReservat
             "SET A.RESERVATION_STATUS = 'APPROVAL' " +
             "WHERE A.STATUS_CODE = :statusCode ", nativeQuery = true)
     void updateStatus(@Param("statusCode") int statusCode);
+    @Query(value = "SELECT * FROM TBL_RESOURCE_RESERVATION_STATUS " +
+            "WHERE TO_CHAR(RESERVATION_DATE,'YYYY-MM-DD')= :reservationDate  AND RESERVATION_STATUS = 'APPROVAL' AND RESOURCE_CODE = :resourceCode ", nativeQuery = true)
+    List<ResourceReservationStatus> selectStatus(@Param("reservationDate") String reservationDate,@Param("resourceCode") int resourceCode);
 }

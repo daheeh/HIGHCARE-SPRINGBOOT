@@ -22,4 +22,6 @@ public class ResourceDTO {
     private ResourceCategoryDTO resourceCategoryDTO;
     private int categoryCode;
 
+    private String fileUrl;
+
 }

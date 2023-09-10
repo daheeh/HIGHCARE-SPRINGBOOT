@@ -160,11 +160,15 @@ public class ResService {
         ResourceFileDTO resourceFileDTO = new ResourceFileDTO();
         try{
             replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, image);
+            String originName = image.getOriginalFilename();
+            String fileExtension = originName.substring(originName.lastIndexOf(".") + 1); // ex) jpg
             resourceFileDTO.setChangedFileName(imageName);
             resourceFileDTO.setModifiedDate(sqlDate);
             resourceFileDTO.setCreationDate(sqlDate);
             resourceFileDTO.setDeleteYn('N');
             resourceFileDTO.setResourceCode(resource.getResourceCode());
+            resourceFileDTO.setType(fileExtension);
+            resourceFileDTO.setOriginalFileName(originName);
 
             ResourceFile resourceFile = modelMapper.map(resourceFileDTO, ResourceFile.class);
             resourceFileRepository.save(resourceFile);
@@ -186,13 +190,17 @@ public class ResService {
 
     public Object selectContent(int resourceCode) {
         Resource resource = resourceRespository.findById(resourceCode).get();
-        return modelMapper.map(resource, ResourceDTO.class);
+        ResourceDTO resource1 = modelMapper.map(resource, ResourceDTO.class);
+        ResourceFile resourceFile = resourceFileRepository.findByResourceCode(resourceCode);
+        resource1.setFileUrl("http://localhost:8080/getImage/"+resourceFile.getChangedFileName()+"/"+resourceFile.getType());
+        return resource1;
 
     }
 
     public Object selectDate(String reservationDate,int resourceCode) {
-        Resource resource = resourceRespository.findById(resourceCode).get();
-        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.findAllByReservationDateAndReservationStatusAndResource(reservationDate,"APPROVAL",resource);
+        System.out.println("reservationDate" + reservationDate);
+        System.out.println("resourceCode" + resourceCode);
+        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.selectStatus(reservationDate,resourceCode);
         System.out.println("list" + resourceReservationStatuses);
         return resourceReservationStatuses.stream()
                 .map(status -> modelMapper.map(status, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
