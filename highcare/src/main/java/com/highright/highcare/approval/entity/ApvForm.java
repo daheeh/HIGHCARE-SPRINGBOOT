@@ -50,6 +50,12 @@ public class ApvForm {
     @Column(name = "CONTENTS2")
     private String contents2;
 
+    @Column(name = "TOTAL_AMOUNT")
+    private String totalAmount;
+
+    @Column(name = "REF_APV_NO")
+    private String refApvNo;
+
     @Column(name = "EMP_NO")
     private int empNo;
 
@@ -75,6 +81,11 @@ public class ApvForm {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "APV_NO")
     private List<ApvBusinessTrip> apvBusinessTrips = new ArrayList<>();
+
+    //    @Where(clause = "category = '업무'")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "APV_NO")
+    private List<ApvOfficial> apvOfficials = new ArrayList<>();
 
     //    @Where(clause = "category = '지출'")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

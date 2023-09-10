@@ -35,6 +35,7 @@ public class ApprovalBizService {
     private final ApvFileRepository apvFileRepository;
     private final ApvMeetingLogRepository apvMeetingLogRepository;
     private final ApvBusinessTripRepository apvBusinessTripRepository;
+    private final ApvOfficialRepository apvOfficialRepository;
 
 
     /*

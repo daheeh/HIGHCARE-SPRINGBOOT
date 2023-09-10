@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> {
 
-    List<ApvFormMain> findByEmpNoAndApvStatusOrderByWriteDateDesc(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus);
-    Page<ApvFormMain> findByEmpNoAndApvStatusOrderByWriteDateDesc(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus, Pageable paging);
+    List<ApvFormMain> findByEmpNoAndApvStatusOrderByApvNoDesc(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus);
+    Page<ApvFormMain> findByEmpNoAndApvStatusOrderByApvNoDesc(@Param("empNo")int empNo, @Param("apvStatus")String apvStatus, Pageable paging);
 
     // 수신함
     @Query(value = "SELECT AF.* " +
@@ -26,7 +26,7 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
             "WHERE AL.EMP_NO = :empNo " +
             "AND AL.ISAPPROVAL = :isApproval " +
             "AND AL.DEGREE <> 0 " +
-            "ORDER BY AF.WRITE_DATE " , nativeQuery = true)
+            "ORDER BY AF.APV_NO DESC " , nativeQuery = true)
     List<ApvFormMain> findByEmpNoAndApvStatus2(@Param("empNo") int empNo, @Param("isApproval")String isApproval);
 
     @Query(value = "SELECT AF.* " +
@@ -40,7 +40,7 @@ public interface ApvFormMainRepository extends JpaRepository<ApvFormMain, Long> 
             "WHERE AL.EMP_NO = :empNo " +
             "AND AF.APV_STATUS = :apvStatus " +
             "AND AL.DEGREE <> 0 " +
-            "ORDER BY AF.WRITE_DATE " , nativeQuery = true)
+            "ORDER BY AF.APV_NO DESC " , nativeQuery = true)
     List<ApvFormMain> findByEmpNoAndApvStatus3(@Param("empNo") int empNo, @Param("apvStatus")String apvStatus);
 
     // 메인페이지 리스트

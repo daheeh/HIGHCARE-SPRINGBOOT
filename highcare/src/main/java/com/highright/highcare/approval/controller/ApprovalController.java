@@ -13,36 +13,20 @@ import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/approval")
 @CrossOrigin(origins = "http://localhost:3000")
 @Slf4j
+@RequiredArgsConstructor
 public class ApprovalController {
-
-    @Autowired
-    public ApprovalController(
-                            ApprovalService approvalService,
-                            ApprovalBizService approvalBizService,
-                            ApprovalExpService approvalExpService,
-                            ApprovalHrmService approvalHrmService,
-                            ApvFormRepository apvFormRepository
-    ) {
-        this.approvalService = approvalService;
-        this.approvalBizService = approvalBizService;
-        this.approvalExpService = approvalExpService;
-        this.approvalHrmService = approvalHrmService;
-        this.apvFormRepository = apvFormRepository;
-    }
 
     private final ApprovalService approvalService;
     private final ApprovalBizService approvalBizService;
@@ -409,9 +393,9 @@ public class ApprovalController {
 
 
     /* 전자결재 - 지출 : exp4 출장경비정산서 */
-    @PostMapping(value ="/search/exp4/{empNo}", consumes = "multipart/form-data")
+    @GetMapping(value ="/search/exp4/{empNo}")
     public ResponseEntity<ResponseDTO> selectApvBusinessTrip(@PathVariable int empNo) {
-        System.out.println("exp4-searchApvFormWithLines = " + empNo);
+        System.out.println("exp4-selectApvBusinessTrip = " + empNo);
 
         List<ApvBusinessTripDTO> serviceResponse = approvalBizService.selectApvBusinessTrip(empNo);
 

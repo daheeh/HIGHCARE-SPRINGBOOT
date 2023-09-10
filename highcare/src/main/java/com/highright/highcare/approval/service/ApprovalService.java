@@ -28,28 +28,23 @@ import java.util.stream.IntStream;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ApprovalService {
 
-    @Autowired
-    public ApprovalService(
-                        ApvFormRepository apvFormRepository,
-                        ApvFormMainRepository apvFormMainRepository,
-                        ApvLineRepository apvLineRepository,
-                        ApvFileRepository apvFileRepository,
-                        ModelMapper modelMapper
-    ) {
-        this.apvFormRepository = apvFormRepository;
-        this.apvFormMainRepository = apvFormMainRepository;
-        this.apvLineRepository = apvLineRepository;
-        this.apvFileRepository = apvFileRepository;
-        this.modelMapper = modelMapper;
-    }
-
-    private final ApvFormRepository apvFormRepository;
+    private final ModelMapper modelMapper;
     private final ApvFormMainRepository apvFormMainRepository;
+    private final ApvFormRepository apvFormRepository;
     private final ApvLineRepository apvLineRepository;
     private final ApvFileRepository apvFileRepository;
-    private final ModelMapper modelMapper;
+    private final ApvMeetingLogRepository apvMeetingLogRepository;
+    private final ApvBusinessTripRepository apvBusinessTripRepository;
+    private final ApvOfficialRepository apvOfficialRepository;
+    private final ApvExpFormRepository apvExpFormRepository;
+    private final ApvFamilyEventRepository apvFamilyEventRepository;
+    private final ApvCorpCardRepository apvCorpCardRepository;
+    private final ApvVacationRepository apvVacationRepository;
+    private final ApvIssuanceRepository apvIssuanceRepository;
+
 
 
 
@@ -89,25 +84,30 @@ public class ApprovalService {
         return counts;
     }
 
-//    /* Apv메인페이지 - 리스트 */
-//    public List<ApvFormMainDTO> selectMyApvList(int empNo) {
-//        log.info("[ApprovalService] selectMyApvList --------------- start ");
-//
-//        List<ApvFormMain> writeApvList = apvFormMainRepository.findTitlesByEmpNo(empNo);
-//        writeApvList.forEach(ApvFormMain::getEmployee);
-//        log.info("[ApprovalService] selectMyApvList --------------- end ");
-//        return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
-//    }
-
-
     /* Apv메인페이지 - 리스트 */
     public List<String> selectMyApvList(int empNo) {
         log.info("[ApprovalService] selectMyApvList --------------- start ");
 
-        List<String> writeApvList = apvFormRepository.findTitlesByEmpNoOrderByWriteDateDesc(empNo);
+        List<String> writeApvList = apvFormRepository.findTitlesByEmpNo(empNo);
+
+        List<String> titleList = Arrays.asList(
+                "회의록",
+                "출장신청서",
+                "공문",
+                "지출결의서",
+                "출장경비정산서",
+                "경조금신청서",
+                "법인카드사용보고서",
+                "연차신청서",
+                "기타휴가신청서",
+                "서류발급신청서"
+        );
+
+        writeApvList = writeApvList.stream()
+                .map(item -> titleList.contains(item) ? item : "기안서")
+                .collect(Collectors.toList());
         log.info("[ApprovalService] selectMyApvList --------------- end ");
 
-        // Assuming you have a modelMapper configured elsewhere
         return writeApvList;
     }
 
@@ -117,7 +117,7 @@ public class ApprovalService {
         log.info("[ApprovalService] selectWriteApvStatusApvList --------------- start ");
 
         System.out.println("empNo = " + empNo);
-        List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
+        List<ApvFormMain> writeApvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByApvNoDesc(empNo, apvStatus);
 
         System.out.println("writeApvList = " + writeApvList);
 
@@ -162,7 +162,7 @@ public class ApprovalService {
     public int selectApvStatusTotal(int empNo, String apvStatus) {
         log.info("[ApprovalService] selectApvStatusTotal --------------- start ");
 
-        List<ApvFormMain> apvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus);
+        List<ApvFormMain> apvList = apvFormMainRepository.findByEmpNoAndApvStatusOrderByApvNoDesc(empNo, apvStatus);
 
         log.info("[ApprovalService] selectApvStatusTotal --------------- end ");
 
@@ -176,7 +176,7 @@ public class ApprovalService {
         int count = criteria.getAmount();
         Pageable paging = PageRequest.of(index, count, Sort.by("apvNo").descending());
 
-        Page<ApvFormMain> result1 = apvFormMainRepository.findByEmpNoAndApvStatusOrderByWriteDateDesc(empNo, apvStatus, paging);
+        Page<ApvFormMain> result1 = apvFormMainRepository.findByEmpNoAndApvStatusOrderByApvNoDesc(empNo, apvStatus, paging);
         List<ApvFormMain> writeApvList = (List<ApvFormMain>) result1.getContent();
         writeApvList.forEach(ApvFormMain::getEmployee);
 
@@ -234,6 +234,16 @@ public class ApprovalService {
         log.info("[ApprovalService] deleteApvForm --------------- start ");
         try {
             apvLineRepository.deleteByApvNo(apvNo);
+            apvFileRepository.deleteByApvNo(apvNo);
+            apvMeetingLogRepository.deleteByApvNo(apvNo);
+            apvBusinessTripRepository.deleteByApvNo(apvNo);
+            apvMeetingLogRepository.deleteByApvNo(apvNo);
+            apvOfficialRepository.deleteByApvNo(apvNo);
+            apvExpFormRepository.deleteByApvNo(apvNo);
+            apvFamilyEventRepository.deleteByApvNo(apvNo);
+            apvCorpCardRepository.deleteByApvNo(apvNo);
+            apvVacationRepository.deleteByApvNo(apvNo);
+            apvIssuanceRepository.deleteByApvNo(apvNo);
             apvFormRepository.deleteById(apvNo);
             log.info("[ApprovalService] deleteApvForm --------------- end ");
             return true;

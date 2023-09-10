@@ -14,6 +14,12 @@ public interface ApvFormRepository extends JpaRepository<ApvForm, Long> {
 
     ApvForm findByApvNo(Long apvNo);
 
+    @Query(value = "SELECT DISTINCT A.TITLE " +
+            "FROM TBL_APV_FORM A " +
+            "ORDER BY A.WRITE_DATE DESC " +
+            "FETCH FIRST 5 ROWS ONLY ", nativeQuery = true)
+    List<String> findTitlesByEmpNo(@Param("empNo")int empNo);
+
     @Modifying
     @Query("UPDATE ApvForm af SET af.apvStatus = '결재완료' WHERE af.apvNo = :apvNo")
     void updateApvStatusToCompleted(@Param("apvNo") Long apvNo);
