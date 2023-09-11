@@ -1,6 +1,7 @@
 package com.highright.highcare.approval.controller;
 
 import com.highright.highcare.approval.dto.*;
+import com.highright.highcare.approval.entity.ApvFile;
 import com.highright.highcare.approval.entity.ApvForm;
 import com.highright.highcare.approval.repository.ApvFormRepository;
 import com.highright.highcare.approval.service.ApprovalBizService;
@@ -11,8 +12,10 @@ import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -128,6 +131,31 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", receiveApvStatusApvList));
     }
 
+    /* 첨부파일 다운로드 */
+    @GetMapping("/download/{fileName:.+}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName) {
+        try {
+            byte[] fileData = approvalService.downloadFileData(fileName);
+
+            if (fileData != null) {
+                HttpHeaders headers = new HttpHeaders();
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
+                return ResponseEntity.ok()
+                        .headers(headers)
+                        .body(fileData);
+            } else {
+                return ResponseEntity
+                        .ok()
+                        .body(new byte[0]); // 빈 데이터를 반환하거나 예외 처리
+            }
+        } catch (Exception ex) {
+            // 예외 처리
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new byte[0]); // 빈 데이터를 반환하거나 예외 처리
+        }
+    }
+
 
     int statusCode;
     String responseMessage;
@@ -179,7 +207,6 @@ public class ApprovalController {
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
-
 
     // 기안 조회
     @GetMapping("/search/{apvNo}")
@@ -545,8 +572,6 @@ public class ApprovalController {
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
-
-
 
     /* 전자결재 - 인사 : hrm3 서류발급신청서 */
     @PostMapping(value ="/insert/hrm3", consumes = "multipart/form-data")
