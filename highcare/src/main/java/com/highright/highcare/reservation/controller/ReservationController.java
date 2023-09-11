@@ -39,6 +39,7 @@ public class ReservationController {
 
     @PostMapping("/regist")
     public ResponseEntity<ResponseDTO> insertRes(@ModelAttribute ResourceDTO resourceDTO, MultipartFile image) throws IOException {
+        System.out.println("resourceDTO : " + resourceDTO);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "시설추가 성공", resService.insertRes(resourceDTO, image)));
     }
@@ -61,14 +62,14 @@ public class ReservationController {
     }
 
     @PostMapping("/status")
-    public ResponseEntity<ResponseDTO> insertDateRes(@RequestBody ResourceReservationStatusDTO resourceReservationStatusDTO) {
+    public ResponseEntity<ResponseDTO> insertDateRes(@RequestBody ResourceReservationStatusDTO resourceReservationStatusDTO) throws Exception {
         System.out.println("reservationDate : " + resourceReservationStatusDTO.getReservationDate());
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "예약 성공", resService.insertResStatus(resourceReservationStatusDTO)));
     }
 
     @PutMapping("/modRes")
     public ResponseEntity<ResponseDTO> updateRes(@ModelAttribute ResourceDTO resourceDTO, MultipartFile image) throws IOException {
-
+        System.out.println("resourceDTO12  :  " + resourceDTO );
                 return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "시설수정 성공", resService.updateRes(resourceDTO, image)));
     }
@@ -76,7 +77,7 @@ public class ReservationController {
     @PutMapping("/deleteRes")
     public ResponseEntity<ResponseDTO> deleteRes(@RequestBody ResourceDTO resourceDTO)  {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "시설수정 성공", resService.deleteRes(resourceDTO)));
+                "시설삭제 성공", resService.deleteRes(resourceDTO)));
     }
 
     @GetMapping("/reser")
