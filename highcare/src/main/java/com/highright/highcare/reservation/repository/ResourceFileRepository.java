@@ -7,4 +7,6 @@ public interface ResourceFileRepository extends JpaRepository<ResourceFile, Inte
 
 
     void deleteByResourceCode(int resourceCode);
+
+    ResourceFile findByResourceCode(int resourceCode);
 }

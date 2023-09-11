@@ -183,10 +183,7 @@ public class BoardService {
         Board board = boardRepository.findById(code).get();
         board.setViews(board.getViews()+1);
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
-
-        List<Comment> comment = commentRepository.findByBoardAndDeleteYn(board,'N');
-        List<CommentDTO> commentList = comment.stream().map(comment1 -> modelMapper.map(comment1, CommentDTO.class)).collect(Collectors.toList());
-        boardDTO.setCommentCnt(commentList.size());
+        boardDTO.setEmpName(boardDTO.getBulletinEmployee().getEmpName());
         return boardDTO;
     }
     @Transactional
@@ -209,7 +206,7 @@ public class BoardService {
         Board board = modelMapper.map(boardDTO, Board.class);
         boardRepository.save(board);
 
-        return 1;
+        return "글작성 성공";
     }
     @Transactional
     public Object insertComment(BoardDTO boardDTO) {

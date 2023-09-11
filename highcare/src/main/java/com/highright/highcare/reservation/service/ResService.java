@@ -74,7 +74,7 @@ public class ResService {
 
     }
     @Transactional
-    public Object insertResStatus(ResourceReservationStatusDTO resourceReservationStatusDTO) {
+    public Object insertResStatus(ResourceReservationStatusDTO resourceReservationStatusDTO) throws Exception {
         Resource resource = resourceRespository.findById(resourceReservationStatusDTO.getResourceCode()).get();
         BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(resourceReservationStatusDTO.getEmpNo()).get();
         ResourceReservationStatus res = modelMapper.map(resourceReservationStatusDTO, ResourceReservationStatus.class);
@@ -90,9 +90,9 @@ public class ResService {
 
         if(resList.size() ==0){
             resourceStatusRepository.save(res);
-            return "하이";
+            return "예약성공";
         }else{
-            return "실패";
+            throw new Exception("예약에 실패하셨습니다. 시간을 다시 확인 바랍니다");
         }
 
     }
@@ -101,6 +101,7 @@ public class ResService {
         java.util.Date utilDate = new java.util.Date();
         long currentMilliseconds = utilDate.getTime();
         java.sql.Date sqlDate = new java.sql.Date(currentMilliseconds);
+
 
         Resource resource = resourceRespository.findById(resourceDTO.getResourceCode()).get();
         resource.setResourceCategory(resourceCategoryRepository.findById(resourceDTO.getCategoryCode()).get());
@@ -112,6 +113,7 @@ public class ResService {
         resource.setEndTime(resourceDTO.getEndTime());
         resource.setResourceName(resourceDTO.getResourceName());
         resourceRespository.save(resource);
+
         resourceFileRepository.deleteByResourceCode(resource.getResourceCode());
         String imageName = UUID.randomUUID().toString().replace("-","");
         String replaceFileName = null;
@@ -120,12 +122,16 @@ public class ResService {
         ResourceFileDTO resourceFileDTO = new ResourceFileDTO();
         try{
             replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, image);
+            String originName = image.getOriginalFilename();
+            String fileExtension = originName.substring(originName.lastIndexOf(".") + 1);
+
             resourceFileDTO.setChangedFileName(imageName);
             resourceFileDTO.setModifiedDate(sqlDate);
             resourceFileDTO.setCreationDate(sqlDate);
             resourceFileDTO.setDeleteYn('N');
             resourceFileDTO.setResourceCode(resource.getResourceCode());
-
+            resourceFileDTO.setType(fileExtension);
+            resourceFileDTO.setOriginalFileName(originName);
             ResourceFile resourceFile = modelMapper.map(resourceFileDTO, ResourceFile.class);
             resourceFileRepository.save(resourceFile);
 
@@ -134,7 +140,7 @@ public class ResService {
             FileUploadUtils.deleteFile(IMAGE_DIR, replaceFileName);
             throw new RuntimeException(e);
         }
-        return (result > 0) ? " 수정 성공": "수정 실페";
+        return (result > 0) ? " 수정 성공": "수정 실패";
     }
     @Transactional
     public Object insertRes(ResourceDTO resourceDTO, MultipartFile image) throws IOException {
@@ -160,11 +166,15 @@ public class ResService {
         ResourceFileDTO resourceFileDTO = new ResourceFileDTO();
         try{
             replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, image);
+            String originName = image.getOriginalFilename();
+            String fileExtension = originName.substring(originName.lastIndexOf(".") + 1); // ex) jpg
             resourceFileDTO.setChangedFileName(imageName);
             resourceFileDTO.setModifiedDate(sqlDate);
             resourceFileDTO.setCreationDate(sqlDate);
             resourceFileDTO.setDeleteYn('N');
             resourceFileDTO.setResourceCode(resource.getResourceCode());
+            resourceFileDTO.setType(fileExtension);
+            resourceFileDTO.setOriginalFileName(originName);
 
             ResourceFile resourceFile = modelMapper.map(resourceFileDTO, ResourceFile.class);
             resourceFileRepository.save(resourceFile);
@@ -186,13 +196,17 @@ public class ResService {
 
     public Object selectContent(int resourceCode) {
         Resource resource = resourceRespository.findById(resourceCode).get();
-        return modelMapper.map(resource, ResourceDTO.class);
+        ResourceDTO resource1 = modelMapper.map(resource, ResourceDTO.class);
+        ResourceFile resourceFile = resourceFileRepository.findByResourceCode(resourceCode);
+        resource1.setFileUrl("http://localhost:8080/getImage/"+resourceFile.getChangedFileName()+"/"+resourceFile.getType());
+        return resource1;
 
     }
 
     public Object selectDate(String reservationDate,int resourceCode) {
-        Resource resource = resourceRespository.findById(resourceCode).get();
-        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.findAllByReservationDateAndReservationStatusAndResource(reservationDate,"APPROVAL",resource);
+        System.out.println("reservationDate" + reservationDate);
+        System.out.println("resourceCode" + resourceCode);
+        List<ResourceReservationStatus> resourceReservationStatuses = resourceStatusRepository.selectStatus(reservationDate,resourceCode);
         System.out.println("list" + resourceReservationStatuses);
         return resourceReservationStatuses.stream()
                 .map(status -> modelMapper.map(status, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
@@ -223,7 +237,7 @@ public class ResService {
     public Object selectStatusListWithPaging(Criteria cri, int empNo) {
         int index = cri.getPageNum() - 1;
         int count = cri.getAmount();
-        Pageable paging = PageRequest.of(index, count, Sort.by("reservationDate").descending());
+        Pageable paging = PageRequest.of(index, count, Sort.by("statusCode").descending());
         BulletinEmployee bulletinEmployee = bulletinEmployeeRepository.findById(empNo).get();
         Page<ResourceReservationStatus> result = resourceStatusRepository.findByBulletinEmployee(bulletinEmployee, paging);
 
@@ -241,7 +255,7 @@ public class ResService {
     public Object selectAllStatusListWithPaging(Criteria cri) {
         int index = cri.getPageNum() - 1;
         int count = cri.getAmount();
-        Pageable paging = PageRequest.of(index, count, Sort.by("reservationDate").descending());
+        Pageable paging = PageRequest.of(index, count, Sort.by("statusCode").descending());
         Page<ResourceReservationStatus> result = resourceStatusRepository.findAll(paging);
         List<ResourceReservationStatus> resourceReservationStatuses = (List<ResourceReservationStatus>) result.getContent();
         return resourceReservationStatuses.stream().map(statusRes -> modelMapper.map(statusRes, ResourceReservationStatusDTO.class)).collect(Collectors.toList());
