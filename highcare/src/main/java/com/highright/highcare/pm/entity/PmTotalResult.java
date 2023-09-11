@@ -19,16 +19,16 @@ public class PmTotalResult {
     private Integer milNo;
     private char isWhether;
     private Integer carNo;
-    private String carName;
-    private int history;
-    private Date carStartDate;
-    private Date carEndDate;
-    private String carjob;
+//    private String carName;
+//    private int history;
+//    private Date carStartDate;
+//    private Date carEndDate;
+//    private String carjob;
     private Integer cerNo;
-    private Date cerStartDate;
-    private Date cerEndDate;
-    private String institution;
-    private String cerName;
+//    private Date cerStartDate;
+//    private Date cerEndDate;
+//    private String institution;
+//    private String cerName;
 
     public PmTotalResult (final PmEmployee pmTotalEmp, Career career, Certification certification, Military military) {
         this.empName = pmTotalEmp.getEmpName();
@@ -40,6 +40,9 @@ public class PmTotalResult {
         this.milStatus = military.getStatus();
         this.milNo = military.getMilNo();
         this.isWhether = military.getIsWhether();
+        this.carNo = career.getCarNo();
+        this.cerNo = certification.getCerNo();
+
 
 //        this.milNo = pmTotalEmp.getMilNo().getMilNo();
 //        this.isWhether = pmTotalEmp.getMilNo().getIsWhether();

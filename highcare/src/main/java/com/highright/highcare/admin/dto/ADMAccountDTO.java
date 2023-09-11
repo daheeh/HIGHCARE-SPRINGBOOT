@@ -24,7 +24,7 @@ public class ADMAccountDTO {
 
     private int empNo;
 
-    private String password;
+//    private String password;
 
     private String isTempPwd;
 

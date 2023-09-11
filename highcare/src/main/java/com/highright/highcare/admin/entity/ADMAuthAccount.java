@@ -20,10 +20,15 @@ public class ADMAuthAccount {
     @Id
     private ADMAuthAccountId id;
 
-
-
     @Builder
     public ADMAuthAccount(ADMAuthAccountId id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ADMAuthAccount{" +
+                "id=" + id +
+                '}';
     }
 }

@@ -20,14 +20,21 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Value("${image.add-resource-handler}")
     private String ADD_RESOURCE_HANDLER;
 
+    @Value("${file.add-resource-locations}")
+    private String fileResourceLocations;
+
+    @Value("${file.add-resource-handler}")
+    private String fileResourceHandler;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         // 이미지 경로 매핑
         registry.addResourceHandler(ADD_RESOURCE_HANDLER)
                 .addResourceLocations(ADD_RESOURCE_LOCATION);
 
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("file:C:/dev/profileImages/");
+        // 전자결재 파일 경로 매핑
+        registry.addResourceHandler(fileResourceHandler)
+                .addResourceLocations(fileResourceLocations);
     }
 
 

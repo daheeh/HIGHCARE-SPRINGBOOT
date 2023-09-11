@@ -50,6 +50,12 @@ public class ApvFormMain {
     @Column(name = "CONTENTS2")
     private String contents2;
 
+    @Column(name = "TOTAL_AMOUNT")
+    private String totalAmount;
+
+    @Column(name = "REF_APV_NO")
+    private String refApvNo;
+
     @Column(name = "EMP_NO")
     private int empNo;
 

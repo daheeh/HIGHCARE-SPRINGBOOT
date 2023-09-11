@@ -5,15 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
 @Table(name="TBL_CAREER")
+@SequenceGenerator(
+        name="CAREER_SEQ_GENERATOR",
+        sequenceName = "SEQ_CAREER_CODE",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,6 +24,8 @@ import java.sql.Date;
 public class Career {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "CAREER_SEQ_GENERATOR")
     @Column(name = "CAR_NO")
     private Integer carNo;
 
@@ -39,6 +44,16 @@ public class Career {
     @Column(name = "JOB")
     private String job;
 
-    @Column(name = "EMP_NO")
-    private int empNo;
+//    @Column(name = "EMP_NO")
+//    private int empNo;
+
+//    @OneToMany(mappedBy = "career")
+//    private List<PmEmployee> employees;
+
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO")
+    private PmEmployee employees;
+
+
+
 }

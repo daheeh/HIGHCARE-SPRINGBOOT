@@ -33,6 +33,7 @@ spring:
           auth: true
           starttls:
             enable: true
+
   # redis cache config
   redis:
     host: localhost
@@ -99,6 +100,9 @@ image:
   image-url: http://localhost:8080/images/
 
 file:
+  add-resource-locations: classpath:/static/apvFiles/
+  add-resource-handler: /apvFiles/**
+
   upload-dir: src/main/resources/static/apvFiles
   base-url: http://localhost:8080/apvFiles/
 

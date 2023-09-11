@@ -1,6 +1,7 @@
 package com.highright.highcare.auth.entity;
 
 
+import com.highright.highcare.admin.entity.ADMAccount;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,6 @@ import java.io.Serializable;
 @Table(name="TBL_AUTH_ACCOUNT")
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode
 public class AUTHAuthAccount implements Serializable {
 
@@ -28,5 +28,15 @@ public class AUTHAuthAccount implements Serializable {
     private String id;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID")
+    private ADMAccount admaAccount;
 
+    @Override
+    public String toString() {
+        return "AUTHAuthAccount{" +
+                "authCode='" + authCode + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

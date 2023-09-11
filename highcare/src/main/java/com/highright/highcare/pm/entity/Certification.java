@@ -6,14 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name="TBL_CERTIFICATION")
+@SequenceGenerator(
+        name="CERTIFICATION_SEQ_GENERATOR",
+        sequenceName = "SEQ_CERTIFICATION_CODE",
+        initialValue = 1, allocationSize = 1
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,6 +24,10 @@ import java.sql.Date;
 public class Certification {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "CERTIFICATION_SEQ_GENERATOR"
+    )
     @Column(name = "CER_NO")
     private Integer cerNo;
 
@@ -36,7 +43,12 @@ public class Certification {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "EMP_NO")
-    private int empNo;
+//    @Column(name = "EMP_NO")
+//    private int empNo;
 
+//    @OneToMany(mappedBy = "certification")
+//    private List<PmEmployee> employees;
+    @ManyToOne
+    @JoinColumn(name = "EMP_NO")
+    private PmEmployee employees;
 }

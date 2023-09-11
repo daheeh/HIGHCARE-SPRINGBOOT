@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="profile, annual, management">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-    </list>
+    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="dahee merge" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,19 +60,18 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/HIGHCARE_Springboot/HIGHCARE-SPRINGBOOT&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/finalproject/final-chatting-springboot/HIGHCARE-SPRINGBOOT/highcare/src/main/java/com/highright/highcare/chatting/pubsub&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;224a260ff65e244fcab1d93ae2b9c7b7&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;4fa16f21e564532b0cb5825ea3a6a998&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
-      &quot;redis&quot;,
-      &quot;oracle&quot;
+      &quot;redis&quot;
     ]
   }
 }</component>
@@ -93,28 +87,14 @@
       <recent name="com.highright.highcare.chatting.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.HighcareApplication">
-    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="mypage | 회원아이디로 근태조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="4" requestIdentifier="회원아이디로 근태조회" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="HighcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="com.highright.highcare.main" />
+      <module name="highcare.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.HighcareApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="HTTP Request.mypage | 회원아이디로 근태조회" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -126,27 +106,20 @@
       <updated>1693373139536</updated>
       <workItem from="1693373140744" duration="637000" />
       <workItem from="1693447343602" duration="28786000" />
-      <workItem from="1693835951516" duration="95000" />
-      <workItem from="1693873876734" duration="2846000" />
-      <workItem from="1693876736775" duration="1459000" />
-      <workItem from="1694089925105" duration="7728000" />
-      <workItem from="1694240630138" duration="9003000" />
-      <workItem from="1694353851194" duration="4165000" />
-      <workItem from="1694392347405" duration="4013000" />
     </task>
-    <task id="LOCAL-00001" summary="profile">
-      <created>1693876587199</created>
+    <task id="LOCAL-00001" summary="dahee merge">
+      <created>1693539950270</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1693876587199</updated>
+      <updated>1693539950270</updated>
     </task>
-    <task id="LOCAL-00002" summary="profile">
-      <created>1693876656518</created>
+    <task id="LOCAL-00002" summary="dahee merge">
+      <created>1693988494832</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1693876656518</updated>
+      <updated>1693988494832</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
@@ -167,9 +140,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dahee merge" />
-    <MESSAGE value="profile" />
-    <MESSAGE value="profile, annual, management" />
-    <option name="LAST_COMMIT_MESSAGE" value="profile, annual, management" />
+    <option name="LAST_COMMIT_MESSAGE" value="dahee merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

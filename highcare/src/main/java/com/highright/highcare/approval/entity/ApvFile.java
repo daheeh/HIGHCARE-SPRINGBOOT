@@ -24,7 +24,7 @@ public class ApvFile {
             strategy = GenerationType.SEQUENCE,
             generator = "SEQ_APV_FILE"
     )
-    private String fileNo;
+    private Long fileNo;
 
 
     @Column(name = "ORIGINAL_FILE_NAME")

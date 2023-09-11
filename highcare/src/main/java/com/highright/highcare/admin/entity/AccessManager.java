@@ -1,39 +1,86 @@
 package com.highright.highcare.admin.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="TBL_ACCESS_MANAGER")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class AccessManager {
 
     @Id
     @Column(name="ID")
     private String id;
-    @Column(name="IS_LOCK")
+
+    @Column(name="REGIST_DATE")
+    private Timestamp registDate;
+
+    @Column(name="LOGIN_TOTAL_COUNT")
+    private int loginTotalCount;
+
+    @Column(name="LOGIN_FAIL_COUNT")
+    private int loginFailCount;
+
+    @Column(name = "IS_LOCK")
+    @ColumnDefault("'Y'") // 기본값 'Y'로 설정
     private String isLock;
-    @Column(name="IS_INACTIVE")
+
+    @Column(name = "IS_INACTIVE")
+    @ColumnDefault("'N'") // 기본값 'N'로 설정
     private String isInActive;
-    @Column(name="IS_EXPIRED")
-    private String ixExpired;
-    @Column(name="IS_WITHDRAW")
+
+    @Column(name = "IS_EXPIRED")
+    @ColumnDefault("'N'") // 기본값 'N'로 설정
+    private String isExpired;
+
+    @Column(name = "IS_WITHDRAW")
+    @ColumnDefault("'N'") // 기본값 'N'로 설정
     private String isWithDraw;
 
+    @Column(name="EXPIRED_DATE")
+    private Date expiredDate;
+
+
+    @Column(name="WITHDRAW_DATE")
+    private Date withDrawDate;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID")
+    private ADMAccount admaAccount;
 
     @Builder
-    public AccessManager(String id, String isLock, String isInActive, String ixExpired, String isWithDraw) {
+    public AccessManager(String id, Timestamp registDate, int loginTotalCount, int loginFailCount, String isLock, String isInActive, String isExpired, Date expiredDate, String isWithDraw, Date withDrawDate) {
         this.id = id;
+        this.registDate = registDate;
+        this.loginTotalCount = loginTotalCount;
+        this.loginFailCount = loginFailCount;
         this.isLock = isLock;
         this.isInActive = isInActive;
-        this.ixExpired = ixExpired;
+        this.isExpired = isExpired;
+        this.expiredDate = expiredDate;
         this.isWithDraw = isWithDraw;
+        this.withDrawDate = withDrawDate;
+    }
+
+    @Override
+    public String toString() {
+        return "AccessManager{" +
+                "id='" + id + '\'' +
+                ", registDate=" + registDate +
+                ", loginTotalCount=" + loginTotalCount +
+                ", loginFailCount=" + loginFailCount +
+                ", isLock='" + isLock + '\'' +
+                ", isInActive='" + isInActive + '\'' +
+                ", isExpired='" + isExpired + '\'' +
+                ", isWithDraw='" + isWithDraw + '\'' +
+                ", expiredDate=" + expiredDate +
+                ", withDrawDate=" + withDrawDate +
+                '}';
     }
 }

@@ -219,6 +219,7 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
+
     private LoginMemberDTO setMember(LoginMemberDTO loginInfo) {
 
         log.info("[AuthServiceImpl] login : loginInfo ====== {} ", loginInfo);

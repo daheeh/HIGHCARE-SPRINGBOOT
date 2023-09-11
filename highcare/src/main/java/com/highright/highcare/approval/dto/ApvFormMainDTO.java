@@ -21,6 +21,8 @@ public class ApvFormMainDTO {
     private String category;
     private String contents1;
     private String contents2;
+    private String totalAmount;
+    private String refApvNo;
     private int empNo;
 
     private ApvEmployee apvEmployee;

@@ -20,6 +20,8 @@ public class ApvFormDTO {
     private String category;
     private String contents1;
     private String contents2;
+    private String totalAmount;
+    private String refApvNo;
     private int empNo;
 
     private ApvEmployee apvEmployee;
@@ -31,6 +33,7 @@ public class ApvFormDTO {
     /* 업무 */
     private List<ApvMeetingLogDTO> apvMeetingLogs;
     private List<ApvBusinessTripDTO> apvBusinessTrips;
+    private List<ApvOfficialDTO> apvOfficials;
 
     /* 지출 */
     private List<ApvExpFormDTO> apvExpForms;
