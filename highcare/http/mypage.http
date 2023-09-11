@@ -1,7 +1,14 @@
 ### 프로필 회원아이디로 조회
-GET http://localhost:8080/api/mypage/profile/10001
-
+#GET http://localhost:8080/api/mypage/profile/10005
+GET http://localhost:8080/api/mypage/profile/10003?offset=1
 Accept: */*
+#Authorization: earer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
+#Content-Type: application/json
+
+
+
+
+
 
 
 ### 프로필파일 인서트 테스트
@@ -9,6 +16,7 @@ POST http://localhost:8080/api/mypage/insert
 Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
 
 {
   "code": "1",
@@ -19,6 +27,12 @@ Access-Control-Allow-Origin: *
 
 ###회원 아이디로 연차조회
 GET http://localhost:8080/api/mypage/anselect/10002
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
+Content-Type: application/json
+
 
 ### 회원아이디로 근태조회
-GET http://localhost:8080/api/mypage/manselect/10003
+GET http://localhost:8080/api/mypage/manselect/10005
+Accept: */*
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
+#Content-Type: application/json

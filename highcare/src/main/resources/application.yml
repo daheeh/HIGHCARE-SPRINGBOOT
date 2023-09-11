@@ -98,3 +98,7 @@ image:
   image-dir: src/main/resources/static/images
   image-url: http://localhost:8080/images/
 
+file:
+  upload-dir: src/main/resources/static/apvFiles
+  base-url: http://localhost:8080/apvFiles/
+

@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @SequenceGenerator(
-        name = "PROFILE_SEQ_NO",
+        name = "MYPROFILE_SEQ_NO",
         sequenceName = "PROFILE_SEQ_NO",
         initialValue = 1, allocationSize = 1
 )
@@ -20,7 +20,7 @@ import java.util.List;
 public class MyProfile {
 
     @Id
-    // pk에는 sequencgenerator
+    @GeneratedValue(strategy =GenerationType.SEQUENCE, generator = "MYPROFILE_SEQ_NO")
     @Column(name = "PROFILE_CODE")
     private int code;
 

@@ -7,13 +7,16 @@ import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.Repository.ProfileRepository;
 import com.highright.highcare.mypage.dto.*;
-//import com.highright.highcare.mypage.entity.AnnEmployee;
+
+import com.highright.highcare.mypage.entity.MyAnnual;
 import com.highright.highcare.mypage.entity.MyProfile;
 import com.highright.highcare.mypage.entity.MyProfileFile;
 import com.highright.highcare.mypage.service.MypageService;
 import com.highright.highcare.pm.dto.ManagementDTO;
 import com.highright.highcare.pm.entity.Management;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -41,6 +44,7 @@ public class MypageController {
 
     @GetMapping ("/profile/{empNo}")
         public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
+
         MyProfileDTO profilefileList = mypageService.selectProfilefileList(empNo);
         log.info("empNo [Controller] ================profilefileList{} ", profilefileList);
 
@@ -75,44 +79,60 @@ public class MypageController {
 
     @GetMapping("/anselect/{empNo}")
     public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
-                                                 @PathVariable int empNo) {
-//        member.getEmpNo();
-        Object annAnnual = mypageService.selectAnnList(empNo);
+                                                 @PathVariable int empNo
+                                                 //        member.getEmpNo();
+                                                 , @RequestParam(name="offset", defaultValue = "1") String offset) {
 
-        log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annAnnual);
+        log.info("offset start===========");
+        log.info("offset==== :{}", offset);
 
-        if(annAnnual == null){
+//        Object annAnnual = mypageService.selectAnnList(empNo);
+
+        int total = mypageService.annselectTotal(empNo);
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+
+        List<MyAnnualDTO> annAnnualList = mypageService.selectAnnList(empNo);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(mypageService.selectAnnListPaging(empNo, cri));
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+
+
+        log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annAnnualList);
+
+        if(annAnnualList == null){
             return ResponseEntity
                     .ok()
                     .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
         }
         System.out.println("[Controller] annEmployee ^^^^^^" + empNo);
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", annAnnual));
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", annAnnualList));
     }
+
 
     @GetMapping("/manselect/{empNo}")
     public ResponseEntity<ResponseDTO> manselect(@AuthenticationPrincipal LoginMemberDTO member,
-                                                 @PathVariable int empNo
-//                                                 @RequestParam(name = "offset", defaultValue = "1") int offset,
-//                                                 @RequestParam(name = "limit", defaultValue = "10") int limit
-    ) {
+                                                 @PathVariable int empNo,
+                                                 @RequestParam(name = "offset", defaultValue = "1") String offset) {
 
-//        log.info("start=================");
-//        log.info("offset=========== : {}", offset);
+        log.info("[Controller] manselect start=================");
+        log.info("[Controller] manselect offset=========== : {}", offset);
 
-        Object mymanagementDTO = mypageService.selectManList(empNo);
-//        int total = mypageService.manselect(empNo);     // 데이터이 총 개수 반환
+        int total = mypageService.manselectTotal(empNo);
+
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+
+        List<MyManegementDTO> mymanagementDTO = mypageService.selectManList(empNo);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(mypageService.selectManListWithPaging(empNo, cri));
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 
         log.info("Controller] managementDTO selectManList^^^^^^ {}", mymanagementDTO);
+        log.info("[Controller] manselect end=================");
 
-//        Criteria cri = new Criteria(offset, limit);
-
-//        List<ManagementDTO> data = mypageService.manselectPage(empNo);  // 페이징된 데이터 가지고 옴
-
-//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-//        pagingResponseDTO.setData(mypageService.manageMent(cri));
-//        pagingResponseDTO.setPageInfo((new PageDTO(cri, total)));
 
         if(mymanagementDTO == null) {
             return ResponseEntity

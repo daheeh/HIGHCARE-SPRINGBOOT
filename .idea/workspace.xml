@@ -4,9 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="">
+    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="profile">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e627c3c3-2ba9-4999-869d-ce02918e1130.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-08-30__6_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-08-30_오후_6_49_[Changes]/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-08-30_오후_6_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/http/mypage.http" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/http/mypage.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/approval/controller/ApprovalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/jwt/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/jwt/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/jwt/TokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/jwt/TokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/AnnRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/AnnRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/MyManagementRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/MyManagementRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyAnnual.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyAnnual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/service/MypageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/service/MypageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/pm/controller/PmEmployeeContorller.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/pm/controller/PmEmployeeContorller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/02d8ab2f867541ddb36eeff4fae6642c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/0c86f4d2be434ff4af0a687ebe95bfe7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/34f8e92fd3ed492c843871edd7c53ab9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/3f672540ced646cdb759c71895e34672.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/4aa272fd79e74038bcb170c49a3a377f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/546988c388044c208a702a510b12e0ff.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/6a61d8d945754e90aac6520ac9730c32.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/702ff830045d469fbc9a60c0a27dba15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/7da9edd48d8f43ae916bc26431589834.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/9c2d12d808dc4bbe918a3267efeed8d6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/a1f42179c1d6459086abde8d3e4a5984.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/a5b43a1f1d6c442d9e6ad3e059356eff.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/b5b914af26054128a329432768040a44.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/basic.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/cc30ba7850284d8caeb7171a956b9c12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/d19e1f135f134c53ab50f16360795bd8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/dea69ece4fdd4e4daf18250ac37db011.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/df892c34a0184b2dada251ee24154340.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/e5ac23fc10914d1681ca46eedb724b35.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/f0fc46ab1d8a4bdd8e9daa74f7cfbc12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/f1ee6fda51284454824d1f18cce3a0d2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/resources/static/images/f614d234f88949ffba73d8b2b0a0fe79.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,30 +102,31 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/dev/HIGHCARE_Springboot/HIGHCARE-SPRINGBOOT",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "224a260ff65e244fcab1d93ae2b9c7b7",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/HIGHCARE_Springboot/HIGHCARE-SPRINGBOOT&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;224a260ff65e244fcab1d93ae2b9c7b7&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;redis&quot;,
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\finalproject\final-chatting-springboot\HIGHCARE-SPRINGBOOT\highcare\src\main\java\com\highright\highcare\chatting\pubsub" />
@@ -90,7 +139,16 @@
       <recent name="com.highright.highcare.chatting.repository" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.HighcareApplication">
+    <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="mypage | 회원아이디로 근태조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="4" requestIdentifier="회원아이디로 근태조회" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="HighcareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="com.highright.highcare.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.highright.highcare.HighcareApplication" />
@@ -98,6 +156,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.mypage | 회원아이디로 근태조회" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -110,8 +173,28 @@
       <workItem from="1693373140744" duration="637000" />
       <workItem from="1693447343602" duration="28786000" />
       <workItem from="1693835951516" duration="95000" />
-      <workItem from="1693873876734" duration="2677000" />
+      <workItem from="1693873876734" duration="2846000" />
+      <workItem from="1693876736775" duration="1459000" />
+      <workItem from="1694089925105" duration="7728000" />
+      <workItem from="1694240630138" duration="9003000" />
+      <workItem from="1694353851194" duration="4165000" />
+      <workItem from="1694392347405" duration="4013000" />
     </task>
+    <task id="LOCAL-00001" summary="profile">
+      <created>1693876587199</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1693876587199</updated>
+    </task>
+    <task id="LOCAL-00002" summary="profile">
+      <created>1693876656518</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693876656518</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,7 +213,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dahee merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="dahee merge" />
+    <MESSAGE value="profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="profile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -67,7 +67,9 @@ public class PmEmployeeContorller {
         log.info("offset===================> {}", offset);
         log.info("empName==============> {}", empName);
 
-        int total = employeeService.selectEmployeeTotal(empName); // 조건을 추가
+        int total = employeeService.selectEmployeeTotal(
+
+        ); // 조건을 추가
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
         cri.setSearchValue(empName);
 

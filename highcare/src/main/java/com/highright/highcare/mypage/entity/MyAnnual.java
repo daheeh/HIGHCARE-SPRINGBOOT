@@ -47,7 +47,5 @@ public class MyAnnual {
     @OneToOne
     @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
     private MyApvVation myApvVation;
-
-
 }
 

@@ -1,6 +1,7 @@
 package com.highright.highcare.mypage.service;
 
 //import com.highright.highcare.mypage.Repository.AnnRepository;
+import com.highright.highcare.common.Criteria;
 import com.highright.highcare.mypage.Repository.AnnRepository;
 //import com.highright.highcare.mypage.Repository.MyManagementRepository;
 import com.highright.highcare.mypage.Repository.MyManagementRepository;
@@ -17,6 +18,10 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,18 +70,20 @@ public class MypageService {
         log.info("[MypageService] selectProfilefileList ProfileList =================={}", ProfileList);
         log.info("[MypageService] selectProfile End =============================================");
 
+
+        if(ProfileList == null) {
+
+            MyProfile newProfile = new MyProfile();
+            newProfile.setEmpNo(empNo);
+//            newProfile.setCode(code);
+//            이미 엔티티에서 자동으로 시퀀스 생성을 해놨기 때문에 수동으로 해주면 안됨
+            profileRepository.save(newProfile);
+        }
         MyProfileDTO myProfileDTO = modelMapper.map(ProfileList, MyProfileDTO.class);
         log.info("[MypageService] selectProfilefileList myProfileDTO1111 =================={}", myProfileDTO);
 
-//        myProfileDTO.setMyEmployee(modelMapper.map(ProfileList.getMyEmployee(), MyEmployeeDTO.class));
-//        log.info("[MypageService] selectProfilefileList myProfileDTO222 =================={}", myProfileDTO);
-        // 엔티티 디티오 이름ㅇ르 잘 안맞춰줘서 괜히 작성 ㅊ****
 
-//        myProfileDTO.getMyEmployeeDTO().setDeptName();
-
-//        return ProfileList.stream().map(profile -> modelMapper.map(profile, MyProfileDTO.class)).collect(Collectors.toList());
         return myProfileDTO;
-
     }
 
     // 서비스 업데이트 코드
@@ -96,7 +103,7 @@ public class MypageService {
                 String imageName = UUID.randomUUID().toString().replace("-", "");
                 String replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, profileImage);
 //                String imgUrl = saveProfileImageAndGetUrl(profileImage);
-//                myProfileFileDTO.setProfileImgUrl(imgUrl);
+//                myProfileFileDTO.setProfileImgUrl(imgUrl)
 
                 // 기존 데이터 업데이트
                 // set은 내가 디티오 엔티티에 정해준 이름, getOriginalFilename은 메소드가  정의되어있어서 getOriginalFilename를 하면
@@ -128,12 +135,12 @@ public class MypageService {
 
 
     @Transactional
-    public Object selectAnnList(int empNo) {
-        log.info("[MyPageService] empNo^^^^222222222 {}", empNo);
+    public List<MyAnnualDTO> selectAnnList(int empNo) {
+        log.info("[MyPageService] empNo^^^^ {}", empNo);
 
         List<MyAnnual> myAnnuals = annRepository.findByEmpNo(empNo);
 
-        log.info("[MyPageService] annEmployee^^^^222222222 {}", myAnnuals);
+        log.info("[MyPageService] annEmployee^^^^ {}", myAnnuals);
 
         List<MyAnnualDTO> myAnnualDTOList = myAnnuals.stream().map(item -> modelMapper.map(item, MyAnnualDTO.class)).collect(Collectors.toList());
         log.info("[MyPageService] MyEmployeeDTO^^^^ {}",myAnnualDTOList);
@@ -141,7 +148,7 @@ public class MypageService {
         return myAnnualDTOList;
     }
 
-    public Object selectManList(int empNo) {
+    public List selectManList(int empNo) {
         log.info("[MyPageService] empNo%%%%%% {}", empNo);
         List<MyManegement> myManegementList = myManagementRepository.findByEmpNo(empNo);
 //        List<MyManegementDTO> mymanagementDTOList = modelMapper.map(myManegementList, MyManegementDTO.class);
@@ -152,10 +159,69 @@ public class MypageService {
         log.info("[MyPageService] managementDTOList =============== {}", mymanagementDTOList);
 
         return mymanagementDTOList;
+    }
 
+    /* 토탈 */
+    public int annselectTotal(int empNo) {
 
+        log.info("[Service annselectTotal] annselectTotal --------------- start ");
+        List<MyAnnual> myAnnualList = annRepository.findByEmpNo(empNo); // 회원번호 전체 정보 조회
+        // 레파지토리??
+        log.info("[Service annselectTotal] myAnnualList.size: {}", myAnnualList.size());
+        log.info("[Service annselectTotal] annselectTotal --------------- end ");
 
+        return myAnnualList.size();
+    }
 
+    public Object selectAnnListPaging(int empNo, Criteria cri) {
+        log.info("[MypageService] selectAnnListPaging => start ======");
+
+        int index = cri.getPageNum() - 1;   // 인데스는 0부터 시작해거 1 빼줌
+        int count = cri.getAmount();        // 페이지당 아이템 수
+        Pageable paging = PageRequest.of(index, count, Sort.by("apvNo").descending());
+
+        Page<MyAnnual> result1 = annRepository.findByEmpNo(empNo, paging);
+        log.info("[MypageService] selectAnnListPagin result1 =>=============" + paging);
+
+        List<MyAnnual> resultList = (List<MyAnnual>) result1.getContent();
+        // Page 객체에서 조회 결과를 추출하여 List 형태로 변환. 이 때, getContent() 메서드를 사용하여 페이지에 포함된 실제 데이터를 추출
+        resultList.forEach(MyAnnual::getAnnNo);
+        // resultList의 요소들을 순회하며 MyAnnual 객체의 getAnnNo 메서드를 호출
+
+        log.info("[MypageService] selectAnnListPaging => end =============");
+
+        return resultList.stream().map(MyAnnual -> modelMapper.map(MyAnnual, MyAnnualDTO.class)).collect(Collectors.toList());
+    }
+
+    public int manselectTotal(int empNo) {
+
+        log.info("[Service] myManList Start ===================");
+
+        List<MyManegement> myManList = myManagementRepository.findByEmpNo(empNo);    // 회원 전체정보 조회
+        log.info("[Service] myManList.size : {}", myManList.size());
+
+        log.info("[Service myManList] myAnnualList.size: {}", myManList.size());
+        log.info("[Service] myManList End ===================");
+
+        return myManList.size();
+    }
+
+    public Object selectManListWithPaging(int empNo, Criteria cri) {
+
+        log.info("[Service] selectManListWithPaging Start ======");
+        int index = cri.getPageNum() - 1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count, Sort.by("manNo").descending());
+
+        Page<MyManegement> result1 = myManagementRepository.findByEmpNo(empNo, paging);
+        log.info("[MypageService] selectmanListPaging result1 =>=============" + paging);
+
+        List<MyManegement> resultList = (List<MyManegement>) result1.getContent();
+        resultList.forEach(MyManegement::getManNo);
+
+        log.info("[MypageService] selectManListWithPaging => end =======");
+
+        return resultList.stream().map(MyAnnual -> modelMapper.map(MyAnnual, MyAnnualDTO.class)).collect(Collectors.toList());
     }
 }
 

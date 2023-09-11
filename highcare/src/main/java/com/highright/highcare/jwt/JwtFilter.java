@@ -39,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
             // 권한부여
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-
+            log.info("[JwtFilter] resolveToken 완료 ==== {통과}");
         }
 
         filterChain.doFilter(request, response);
