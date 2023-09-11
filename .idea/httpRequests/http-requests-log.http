@@ -1,3 +1,170 @@
+GET http://localhost:8080/api/mypage/profile/10003?offset=1
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T172159.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10002?offset=1
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T172034.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10004?offset=1
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T165749.500.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10003?offset=1
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T165720.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10005?offset=1
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T165654.500.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10002?offset=1
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T165641.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10005
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T164450.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10005
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T163605.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T163555.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-09T163530.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10001
+Content-Length: 11
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+Accept: */*
+
+<> 2023-09-05T103729.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10001
+Content-Length: 11
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+Accept: */*
+
+<> 2023-09-05T103619.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/anselect/10002
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-05T103008.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-05T103006.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/anselect/10002
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-05T102953.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10001
+Content-Length: 11
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+Accept: */*
+
+<> 2023-09-05T102934.403.json
+
+###
+
 POST http://localhost:8080/api/approval/insert
 Content-Type: application/json
 Accept: */*

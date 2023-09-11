@@ -1,6 +1,6 @@
 package com.highright.highcare.mypage.dto;
 
-import com.highright.highcare.mypage.entity.AnnEmployee;
+//import com.highright.highcare.mypage.entity.AnnEmployee;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -30,6 +30,9 @@ public class MyAnnualDTO {
     // 담을 공간 만들기
     private MyApvVationDTO myApvVation;
 
+    // 이것 추가
 //    private List<MyEmployeeDTO> annEmployee;
+
+
 
 }

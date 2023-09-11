@@ -35,6 +35,9 @@ public class MyProfileFile {
     @Column(name = "CHANGED_FILE_NAME")
     private String chName;
 
+    @Column(name="PROFILE_IMAGE_URL")
+    private String profileImgUrl;
+
     @Column(name = "CREATION_DATE" ,nullable = true)
     private Date date;
 

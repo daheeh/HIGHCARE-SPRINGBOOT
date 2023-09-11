@@ -54,9 +54,19 @@ public class MyEmployee {
     @OneToOne
     @JoinColumn(name = "JOB_CODE", insertable = false, updatable = false)
     private Job jobName;
+// 이것 추가
+//    @OneToOne
+//    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+//    private MyProfile myProfile;
 
+    @OneToMany
+    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+    private List<MyManegement> manegementList;
 
-
+    // 이것 추가
+    @OneToMany
+    @JoinColumn(name = "EMP_NO")
+    private List<MyAnnual> myAnnual;
 
 
 

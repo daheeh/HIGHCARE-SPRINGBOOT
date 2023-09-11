@@ -8,7 +8,7 @@ import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.Management;
 import com.highright.highcare.pm.entity.ManagementResult;
-import com.highright.highcare.pm.entity.MgEmployee;
+//import com.highright.highcare.pm.entity.MgEmployee;
 import com.highright.highcare.pm.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.description.modifier.Mandate;
@@ -65,7 +65,9 @@ public class PmEmployeeContorller {
         log.info("offset===================> {}", offset);
         log.info("empName==============> {}", empName);
 
-        int total = employeeService.selectEmployeeTotal(empName); // 조건을 추가
+        int total = employeeService.selectEmployeeTotal(
+
+        ); // 조건을 추가
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
         cri.setSearchValue(empName);
 
