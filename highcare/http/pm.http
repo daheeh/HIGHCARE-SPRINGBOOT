@@ -137,7 +137,6 @@ Accept: */*
 }
 
 
-
 ### 회원 상세조회
 GET http://localhost:8080/api/pm/member/detail/10001
 Content-Type: application/json
@@ -146,6 +145,11 @@ Accept: */*
 
 ### 연차 조회
 GET http://localhost:8080/api/pm/annual
+Content-Type: application/json
+Accept: */*
+
+### 개인 연차 조회
+GET http://localhost:8080/api/pm/annual/detail/10001
 Content-Type: application/json
 Accept: */*
 

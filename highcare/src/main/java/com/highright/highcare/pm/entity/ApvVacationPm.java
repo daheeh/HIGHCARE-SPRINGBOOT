@@ -20,6 +20,7 @@ public class ApvVacationPm implements Serializable {
     @Column(name="ITEMS_NO")
     private String itemsNo;
 
+
     @Column(name="APV_NO")
     private String apvNo;      // fk
 

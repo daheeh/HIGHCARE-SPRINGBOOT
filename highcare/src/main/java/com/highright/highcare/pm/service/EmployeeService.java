@@ -531,31 +531,32 @@ public class EmployeeService {
         System.out.println("paging ==========================> " + paging);
 
 
-//        Page<PmEmployee> result = employeeRepository.findByIsResignation('N', paging);
         Page<AnAnual> result = anAnualRepository.findAll(paging);
         System.out.println("result ==========================> " + result);
 
-//        List<AnAnual> annEmployee = anAnualRepository.findAll();
+        List<AnAnual> annEmployee = result.getContent();
 
-      List<AnnualDTO> annEmployeeList = result.stream()
+        System.out.println("result ==========================> " + annEmployee);
+
+
+
+      List<AnnualDTO> annEmployeeList = annEmployee.stream()
                 .map(ananul -> modelMapper
                         .map(ananul, AnnualDTO.class)).collect(Collectors.toList());
 
-//        int index = cri.getPageNum() - 1;
-//        int count = cri.getAmount();
-//        Pageable paging = PageRequest.of(index, count);
-//
-//        Page<AnAnual> result = anAnualRepository.findAll(paging);
-//
-//        List<AnAnualResult> annEmployeeList = result.getContent().stream()
-//                .map(ananul -> modelMapper.map(ananul, AnAnualResult.class))
-//                .collect(Collectors.toList());
 
         return annEmployeeList;
     }
 
+    /* 개인 연차 조회 */
+    public List<AnnualDTO> selectedPersonalAnnaul(int empNo) {
 
+        List<AnAnual> anAnual = anAnualRepository.findByEmpNo(empNo);
 
+        List<AnnualDTO> annual = anAnual.stream().map(anl -> modelMapper.map(anl,  AnnualDTO.class)).collect(Collectors.toList());
+
+        return annual;
+    }
 
 
     // 연도별 연차를 가져올거면 연차를 가져와서 원투매니로 해당내용연결 employee

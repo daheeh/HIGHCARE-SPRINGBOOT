@@ -6,10 +6,7 @@ import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.pm.dto.*;
-import com.highright.highcare.pm.entity.AnAnualResult;
-import com.highright.highcare.pm.entity.Management;
-import com.highright.highcare.pm.entity.ManagementResult;
-import com.highright.highcare.pm.entity.MgEmployee;
+import com.highright.highcare.pm.entity.*;
 import com.highright.highcare.pm.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.description.modifier.Mandate;
@@ -213,7 +210,7 @@ public class PmEmployeeContorller {
 
     /* 연차 */
     @GetMapping("/annual")
-    public ResponseEntity<ResponseDTO> selectAnnual(
+    public ResponseEntity<ResponseDTO> selectAnnual(@ModelAttribute AnnualDTO annualDTO,
             @RequestParam(name = "offset", defaultValue = "1") String offset){
         log.info("start========================================================");
         log.info("offset=============================== : {}", offset);
@@ -235,7 +232,22 @@ public class PmEmployeeContorller {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmAnnuallist));
     }
+    /* 개인 연차 조회 */
+    @GetMapping("/annual/detail/{empNo}")
+    public ResponseEntity<ResponseDTO> selectPersonalAnnual (@ModelAttribute AnnualDTO annualDTO,
+                                                             @PathVariable int empNo ){
 
-    /* 연차 등록 */
+        List<AnnualDTO> pmAnnual = employeeService.selectedPersonalAnnaul(empNo);
+
+
+        log.info("offset=============================== : {}", pmAnnual);
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmAnnual));
+    }
+
+
+    /* 연차 사용 */
 
 }

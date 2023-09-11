@@ -63,9 +63,10 @@ public class AnEmployee {
     @JoinColumn(name="JOB_CODE", insertable = false, updatable = false)
     private PmJob job;
 
+
     @ManyToOne
     @JoinColumn(name = "DEPT_CODE",insertable = false, updatable = false )
-    private PmDepartment department;
+    private PmDepartment dt;
 
 //    @OneToMany
 //    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)

@@ -32,6 +32,7 @@ public class EmployeeTotalDTO {
     private List<MilitaryDTO> military;
     private List<CareerDTO> career;
     private List<CertificationDTO> certification;
+
     // 부서
 //    private String deptName;
 //    private String tel;

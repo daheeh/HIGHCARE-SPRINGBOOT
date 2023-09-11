@@ -9,8 +9,6 @@ import lombok.ToString;
 import java.util.Date;
 
 @Getter
-//@ToString//delete
-@NoArgsConstructor
 public class AnAnualResult {
 
     private int empNo;
@@ -21,10 +19,10 @@ public class AnAnualResult {
     private int addAnnual;
     private int totalAnnual;
     private String reason;
-    private String deptName;
-    private Date startDate;
-    private String empName;
-    private String jobName;
+//    private String deptName;
+//    private Date startDate;
+//    private String empName;
+//    private String jobName;
 
 
     public AnAnualResult(AnAnual anAnual) {
@@ -36,10 +34,10 @@ public class AnAnualResult {
         this.addAnnual = anAnual.getAddAnnual();
         this.totalAnnual = anAnual.getTotalAnnual();
         this.reason = anAnual.getReason();
-        this.deptName = anAnual.getAnEmployee().getDepartment().getName();
-        this.startDate = anAnual.getAnEmployee().getStartDate();
-        this.empName = anAnual.getAnEmployee().getEmpName();
-        this.jobName = anAnual.getAnEmployee().getJob().getName();
+//        this.deptName = anAnual.getAnEmployee().getDepartment().getName();
+//        this.startDate = anAnual.getAnEmployee().getStartDate();
+//        this.empName = anAnual.getAnEmployee().getEmpName();
+//        this.jobName = anAnual.getAnEmployee().getJob().getName();
 
     }
 

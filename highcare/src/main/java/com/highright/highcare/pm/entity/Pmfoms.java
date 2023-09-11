@@ -46,6 +46,7 @@ public class Pmfoms {
     @Column(name = "MAIN_TITLE")
     private String mainTitle;
 
+
 //    @ManyToOne
 //    @JoinColumn(name = "APV_NO", insertable = false, updatable = false)
 //    private ApvVacationPm apvVacationPm;

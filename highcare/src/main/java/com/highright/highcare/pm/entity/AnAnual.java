@@ -19,10 +19,10 @@ import java.util.List;
         initialValue = 1, allocationSize = 1
 )
 @Setter
-//@ToString
+@ToString
 public class AnAnual implements Serializable {
 
-
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PM_SEQ_NO")
     @Column(name = "EMP_NO")
     private int empNo;
@@ -30,7 +30,6 @@ public class AnAnual implements Serializable {
     @Column(name = "ANN_NO")
     private int annNo;
 
-    @Id
     @Column(name = "APV_NO")
     private String ApvNo;
 
@@ -52,18 +51,28 @@ public class AnAnual implements Serializable {
 //    @ManyToOne
 //    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
 //    private AnEmployee anEmployee;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "APV_NO", insertable = false, updatable = false)
+//    private Pmfoms pmForms;
+//
+//    @OneToMany
+//    @JoinColumn(name = "APV_NO", insertable = false , updatable = false, referencedColumnName = "APV_NO")
+//    private List<Pmfoms> pmForms;
 
-    @ManyToOne
-    @JoinColumn(name = "APV_NO", insertable = false, updatable = false)
-    private Pmfoms pmForms;
+    @OneToMany
+    @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
+    private List<ApvVacationPm> vacation;
 
-//    @OneToOne
-//    @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
-//    private ApvVacationPm vacation;
+//    @ManyToOne
+//    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+//    private AnEmployee AnEmployee;
 
-    @ManyToOne
-    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
-    private AnEmployee AnEmployee;
+    @OneToMany
+    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false,referencedColumnName = "EMP_NO")
+    private List<AnEmployee> AnEmployee;
+
+
 
 
     // 기타 필드, 생성자, getter 및 setter 메서드
@@ -72,4 +81,3 @@ public class AnAnual implements Serializable {
 // 연차를 기준으로 조회해서 가져올거면 현재년도기준으로 조회 조건절...현재년도 2023 리액트에서 잘라서던지면
 // changeevent
 // 년도 계산해서 조회해서넘길것..
-//
