@@ -91,14 +91,6 @@ public class BoardController {
 
     }
 
-    //    @PostMapping("/boardAdd")
-//    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
-//
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
-//    }
     @PostMapping("/insertBoard")
     public ResponseEntity<ResponseDTO> insertBoard(@RequestBody BoardDTO boardDTO) {
         System.out.println("boardDTO get empNo : " + boardDTO.getEmpNo());
@@ -131,5 +123,9 @@ public class BoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "댓글 수정 성공", boardService.updateComment(commentDTO)));
 
     }
+    @GetMapping("/notice")
+    public ResponseEntity<ResponseDTO> selectnotice(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "공지 조회 성공", boardService.selectNotice()));
 
+    }
 }
