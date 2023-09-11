@@ -54,7 +54,7 @@ public class ApvFormMain {
     private String totalAmount;
 
     @Column(name = "REF_APV_NO")
-    private String refApvNo;
+    private Long refApvNo;
 
     @Column(name = "EMP_NO")
     private int empNo;

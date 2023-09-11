@@ -23,4 +23,6 @@ public interface ApvBusinessTripRepository extends JpaRepository<ApvBusinessTrip
     @Modifying
     @Query("DELETE FROM ApvBusinessTrip AL WHERE AL.apvNo = :apvNo ")
     void deleteByApvNo(@Param("apvNo") Long apvNo);
+
+    List<ApvBusinessTrip> findByApvNo(@Param("apvNo")Long refApvNo);
 }

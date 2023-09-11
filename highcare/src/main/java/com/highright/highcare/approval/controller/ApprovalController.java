@@ -347,6 +347,33 @@ public class ApprovalController {
     }
 
 
+    /* 전자결재 - 업무 : biz4 공문 */
+    @PostMapping(value = "/insert/biz4", consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> insertApvOfficial(
+            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+        System.out.println("biz1 apvFormDTO = " + apvFormDTO);
+        System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvFileDTO = " + apvFileDTO);
+
+
+        Boolean serviceResponse = approvalBizService.insertApvOfficial(apvFormDTO, apvLineDTOs, apvFileDTO);
+        int statusCode;
+        String responseMessage;
+
+        if (!serviceResponse) {
+            statusCode = HttpStatus.BAD_REQUEST.value();
+            responseMessage = "상신 등록 실패";
+        } else {
+            statusCode = HttpStatus.OK.value();
+            responseMessage = "상신 등록 성공";
+        }
+        return ResponseEntity
+                .status(statusCode)
+                .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
+    }
+
 
     //    /* 전자결재 - 지출 : exp1 지출결의서 */
     @PostMapping(value ="/insert/exp1", consumes = "multipart/form-data")

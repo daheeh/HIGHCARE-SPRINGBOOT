@@ -260,6 +260,12 @@ public class ApprovalService {
         log.info("[ApprovalService] searchApvFormWithLines --------------- start ");
 
         ApvForm apvForm = apvFormRepository.findByApvNo(apvNo);
+        String title = apvFormRepository.findTitleByApvNo(apvNo);
+
+        if(title.equals("출장경비정산서")){
+            apvForm.setApvBusinessTrips(apvBusinessTripRepository.findByApvNo(apvForm.getRefApvNo()));
+        }
+
         apvForm.getApvLines().forEach(ApvLine::getEmployee);
         apvForm.getEmployee();
 
