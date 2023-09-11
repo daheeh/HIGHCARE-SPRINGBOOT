@@ -4,6 +4,7 @@ import com.highright.highcare.auth.entity.AUTHAccount;
 import com.highright.highcare.auth.repository.AccountRepository;
 import com.highright.highcare.common.Criteria;
 
+import com.highright.highcare.mypage.entity.MyAnnual;
 import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.*;
 import com.highright.highcare.pm.repository.*;
@@ -16,15 +17,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,14 +50,20 @@ public class EmployeeService {
 
     private final MilitaryRepository militaryRepository;
 
+    private final AnAnualRepository anAnualRepository;
+
+    private final AnEmployeeRepository anEmployeeRepository;
+
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
                             PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
                             , ManagementEmRepository managementEmRepository
                             , AccountRepository accountRepository
-    ,CareerRepository careerRepository
-    ,CertificationRepository certificationRepository
-    ,MilitaryRepository militaryRepository){
+                            ,CareerRepository careerRepository
+                            ,CertificationRepository certificationRepository
+                            ,MilitaryRepository militaryRepository
+                            ,AnAnualRepository anAnualRepository
+    ,AnEmployeeRepository anEmployeeRepository){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
@@ -68,6 +73,8 @@ public class EmployeeService {
         this.careerRepository = careerRepository;
         this.certificationRepository = certificationRepository;
         this.militaryRepository = militaryRepository;
+        this.anAnualRepository = anAnualRepository;
+        this.anEmployeeRepository = anEmployeeRepository;
     }
 
     /* 토탈 */
@@ -195,15 +202,16 @@ public class EmployeeService {
 //        log.info("insertpmEmployee ============================end");
 //        return (result > 0)? "사원 등록 성공": "사원 등록 실패";
 //    }
-
+    /* 사원 등록 */
     @Transactional
-    public String insertPmEmployee(@ModelAttribute EmployeeTotalDTO pmEmployeeDTO) {
+    public String insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO) {
         log.info("insertPmEmployee start==================");
         log.info("insertPmEmployee pmEmployeeDTO ================== " + pmEmployeeDTO );
 
         try {
             // PmEmployee 엔터티 생성 및 저장
             PmEmployee insertPmEmployee = modelMapper.map(pmEmployeeDTO, PmEmployee.class);
+            insertPmEmployee.setIsResignation('N');
             employeeRepository.save(insertPmEmployee);
 
             // Career 테이블에 데이터 삽입
@@ -226,6 +234,15 @@ public class EmployeeService {
             // Military 테이블에 데이터 삽입
             for (MilitaryDTO militaryDTO : pmEmployeeDTO.getMilitary()) {
                 Military military = modelMapper.map(militaryDTO, Military.class);
+
+                Date startDate = militaryDTO.getStartDate();
+
+                if(startDate == null) {
+                    military.setIsWhether('N');
+                } else {
+                    military.setIsWhether('Y');
+                }
+
                 // PmEmployee와 연관 설정
                 military.setEmployees(insertPmEmployee);
                 militaryRepository.save(military);
@@ -503,26 +520,51 @@ public class EmployeeService {
     }
 
     /* 연차 조회 */
-//
-//    public List<AnnualDTO> selectedAnnaul(Criteria cri){
-//        System.out.println("cri ==========================> " + cri);
-//        int index = cri.getPageNum() -1;
-//        int count = cri.getAmount();
-//        Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
-//        System.out.println("paging ==========================> " + paging);
-//
-//
-////        Page<PmEmployee> result = employeeRepository.findByIsResignation('N', paging);
-//        Page<AnEmployee> result = employeeRepository.findByannaul(10005, paging);
-//        System.out.println("result ==========================> " + result);
-//
-//        List<AnnualDTO> annualList = result.stream()
-//                .map(ananul -> modelMapper
-//                        .map(ananul, AnnualDTO.class)).collect(Collectors.toList());
-//
-//        return annualList;
-//    }
+    // 1. 사원, 부서, 직급, 입사일 등 employee, department, job등 필요한 정보가 추가적으로 존재
+    // 2. 저위에 테이블과 annual테이블을 엮어서 전체로 들고와야함
+    // 3.
+    public List<AnnualDTO> selectedAnnaul(Criteria cri){
+        System.out.println("cri ==========================> " + cri);
+        int index = cri.getPageNum() -1;
+        int count = cri.getAmount();
+        Pageable paging = PageRequest.of(index, count);
+        System.out.println("paging ==========================> " + paging);
 
+
+//        Page<PmEmployee> result = employeeRepository.findByIsResignation('N', paging);
+        Page<AnAnual> result = anAnualRepository.findAll(paging);
+        System.out.println("result ==========================> " + result);
+
+//        List<AnAnual> annEmployee = anAnualRepository.findAll();
+
+      List<AnnualDTO> annEmployeeList = result.stream()
+                .map(ananul -> modelMapper
+                        .map(ananul, AnnualDTO.class)).collect(Collectors.toList());
+
+//        int index = cri.getPageNum() - 1;
+//        int count = cri.getAmount();
+//        Pageable paging = PageRequest.of(index, count);
+//
+//        Page<AnAnual> result = anAnualRepository.findAll(paging);
+//
+//        List<AnAnualResult> annEmployeeList = result.getContent().stream()
+//                .map(ananul -> modelMapper.map(ananul, AnAnualResult.class))
+//                .collect(Collectors.toList());
+
+        return annEmployeeList;
+    }
+
+
+
+
+
+    // 연도별 연차를 가져올거면 연차를 가져와서 원투매니로 해당내용연결 employee
+    // 전체연차중에 사원이한명씩붙음 // 전체연차조회하면 전체사원이나옴
+    // 연차기준으로 매핑되어있는 사원을들고오기
+    //!!!!!!!!!!!!!!!!!!! 연차엔터티안에 사원을  묶을것  사원에는 부서가 붙어있으니까 다딸려서 들어올거임
+
+
+    //
 
 }
 

@@ -56,6 +56,9 @@ public class PmEmployee {
     @Column(name = "DEPT_CODE")
     private int deptCode;
 
+    @Column(name = "JOB_CODE")
+    private int jobCode;
+
     @Column(name = "ADDRESS")
     private String address;
 
@@ -66,7 +69,7 @@ public class PmEmployee {
     private String telephone;
 
     @ManyToOne
-    @JoinColumn(name="JOB_CODE")
+    @JoinColumn(name="JOB_CODE", insertable = false, updatable = false)
     private PmJob job;
 
     @OneToMany(mappedBy = "employees")
@@ -80,6 +83,7 @@ public class PmEmployee {
 
     //    @Column(name="JOB_CODE")
     //    private Integer job;
+
 
 
 

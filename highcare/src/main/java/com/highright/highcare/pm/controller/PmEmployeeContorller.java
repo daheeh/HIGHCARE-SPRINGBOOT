@@ -6,6 +6,7 @@ import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.pm.dto.*;
+import com.highright.highcare.pm.entity.AnAnualResult;
 import com.highright.highcare.pm.entity.Management;
 import com.highright.highcare.pm.entity.ManagementResult;
 import com.highright.highcare.pm.entity.MgEmployee;
@@ -99,8 +100,9 @@ public class PmEmployeeContorller {
 
     /* 사원 등록 */
     @PostMapping("/member/all")
-    public ResponseEntity<ResponseDTO> insertPmEmployee(@RequestBody EmployeeTotalDTO pmEmployeeDTO){
-        log.info("inserPmEmployee=========================>", pmEmployeeDTO);
+    public ResponseEntity<ResponseDTO> insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO){
+        log.info("inserPmEmployee=========================> {}", pmEmployeeDTO);
+
 
         return ResponseEntity.ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(),"사원 등록 성공",
@@ -208,26 +210,32 @@ public class PmEmployeeContorller {
 
 
     }
-//
-//    /* 연차 */
-//    @GetMapping("/annaul")
-//    public ResponseEntity<ResponseDTO> selectAnnual(
-//            @RequestParam(name = "offset", defaultValue = "1") String offset){
-//        log.info("start========================================================");
-//        log.info("offset=============================== : {}", offset);
-//
-//        int total = employeeService.selectEmployeeTotal();
-//
-//        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
-//
-//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-//        pagingResponseDTO.setData(employeeService.selectedAnnaul(cri));
-//        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
-//    }
 
+    /* 연차 */
+    @GetMapping("/annual")
+    public ResponseEntity<ResponseDTO> selectAnnual(
+            @RequestParam(name = "offset", defaultValue = "1") String offset){
+        log.info("start========================================================");
+        log.info("offset=============================== : {}", offset);
+
+        int total = employeeService.selectEmployeeTotal();
+
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+
+        List<AnnualDTO> pmAnnuallist = employeeService.selectedAnnaul(cri);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(pmAnnuallist);
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+
+
+        log.info("offset=============================== : {}", pmAnnuallist);
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmAnnuallist));
+    }
+
+    /* 연차 등록 */
 
 }
