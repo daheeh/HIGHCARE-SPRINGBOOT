@@ -5,6 +5,7 @@ import com.highright.highcare.approval.entity.*;
 
 import com.highright.highcare.approval.repository.*;
 import com.highright.highcare.common.Criteria;
+import com.highright.highcare.reservation.entity.Resource;
 import com.highright.highcare.util.FileUploadUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -316,6 +320,7 @@ public class ApprovalService {
                 apvFile.setApvNo(apvNo);
                 apvFile.setSavedFileName(replaceFileName);
                 apvFile.setOriginalFileName(originalFileName);
+                apvFile.setFileUrl(FILE_DIR + "/" + replaceFileName);
 
                 apvFiles.add(apvFile); // 리스트에 추가
 
@@ -330,7 +335,6 @@ public class ApprovalService {
     }
 
     // 첨부파일 수정
-
     @Transactional
     public List<ApvFile> updateFiles(Long apvNo, List<MultipartFile> apvFileDTO) {
         System.out.println("updateFiles =============================== ");
@@ -361,6 +365,7 @@ public class ApprovalService {
                 apvFile.setApvNo(apvNo);
                 apvFile.setSavedFileName(replaceFileName);
                 apvFile.setOriginalFileName(originalFileName);
+                apvFile.setFileUrl(FILE_DIR + replaceFileName);
 
                 apvFiles.add(apvFile); // 리스트에 추가
 
@@ -373,6 +378,24 @@ public class ApprovalService {
         return apvFiles;
     }
 
+    // 첨부파일 다운로드
+    public byte[] downloadFileData(String fileName) {
+        ApvFile apvFile = apvFileRepository.findByOriginalFileName(fileName);
+
+        if (apvFile != null) {
+            // 파일 데이터를 읽어온 후 바이트 배열로 반환
+            try {
+                // Read file data and return it as a byte array
+                Path path = Path.of(apvFile.getFileUrl());
+                return Files.readAllBytes(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        return null; // 파일을 찾을 수 없는 경우 null 반환 또는 예외 처리
+    }
 
 }
 
