@@ -48,7 +48,12 @@ public class BoardService {
         this.commentRepository = commentRepository;
         this.bulletinEmployeeRepository = bulletinEmployeeRepository;
     }
-
+    public Object selectNotice() {
+        BulletinCategories bulletinCategories = boardCategoryRepository.findByCategoryCode(4);
+        List<Board> board = boardRepository.findTop3ByDeleteYnAndBulletinCategoriesOrderByModifiedDateDesc('N',bulletinCategories);
+        return board.stream()
+                .map(board1 -> modelMapper.map(board1, BoardDTO.class)).collect(Collectors.toList());
+    }
     public List<BoardDTO> selectBoardList(){
         List<Board> boardList = boardRepository.findAll();
         return  boardList.stream()
@@ -282,4 +287,6 @@ public class BoardService {
         comment.setCommentContent(commentDTO.getCommentContent());
         return 1;
     }
+
+
 }

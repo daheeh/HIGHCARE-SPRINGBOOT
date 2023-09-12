@@ -50,9 +50,6 @@ public class ImageController {
     }
     @PostMapping("/uploadImage")
     public ResponseEntity<Object> uploadImage(MultipartFile multipartFiles[]) {
-        System.out.println("여기옴 =======");
-        System.out.println("UPLOAD_PATH" + UPLOAD_PATH);
-        System.out.println("URL_PATH" + URL_PATH);
         System.out.println(multipartFiles[0]);
         MultipartFile file = multipartFiles[0];
 
@@ -73,9 +70,9 @@ public class ImageController {
             Path filePath = uploadPath.resolve(replaceFileName);
             Files.copy(inputStream, filePath,  StandardCopyOption.REPLACE_EXISTING);
 
-            long fileSize = file.getSize(); // 파일 사이즈
+            long fileSize = file.getSize();
 
-            File fileSave = new File(UPLOAD_PATH, fileId + "." + fileExtension); // ex) fileId.jpg
+            File fileSave = new File(UPLOAD_PATH, fileId + "." +fileExtension);
 
 
             return new ResponseEntity<Object>( "http://localhost:8080/getImage/"+ fileId + "/" + fileExtension, HttpStatus.OK);

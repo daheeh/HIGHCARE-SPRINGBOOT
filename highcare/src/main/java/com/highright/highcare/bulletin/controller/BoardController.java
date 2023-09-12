@@ -31,7 +31,6 @@ public class BoardController {
             @RequestParam(name = "currentPage") String currentPage,
             @RequestParam(name = "content") String content,
             @RequestParam(name = "empNo")int empNo) {
-        System.out.println("categoryCode : " + categoryCode);
 
         int boardCategoryCode = Integer.valueOf(categoryCode);
         Criteria cri = new Criteria(Integer.valueOf(currentPage), 10);
@@ -91,14 +90,6 @@ public class BoardController {
 
     }
 
-    //    @PostMapping("/boardAdd")
-//    public ResponseEntity<ResponseDTO> boardNameAdd(@RequestBody BulletinCategoriesDTO bulletinCategoriesDTO){
-//
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(),"게시판 카테고리 추가 성공",boardService.boardAdd(bulletinCategoriesDTO)));
-//    }
     @PostMapping("/insertBoard")
     public ResponseEntity<ResponseDTO> insertBoard(@RequestBody BoardDTO boardDTO) {
         System.out.println("boardDTO get empNo : " + boardDTO.getEmpNo());
@@ -111,8 +102,6 @@ public class BoardController {
     }
     @PutMapping("/updateBoard")
     public ResponseEntity<ResponseDTO> updateBoard(@RequestBody BoardDTO boardDTO){
-        System.out.println("put mapping입니다");
-        System.out.println("boardDTO : " + boardDTO);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 수정 성공", boardService.updateBoard(boardDTO)));
     }
 
@@ -131,5 +120,9 @@ public class BoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "댓글 수정 성공", boardService.updateComment(commentDTO)));
 
     }
+    @GetMapping("/notice")
+    public ResponseEntity<ResponseDTO> selectnotice(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "공지 조회 성공", boardService.selectNotice()));
 
+    }
 }
