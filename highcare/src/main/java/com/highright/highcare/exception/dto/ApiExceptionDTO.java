@@ -20,4 +20,10 @@ public class ApiExceptionDTO {
         this.status = status.value();
         this.message = message;
     }
+
+    public ApiExceptionDTO(int status, String message) {
+        this.status = status;
+        this.message = message;
+
+    }
 }

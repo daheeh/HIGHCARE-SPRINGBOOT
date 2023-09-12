@@ -29,6 +29,10 @@ public class LoginMemberDTO implements UserDetails {
 
     private String authNumber;
 
+    private String browser;
+
+    private String device;
+
     private List<AuthAccountDTO> roleList;
 
     private Collection<GrantedAuthority> authorities;
@@ -70,15 +74,20 @@ public class LoginMemberDTO implements UserDetails {
 
 
     @Builder
-
-    public LoginMemberDTO(int empNo, String id, String name, String password, String deptName, String jobName, String loginType, List<AuthAccountDTO> roleList) {
+    public LoginMemberDTO(int empNo, String id, String name, String password, String isTempPwd, Date pwdExpiredDate, String deptName, String jobName, String loginType, String authNumber, String browser, String device, List<AuthAccountDTO> roleList) {
         this.empNo = empNo;
         this.id = id;
         Name = name;
         this.password = password;
+        this.isTempPwd = isTempPwd;
+        this.pwdExpiredDate = pwdExpiredDate;
         this.deptName = deptName;
         this.jobName = jobName;
         this.loginType = loginType;
+        this.authNumber = authNumber;
+        this.browser = browser;
+        this.device = device;
         this.roleList = roleList;
     }
+
 }

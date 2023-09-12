@@ -8,6 +8,7 @@ import com.highright.highcare.common.AdminCustomBean;
 import com.highright.highcare.exception.TokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.IOException;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
@@ -111,7 +113,7 @@ public class TokenProvider {
      * @author hdhye
      * 작성일 2023-08-19
      **/
-    public boolean validateToken(String jwt) {
+    public boolean validateToken(String jwt) throws ServletException, IOException {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
             return true; // 위 코드 정상동작(유효)되면 true 반환됨, 예외발생시 안되면 catch 실행
@@ -229,8 +231,10 @@ public class TokenProvider {
     }
 
     // access 토큰 아이디
-    private String getUserId(String jwt) {
-        return Jwts.parserBuilder()
+    public String getUserId(String jwt) {
+        log.info("[TokenProvider] getUserId : jwt === {}",jwt);
+
+              return Jwts.parserBuilder()
                 .setSigningKey(key).build()
                 .parseClaimsJws(jwt)
                 .getBody()

@@ -2,8 +2,10 @@ package com.highright.highcare.jwt;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
+//@Component
+@Order(2)
 public class JwtFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
@@ -24,6 +28,8 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        String requestURI = ((HttpServletRequest)request).getRequestURI();
+        log.info("[JwtFilter] doFilterInternal jwt ==== {}", requestURI);
         // 1. 토큰 풀기
         String jwt = tokenProvider.resolveToken(request);
         log.info("[JwtFilter] doFilterInternal jwt ==== {}", jwt);

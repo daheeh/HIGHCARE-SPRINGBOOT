@@ -13,4 +13,7 @@ public interface ADMAccountRepository extends JpaRepository<ADMAccount, String> 
     List<ADMAccount> findAllByOrderByEmpNoAsc();
 
     ADMAccount findBymemberId(String id);
+
+
+    List<Optional<Object>> findAllByOrderByAccessManager_RegistDateDesc();
 }

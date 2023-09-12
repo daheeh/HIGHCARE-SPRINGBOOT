@@ -1,6 +1,8 @@
 package com.highright.highcare.admin.controller;
 
 
+import com.highright.highcare.admin.dto.MenuDTO;
+import com.highright.highcare.admin.dto.MenuManagerDTO;
 import com.highright.highcare.admin.dto.RequestMemberDTO;
 import com.highright.highcare.admin.dto.UpdateAccountDTO;
 import com.highright.highcare.admin.service.AdminService;
@@ -11,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequestMapping("/api/admin")
@@ -53,7 +57,6 @@ public class AdminController {
         log.info("[AdminController] updateAccount id ===={}", id);
         log.info("[AdminController] updateAccount updateAccountDTO===={}",updateAccountDTO);
 
-
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "회원 계정상태 수정", adminService.updateAccount(id, updateAccountDTO)));
     }
@@ -90,12 +93,41 @@ public class AdminController {
                 "메뉴그룹 조회", adminService.selectMenuGroupList()));
     }
 
+
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/managers")
-    public ResponseEntity<ResponseDTO> selectMenuManagers(){
+    @PostMapping("/managers")
+    public ResponseEntity<ResponseDTO> insertMenuManagers(@RequestBody MenuManagerDTO menuManagerDTO){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "매니저 조회", adminService.selectMenuManagers()));
+                "매니저 메뉴등록", adminService.insertMenuManagers(menuManagerDTO)));
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/managers")
+    public ResponseEntity<ResponseDTO> deleteMenuManagers(@RequestParam("ids") String[] ids){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "매니저 삭제", adminService.deleteMenuManagers(ids)));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/access")
+    public ResponseEntity<ResponseDTO> selectAccessLog(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "접속로그 조회", adminService.selectAccessLog()));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/access/search")
+    public ResponseEntity<ResponseDTO> selectSearchMemberLog(@RequestParam String keyword){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "접속로그 조회", adminService.selectSearchMemberLog(keyword)));
+    }
+
+//    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @GetMapping("/access")
+//    public ResponseEntity<ResponseDTO> selectAccessLog(@RequestParam String start, @RequestParam String end){
+//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+//                "접속로그 조회", adminService.selectAccessLog(start, end)));
+//    }
 
 
 

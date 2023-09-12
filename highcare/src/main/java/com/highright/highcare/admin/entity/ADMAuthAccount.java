@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -17,8 +19,32 @@ public class ADMAuthAccount {
 
 
     @EmbeddedId
-    @Id
     private ADMAuthAccountId id;
+
+//    @Column(name ="ID")
+//    private String memberId;
+//
+//    @Column(name = "AUTH_CODE")
+//    private String authCode;
+
+//    @OneToMany(mappedBy = "authAccount", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    private List<Menu> menus;
+
+//    public void addMenu(Menu menu) {
+//        if (menus == null) {
+//            menus = new ArrayList<>();
+//        }
+//        menus.add(menu);
+//        menu.setAuthAccount(this);
+//    }
+//
+//    public void removeMenu(Menu menu) {
+//        if (menus != null) {
+//            menus.remove(menu);
+//            menu.setAuthAccount(null);
+//        }
+//    }
+
 
     @Builder
     public ADMAuthAccount(ADMAuthAccountId id) {
