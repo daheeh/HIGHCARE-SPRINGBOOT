@@ -1,9 +1,10 @@
 package com.highright.highcare.pm.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Embeddable;
-import java.sql.Date;
+import java.util.Date;
 
 @Embeddable
 @Getter
@@ -14,7 +15,9 @@ import java.sql.Date;
 public class CertificationDTO {
 
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     private String institution;
     private int cerNo;

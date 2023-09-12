@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -58,4 +59,16 @@ public class AnEmployee {
     @Column(name = "TELEPHONE")
     private String telephone;
 
+    @ManyToOne
+    @JoinColumn(name="JOB_CODE", insertable = false, updatable = false)
+    private PmJob job;
+
+
+    @ManyToOne
+    @JoinColumn(name = "DEPT_CODE",insertable = false, updatable = false )
+    private PmDepartment dt;
+
+//    @OneToMany
+//    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+//    private List<AnAnual> anAnual;
 }
