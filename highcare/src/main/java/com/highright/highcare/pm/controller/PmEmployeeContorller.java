@@ -4,31 +4,20 @@ import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
-import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.pm.dto.*;
-import com.highright.highcare.pm.entity.*;
 import com.highright.highcare.pm.service.EmployeeService;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.description.modifier.Mandate;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping("/api/pm")
 @Slf4j
@@ -111,7 +100,6 @@ public class PmEmployeeContorller {
 
     }
 
-
     /* 트리뷰 */
     @GetMapping("selectDept")
     public ResponseEntity<ResponseDTO> selectDept() {
@@ -162,14 +150,12 @@ public class PmEmployeeContorller {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공", map));
 
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", employeeService.manageMent()));
     }
 
     /* 출근 */
     @PostMapping("management/insert")
     public ResponseEntity<ResponseDTO> insertmanageMent(@RequestBody ManagementDTO managementDTO){
         log.info("insertmanageMent=========================>", managementDTO);
-        // 데이터베이스에 넣을 날짜형식을 갈라서..만들어요
 
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDate currentDate = currentDateTime.toLocalDate();
@@ -198,9 +184,8 @@ public class PmEmployeeContorller {
         // 출근 여부 확인
         String updateSuccess = employeeService.hasAttendanceRecord(managementDTO);
         System.out.println("updateSuccess ==========================================>>> " + updateSuccess);
-        // 업데이트 수행
-      //  boolean updateSuccess = (boolean) employeeService.updateManageMent(managementDTO);
 
+        // 업데이트 수행
         if (updateSuccess.equals("success")) {
             return ResponseEntity.ok()
                     .body(new ResponseDTO(HttpStatus.OK.value(), "퇴근 등록 및 업데이트 성공",updateSuccess));
@@ -208,7 +193,6 @@ public class PmEmployeeContorller {
             return ResponseEntity.badRequest()
                     .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "퇴근 시간 등록 및 업데이트 실패"));
         }
-
 
     }
 
@@ -252,7 +236,17 @@ public class PmEmployeeContorller {
     }
 
     /* 연차 등록 */
+    @GetMapping("employee/startDate")
+        public ResponseEntity<ResponseDTO> employeeDate(){
 
+        List<PmEmployeeDTO> pmStartDate = employeeService.selectEmployeeStartDate();
+
+
+        System.out.println("pmStartDate = " + pmStartDate);
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmStartDate));
+    }
 //    @PostMapping("/addananual")
 //    public ResponseEntity<ResponseDTO> calculateAnnualLeaves(@RequestParam int year, @PathVariable int empNo) {
 //        employeeService.Annualadd(year, empNo);

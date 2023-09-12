@@ -159,6 +159,11 @@ POST http://localhost:8080/api/pm/addananual?empNo=10001
 Content-Type: application/json
 Accept: */*
 
+### 입사일
+GET http://localhost:8080/api/pm/employee/startDate
+Content-Type: application/json
+Accept: */*
+
 
 
 

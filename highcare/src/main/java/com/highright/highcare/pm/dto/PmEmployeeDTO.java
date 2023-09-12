@@ -1,6 +1,7 @@
 package com.highright.highcare.pm.dto;
 
 import com.highright.highcare.approval.dto.ApvLineDTO;
+import com.highright.highcare.pm.entity.AnAnual;
 import com.highright.highcare.pm.entity.Career;
 import com.highright.highcare.pm.entity.Certification;
 import com.highright.highcare.pm.entity.Military;
@@ -43,5 +44,5 @@ public class PmEmployeeDTO {
     private List<CertificationDTO> certification;
 
 
-    private AnnualDTO annual;
+    private AnAnual anAnual;
 }

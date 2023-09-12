@@ -1,10 +1,8 @@
 package com.highright.highcare.pm.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -17,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+@DynamicInsert
 public class AnEmployee {
 
     @Id
@@ -68,7 +68,7 @@ public class AnEmployee {
     @JoinColumn(name = "DEPT_CODE",insertable = false, updatable = false )
     private PmDepartment dt;
 
-//    @OneToMany
-//    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
-//    private List<AnAnual> anAnual;
+    @OneToMany
+    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+    private List<AnAnual> anAnual;
 }
