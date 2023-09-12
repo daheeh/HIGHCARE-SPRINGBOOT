@@ -198,10 +198,6 @@ public class ApprovalService {
                                      List<ApvLineDTO> apvRefLineDTOs,
                                      List<MultipartFile> apvFileDTO){
 
-//        // ApvForm 생성 및 저장
-//        ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-//        ApvForm savedApvForm = apvFormRepository.save(apvForm);
-
         // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
         List<ApvLine> apvLineList = new ArrayList<>();
         apvLineDTOs.forEach(apvLine -> {
@@ -240,10 +236,6 @@ public class ApprovalService {
                                      List<ApvLineDTO> apvLineDTOs,
                                      List<ApvLineDTO> apvRefLineDTOs,
                                      List<MultipartFile> apvFileDTO){
-
-//        // ApvForm 생성 및 저장
-//        ApvForm apvForm = modelMapper.map(apvFormDTO, ApvForm.class);
-//        ApvForm savedApvForm = apvFormRepository.save(apvForm);
 
         // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
         List<ApvLine> apvLineList = new ArrayList<>();
@@ -347,7 +339,6 @@ public class ApprovalService {
         if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
             apvFormRepository.updateApvStatusToCompleted(apvNo);
         }
-
     }
 
 
@@ -558,6 +549,5 @@ public class ApprovalService {
 
         return null; // 파일을 찾을 수 없는 경우 null 반환 또는 예외 처리
     }
-
 }
 
