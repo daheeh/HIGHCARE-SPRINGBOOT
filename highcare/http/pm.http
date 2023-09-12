@@ -154,4 +154,11 @@ Content-Type: application/json
 Accept: */*
 
 
+###  연차 등록
+POST http://localhost:8080/api/pm/addananual?empNo=10001
+Content-Type: application/json
+Accept: */*
+
+
+
 

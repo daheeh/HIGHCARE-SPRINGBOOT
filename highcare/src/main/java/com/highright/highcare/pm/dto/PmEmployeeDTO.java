@@ -43,5 +43,5 @@ public class PmEmployeeDTO {
     private List<CertificationDTO> certification;
 
 
-    private List<AnnualDTO> annual;
+    private AnnualDTO annual;
 }

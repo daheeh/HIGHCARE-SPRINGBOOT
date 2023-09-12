@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -487,6 +489,7 @@ public class EmployeeService {
 //        return manageMentsearchlist;
 //    }
 
+    /* 퇴근 */
     public String hasAttendanceRecord(ManagementDTO managementDTO) {
 
         System.out.println("empNo =============================> " + managementDTO);
@@ -558,6 +561,88 @@ public class EmployeeService {
         return annual;
     }
 
+    /* 연차 등록 */
+
+//    public void Annualadd(int year , @PathVariable int empNo) {
+//        LocalDate startDateOfTheYear = LocalDate.of(year, 1, 1);
+//        LocalDate endDateOfTheYear = LocalDate.of(year, 12, 31);
+//
+//        List<PmEmployee> employees = employeeRepository.findAll();
+//
+//        for (PmEmployee employee : employees) {
+//            LocalDate hireDate = employee.getStartDate().toLocalDate();
+//
+//            if (hireDate != null) {
+//                Period period = Period.between(hireDate, endDateOfTheYear);
+//
+//                int years = period.getYears();
+//
+//                if (years >= 1) {
+//                    AnAnual anAnual = new AnAnual();
+//                    anAnual.setEmpNo(empNo);
+//                    anAnual.setBasicAnnual(15); // 1년 이상 근무한 경우 연차를 15로 설정
+//                    anAnual.setUseAnnual(0); // 초기 사용 연차를 0으로 설정
+//                    anAnual.setAddAnnual(0); // 초기 추가 연차를 0으로 설정
+//                    anAnual.setTotalAnnual(15); // 총 연차를 15로 설정
+//                    anAnual.setReason("연차 계산");
+//                    // ann_no와 apv_no를 설정해야 한다면 설정
+//
+//                    anAnualRepository.save(anAnual);
+//                } else {
+//                    AnAnual annual = new AnAnual();
+//                    annual.setEmpNo(empNo);
+//                    annual.setBasicAnnual(1); // 1년 미만 근무한 경우 연차를 1로 설정
+//                    annual.setUseAnnual(0); // 초기 사용 연차를 0으로 설정
+//                    annual.setAddAnnual(0); // 초기 추가 연차를 0으로 설정
+//                    annual.setTotalAnnual(1); // 총 연차를 1로 설정
+//                    annual.setReason("연차 계산");
+//                    // ann_no와 apv_no를 설정해야 한다면 설정
+//
+//                    anAnualRepository.save(annual);
+//                }
+//            }
+//        }
+//    }
+}
+//    public Object insertAnnual(AnnualDTO annualDTO, ManagementDTO managementDTO) {
+//        log.info("insertAnnual start==================");
+//        log.info("insertAnnual annualDTO ================== " + annualDTO );
+//
+//        Optional<AnAnual> annualadd = anAnualRepository.findByEmpNo();
+//
+//        if (!annualadd.isEmpty()) {
+//            return "exit";
+//        }
+//
+//        int result = 0;
+//
+//        try {
+//            AnAnual insertAnnual =  modelMapper.map(annualDTO, AnAnual.class);
+//            anAnualRepository.save(insertAnnual);
+//            result = 1;
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        log.info("RESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULTRESULT"+ result);
+//        log.info("insertmanageMent ============================end");
+//        return (result > 0) ? "anSuceess" : "fail";
+//    }
+
+//    public String addAnual(AnnualDTO annualDTO) {
+//
+//        List<AnAnual> addAnuallist = anAnualRepository.findByEmpNo(annualDTO.getEmpNo());
+//
+//        addAnuallist.get().setUseAnnual();
+//
+//        attendanceRecords.get().setEndTime(formattedTime);
+//        attendanceRecords.get().setStatus("퇴근");
+//
+//        String result = updateManageMent(attendanceRecords.get());
+//        // 출근 기록이 존재하면 true를 반환, 없으면 false를 반환합니다.
+//
+//        System.out.println("result =12837129873681236712873618273621873681276832======== " + result);
+//    }
+
 
     // 연도별 연차를 가져올거면 연차를 가져와서 원투매니로 해당내용연결 employee
     // 전체연차중에 사원이한명씩붙음 // 전체연차조회하면 전체사원이나옴
@@ -566,8 +651,7 @@ public class EmployeeService {
 
 
     //
-
-}
+//}
 
 
 

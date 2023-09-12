@@ -8,6 +8,7 @@ import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.*;
 import com.highright.highcare.pm.service.EmployeeService;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.description.modifier.Mandate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,15 +16,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pm")
@@ -247,7 +251,56 @@ public class PmEmployeeContorller {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmAnnual));
     }
 
+    /* 연차 등록 */
 
+//    @PostMapping("/addananual")
+//    public ResponseEntity<ResponseDTO> calculateAnnualLeaves(@RequestParam int year, @PathVariable int empNo) {
+//        employeeService.Annualadd(year, empNo);
+//
+//        return ResponseEntity.ok().body(new ResponseDTO(200, "연차 계산이 완료되었습니다.", null));
+//    }
+
+//    @PostMapping("annual/addAnnual")
+//    public ResponseEntity<ResponseDTO> insertAnnual(@RequestBody AnnualDTO annualDTO, @RequestBody ManagementDTO managementDTO){
+//        log.info("insertmanageMent=========================>", annualDTO);
+//
+////        List<PmEmployeeDTO> employees = annualDTO.getAnEmployee(); // 사원 리스트 가져오기
+////
+////        for(PmEmployeeDTO employee : employees) {
+////            Date startDate = (Date) employee.getStartDate(); // 사원 입사일 가져오기
+////            LocalDate currentDate = LocalDate.now(); // 현재 날짜 가져오기
+////
+////            Period period = Period.between(startDate.toLocalDate(), currentDate);
+////            int years = period.getYears(); // 입사년도로부터 경과한 연수
+////
+////            int annualLeave = (years >= 1) ? 15 : 1; // 1년 이상이면 15개, 그 이하면 1개
+////
+////            employee.setAnnual(annualLeave); // 연차 설정
+////        }
+//
+//        return ResponseEntity.ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(),"연차 등록",
+//                        employeeService.insertAnnual(annualDTO, managementDTO)));
+//    }
     /* 연차 사용 */
+
+//    @PostMapping("annual/addAnnual")
+//    public ResponseEntity<ResponseDTO> insertAnnual(@ModelAttribute AnnualDTO annualDTO) {
+//
+//        // 결제 신청 보기
+//        String Success = employeeService.addAnual(annualDTO);
+//        System.out.println("updateSuccess ==========================================>>> " + updateSuccess);
+//        // 업데이트 수행
+//        //  boolean updateSuccess = (boolean) employeeService.updateManageMent(managementDTO);
+//
+//        if (Success.equals("success")) {
+//            return ResponseEntity.ok()
+//                    .body(new ResponseDTO(HttpStatus.OK.value(), "퇴근 등록 및 업데이트 성공",updateSuccess));
+//        } else {
+//            return ResponseEntity.badRequest()
+//                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "퇴근 시간 등록 및 업데이트 실패"));
+//        }
+//
+//    }
 
 }
