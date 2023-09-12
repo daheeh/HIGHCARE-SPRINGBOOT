@@ -18,24 +18,18 @@ public class MyEmployeeDTO {
     private String name;
     private String email;
     private String phone;
-    private String reNo;    // 주민번호
-    private String sDate;   // 입사일
-//    private String eDate;
-//    private String isRes;  // 퇴사여부
+    private String reNo;
+    private String sDate;
     private DepartmentDTO dep;
     private JobDTO job;
     private String address;
-//    private String edu;
-    private String tel;    // 내선전화
+    private String tel;
 
     private Department deptName;
 
     private Job jobName;
 
-    // 이것 추가***
     private List<MyAnnualDTO> myAnnual;
-//    private MyProfile myProfile;
-//    private MyProfileFileDTO myProfileFile;
 
 
     private List<MyManegementDTO> manegementList;

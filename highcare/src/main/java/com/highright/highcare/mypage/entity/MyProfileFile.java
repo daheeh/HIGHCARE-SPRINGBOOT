@@ -12,8 +12,8 @@ import java.sql.Date;
 @Getter
 @Setter
 @SequenceGenerator(
-        name = "MYFILE_SEQ_NO",       // 엔티티 안에서 저장되는 이름
-        sequenceName = "FILE_SEQ_NO",       // DB에 저장되는 이름
+        name = "MYFILE_SEQ_NO",
+        sequenceName = "FILE_SEQ_NO",
         initialValue = 1, allocationSize = 1
 )
 @NoArgsConstructor
@@ -40,7 +40,5 @@ public class MyProfileFile {
 
     @Column(name = "CREATION_DATE" ,nullable = true)
     private Date date;
-
-
 
 }

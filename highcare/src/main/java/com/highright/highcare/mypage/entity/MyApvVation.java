@@ -24,29 +24,28 @@ public class MyApvVation implements Serializable {  // *******왜 직렬화를 �
     @Column(name="ITEMS_NO")
 
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MyAPV_VACATION_NO")
-    private String ItemNo;    // pk
+    private String itemNo;
 
     @Column(name="APV_NO")
-    private String apvNo;      // fk
+    private String apvNo;
 
     @Column(name="TYPE")
-    private String type;    // 휴가종류 : 반차, 연차
+    private String type;
 
     @Column(name="START_DATE")
-    private Date sdate;
+    private String sdate;
 
     @Column(name="END_DATE")
-    private Date edate;
+    private String edate;
 
     @Column(name="APV_COMMENT")
     private String comment;
 
     @Column(name="OFFTYPE1")
-    private String off1;    // 반차
+    private String off1;
 
     @Column(name="OFFTYPE2")
-    private String off2;    // 반차끝
+    private String off2;
 
-    // ApvAnnual -> empNo로 select,
-    // Annual과 Vacation을 조인하려면 ApvNo로 조인 필요
+
 }
