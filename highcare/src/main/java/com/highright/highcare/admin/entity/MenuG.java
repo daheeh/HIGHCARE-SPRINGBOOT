@@ -16,7 +16,7 @@ import java.sql.Date;
         sequenceName = "SEQ_MENU_CODE",
         initialValue = 1, allocationSize = 1
 )
-public class Menu {
+public class MenuG {
 
     @Id
     @GeneratedValue(
@@ -30,19 +30,9 @@ public class Menu {
     private String id;
     private Date registDate;
 
-    @ManyToOne(fetch = FetchType.EAGER) // 즉시 로딩 설정
-    @JoinColumn(name ="GROUP_CODE", insertable = false, updatable = false)
-    private MenuGroup menuGroup;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumns({
-//            @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false),
-//            @JoinColumn(name = "AUTH_CODE", referencedColumnName = "AUTH_CODE", insertable = false, updatable = false)
-//    })
-//    private ADMAuthAccount authAccount;
 
     @Builder
-    public Menu(String groupCode, String id, Date registDate) {
+    public MenuG(String groupCode, String id, Date registDate) {
         this.groupCode = groupCode;
         this.id = id;
         this.registDate = registDate;

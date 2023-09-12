@@ -1,7 +1,11 @@
 package com.highright.highcare.admin.service;
 
+import com.highright.highcare.admin.dto.MenuDTO;
+import com.highright.highcare.admin.dto.MenuManagerDTO;
 import com.highright.highcare.admin.dto.RequestMemberDTO;
 import com.highright.highcare.admin.dto.UpdateAccountDTO;
+
+import java.util.List;
 
 public interface AdminService {
     Object selectMember(int empNo);
@@ -21,5 +25,11 @@ public interface AdminService {
 
     Object selectMenuGroupList();
 
-    Object selectMenuManagers();
+    Object insertMenuManagers(MenuManagerDTO menuManagerDTO);
+
+    Object deleteMenuManagers(String[] ids);
+
+    Object selectAccessLog();
+
+    Object selectSearchMemberLog(String keyword);
 }
