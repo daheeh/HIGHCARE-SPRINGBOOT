@@ -31,7 +31,6 @@ public class BoardController {
             @RequestParam(name = "currentPage") String currentPage,
             @RequestParam(name = "content") String content,
             @RequestParam(name = "empNo")int empNo) {
-        System.out.println("categoryCode : " + categoryCode);
 
         int boardCategoryCode = Integer.valueOf(categoryCode);
         Criteria cri = new Criteria(Integer.valueOf(currentPage), 10);
@@ -103,8 +102,6 @@ public class BoardController {
     }
     @PutMapping("/updateBoard")
     public ResponseEntity<ResponseDTO> updateBoard(@RequestBody BoardDTO boardDTO){
-        System.out.println("put mapping입니다");
-        System.out.println("boardDTO : " + boardDTO);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 수정 성공", boardService.updateBoard(boardDTO)));
     }
 

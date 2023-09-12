@@ -40,7 +40,7 @@ public class ReservationController {
     @PostMapping("/regist")
     public ResponseEntity<ResponseDTO> insertRes(@ModelAttribute ResourceDTO resourceDTO, MultipartFile image) throws IOException {
         System.out.println("resourceDTO : " + resourceDTO);
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(),
                 "시설추가 성공", resService.insertRes(resourceDTO, image)));
     }
     @GetMapping("/resList")
@@ -69,7 +69,6 @@ public class ReservationController {
 
     @PutMapping("/modRes")
     public ResponseEntity<ResponseDTO> updateRes(@ModelAttribute ResourceDTO resourceDTO, MultipartFile image) throws IOException {
-        System.out.println("resourceDTO12  :  " + resourceDTO );
                 return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "시설수정 성공", resService.updateRes(resourceDTO, image)));
     }
