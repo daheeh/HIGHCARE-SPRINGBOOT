@@ -236,9 +236,11 @@ public class ApprovalController {
             @PathVariable Long apvNo,
             @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+            @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
             @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
         System.out.println("apvFormDTO = " + apvFormDTO);
         System.out.println("apvLineDTOs = " + apvLineDTOs);
+        System.out.println("apvLineDTOs = " + apvRefLineDTOs);
         System.out.println("apvFileDTO = " + apvFileDTO);
 
         Boolean serviceResponse = false;
@@ -247,35 +249,38 @@ public class ApprovalController {
         System.out.println("title = " + title);
         switch (title) {
             case "회의록":
-                serviceResponse = approvalBizService.updateApvMeetingLog(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalBizService.updateApvMeetingLog(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "출장신청서":
-                serviceResponse = approvalBizService.updateApvBusinessTrip(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalBizService.updateApvBusinessTrip(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
+                break;
+            case "공문":
+                serviceResponse = approvalBizService.updateApvOfficial(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "지출결의서" :
-                serviceResponse = approvalExpService.updateApvExpense(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalExpService.updateApvExpense(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "출장경비신청서" :
-                serviceResponse = approvalExpService.updateApvExpense(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalExpService.updateApvExpense(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "경조금신청서" :
-                serviceResponse = approvalExpService.updateFamilyEvent(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalExpService.updateFamilyEvent(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "법인카드사용보고서" :
-                serviceResponse = approvalExpService.updateApvCorpCard(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalExpService.updateApvCorpCard(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "연차신청서" :
-                serviceResponse = approvalHrmService.updateApvVacation(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalHrmService.updateApvVacation(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "기타휴가신청서" :
-                serviceResponse = approvalHrmService.updateApvVacation(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalHrmService.updateApvVacation(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
             case "서류발급신청서" :
-                serviceResponse = approvalHrmService.updateApvIssuance(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                serviceResponse = approvalHrmService.updateApvIssuance(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                 break;
                 default:
                     System.out.println("기안서로 이동");
-                    serviceResponse = approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvFileDTO);
+                    serviceResponse = approvalBizService.updateApvForm(apvNo, apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
                     break;
             }
 
@@ -295,16 +300,17 @@ public class ApprovalController {
 
     /* 전자결재 - 업무 : biz1 기안서 */
     @PostMapping(value = "/insert/biz1")
-    public ResponseEntity<ResponseDTO> insertApvFormWithLines(
-                                                            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+    public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                            @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
                                                             List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
         // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
-        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalBizService.insertApvFormWithLines(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
@@ -320,17 +326,17 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz2 회의록 */
-    @PostMapping(value = "/insert/biz2", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvMeetingLog(
-                                                            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-                                                            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+    @PostMapping(value = "/insert/biz2")
+    public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                           @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                           @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                           List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-
-        Boolean serviceResponse = approvalBizService.insertApvMeetingLog(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalBizService.insertApvMeetingLog(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -348,16 +354,17 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz3 출장신청서 */
-    @PostMapping(value ="/insert/biz3", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvBusinessTrip(
-                                                            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-                                                            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+    @PostMapping(value ="/insert/biz3")
+    public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                             @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                             List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalBizService.insertApvBusinessTrip(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalBizService.insertApvBusinessTrip(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -375,17 +382,17 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz4 공문 */
-    @PostMapping(value = "/insert/biz4", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvOfficial(
-            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+    @PostMapping(value = "/insert/biz4")
+    public ResponseEntity<ResponseDTO> insertApvOfficial(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                         @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                         List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-
-        Boolean serviceResponse = approvalBizService.insertApvOfficial(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalBizService.insertApvOfficial(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -403,16 +410,17 @@ public class ApprovalController {
 
 
     //    /* 전자결재 - 지출 : exp1 지출결의서 */
-    @PostMapping(value ="/insert/exp1", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvExpense(
-                                                        @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+    @PostMapping(value ="/insert/exp1")
+    public ResponseEntity<ResponseDTO> insertApvExpense(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                        @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
-        System.out.println("exp1 apvFormDTO = " + apvFormDTO);
-        System.out.println("exp1 apvLineDTOs = " + apvLineDTOs);
-        System.out.println("exp1 apvFileDTO = " + apvFileDTO);
+                                                        @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                        List<MultipartFile> apvFileDTO) {
+        System.out.println("biz1 apvFormDTO = " + apvFormDTO);
+        System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
+        System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalExpService.insertApvExpense(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalExpService.insertApvExpense(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -427,24 +435,6 @@ public class ApprovalController {
                 .status(statusCode)
                 .body(new ResponseDTO(statusCode, responseMessage, serviceResponse));
     }
-
-
-    /* 전자결재 - 지출 : exp2 지출결의서 */
-//    @PostMapping(value ="/insert/exp2", consumes = "multipart/form-data")
-//    public ResponseEntity<ResponseDTO> insertApvExpense2(
-//                                                        @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-//                                                        @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-//                                                        @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
-//        System.out.println("biz1 apvFormDTO = " + apvFormDTO);
-//        System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
-//        System.out.println("biz1 apvFileDTO = " + apvFileDTO);
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "상신 등록 성공", approvalService.insertApvExpense(apvFormDTO, apvLineDTOs, apvFileDTO)));
-//    }
-
-
 
     /* 전자결재 - 지출 : exp4 출장경비정산서 */
     @GetMapping(value ="/search/exp4/{empNo}")
@@ -469,16 +459,17 @@ public class ApprovalController {
     }
 
 
-    @PostMapping(value ="/insert/exp4", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(
-                                                                @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+    @PostMapping(value ="/insert/exp4")
+    public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                                 @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                                @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+                                                                @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                                List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalExpService.insertApvExpense(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalExpService.insertApvExpense(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -496,16 +487,17 @@ public class ApprovalController {
 
 
     /* 전자결재 - 지출 : exp6 경조금 신청서 */
-    @PostMapping(value="/insert/exp6", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvFamilyEvent(
-                                                            @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+    @PostMapping(value="/insert/exp6")
+    public ResponseEntity<ResponseDTO> insertApvFamilyEvent(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                            @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+                                                            @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                            List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalExpService.insertApvFamilyEvent(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalExpService.insertApvFamilyEvent(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -522,16 +514,17 @@ public class ApprovalController {
     }
 
     /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
-    @PostMapping(value ="/insert/exp7", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvCorpCard(
-                                                        @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-                                                        @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                        @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+    @PostMapping(value ="/insert/exp7")
+    public ResponseEntity<ResponseDTO> insertApvCorpCard(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                         @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                         List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalExpService.insertApvCorpCard(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalExpService.insertApvCorpCard(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
         int statusCode;
         String responseMessage;
 
@@ -549,17 +542,18 @@ public class ApprovalController {
 
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
-    @PostMapping(value = "/insert/hrm1", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvVacation(
-                                                        @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-                                                        @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                        @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+    @PostMapping(value = "/insert/hrm1")
+    public ResponseEntity<ResponseDTO> insertApvVacation(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                         @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                         List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
         // 서비스 메서드를 호출하여  ApvFormDTO, ApvLineDTOs, 파일 정보를 등록
-        Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalHrmService.insertApvVacation(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
@@ -574,16 +568,17 @@ public class ApprovalController {
     }
 
     /* 전자결재 - 인사 : hrm3 서류발급신청서 */
-    @PostMapping(value ="/insert/hrm3", consumes = "multipart/form-data")
-    public ResponseEntity<ResponseDTO> insertApvIssuance(
-                                                        @RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
-                                                        @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
-                                                        @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
+    @PostMapping(value ="/insert/hrm3")
+    public ResponseEntity<ResponseDTO> insertApvIssuance(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
+                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
+                                                         @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
+                                                         List<MultipartFile> apvFileDTO) {
         System.out.println("biz1 apvFormDTO = " + apvFormDTO);
         System.out.println("biz1 apvLineDTOs = " + apvLineDTOs);
+        System.out.println("biz1 apvRefLineDTOs = " + apvRefLineDTOs);
         System.out.println("biz1 apvFileDTO = " + apvFileDTO);
 
-        Boolean serviceResponse = approvalHrmService.insertApvIssuance(apvFormDTO, apvLineDTOs, apvFileDTO);
+        Boolean serviceResponse = approvalHrmService.insertApvIssuance(apvFormDTO, apvLineDTOs, apvRefLineDTOs, apvFileDTO);
 
         if (!serviceResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
