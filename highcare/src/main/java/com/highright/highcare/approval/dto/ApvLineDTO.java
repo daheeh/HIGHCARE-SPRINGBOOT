@@ -18,6 +18,7 @@ public class ApvLineDTO {
     private int degree;
     private String isApproval;
     private Date apvDate;
+    private String isReference;
     private Long apvNo;
 
     private int empNo;
