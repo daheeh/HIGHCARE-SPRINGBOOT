@@ -45,4 +45,9 @@ public class MyProfile {
                 ", myProfileFile=" + myProfileFile +
                 '}';
     }
+
+    @Builder
+    public MyProfile(int empNo) {
+        this.empNo = empNo;
+    }
 }

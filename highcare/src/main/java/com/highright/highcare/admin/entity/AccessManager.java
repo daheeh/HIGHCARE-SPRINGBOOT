@@ -4,8 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="TBL_ACCESS_MANAGER")
@@ -19,7 +19,7 @@ public class AccessManager {
     private String id;
 
     @Column(name="REGIST_DATE")
-    private Timestamp registDate;
+    private LocalDateTime registDate;
 
     @Column(name="LOGIN_TOTAL_COUNT")
     private int loginTotalCount;
@@ -59,7 +59,7 @@ public class AccessManager {
     private ADMAccount admaAccount;
 
     @Builder
-    public AccessManager(String id, Timestamp registDate, int loginTotalCount, int loginFailCount, String isLock, String isInActive, String isExpired, String isWithDraw, Date expiredDate, Date withDrawDate, String browser, String device) {
+    public AccessManager(String id, LocalDateTime registDate, int loginTotalCount, int loginFailCount, String isLock, String isInActive, String isExpired, String isWithDraw, Date expiredDate, Date withDrawDate, String browser, String device) {
         this.id = id;
         this.registDate = registDate;
         this.loginTotalCount = loginTotalCount;

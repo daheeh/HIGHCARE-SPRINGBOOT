@@ -90,6 +90,8 @@ public class SpecificUrlFilter implements Filter {
                 chain.doFilter(request, response);
 
             } else {
+                log.info("[SpecificUrlFilter] doFilterInternal 권한 없ㅇㅁ ==================");
+
                 throw new NotAllowedRequestException("해당 url에 대한 요청 권한이 없습니다.");
 
             }

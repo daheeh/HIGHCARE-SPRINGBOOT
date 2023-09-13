@@ -42,5 +42,12 @@ public class MyProfileFile {
     private Date date;
 
 
-
+    @Builder
+    public MyProfileFile(int code, String name, String chName, String profileImgUrl, Date date) {
+        this.code = code;
+        this.name = name;
+        this.chName = chName;
+        this.profileImgUrl = profileImgUrl;
+        this.date = date;
+    }
 }

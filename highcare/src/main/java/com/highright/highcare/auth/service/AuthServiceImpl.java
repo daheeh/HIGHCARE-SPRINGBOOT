@@ -27,6 +27,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -73,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
                     .build());
 
             // 로그인 이력관리
-            accessManager.get().setRegistDate(new Timestamp(System.currentTimeMillis()));
+            accessManager.get().setRegistDate(LocalDateTime.now());
             accessManager.get().setLoginTotalCount(accessManager.get().getLoginTotalCount() + 1);
             accessManager.get().setLoginFailCount(0);
             accessManager.get().setBrowser(loginInfo.getBrowser());
@@ -158,7 +159,7 @@ public class AuthServiceImpl implements AuthService {
             if (accessManager.isEmpty()) {
 
                 accessManagerRepository.save(AccessManager.builder().id(insertUser.getId())
-                        .registDate(new Timestamp(System.currentTimeMillis()))
+                        .registDate(LocalDateTime.now())
                         .loginFailCount(0)
                         .loginTotalCount(0)
                         .isLock("N")
@@ -174,7 +175,7 @@ public class AuthServiceImpl implements AuthService {
         else {
             insertUser = findOauthUser.get();
             log.info("[AuthServiceImpl] insertOauthRegist : findOauthUser.get() = insertUser ================{}", insertUser);
-            accessManager.get().setRegistDate(new Timestamp(System.currentTimeMillis()));
+            accessManager.get().setRegistDate(LocalDateTime.now());
             accessManager.get().setLoginTotalCount(accessManager.get().getLoginTotalCount() + 1);
             accessManager.get().setBrowser((String) data.get("browser"));
             accessManager.get().setDevice((String) data.get("device"));
@@ -277,10 +278,10 @@ public class AuthServiceImpl implements AuthService {
             LoginMemberDTO setMemberDTO = modelMapper.map(member, LoginMemberDTO.class);
             log.info("[AuthServiceImpl] setMember : setMemberDTO ====== {} ", setMemberDTO);
 
-            // 비번 틀린 경우
-//            if (!passwordEncoder.matches(loginInfo.getPassword(), member.getPassword())) {
-//                throw new LoginFailedException(" [PASSWORD INCORRECT] 잘못된 비밀번호입니다.");
-//            }
+//             비번 틀린 경우
+            if (!passwordEncoder.matches(loginInfo.getPassword(), member.getPassword())) {
+                throw new LoginFailedException(" [PASSWORD INCORRECT] 잘못된 비밀번호입니다.");
+            }
             // 접속관리 데이터 있으면
             // 성공시 token 발급
             // 멤버 dto에 다시 여러 정보 담아서 전달하기

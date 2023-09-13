@@ -30,7 +30,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
         } catch (Throwable ex) {
             handleException(request, response, ex);
 
-            filterChain.doFilter(request,response);
+//            filterChain.doFilter(request,response);
 
         }
     }
