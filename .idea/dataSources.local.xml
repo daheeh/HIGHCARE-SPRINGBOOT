@@ -20,7 +20,7 @@
       <introspection-level>3</introspection-level>
       <load-sources>user_and_system_sources</load-sources>
     </data-source>
-    <data-source name="0@localhost" uuid="e627c3c3-2ba9-4999-869d-ce02918e1130">
+    <data-source name="0@localhost" uuid="87bf3708-c8ac-4a5b-ac41-68634c6f8e80">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="REDIS" exact-version="0" />
       <schema-mapping />
     </data-source>
