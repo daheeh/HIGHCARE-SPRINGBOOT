@@ -4,6 +4,7 @@ import com.highright.highcare.auth.dto.AUTHFindAccountDTO;
 import com.highright.highcare.auth.dto.MailDTO;
 import com.highright.highcare.auth.service.FindAccountService;
 import com.highright.highcare.common.ResponseDTO;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class FindAccountController {
 
     private final FindAccountService findAccountService;
 
+    @Operation(summary = "이메일 본인인증 요청", description = "회원 본인 인증코드 발송용 메일발송 요청이 진행됩니다..", tags = {"AdminController"})
     @PostMapping("/mail")
     public ResponseEntity<ResponseDTO> emailSendAuth(@RequestBody MailDTO mailDTO){
         log.info("FindAccountController execMail :==={}", mailDTO);
@@ -32,6 +34,7 @@ public class FindAccountController {
 //
 //    }
 
+    @Operation(summary = "본인 인증코드 확인 요청", description = "본인 인증코드 확인 작업이 진행됩니다.", tags = {"AdminController"})
     @PostMapping("/authcheck")
     public ResponseEntity<ResponseDTO> selectAuthNumberCheck(@RequestBody AUTHFindAccountDTO authFindAccountDTO){
         log.info("FindAccountController authFindAccountDTO :==={}", authFindAccountDTO);
