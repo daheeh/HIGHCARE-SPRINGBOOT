@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="merge">
+    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="swagger modify">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,10 +96,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HighcareApplication (1)">
-    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
+    <configuration name="mypage | 프로필파일 인서트 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="2" requestIdentifier="프로필파일 인서트 테스트" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="mypage | 프로필파일 인서트 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="2" requestIdentifier="프로필파일 인서트 테스트" runType="Run single request">
+    <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
@@ -112,7 +111,7 @@
     <configuration name="mypage | 회원아이디로 근태조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="4" requestIdentifier="회원아이디로 근태조회" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
+    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="HighcareApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -131,7 +130,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.HighcareApplication (1)" />
-        <item itemvalue="HTTP Request.mypage | 회원 아이디로 연차조회" />
         <item itemvalue="HTTP Request.mypage | 회원아이디로 근태조회" />
       </list>
     </recent_temporary>
@@ -165,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693988494832</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="swagger modify">
+      <created>1694589415559</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694589415559</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +189,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dahee merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="dahee merge" />
+    <MESSAGE value="swagger modify" />
+    <option name="LAST_COMMIT_MESSAGE" value="swagger modify" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
