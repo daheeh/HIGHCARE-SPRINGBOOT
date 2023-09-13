@@ -46,7 +46,7 @@ public class ReservationController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(),
                 "시설추가 성공", resService.insertRes(resourceDTO, image)));
     }
-    @Operation(summary = "시설 조회", description = "시설지열을 조회합니다.", tags = {"ReservationController"})
+    @Operation(summary = "시설 조회", description = "시설지역을 조회합니다.", tags = {"ReservationController"})
     @GetMapping("/resList")
     public ResponseEntity<ResponseDTO> selectRes(@RequestParam(name = "categoryCode") String code) {
         int categoryCode = Integer.parseInt(code);
@@ -77,7 +77,7 @@ public class ReservationController {
                 "시설수정 성공", resService.updateRes(resourceDTO, image)));
     }
 
-    @Operation(summary = "시설 삭제", description = "시설을 삭제합니다.", tags = {"ReservationController"})
+    @Operation(summary = "시설 수정", description = "시설의 정보를 수정합니다.", tags = {"ReservationController"})
     @PutMapping("/deleteRes")
     public ResponseEntity<ResponseDTO> deleteRes(@RequestBody ResourceDTO resourceDTO)  {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
