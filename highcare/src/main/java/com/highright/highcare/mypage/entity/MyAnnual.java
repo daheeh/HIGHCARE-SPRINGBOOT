@@ -39,10 +39,6 @@ public class MyAnnual {
     @Column(name="APV_NO")
     private String  apvNo;
 
-    // 이것 추가
-//    @OneToMany
-//    @JoinColumn(name="EMP_NO", insertable = false, updatable = false)
-//    private List<AnnEmployee> annEmployee;
 
     @OneToOne
     @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
