@@ -24,5 +24,5 @@ public class AnnualDTO {
 
     private List<ApvPmFormDTO> pmForms;
     private List<ApvVacationDTO> vacation;
-    private List<PmEmployeeDTO> anEmployee;
+    private List<PmEmployeeDTO> AnEmployee;
 }
