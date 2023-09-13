@@ -32,7 +32,7 @@ public class MyProfile {
     private MyEmployee myEmployee;
 
     @OneToOne
-    @JoinColumn(name = "PROFILE_CODE")
+    @JoinColumn(name = "PROFILE_CODE", referencedColumnName = "PROFILE_CODE")
     private MyProfileFile myProfileFile;
 
     @Override
@@ -44,5 +44,10 @@ public class MyProfile {
                 ", myEmployee=" + myEmployee +
                 ", myProfileFile=" + myProfileFile +
                 '}';
+    }
+
+    @Builder
+    public MyProfile(int empNo) {
+        this.empNo = empNo;
     }
 }

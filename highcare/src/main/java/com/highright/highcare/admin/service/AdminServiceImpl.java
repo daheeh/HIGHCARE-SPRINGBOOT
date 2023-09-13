@@ -13,20 +13,23 @@ import com.highright.highcare.mypage.dto.JobDTO;
 import com.highright.highcare.mypage.entity.Department;
 import com.highright.highcare.mypage.entity.Job;
 
-import lombok.Builder;
+import com.highright.highcare.mypage.entity.MyProfile;
+import com.highright.highcare.mypage.entity.MyProfileFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,6 +50,7 @@ public class AdminServiceImpl implements AdminService {
     private final MenuRepository menuRepository;
     private final ProfileRepository profileRepository;
     private final MyProfileFileRepository myProfileFileRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     private final AdminCustomBean customBean;
@@ -82,10 +86,12 @@ public class AdminServiceImpl implements AdminService {
         // 일반계정 등록 -> 계정별권한(임시회원) 까지만 진행됨(이후 절차는 회원등록 승인 후)
         log.info("[AdminServiceImpl] insertMember ===== start ");
 
+        String tempPwd = customBean.randomPassword();
+
         AccountDTO account = AccountDTO.builder()
                 .memberId(customBean.idAccountGenerator(requestMemberDTO))
                 .empNo(requestMemberDTO.getEmpNo())
-                .password(customBean.randomPassword())
+                .password(passwordEncoder.encode(tempPwd))
                 .isTempPwd("Y")
                 .pwdExpiredDate(Date.valueOf(LocalDate.now().plusMonths(3))) // 3개월후 비밀번호 만료
                 .build();
@@ -104,7 +110,7 @@ public class AdminServiceImpl implements AdminService {
             admAuthAccountRepository.save(ADMAuthAccount.builder().id(authAccountId).build());
             // 접근관리 테이블 등록(isLock)
             accessManagerRepository.save(AccessManager.builder().id(account.getMemberId())
-                    .registDate(new Timestamp(System.currentTimeMillis()))
+                    .registDate(LocalDateTime.now())
                     .isLock("Y")
                     .build());
 
@@ -113,18 +119,22 @@ public class AdminServiceImpl implements AdminService {
             message.setTo(requestMemberDTO.getEmail());
             message.setSubject("[하이케어] 임시회원 아이디, 비밀번호 발송");
             message.setText("회원 아이디 : " + joinInfo.getMemberId() +
-                    "회원 비밀번호 : " + joinInfo.getPassword());
+                    "회원 비밀번호 : " + tempPwd);
 
             javaMailSender.send(message);
 
             log.info("[AdminServiceImpl] insertMember == message ==={}", message);
 
-            // 프로필만들어두기
-//            profileRepository.save(joinInfo.getEmpNo());
-
+            // 프로필 만들어두기
+            MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
+            myProfileFileRepository.save(MyProfileFile.builder()
+                    .code(profile.getCode())
+                    .name("basicprofile.png")
+                    .chName("basicprofile.png")
+                    .profileImgUrl("http://localhost:8080/images/basicprofile.png")
+                    .date(new Date(System.currentTimeMillis()))
+                    .build());
             // accessmanager 0으로 넣어두기
-
-
 
 
             return "회원 임시등록 성공";
@@ -266,7 +276,7 @@ public class AdminServiceImpl implements AdminService {
         log.info("[AdminServiceImpl] insertMenuManagers menuDTOList ======================{} ", menuManagerDTO);
 
         try {
-            for(String id : menuManagerDTO.getId() ) {
+            for (String id : menuManagerDTO.getId()) {
                 Optional<ADMAuthAccount> account = admAuthAccountRepository.findById_IdAndId_AuthCode(id, "ROLE_MANAGER");
                 log.info("[AdminServiceImpl] insertMenuManagers account ======================{} ", account);
 
@@ -334,10 +344,7 @@ public class AdminServiceImpl implements AdminService {
         } catch (Exception e) {
 
             return "매니저 메뉴 등록 실패";
-
         }
-
-
     }
 
     @Transactional
@@ -361,18 +368,59 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
-    @Transactional
-    @Override
-    public Object selectAccessLog() {
-
-        return admAccountRepository.findAllByOrderByAccessManager_RegistDateDesc().stream().map(account ->
-                modelMapper.map(account, ADMAccountDTO.class)).collect(Collectors.toList());
-    }
+//    @Transactional
+//    @Override
+//    public Object selectAccessLog(int page) {
+//
+//        Page<ADMAccount> paging = admAccountRepository.findAllByOrderByAccessManager_RegistDateDesc(PageRequest.of(page, 15));
+//        log.info("[AdminServiceImpl] selectAccessLog paging ======================{} ", paging);
+//
+//        return paging;
+//
+//        return admAccountRepository.findAllByOrderByAccessManager_RegistDateDesc().stream().map(account ->
+//                modelMapper.map(account, ADMAccountDTO.class)).collect(Collectors.toList());
+//    }
 
     @Override
     public Object selectSearchMemberLog(String keyword) {
+
+
+        List<ADMAccount> admAccount = admAccountRepository.findByEmployeeNameContaining(keyword);
+        log.info("[AdminServiceImpl] selectSearchMemberLog admAccount ======================{} ", admAccount);
+
+        return admAccount.stream().map(acc -> modelMapper.map(acc, ADMAccountDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end) {
+
+//        List<ADMAccount> admAccountList = admAccountRepository.findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(start, end);
+        List<ADMAccount> admAccountList = admAccountRepository.findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(start, end);
+
+
+        log.info("[AdminServiceImpl] selectSearchMemberDateLog admAccountList ======================{} ", admAccountList);
+
+        //페이지에이블로 받기 . 페이징 인자로 넘기고/ 사이즈, 페이지 받고 -- 전체크기를 알고싶으면 페이지로 받아.
+
+        return admAccountList.stream().map(acc -> modelMapper.map(acc, ADMAccountDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<ADMAccountDTO> getAccountsByPage(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<ADMAccount> paging = admAccountRepository.findAllByOrderByAccessManager_RegistDateDesc(pageRequest);
+
+        log.info("[AdminServiceImpl] selectSearchMemberDateLog paging ======================{} ", paging);
+
+        return paging.map(p -> modelMapper.map(p, ADMAccountDTO.class));
+
+    }
+
+    @Override
+    public Object insertAllAccount(String[] ids) {
         return null;
     }
+
 
 //         List<ADMAccount> authAccountList = admAccountRepository.findAllByOrderByEmpNoAsc();
 }

@@ -3,6 +3,7 @@ package com.highright.highcare.admin.dto;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Setter
@@ -15,7 +16,7 @@ public class AccessManagerDTO {
     private String isInActive;
     private String ixExpired;
     private String isWithDraw;
-    private Timestamp registDate;
+    private LocalDateTime registDate;
     private int loginFailCount;
 
 
@@ -24,7 +25,6 @@ public class AccessManagerDTO {
     private String device;
 
     @Builder
-
     public AccessManagerDTO(String id, String isLock, String isInActive, String ixExpired, String isWithDraw, String browser, String device) {
         this.id = id;
         this.isLock = isLock;

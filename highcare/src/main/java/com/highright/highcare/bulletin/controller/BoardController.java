@@ -110,12 +110,12 @@ public class BoardController {
     public ResponseEntity<ResponseDTO> updateBoard(@RequestBody BoardDTO boardDTO){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 수정 성공", boardService.updateBoard(boardDTO)));
     }
-    @Operation(summary = "게시글 삭제", description = "게시글을 삭제합니다", tags = {"BoardController"})
+    @Operation(summary = "게시글 수정", description = "게시글의 상태를 수정합니다", tags = {"BoardController"})
     @PutMapping("/deleteBoard")
     public ResponseEntity<ResponseDTO> deleteBoard(@RequestBody BoardDTO boardDTO){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "글 삭제 성공", boardService.deleteBoard(boardDTO)));
     }
-    @Operation(summary = "댓글 삭제", description = "댓글을 삭제합니다", tags = {"BoardController"})
+    @Operation(summary = "댓글 수정", description = "댓글의 상태를 수정합니다", tags = {"BoardController"})
     @PutMapping("/deleteComment")
     public ResponseEntity<ResponseDTO> deleteBoard(@RequestBody CommentDTO commentDTO){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "댓글 삭제 성공", boardService.deleteComment(commentDTO)));

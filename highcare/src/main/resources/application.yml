@@ -59,7 +59,7 @@ spring:
         registration:
           google:
             client-id: 831001732147-ggsjpv73kps8bchv2s8k85790qm3iv76.apps.googleusercontent.com
-            client-secret: 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
+            client-secret: AIzaSyBvmCsalasbBKbJSqyzcTNYc4GNVzlrf6Q
             scope:
               - email
               - profile
@@ -93,7 +93,7 @@ jwt:
     level:
       root: info
 image:
-  add-resource-locations: classpath:/static/images/
+  add-resource-locations: file:///C:/dev/profileImages/
   add-resource-handler: /images/**
 
   image-dir: src/main/resources/static/images

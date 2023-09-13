@@ -14,6 +14,7 @@ import com.highright.highcare.mypage.entity.MyProfileFile;
 import com.highright.highcare.mypage.service.MypageService;
 import com.highright.highcare.pm.dto.ManagementDTO;
 import com.highright.highcare.pm.entity.Management;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -37,11 +38,7 @@ public class MypageController {
         this.mypageService = mypageService;
     }
 
-    // employee와 profile을 조인한 데이터를 조회해야함
-    // 현재는 파일리스트만 조회해오는것임
-    // 파일을 인서트 다시 생각해보기
-
-
+    @Operation(summary = "프로필, 프로필파일 조회페이지", description = "프로필페이지에 접속", tags = {"MypageController"})
     @GetMapping ("/profile/{empNo}")
         public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
 
@@ -60,58 +57,50 @@ public class MypageController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "프로필 조회 성공", profilefileList));
         }
 
+    @Operation(summary = "프로필사진 업데이트", description = "프로필페이지에 사진을 등록합니다.", tags = {"MypageController"})
     @PostMapping("/update")
     public ResponseEntity<ResponseDTO> updateMyProfileFile(@ModelAttribute MyProfileFileDTO myProfileFileDTO, MultipartFile profileImage){
 
         log.info("insertMyProfileFile multifile!!!!!!! {}", profileImage);
 
-//        int photoFileCodeDelete = myProfileFileDTO.getCode();
 
         MyProfileFileDTO updateMyProfile = mypageService.updateMyProfileFile(myProfileFileDTO, profileImage);
 
         return ResponseEntity
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "사진 파일 등록 성공", updateMyProfile));
-        //  MyProfileFileDTO updatedProfile = mypageService.updateMyProfileFile(myProfileFileDTO, profileImage);여기에서 서비스로 갔다옴
-        // return에서 갔다온 파일 변수에 넘김
 
     }
 
+    @Operation(summary = "연자 조회 페이지", description = "개인의 연차를 조회합니다.", tags = {"MypageController"})
     @GetMapping("/anselect/{empNo}")
     public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo
-                                                 //        member.getEmpNo();
                                                  , @RequestParam(name="offset", defaultValue = "1") String offset) {
 
         log.info("offset start===========");
         log.info("offset==== :{}", offset);
 
-//        Object annAnnual = mypageService.selectAnnList(empNo);
 
         int total = mypageService.annselectTotal(empNo);
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
 
-        List<MyAnnualDTO> annAnnualList = mypageService.selectAnnList(empNo);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
         pagingResponseDTO.setData(mypageService.selectAnnListPaging(empNo, cri));
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 
 
-        log.info("[Controller] annEmployee selectAnnList^^^^^^ {}", annAnnualList);
 
-        if(annAnnualList == null){
-            return ResponseEntity
-                    .ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
-        }
-        System.out.println("[Controller] annEmployee ^^^^^^" + empNo);
+        log.info("Controller]  annselect pagingResponseDTO^^^^^^ {}", pagingResponseDTO);
+        log.info("[Controller] annselect end=================");
 
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", annAnnualList));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "연차 조회 성공", pagingResponseDTO));
     }
 
 
+    @Operation(summary = "근태 조회 페이지", description = "개인별 근태를 조회합니다.", tags = {"MypageController"})
     @GetMapping("/manselect/{empNo}")
     public ResponseEntity<ResponseDTO> manselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo,
@@ -121,40 +110,20 @@ public class MypageController {
         log.info("[Controller] manselect offset=========== : {}", offset);
 
         int total = mypageService.manselectTotal(empNo);
-
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
 
-        List<MyManegementDTO> mymanagementDTO = mypageService.selectManList(empNo);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
         pagingResponseDTO.setData(mypageService.selectManListWithPaging(empNo, cri));
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 
-        log.info("Controller] managementDTO selectManList^^^^^^ {}", mymanagementDTO);
+        log.info("Controller] managementDTO selectManList pagingResponseDTO^^^^^^ {}", pagingResponseDTO);
         log.info("[Controller] manselect end=================");
 
 
-        if(mymanagementDTO == null) {
-            return ResponseEntity
-                    .ok()
-                    .body(new ResponseDTO(HttpStatus.OK.value(), "조회결과없음"));
-        }
-        System.out.println("[Controller] managementDTO %%%%" + empNo);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", pagingResponseDTO));
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", mymanagementDTO));
     }
-
-
-/* TEST를 위해 작성, 연결이 됐는지만 확인, 여기서 직접 리포지토리로 보냄 */
-//    @GetMapping("/test")
-//    public String Test() {
-//
-//        List<MyProfileFile> myProfileFiles = profileRepository.findAll();
-//
-//        System.out.println("myProfileFiles = " + myProfileFiles);
-//
-//        return "";
-//    }
 
 
 }

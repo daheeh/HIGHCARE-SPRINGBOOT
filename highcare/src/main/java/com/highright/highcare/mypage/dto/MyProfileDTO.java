@@ -14,7 +14,6 @@ public class MyProfileDTO {
 
     private int code;
     private int empNo;
-    private String imgUrl;
 
     private MyEmployeeDTO myEmployee;
     private MyProfileFileDTO myProfileFile;

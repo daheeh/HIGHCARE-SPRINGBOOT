@@ -1,10 +1,14 @@
 package com.highright.highcare.admin.service;
 
-import com.highright.highcare.admin.dto.MenuDTO;
-import com.highright.highcare.admin.dto.MenuManagerDTO;
-import com.highright.highcare.admin.dto.RequestMemberDTO;
-import com.highright.highcare.admin.dto.UpdateAccountDTO;
+import com.highright.highcare.admin.dto.*;
+import com.highright.highcare.admin.entity.ADMAccount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AdminService {
@@ -29,7 +33,17 @@ public interface AdminService {
 
     Object deleteMenuManagers(String[] ids);
 
-    Object selectAccessLog();
+//    Object selectAccessLog();
+
+//    Object selectAccessLog(int page);
 
     Object selectSearchMemberLog(String keyword);
+
+    Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end);
+
+    Page<ADMAccountDTO> getAccountsByPage(int page, int size);
+
+    Object insertAllAccount(String[] ids);
+
+//    Page<ADMAccountDTO> selectAllAccountForLog(PageRequest of);
 }
