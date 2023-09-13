@@ -25,6 +25,7 @@ public class ImageController {
     @Value("${image.image-dir}")
     String UPLOAD_PATH; // src/main/resources/static/images
 
+
     @Value("${image.image-url}")
     String URL_PATH; //http://localhost:8080/images/
 
