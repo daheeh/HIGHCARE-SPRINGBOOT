@@ -3,6 +3,7 @@ package com.highright.highcare.chatting.controller;
 
 import com.highright.highcare.chatting.dto.Conversation;
 import com.highright.highcare.chatting.dto.MessageModel;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class MessageController {
     private RedisTemplate<String, Conversation> conversationTemplate;
 
 
-    //  발신자의 이름을 to로 지정하고, 이 메소드를 호출하면 발신자의 이름으로 메시지가 처리
+    @Operation(summary = "메세지 처리", description = "특정대상(to)에게 메세지를 전송합니다", tags = {"MessageController"})
     @MessageMapping("/send/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message){
         System.out.println("handling send message: " + message + "to: " + to);
@@ -42,7 +43,7 @@ public class MessageController {
     }
 
 
-    //클라이언트에서 보낸 메시지를 받아와서, 발신자와 수신자의 아이디로 처리
+    @Operation(summary = "메세지 처리", description = "클라이언트에서 보낸 메세지를 받아 발신자와 수신자의 이름으로 처리합니다.", tags = {"MessageController"})
     @MessageMapping("/send")
     public void SendToMessage(MessageModel msg){
         logger.info("{}", msg);
@@ -74,17 +75,14 @@ public class MessageController {
         System.out.println("MessageController 받은 메세지 상대방에게 전달할때 주소" + msg.getTo());
     }
 
-    @MessageMapping("/Template")
-    public void SendTemplateMessage() {
-        simpMessagingTemplate.convertAndSend("/topics/template" , "Template");
-    }
-
+    @Operation(summary = "API메세지 전송", description = "클라이언트에게 API 관련 메시지를 전송합니다.", tags = {"MessageController"})
     @RequestMapping(value="/api")
     public void SendAPI() {
         simpMessagingTemplate.convertAndSend("/topics/api" , "API");
     }
 
 
+    @Operation(summary = "메시지 헤더 생성", description = "WebSocket 메시지의 헤더를 생성합니다.", tags = {"MessageController"})
     private MessageHeaders createHeaders(@Nullable String sessionId) {
         SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor.create(SimpMessageType.MESSAGE);
         if (sessionId != null) headerAccessor.setSessionId(sessionId);
