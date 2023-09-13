@@ -21,6 +21,7 @@ import java.util.List;
 )
 @Setter
 @DynamicInsert
+@ToString
 public class AnAnual implements Serializable {
 
     @Id
@@ -53,9 +54,9 @@ public class AnAnual implements Serializable {
     private String reason;
 
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
-    private List<ApvVacationPm> vacation;
+    private ApvVacationPm vacation;
 
 //    @OneToMany
 //    @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
@@ -63,7 +64,7 @@ public class AnAnual implements Serializable {
 
 
     @OneToMany
-    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false,referencedColumnName = "EMP_NO")
+    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
     private List<AnEmployee> AnEmployee;
 
 

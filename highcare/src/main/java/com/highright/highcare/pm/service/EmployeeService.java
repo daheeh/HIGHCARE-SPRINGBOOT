@@ -195,39 +195,44 @@ public class EmployeeService {
             employeeRepository.save(insertPmEmployee);
 
             // Career 테이블에 데이터 삽입
-            for (CareerDTO careerDTO : pmEmployeeDTO.getCareer()) {
-                Career career = modelMapper.map(careerDTO, Career.class);
-                // PmEmployee와 연관 설정
-                career.setEmployees(insertPmEmployee);
+            if (pmEmployeeDTO.getCareer() != null) {
+                for (CareerDTO careerDTO : pmEmployeeDTO.getCareer()) {
+                    Career career = modelMapper.map(careerDTO, Career.class);
+                    // PmEmployee와 연관 설정
+                    career.setEmployees(insertPmEmployee);
 
-                careerRepository.save(career);
+                    careerRepository.save(career);
+                }
             }
 
             // Certification 테이블에 데이터 삽입
-            for (CertificationDTO certificationDTO : pmEmployeeDTO.getCertification()) {
-                Certification certification = modelMapper.map(certificationDTO, Certification.class);
-                // PmEmployee와 연관 설정
-                certification.setEmployees(insertPmEmployee);
-                certificationRepository.save(certification);
+            if (pmEmployeeDTO.getCertification() != null) {
+                for (CertificationDTO certificationDTO : pmEmployeeDTO.getCertification()) {
+                    Certification certification = modelMapper.map(certificationDTO, Certification.class);
+                    // PmEmployee와 연관 설정
+                    certification.setEmployees(insertPmEmployee);
+                    certificationRepository.save(certification);
+                }
             }
 
             // Military 테이블에 데이터 삽입
-            for (MilitaryDTO militaryDTO : pmEmployeeDTO.getMilitary()) {
-                Military military = modelMapper.map(militaryDTO, Military.class);
+            if (pmEmployeeDTO.getMilitary() != null) {
+                for (MilitaryDTO militaryDTO : pmEmployeeDTO.getMilitary()) {
+                    Military military = modelMapper.map(militaryDTO, Military.class);
 
-                Date startDate = militaryDTO.getStartDate();
+                    Date startDate = militaryDTO.getStartDate();
 
-                if(startDate == null) {
-                    military.setIsWhether('N');
-                } else {
-                    military.setIsWhether('Y');
+                    if(startDate == null) {
+                        military.setIsWhether('N');
+                    } else {
+                        military.setIsWhether('Y');
+                    }
+
+                    // PmEmployee와 연관 설정
+                    military.setEmployees(insertPmEmployee);
+                    militaryRepository.save(military);
                 }
-
-                // PmEmployee와 연관 설정
-                military.setEmployees(insertPmEmployee);
-                militaryRepository.save(military);
             }
-
             log.info("insertpmEmployee ============================end");
             return "사원 등록 성공";
         } catch (Exception e) {
@@ -475,9 +480,10 @@ public class EmployeeService {
 
 
 
-      List<AnnualDTO> annEmployeeList = annEmployee.stream()
+      List<AnnualDTO> annEmployeeList = result.getContent().stream()
                 .map(ananul -> modelMapper
                         .map(ananul, AnnualDTO.class)).collect(Collectors.toList());
+//        List<AnnualDTO> annEmployeeList = null;
 
 
         return annEmployeeList;
