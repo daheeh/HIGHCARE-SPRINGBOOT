@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @SequenceGenerator(
         name = "PM_SEQ_NO",
-        sequenceName = "SEQ_ANN_NO",
+        sequenceName = "SEQ_ANU_NO",
         initialValue = 1, allocationSize = 1
 )
 @Setter
@@ -24,13 +24,13 @@ import java.util.List;
 public class AnAnual implements Serializable {
 
     @Id
+    @Column(name = "EMP_NO")
+    private int empNo;
+
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "PM_SEQ_NO"
     )
-    @Column(name = "EMP_NO")
-    private int empNo;
-
     @Column(name = "ANN_NO")
     private int annNo;
 
@@ -56,6 +56,10 @@ public class AnAnual implements Serializable {
     @OneToMany
     @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
     private List<ApvVacationPm> vacation;
+
+//    @OneToMany
+//    @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
+//    private List<Pmfoms> pmfoms;
 
 
     @OneToMany

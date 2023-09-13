@@ -214,11 +214,11 @@ public class PmEmployeeContorller {
         pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
 
 
-        log.info("offset=============================== : {}", pmAnnuallist);
+        log.info("pmAnnuallist=============================== : {}", pmAnnuallist);
 
         return ResponseEntity
                 .ok()
-                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmAnnuallist));
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
     }
     /* 개인 연차 조회 */
     @GetMapping("/annual/detail/{empNo}")

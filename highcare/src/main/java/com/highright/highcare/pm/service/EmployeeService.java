@@ -4,11 +4,9 @@ import com.highright.highcare.auth.entity.AUTHAccount;
 import com.highright.highcare.auth.repository.AccountRepository;
 import com.highright.highcare.common.Criteria;
 
-import com.highright.highcare.mypage.entity.MyAnnual;
 import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.*;
 import com.highright.highcare.pm.repository.*;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -18,14 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -58,16 +53,19 @@ public class EmployeeService {
 
     private final AnEmployeeRepository anEmployeeRepository;
 
+    private final AnnualEmployeeRepository annualEmployeeRepository;
+
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
-                            PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
+                           PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
                             , ManagementEmRepository managementEmRepository
                             , AccountRepository accountRepository
-                            ,CareerRepository careerRepository
-                            ,CertificationRepository certificationRepository
-                            ,MilitaryRepository militaryRepository
-                            ,AnAnualRepository anAnualRepository
-    ,AnEmployeeRepository anEmployeeRepository){
+                            , CareerRepository careerRepository
+                            , CertificationRepository certificationRepository
+                            , MilitaryRepository militaryRepository
+                            , AnAnualRepository anAnualRepository
+                            , AnEmployeeRepository anEmployeeRepository
+                            , AnnualEmployeeRepository annualEmployeeRepository){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
@@ -79,6 +77,8 @@ public class EmployeeService {
         this.militaryRepository = militaryRepository;
         this.anAnualRepository = anAnualRepository;
         this.anEmployeeRepository = anEmployeeRepository;
+        this.annualEmployeeRepository = annualEmployeeRepository;
+
     }
 
     /* 토탈 */
@@ -602,7 +602,7 @@ public class EmployeeService {
 //}
     @Transactional
     public List<PmEmployeeDTO> selectEmployeeStartDate() {
-        List<AnEmployee> pmstartDate = anEmployeeRepository.findAll();
+        List<AnnualEmployee> pmstartDate = annualEmployeeRepository.findAll();
         List<PmEmployeeDTO> startDate = pmstartDate.stream().map(std -> modelMapper.map(std, PmEmployeeDTO.class)).collect(Collectors.toList());
 
         for (PmEmployeeDTO pme : startDate) {
@@ -621,15 +621,19 @@ public class EmployeeService {
                 annual.setBasicAnnual(1);
             }
 
-            annual.setEmpNo(pme.getEmpNo());
+//            annual.setEmpNo(pme.getEmpNo());
+            annual.setEmpNo(Integer.parseInt(String.valueOf(pme.getEmpNo())));
+            System.out.println("annual = " + annual);
+            System.out.println("pme = " + pme.getEmpNo());
             annual.setUseAnnual(0);
             annual.setAddAnnual(0);
             annual.setApvNo("783");
+//            annual.setApvNo(String.valueOf(785));
             annual.setTotalAnnual(annual.getBasicAnnual());
 
             pme.setAnAnual(annual);
 
-            AnEmployee findEmp = anEmployeeRepository.findByEmpNo(pme.getEmpNo());
+            AnnualEmployee findEmp = annualEmployeeRepository.findByEmpNo(pme.getEmpNo());
             List<AnAnual> anList = findEmp.getAnAnual();
             anList.add(annual);
             findEmp.setAnAnual(anList);

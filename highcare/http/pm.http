@@ -144,7 +144,7 @@ Accept: */*
 
 
 ### 연차 조회
-GET http://localhost:8080/api/pm/annual
+GET http://localhost:8080/api/pm/annual?offset=1
 Content-Type: application/json
 Accept: */*
 
