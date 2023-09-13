@@ -76,6 +76,8 @@ public class BoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "댓글 조회 성공", pagingResponseDTO));
     }
+
+    @Operation(summary = "게시글 조회", description = "게시글을 조회합니다", tags = {"BoardController"})
     @GetMapping("/thr")
     public ResponseEntity<ResponseDTO> selectBoardDetails(
             @RequestParam(name = "bulletinCode") String bulletinCode
