@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
     private final String SOCIAL_LOGIN_TYPE = "oauth";   // 로그인타입(소셜인경우만)
 
 
-    @Transactional
+    @Transactional(noRollbackFor = {LoginFailedException.class, IncorrectPasswordExceedException.class})
     @Override
     public Object selectLogin(LoginMemberDTO loginInfo, HttpServletResponse response) {
 
@@ -119,7 +119,7 @@ public class AuthServiceImpl implements AuthService {
 
     // 소셜로그인 연동 데이터 인서트, jwt토큰 발급 요청
     @Override
-    @Transactional
+    @Transactional(noRollbackFor = {LoginFailedException.class, IncorrectPasswordExceedException.class})
     public Object insertOauthRegist(Map<String, Object> data, HttpServletResponse response) {
 
         OAuthUserInfo userInfo = null;
@@ -258,7 +258,7 @@ public class AuthServiceImpl implements AuthService {
         throw new TokenException("리프레시토큰 검증 실패하였습니다. 재로그인 해주세요.");
     }
 
-    @Transactional
+    @Transactional(noRollbackFor = {LoginFailedException.class, IncorrectPasswordExceedException.class})
     public LoginMemberDTO setMember(LoginMemberDTO loginInfo, Optional<AccessManager> accessManager) {
 
         log.info("[AuthServiceImpl] setMember : loginInfo ====== {} ", loginInfo);
@@ -280,6 +280,9 @@ public class AuthServiceImpl implements AuthService {
 
 //             비번 틀린 경우
             if (!passwordEncoder.matches(loginInfo.getPassword(), member.getPassword())) {
+                accessManager.get().setLoginFailCount(currentFailCount + 1);
+//                accessManagerRepository.save(accessManager.get()); // 엔티티 업데이트
+
                 throw new LoginFailedException(" [PASSWORD INCORRECT] 잘못된 비밀번호입니다.");
             }
             // 접속관리 데이터 있으면
@@ -295,18 +298,22 @@ public class AuthServiceImpl implements AuthService {
 
         } catch (LoginFailedException e) {
             // 실패카운트 5이상이면
+            log.error("에러입니다.");
             if (currentFailCount >= 5) {
                 // 5회 미만 틀린 경우 catch에서 실패 카운트 1회 추가
-                accessManager.get().setLoginFailCount(currentFailCount + 1);
+//                accessManager.get().setLoginFailCount(currentFailCount + 1);
                 // 비밀번호 초과 예외 발생 - catch에서 잠금 처리
                 accessManager.get().setIsLock("Y");
+//                accessManagerRepository.save(accessManager.get()); // 엔티티 업데이트
+
+//                accessManagerRepository.save(accessManager.get());
                 throw new IncorrectPasswordExceedException(" [PASSWORD INCORRECT] 비밀번호 오류 5회 초과");
             }
 
             throw e;
         } finally {
             // 예외발생해도 로그인엑세스 데이터 입력 날리기
-            accessManagerRepository.save(accessManager.get()); // 엔티티 업데이트
+//            accessManagerRepository.save(accessManager.get()); // 엔티티 업데이트
         }
     }
 }
