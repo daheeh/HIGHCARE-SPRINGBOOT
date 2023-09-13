@@ -11,14 +11,14 @@ import java.sql.Date;
 @ToString
 public class MyApvVationDTO {
 
-    private String ItemNo;    // pk
-    private String ApvNo;      // fk로 조인
-    private String type;    // 휴가종류 : 반차, 연차
-    private Date sdate;
-    private Date edate;
+    private String itemNo;
+    private String apvNo;
+    private String type;
+    private String sdate;
+    private String edate;
     private String comment;
-    private String off1;    // 반차
-    private String off2;    // 반차끝
+    private String off1;
+    private String off2;
 
 
 }

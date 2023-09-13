@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface MyManagementRepository extends JpaRepository <MyManegement, Integer> {
     List<MyManegement> findByEmpNo(int empNo);
-    // total 추가 해야하나?
 
     Page<MyManegement> findByEmpNo(@Param("empNo") int empNo, Pageable paging);
 
