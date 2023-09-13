@@ -1,8 +1,6 @@
 package com.highright.highcare.approval.controller;
 
 import com.highright.highcare.approval.dto.*;
-import com.highright.highcare.approval.entity.ApvFile;
-import com.highright.highcare.approval.entity.ApvForm;
 import com.highright.highcare.approval.repository.ApvFormRepository;
 import com.highright.highcare.approval.service.ApprovalBizService;
 import com.highright.highcare.approval.service.ApprovalExpService;
@@ -12,7 +10,7 @@ import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
-
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/api/approval")
@@ -39,6 +36,7 @@ public class ApprovalController {
 
 
     /* Apv메인페이지 - 조건별 현황 1 */
+    @Operation(summary = "전자결재 메인페이지", description = "전자결재 메인페이지에 접속", tags = {"ApprovalController"})
     @GetMapping("/main")
     public ResponseEntity<ResponseDTO> selectWriteApv(@RequestParam int empNo) {
 
@@ -58,6 +56,7 @@ public class ApprovalController {
     }
 
     /* Apv메인페이지 - 리스트 */
+    @Operation(summary = "최근 기안 양식 리스트 조회", description = "최근에 상신한 결재 양식을 조회합니다.", tags = {"ApprovalController"})
     @GetMapping("/apvList")
     public ResponseEntity<ResponseDTO> selectMyApvList(@RequestParam int empNo) {
 
@@ -76,8 +75,8 @@ public class ApprovalController {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "작성 기안 상태 조회 성공", myApvList));
     }
 
-
     /* 전자결재 결재함 조회 */
+    @Operation(summary = "결재함 조회", description = "조건별로 상신한 결재문서를 조회합니다.", tags = {"ApprovalController"})
     @GetMapping("/write")
     public ResponseEntity<ResponseDTO> selectWriteApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus
             , @RequestParam(name = "offset", defaultValue = "1") String offset) {
@@ -105,6 +104,7 @@ public class ApprovalController {
     }
 
     /* 전자결재 수신함 조회 */
+    @Operation(summary = "수신함 조회", description = "수신한 결재문서를 조회합니다.", tags = {"ApprovalController"})
     @GetMapping("/receive")
     public ResponseEntity<ResponseDTO> selectReceiveApvStatusApv(@RequestParam int empNo, @RequestParam String apvStatus
             , @RequestParam(name = "offset", defaultValue = "1") String offset) {
@@ -132,6 +132,7 @@ public class ApprovalController {
     }
 
     /* 첨부파일 다운로드 */
+    @Operation(summary = "결재 첨부파일 다운로드", description = "결재문서의 첨부파일을 다운도르합니다.", tags = {"ApprovalController"})
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName) {
         try {
@@ -160,8 +161,8 @@ public class ApprovalController {
     int statusCode;
     String responseMessage;
 
-
     /* 전자결재 승인 + 반려*/
+    @Operation(summary = "전자결재 상태 변경", description = "결재문서의 결재 상태를 변경합니다. (승인, 반려)", tags = {"ApprovalController"})
     @PutMapping("/put/line/{apvLineNo}")
     public ResponseEntity<ResponseDTO> updateApprovalStatus(@PathVariable Long apvLineNo, @RequestParam Long apvNo, @RequestParam String apvStatus) {
 
@@ -191,6 +192,7 @@ public class ApprovalController {
     }
 
     // 기안 취소(삭제)
+    @Operation(summary = "기안 상신 취소(삭제)", description = "상신한 결재문서를 취소(삭제)합니다.", tags = {"ApprovalController"})
     @DeleteMapping("/delete/{apvNo}")
     public ResponseEntity<ResponseDTO> deleteApvForm(@PathVariable Long apvNo) {
 
@@ -209,6 +211,7 @@ public class ApprovalController {
     }
 
     // 기안 조회
+    @Operation(summary = "결재문서 조회", description = "상신한 결재문서를 조회합니다.", tags = {"ApprovalController"})
     @GetMapping("/search/{apvNo}")
     public ResponseEntity<?> searchApvFormWithLines(@PathVariable Long apvNo) {
         System.out.println("biz1View searchApvFormWithLines = " + apvNo);
@@ -231,6 +234,7 @@ public class ApprovalController {
     }
 
     // 기안 수정
+    @Operation(summary = "결재문서 수정", description = "상신한 결재문서를 수정합니다.", tags = {"ApprovalController"})
     @PutMapping(value = "/put/{apvNo}", consumes = "multipart/form-data")
     public ResponseEntity<ResponseDTO> putApvFormWithLines(
             @PathVariable Long apvNo,
@@ -299,6 +303,7 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz1 기안서 */
+    @Operation(summary = "결재상신 (업무:기안서)", description = "결재를 상신합니다.(업무:기안서)", tags = {"ApprovalController"})
     @PostMapping(value = "/insert/biz1")
     public ResponseEntity<ResponseDTO> insertApvFormWithLines(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -326,6 +331,7 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz2 회의록 */
+    @Operation(summary = "결재상신 (업무:회의록)", description = "결재를 상신합니다.(업무:회의록)", tags = {"ApprovalController"})
     @PostMapping(value = "/insert/biz2")
     public ResponseEntity<ResponseDTO> insertApvMeetingLog(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                            @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -354,6 +360,7 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz3 출장신청서 */
+    @Operation(summary = "결재상신 (업무:출장신청서)", description = "결재를 상신합니다.(업무:출장신청서)", tags = {"ApprovalController"})
     @PostMapping(value ="/insert/biz3")
     public ResponseEntity<ResponseDTO> insertApvBusinessTrip(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                              @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -382,6 +389,7 @@ public class ApprovalController {
 
 
     /* 전자결재 - 업무 : biz4 공문 */
+    @Operation(summary = "결재상신 (업무:공문)", description = "결재를 상신합니다.(업무:공문)", tags = {"ApprovalController"})
     @PostMapping(value = "/insert/biz4")
     public ResponseEntity<ResponseDTO> insertApvOfficial(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                          @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -410,6 +418,7 @@ public class ApprovalController {
 
 
     //    /* 전자결재 - 지출 : exp1 지출결의서 */
+    @Operation(summary = "결재상신 (지출:지출결의서)", description = "결재를 상신합니다.(지출:지출결의서)", tags = {"ApprovalController"})
     @PostMapping(value ="/insert/exp1")
     public ResponseEntity<ResponseDTO> insertApvExpense(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                         @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -437,6 +446,7 @@ public class ApprovalController {
     }
 
     /* 전자결재 - 지출 : exp4 출장경비정산서 */
+    @Operation(summary = "결재상신(조회) (지출:출장경비정산서)", description = "결재를 상신을 위한 사전정보를 조회합니다.(지출:출장경비정산서)", tags = {"ApprovalController"})
     @GetMapping(value ="/search/exp4/{empNo}")
     public ResponseEntity<ResponseDTO> selectApvBusinessTrip(@PathVariable int empNo) {
         System.out.println("exp4-selectApvBusinessTrip = " + empNo);
@@ -459,6 +469,7 @@ public class ApprovalController {
     }
 
 
+    @Operation(summary = "결재상신 (지출:출장경비정산서)", description = "결재를 상신합니다.(지출:출장경비정산서)", tags = {"ApprovalController"})
     @PostMapping(value ="/insert/exp4")
     public ResponseEntity<ResponseDTO> insertApvBusinessTripExp(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                                 @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -486,7 +497,8 @@ public class ApprovalController {
     }
 
 
-    /* 전자결재 - 지출 : exp6 경조금 신청서 */
+    /* 전자결재 - 지출 : exp6 경조금신청서 */
+    @Operation(summary = "결재상신 (지출:경조금신청서)", description = "결재를 상신합니다.(지출:경조금신청서)", tags = {"ApprovalController"})
     @PostMapping(value="/insert/exp6")
     public ResponseEntity<ResponseDTO> insertApvFamilyEvent(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -514,6 +526,7 @@ public class ApprovalController {
     }
 
     /* 전자결재 - 지출 : exp7 법인카드사용보고서 */
+    @Operation(summary = "결재상신 (지출:법인카드사용보고서)", description = "결재를 상신합니다.(지출:법인카드사용보고서)", tags = {"ApprovalController"})
     @PostMapping(value ="/insert/exp7")
     public ResponseEntity<ResponseDTO> insertApvCorpCard(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                          @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -542,6 +555,7 @@ public class ApprovalController {
 
 
     /* 전자결재 - 인사 : hrm1 연차신청서, hrm2 기타휴가신청서 */
+    @Operation(summary = "결재상신 (인사:기타휴가신청서)", description = "결재를 상신합니다.(인사:기타휴가신청서)", tags = {"ApprovalController"})
     @PostMapping(value = "/insert/hrm1")
     public ResponseEntity<ResponseDTO> insertApvVacation(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                          @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
@@ -568,6 +582,7 @@ public class ApprovalController {
     }
 
     /* 전자결재 - 인사 : hrm3 서류발급신청서 */
+    @Operation(summary = "결재상신 (인사:서류발급신청서)", description = "결재를 상신합니다.(인사:서류발급신청서)", tags = {"ApprovalController"})
     @PostMapping(value ="/insert/hrm3")
     public ResponseEntity<ResponseDTO> insertApvIssuance(@RequestPart("apvFormDTO") ApvFormDTO apvFormDTO,
                                                          @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
