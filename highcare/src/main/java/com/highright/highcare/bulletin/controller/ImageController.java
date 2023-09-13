@@ -1,5 +1,6 @@
 package com.highright.highcare.bulletin.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -24,11 +25,12 @@ public class ImageController {
     @Value("${image.image-dir}")
     String UPLOAD_PATH; // src/main/resources/static/images
 
+
     @Value("${image.image-url}")
     String URL_PATH; //http://localhost:8080/images/
 
 
-
+    @Operation(summary = "이미지 조회", description = "이미지를 조회합니다", tags = {"ImageController"})
     @GetMapping("/getImage/{fileId}/{fileType}")
     public ResponseEntity<byte[]> getImageFile(@PathVariable String fileId,@PathVariable String fileType){
         try {
@@ -48,6 +50,7 @@ public class ImageController {
             return new ResponseEntity<byte[]>(new byte[] {}, HttpStatus.CONFLICT);
         }
     }
+    @Operation(summary = "이미지 등록", description = "이미지를 등록합니다", tags = {"ImageController"})
     @PostMapping("/uploadImage")
     public ResponseEntity<Object> uploadImage(MultipartFile multipartFiles[]) {
         System.out.println(multipartFiles[0]);

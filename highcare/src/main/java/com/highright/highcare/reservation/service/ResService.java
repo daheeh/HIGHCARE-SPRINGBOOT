@@ -4,6 +4,7 @@ import com.highright.highcare.bulletin.entity.Board;
 import com.highright.highcare.bulletin.entity.BulletinEmployee;
 import com.highright.highcare.bulletin.repository.BulletinEmployeeRepository;
 import com.highright.highcare.common.Criteria;
+import com.highright.highcare.exception.ResException;
 import com.highright.highcare.reservation.dto.ResourceCategoryDTO;
 import com.highright.highcare.reservation.dto.ResourceDTO;
 import com.highright.highcare.reservation.dto.ResourceFileDTO;
@@ -92,7 +93,7 @@ public class ResService {
             resourceStatusRepository.save(res);
             return "예약성공";
         }else{
-            throw new Exception("예약에 실패하셨습니다. 시간을 다시 확인 바랍니다");
+            throw new ResException("예약에 실패하셨습니다. 시간을 다시 확인 바랍니다");
         }
 
     }
