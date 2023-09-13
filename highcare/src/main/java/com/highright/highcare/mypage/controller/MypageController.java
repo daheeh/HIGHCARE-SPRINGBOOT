@@ -14,6 +14,7 @@ import com.highright.highcare.mypage.entity.MyProfileFile;
 import com.highright.highcare.mypage.service.MypageService;
 import com.highright.highcare.pm.dto.ManagementDTO;
 import com.highright.highcare.pm.entity.Management;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -37,7 +38,7 @@ public class MypageController {
         this.mypageService = mypageService;
     }
 
-
+    @Operation(summary = "프로필, 프로필파일 조회페이지", description = "프로필페이지에 접속", tags = {"MypageController"})
     @GetMapping ("/profile/{empNo}")
         public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
 
@@ -56,6 +57,7 @@ public class MypageController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "프로필 조회 성공", profilefileList));
         }
 
+    @Operation(summary = "프로필사진 업데이트", description = "프로필페이지에 사진을 등록합니다.", tags = {"MypageController"})
     @PostMapping("/update")
     public ResponseEntity<ResponseDTO> updateMyProfileFile(@ModelAttribute MyProfileFileDTO myProfileFileDTO, MultipartFile profileImage){
 
@@ -70,6 +72,7 @@ public class MypageController {
 
     }
 
+    @Operation(summary = "연자 조회 페이지", description = "개인의 연차를 조회합니다.", tags = {"MypageController"})
     @GetMapping("/anselect/{empNo}")
     public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo
@@ -97,6 +100,7 @@ public class MypageController {
     }
 
 
+    @Operation(summary = "근태 조회 페이지", description = "개인별 근태를 조회합니다.", tags = {"MypageController"})
     @GetMapping("/manselect/{empNo}")
     public ResponseEntity<ResponseDTO> manselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo,
@@ -120,7 +124,6 @@ public class MypageController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", pagingResponseDTO));
 
     }
-
 
 
 }
