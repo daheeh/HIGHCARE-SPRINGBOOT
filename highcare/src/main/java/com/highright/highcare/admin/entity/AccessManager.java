@@ -4,8 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="TBL_ACCESS_MANAGER")
@@ -19,7 +19,7 @@ public class AccessManager {
     private String id;
 
     @Column(name="REGIST_DATE")
-    private Timestamp registDate;
+    private LocalDateTime registDate;
 
     @Column(name="LOGIN_TOTAL_COUNT")
     private int loginTotalCount;
@@ -50,12 +50,16 @@ public class AccessManager {
     @Column(name="WITHDRAW_DATE")
     private Date withDrawDate;
 
+    private String browser;
+
+    private String device;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID")
     private ADMAccount admaAccount;
 
     @Builder
-    public AccessManager(String id, Timestamp registDate, int loginTotalCount, int loginFailCount, String isLock, String isInActive, String isExpired, Date expiredDate, String isWithDraw, Date withDrawDate) {
+    public AccessManager(String id, LocalDateTime registDate, int loginTotalCount, int loginFailCount, String isLock, String isInActive, String isExpired, String isWithDraw, Date expiredDate, Date withDrawDate, String browser, String device) {
         this.id = id;
         this.registDate = registDate;
         this.loginTotalCount = loginTotalCount;
@@ -63,11 +67,13 @@ public class AccessManager {
         this.isLock = isLock;
         this.isInActive = isInActive;
         this.isExpired = isExpired;
-        this.expiredDate = expiredDate;
         this.isWithDraw = isWithDraw;
+        this.expiredDate = expiredDate;
         this.withDrawDate = withDrawDate;
-    }
 
+        this.browser = browser;
+        this.device = device;
+    }
     @Override
     public String toString() {
         return "AccessManager{" +
@@ -81,6 +87,8 @@ public class AccessManager {
                 ", isWithDraw='" + isWithDraw + '\'' +
                 ", expiredDate=" + expiredDate +
                 ", withDrawDate=" + withDrawDate +
+                ", browser='" + browser + '\'' +
+                ", device='" + device + '\'' +
                 '}';
     }
 }

@@ -39,6 +39,9 @@ public class ApvLine {
     @Column(name = "APV_DATE")
     private Date apvDate;
 
+    @Column(name =  "ISREFERENCE")
+    private String isReference;
+
     @Column(name = "APV_NO")
     private Long apvNo;
 

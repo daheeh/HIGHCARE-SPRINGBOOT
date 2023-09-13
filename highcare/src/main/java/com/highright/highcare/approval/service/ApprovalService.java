@@ -138,11 +138,13 @@ public class ApprovalService {
         String isApproval = "";
         List<ApvFormMain> receiveApvList;
 
-        if (apvStatus.equals("결재진행중") || apvStatus.equals("결재완료")) {
+        if (apvStatus.equals("결재진행중") || apvStatus.equals("결재완료") || apvStatus.equals("결재참조")) {
             if (apvStatus.equals("결재진행중")) {
                 isApproval = "F";
             } else if (apvStatus.equals("결재완료")) {
                 isApproval = "T";
+            } else if (apvStatus.equals("결재참조")) {
+                isApproval = "R";
             }
             receiveApvList = apvFormMainRepository.findByEmpNoAndApvStatus2(empNo, isApproval);
 
@@ -186,6 +188,157 @@ public class ApprovalService {
 
         log.info("[ApprovalService] selectListWithPaging => end =============");
         return writeApvList.stream().map(apvFormMain -> modelMapper.map(apvFormMain, ApvFormMainDTO.class)).collect(Collectors.toList());
+    }
+
+
+    // 결재 등록 - 결재 라인, 첨부 파일 공통 메소드
+    @Transactional
+    public void insertApprovalCommon(ApvForm savedApvForm,
+                                     List<ApvLineDTO> apvLineDTOs,
+                                     List<ApvLineDTO> apvRefLineDTOs,
+                                     List<MultipartFile> apvFileDTO){
+
+        // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
+        List<ApvLine> apvLineList = new ArrayList<>();
+        apvLineDTOs.forEach(apvLine -> {
+            apvLine.setApvNo(savedApvForm.getApvNo());
+            apvLineList.add(modelMapper.map(apvLine, ApvLine.class));
+        });
+
+        // apvRefLineDTOs도 ApvLine 엔티티로 매핑하고 ApvNo 설정
+        apvRefLineDTOs.forEach(apvLine -> {
+            apvLine.setApvNo(savedApvForm.getApvNo());
+            apvLineList.add(modelMapper.map(apvLine, ApvLine.class));
+        });
+
+        // ApvLines 설정
+        savedApvForm.setApvLines(apvLineList);
+        System.out.println("apvLineList = " + apvLineList);
+
+
+        // 첨부파일 등록
+        if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+            List<ApvFile> apvFiles = insertFiles(savedApvForm.getApvNo(), apvFileDTO);
+            savedApvForm.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+        }
+
+        // 승인 상태 확인 후 결재 상태 변경
+        int approved = apvLineRepository.apvNoAllApproved(savedApvForm.getApvNo());
+        if (approved == 0) {
+            apvFormRepository.updateApvStatusToCompleted(savedApvForm.getApvNo());
+        }
+    }
+
+    // 결재 등록 - 결재 라인, 첨부 파일 공통 메소드
+    @Transactional
+    public void insertApprovalCommon(ApvFormMain apvFormMain,
+                                     List<ApvLineDTO> apvLineDTOs,
+                                     List<ApvLineDTO> apvRefLineDTOs,
+                                     List<MultipartFile> apvFileDTO){
+
+        // ApvLineDTO를 ApvLine 엔티티로 매핑하고 ApvNo 설정
+        List<ApvLine> apvLineList = new ArrayList<>();
+        apvLineDTOs.forEach(apvLine -> {
+            apvLine.setApvNo(apvFormMain.getApvNo());
+            apvLineList.add(modelMapper.map(apvLine, ApvLine.class));
+        });
+
+        // apvRefLineDTOs도 ApvLine 엔티티로 매핑하고 ApvNo 설정
+        apvRefLineDTOs.forEach(apvLine -> {
+            apvLine.setApvNo(apvFormMain.getApvNo());
+            apvLineList.add(modelMapper.map(apvLine, ApvLine.class));
+        });
+
+        // ApvLines 설정
+        apvFormMain.setApvLines(apvLineList);
+        System.out.println("apvLineList = " + apvLineList);
+
+
+        // 첨부파일 등록
+        if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+            List<ApvFile> apvFiles = insertFiles(apvFormMain.getApvNo(), apvFileDTO);
+            apvFormMain.setApvFiles(apvFiles);
+            System.out.println("apvFiles = " + apvFiles);
+        }
+
+        // 승인 상태 확인 후 결재 상태 변경
+        int approved = apvLineRepository.apvNoAllApproved(apvFormMain.getApvNo());
+        if (approved == 0) {
+            apvFormRepository.updateApvStatusToCompleted(apvFormMain.getApvNo());
+        }
+    }
+
+
+    // 결재 수정 - 결재 라인, 첨부 파일 공통 메소드
+    @Transactional
+    public void updateApprovalCommon(Long apvNo,
+                                     ApvForm savedApvForm,
+                                     ApvFormMain savedApvFormMain,
+                                     ApvFormDTO apvFormDTO,
+                                     List<ApvLineDTO> apvLineDTOs,
+                                     List<ApvLineDTO> apvRefLineDTOs,
+                                     List<MultipartFile> apvFileDTO) {
+
+        savedApvFormMain.setTitle(apvFormDTO.getTitle());
+        savedApvFormMain.setWriteDate(apvFormDTO.getWriteDate());
+        savedApvFormMain.setIsUrgency(apvFormDTO.getIsUrgency());
+        savedApvFormMain.setCategory(apvFormDTO.getCategory());
+        savedApvFormMain.setContents1(apvFormDTO.getContents1());
+        savedApvFormMain.setContents2(apvFormDTO.getContents2());
+
+        apvFormMainRepository.save(savedApvFormMain);
+        System.out.println("savedApvFormMain======================== = " + savedApvFormMain);
+        System.out.println("============================================================ 1");
+
+        // 테이블에서 apvNo와 일치하는 데이터를 삭제합니다.
+        apvLineRepository.deleteByApvNo(apvNo);
+        apvFileRepository.deleteByApvNo(apvNo);
+
+        System.out.println("savedApvFormMain======================== = " + savedApvFormMain);
+        System.out.println("============================================================ 1-2");
+
+
+        // ApvLineDTOs와 apvRefLineDTOs 합치기
+        List<ApvLineDTO> allApvLineDTOs = new ArrayList<>();
+        allApvLineDTOs.addAll(apvLineDTOs);
+
+        if (apvRefLineDTOs != null && !apvRefLineDTOs.isEmpty()) {
+            allApvLineDTOs.addAll(apvRefLineDTOs);
+        }
+
+        System.out.println("allApvLineDTOs = " + allApvLineDTOs);
+
+        // ApvLine 엔터티 업데이트
+        List<ApvLine> apvLineList = allApvLineDTOs.stream()
+                .map(dto -> {
+                    ApvLine apvLine = modelMapper.map(dto, ApvLine.class);
+                    apvLine.setApvNo(apvNo);
+                    log.info("apvLine = {}", apvLine);
+                    return apvLine;
+                })
+                .collect(Collectors.toList());
+
+        System.out.println("apvLineList ================================== " + apvLineList);
+        System.out.println("============================================================ 2");
+
+        // 첨부파일 등록을 위해 서비스로 DTO전달
+        List<ApvFile> apvFiles = new ArrayList<>();
+        if (apvFileDTO != null && !apvFileDTO.isEmpty()) {
+            apvFiles = insertFiles(apvNo, apvFileDTO);
+        }
+
+        System.out.println("apvFiles ================================== " + apvFiles);
+        System.out.println("============================================================ 3");
+
+        // ApvLine, ApvFile 엔티티를 ApvFormMain에 설정
+        apvLineRepository.saveAll(apvLineList);
+        apvFileRepository.saveAll(apvFiles);
+
+        // 승인 상태를 확인하고 업데이트
+        if (apvLineRepository.apvNoAllApproved(apvNo) == 0) {
+            apvFormRepository.updateApvStatusToCompleted(apvNo);
+        }
     }
 
 
@@ -396,6 +549,5 @@ public class ApprovalService {
 
         return null; // 파일을 찾을 수 없는 경우 null 반환 또는 예외 처리
     }
-
 }
 

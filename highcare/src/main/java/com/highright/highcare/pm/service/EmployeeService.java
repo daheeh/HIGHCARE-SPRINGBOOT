@@ -4,7 +4,6 @@ import com.highright.highcare.auth.entity.AUTHAccount;
 import com.highright.highcare.auth.repository.AccountRepository;
 import com.highright.highcare.common.Criteria;
 
-import com.highright.highcare.mypage.entity.MyAnnual;
 import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.entity.*;
 import com.highright.highcare.pm.repository.*;
@@ -17,13 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -56,16 +53,19 @@ public class EmployeeService {
 
     private final AnEmployeeRepository anEmployeeRepository;
 
+    private final AnnualEmployeeRepository annualEmployeeRepository;
+
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper,
-                            PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
+                           PmDepartmentRepository pmDepartmentRepository, ReEmployeeRepository reEmployeeRepository
                             , ManagementEmRepository managementEmRepository
                             , AccountRepository accountRepository
-                            ,CareerRepository careerRepository
-                            ,CertificationRepository certificationRepository
-                            ,MilitaryRepository militaryRepository
-                            ,AnAnualRepository anAnualRepository
-    ,AnEmployeeRepository anEmployeeRepository){
+                            , CareerRepository careerRepository
+                            , CertificationRepository certificationRepository
+                            , MilitaryRepository militaryRepository
+                            , AnAnualRepository anAnualRepository
+                            , AnEmployeeRepository anEmployeeRepository
+                            , AnnualEmployeeRepository annualEmployeeRepository){
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.pmDepartmentRepository = pmDepartmentRepository;
@@ -77,6 +77,8 @@ public class EmployeeService {
         this.militaryRepository = militaryRepository;
         this.anAnualRepository = anAnualRepository;
         this.anEmployeeRepository = anEmployeeRepository;
+        this.annualEmployeeRepository = annualEmployeeRepository;
+
     }
 
     /* 토탈 */
@@ -126,9 +128,6 @@ public class EmployeeService {
 
     /* 사원 검색 */
     public List<PmEmployeeDTO> selectEmployeeList(String empName) {
-//        log.info("empNo==================================> {}",empNo);
-//        List<PmEmployee> pmemployeeList = employeeRepository.findByEmpNo(Integer.valueOf(empNo));
-//        List<PmEmployee> pmemployeeList = employeeRepository.findByEmpNo(Integer.valueOf(1));
         List<PmEmployee> pmemployeeList = employeeRepository.findByEmpNo(Integer.valueOf(empName));
         System.out.println("pmemployeeList ==============> " + pmemployeeList);
         List<PmEmployeeDTO> employeeList = pmemployeeList.stream()
@@ -182,28 +181,7 @@ public class EmployeeService {
         return employeedetailList;
     }
 
-    /* 사원 등록 */
-//    @Transactional
-//    public String insertPmEmployee(@ModelAttribute EmployeeTotalDTO employeeTotalDTO) {
-//        log.info("insertPmEmployee start==================");
-//        log.info("insertPmEmployee pmEmployeeDTO ================== " + employeeTotalDTO );
-//
-//
-//        int result = 0;
-//
-//        try {
-//            PmEmployee insertPmEmployee = modelMapper.map(employeeTotalDTO, PmEmployee.class);
-//            employeeRepository.save(insertPmEmployee);
-//
-//            result = 1;
-//        }catch (Exception e){
-//            System.out.println("check");
-//            throw new RuntimeException(e);
-//        }
-//
-//        log.info("insertpmEmployee ============================end");
-//        return (result > 0)? "사원 등록 성공": "사원 등록 실패";
-//    }
+
     /* 사원 등록 */
     @Transactional
     public String insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO) {
@@ -389,26 +367,6 @@ public class EmployeeService {
         return management;
     }
 
-//    public ManagementDTO userInfo(Integer empNo) {
-//        Management result = managementEmRepository.findByEmpNo(empNo);
-//
-//        if (result != null) {
-//            // Management 엔티티에서 startTime과 endTime 값을 가져와서 DTO에 설정
-//            String startTime = result.getStartTime();
-//            String endTime = result.getEndTime();
-//
-//            ManagementDTO managementDTO = modelMapper.map(result, ManagementDTO.class);
-//
-//            // DTO에 startTime와 endTime 설정
-//            managementDTO.setStartTime(startTime);
-//            managementDTO.setEndTime(endTime);
-//
-//            return managementDTO;
-//        } else {
-//            // Management 엔티티가 없는 경우 처리
-//            return null; // 또는 에러 처리를 수행할 수 있습니다.
-//        }
-//    }
 
 
     /*출근시간 등록*/
@@ -462,32 +420,6 @@ public class EmployeeService {
 
 
     }
-
-    /* 퇴근 조회 */
-//    public List<ManagementResult> manageMentsearch(Criteria cri, int empNo) { // Remove @RequestBody
-//        System.out.println("selectEmployeeSearchList  cri ==========================> " + cri);
-//        System.out.println("selectEmployeeSearchList  empNo ==========================> " + empNo);
-//
-//        int index = cri.getPageNum() -1;
-//        int count = cri.getAmount();
-//
-//        Pageable paging = PageRequest.of(index, count, Sort.by("empNo").descending());
-//        System.out.println("selectEmployeeSearchList paging ==========================> " + paging);
-//
-//        Page<Management> result = managementEmRepository.findByEmpNo(empNo, paging);
-//        System.out.println("selectEmployeeSearchList result ==========================> " + result);
-//
-//        List<Management> manageList = result.getContent(); // 조회된 결과 리스트
-//
-//
-//
-//        List<ManagementResult> manageMentsearchlist = manageList.stream()
-//                .sorted(Comparator.comparing(Management::getEmpNo).reversed()) // manNo 내림차순 정렬
-//                .map(ManagementResult::new)
-//                .collect(Collectors.toList());
-//
-//        return manageMentsearchlist;
-//    }
 
     /* 퇴근 */
     public String hasAttendanceRecord(ManagementDTO managementDTO) {
@@ -561,9 +493,10 @@ public class EmployeeService {
         return annual;
     }
 
+
     /* 연차 등록 */
 
-//    public void Annualadd(int year , @PathVariable int empNo) {
+//    public void Annualadd(int year) {
 //        LocalDate startDateOfTheYear = LocalDate.of(year, 1, 1);
 //        LocalDate endDateOfTheYear = LocalDate.of(year, 12, 31);
 //
@@ -579,7 +512,6 @@ public class EmployeeService {
 //
 //                if (years >= 1) {
 //                    AnAnual anAnual = new AnAnual();
-//                    anAnual.setEmpNo(empNo);
 //                    anAnual.setBasicAnnual(15); // 1년 이상 근무한 경우 연차를 15로 설정
 //                    anAnual.setUseAnnual(0); // 초기 사용 연차를 0으로 설정
 //                    anAnual.setAddAnnual(0); // 초기 추가 연차를 0으로 설정
@@ -590,7 +522,7 @@ public class EmployeeService {
 //                    anAnualRepository.save(anAnual);
 //                } else {
 //                    AnAnual annual = new AnAnual();
-//                    annual.setEmpNo(empNo);
+//
 //                    annual.setBasicAnnual(1); // 1년 미만 근무한 경우 연차를 1로 설정
 //                    annual.setUseAnnual(0); // 초기 사용 연차를 0으로 설정
 //                    annual.setAddAnnual(0); // 초기 추가 연차를 0으로 설정
@@ -603,7 +535,117 @@ public class EmployeeService {
 //            }
 //        }
 //    }
-}
+
+    ////////////////////
+//    @Transactional
+//    public List<PmEmployeeDTO> selectEmployeeStartDate() {
+//
+//        List<AnEmployee> pmstartDate = anEmployeeRepository.findAll();
+//        System.out.println("pmstartDate = " + pmstartDate);
+//        List<PmEmployeeDTO> startDate = pmstartDate.stream().map(std -> modelMapper.map(std,  PmEmployeeDTO.class)).collect(Collectors.toList());
+//
+//        for(PmEmployeeDTO pme : startDate) {
+//
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+//
+//            int year = Integer.valueOf(sdf.format(pme.getStartDate()));
+//            System.out.println("year = " + year);
+//            int currentYear = Integer.valueOf(sdf.format(new Date()));
+//
+//            System.out.println("(currentYear - year) = " + (currentYear - year));
+//
+//            int yearsOfWork = currentYear - year; // 현재 년도와 입사 년도의 차이로 연차 계산
+//
+//            AnAnual annual = new AnAnual();
+//
+//            if (yearsOfWork >= 1) {
+//                annual.setBasicAnnual(15); // 1년 이상 근무한 경우 연차를 15로 설정
+//            } else {
+//                annual.setBasicAnnual(1); // 1년 미만 근무한 경우 연차를 1로 설정
+//            }
+//
+//            annual.setEmpNo(pme.getEmpNo());
+//            System.out.println("annual = " + annual);
+//            annual.setUseAnnual(0); // 초기 사용 연차를 0으로 설정
+//            annual.setAddAnnual(0); // 초기 추가 연차를 0으로 설정
+//            annual.setAddAnnual(0);
+//            annual.setApvNo("705");
+////            annual.setTotalAnnual(0);
+//            annual.setTotalAnnual(annual.getBasicAnnual()); // 총 연차를 기본 연차로 설정
+//
+////            pme.setAnnual(annual);
+//
+//            pme.setAnAnual(annual);
+//
+//            System.out.println("annual.getEmpNo() = " + annual.getEmpNo());
+//
+////            pme.setAnnual(annual);
+//            AnEmployee findEmp = anEmployeeRepository.findByEmpNo(pme.getEmpNo());
+//
+//
+//            System.out.println("findEmp = " + findEmp);
+//            List<AnAnual> anList = findEmp.getAnAnual();
+//            System.out.println("annual = " + annual.getAddAnnual());
+//            System.out.println("anList = " + anList.size());
+////            System.out.println("anList = " + anList.get(0).getAnEmployee());
+//            anList.add(annual);
+//            findEmp.setAnAnual(anList);
+//            System.out.println("findEmp =================== " + findEmp.getAnAnual().get(0).getReason());
+//            anEmployeeRepository.save(findEmp);
+//
+//
+//
+//        }
+//
+//        return startDate;
+//    }
+//}
+    @Transactional
+    public List<PmEmployeeDTO> selectEmployeeStartDate() {
+        List<AnnualEmployee> pmstartDate = annualEmployeeRepository.findAll();
+        List<PmEmployeeDTO> startDate = pmstartDate.stream().map(std -> modelMapper.map(std, PmEmployeeDTO.class)).collect(Collectors.toList());
+
+        for (PmEmployeeDTO pme : startDate) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+
+            int year = Integer.valueOf(sdf.format(pme.getStartDate()));
+            int currentYear = Integer.valueOf(sdf.format(new Date()));
+
+            int yearsOfWork = currentYear - year;
+
+            AnAnual annual = new AnAnual();
+
+            if (yearsOfWork >= 1) {
+                annual.setBasicAnnual(15);
+            } else {
+                annual.setBasicAnnual(1);
+            }
+
+//            annual.setEmpNo(pme.getEmpNo());
+            annual.setEmpNo(Integer.parseInt(String.valueOf(pme.getEmpNo())));
+            System.out.println("annual = " + annual);
+            System.out.println("pme = " + pme.getEmpNo());
+            annual.setUseAnnual(0);
+            annual.setAddAnnual(0);
+            annual.setApvNo("783");
+//            annual.setApvNo(String.valueOf(785));
+            annual.setTotalAnnual(annual.getBasicAnnual());
+
+            pme.setAnAnual(annual);
+
+            AnnualEmployee findEmp = annualEmployeeRepository.findByEmpNo(pme.getEmpNo());
+            List<AnAnual> anList = findEmp.getAnAnual();
+            anList.add(annual);
+            findEmp.setAnAnual(anList);
+
+            // 여기서 anAnual의 repository에 값을 저장
+            anAnualRepository.save(annual);
+//            anEmployeeRepository.save(findEmp);
+        }
+
+        return startDate;
+    }
+    /////////////////
 //    public Object insertAnnual(AnnualDTO annualDTO, ManagementDTO managementDTO) {
 //        log.info("insertAnnual start==================");
 //        log.info("insertAnnual annualDTO ================== " + annualDTO );
@@ -649,10 +691,9 @@ public class EmployeeService {
     // 연차기준으로 매핑되어있는 사원을들고오기
     //!!!!!!!!!!!!!!!!!!! 연차엔터티안에 사원을  묶을것  사원에는 부서가 붙어있으니까 다딸려서 들어올거임
 
+}
 
-    //
-//}
-
+//employee랑 annual 랑 묶어서 입사년도
 
 
 
