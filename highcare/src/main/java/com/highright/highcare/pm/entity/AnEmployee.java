@@ -1,13 +1,12 @@
 package com.highright.highcare.pm.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +15,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+@DynamicInsert
 public class AnEmployee {
 
     @Id
@@ -58,4 +59,18 @@ public class AnEmployee {
     @Column(name = "TELEPHONE")
     private String telephone;
 
+    @ManyToOne
+    @JoinColumn(name="JOB_CODE", insertable = false, updatable = false)
+    private PmJob job;
+
+
+    @ManyToOne
+    @JoinColumn(name = "DEPT_CODE",insertable = false, updatable = false )
+    private PmDepartment dt;
+
+//    @OneToMany
+//    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
+//    private List<AnAnual> anAnual;
+    // 개인 연차 조회시 얘가 계속 참조되서 오류발생
+    // 이문제를 해결하기 위해서는...또 엔티티를 갈라야하는지..
 }

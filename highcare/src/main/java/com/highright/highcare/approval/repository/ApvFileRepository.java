@@ -15,4 +15,6 @@ public interface ApvFileRepository extends JpaRepository<ApvFile, Long> {
     @Modifying
     @Query("DELETE FROM ApvFile AL WHERE AL.apvNo = :apvNo ")
     void deleteByApvNo(@Param("apvNo") Long apvNo);
+
+    ApvFile findByOriginalFileName(@Param("fileName") String originalFileName);
 }

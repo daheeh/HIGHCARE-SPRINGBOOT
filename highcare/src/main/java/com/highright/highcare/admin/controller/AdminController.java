@@ -1,16 +1,30 @@
 package com.highright.highcare.admin.controller;
 
 
-import com.highright.highcare.admin.dto.RequestMemberDTO;
-import com.highright.highcare.admin.dto.UpdateAccountDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.highright.highcare.admin.dto.*;
+import com.highright.highcare.admin.entity.ADMAccount;
 import com.highright.highcare.admin.service.AdminService;
+import com.highright.highcare.common.Criteria;
+import com.highright.highcare.common.PageDTO;
+import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @RequestMapping("/api/admin")
@@ -22,8 +36,8 @@ public class AdminController {
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping("/member")
-    public ResponseEntity<ResponseDTO> selectMember(@RequestParam String empNo){
-        log.info("================= empNo ===== {}" , empNo);
+    public ResponseEntity<ResponseDTO> selectMember(@RequestParam String empNo) {
+        log.info("================= empNo ===== {}", empNo);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "사원 조회", adminService.selectMember(Integer.valueOf(empNo))));
     }
@@ -31,16 +45,26 @@ public class AdminController {
     // 인서트 회원신청
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @PostMapping("/memberjoin")
-    public ResponseEntity<ResponseDTO> insertAccount(@RequestBody RequestMemberDTO requestMemberDTO){
+    public ResponseEntity<ResponseDTO> insertAccount(@RequestBody RequestMemberDTO requestMemberDTO) {
         log.info("[AdminController] insertAccount requestMemberDTO===={}", requestMemberDTO);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "회원 등록 신청", adminService.insertAccount(requestMemberDTO)));
     }
 
+    // 인서트 회원신청
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
+    @PostMapping("/allmemberjoin")
+    public ResponseEntity<ResponseDTO> insertAllAccount(@RequestBody String[] ids) {
+        log.info("[AdminController] insertAllAccount ids===={}", ids);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "회원 등록 신청(일괄)", adminService.insertAllAccount(ids)));
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/memberlist")
-    public ResponseEntity<ResponseDTO> selectAccountList(){
+    public ResponseEntity<ResponseDTO> selectAccountList() {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "전체 회원 조회", adminService.selectAccountList()));
@@ -48,11 +72,10 @@ public class AdminController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/member/{id}")
-    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id, @RequestBody UpdateAccountDTO updateAccountDTO){
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id, @RequestBody UpdateAccountDTO updateAccountDTO) {
 
         log.info("[AdminController] updateAccount id ===={}", id);
-        log.info("[AdminController] updateAccount updateAccountDTO===={}",updateAccountDTO);
-
+        log.info("[AdminController] updateAccount updateAccountDTO===={}", updateAccountDTO);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "회원 계정상태 수정", adminService.updateAccount(id, updateAccountDTO)));
@@ -60,7 +83,7 @@ public class AdminController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/member/{id}")
-    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id){
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id) {
         log.info("[AdminController] updateAccount id===={}", id);
 
 
@@ -71,33 +94,77 @@ public class AdminController {
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping("/jobs")
-    public ResponseEntity<ResponseDTO> selectJobList(){
+    public ResponseEntity<ResponseDTO> selectJobList() {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "직급 조회", adminService.selectJobList()));
     }
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping("/department")
-    public ResponseEntity<ResponseDTO> selectDepartmentList(){
+    public ResponseEntity<ResponseDTO> selectDepartmentList() {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "부서 조회", adminService.selectDepartmentsList()));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/menugroup")
-    public ResponseEntity<ResponseDTO> selectMenuGroupList(){
+    public ResponseEntity<ResponseDTO> selectMenuGroupList() {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
                 "메뉴그룹 조회", adminService.selectMenuGroupList()));
     }
 
+
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/managers")
-    public ResponseEntity<ResponseDTO> selectMenuManagers(){
+    @PostMapping("/managers")
+    public ResponseEntity<ResponseDTO> insertMenuManagers(@RequestBody MenuManagerDTO menuManagerDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "매니저 조회", adminService.selectMenuManagers()));
+                "매니저 메뉴등록", adminService.insertMenuManagers(menuManagerDTO)));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/managers")
+    public ResponseEntity<ResponseDTO> deleteMenuManagers(@RequestParam("ids") String[] ids) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "매니저 삭제", adminService.deleteMenuManagers(ids)));
+    }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/access")
+    public ResponseEntity<ResponseDTO> selectAccessLog(@RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "15") int size) {
+        Page<ADMAccountDTO> accountPageDTO = adminService.getAccountsByPage(page, size);
+
+
+        System.out.println("accountPage =====================>>>= " + accountPageDTO);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "접속로그 조회", accountPageDTO));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/access/search")
+    public ResponseEntity<ResponseDTO> selectSearchMemberLog(@RequestParam String keyword) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "사원 접속로그 검색", adminService.selectSearchMemberLog(keyword)));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/access/date")
+    public ResponseEntity<ResponseDTO> selectAccessLog(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
+                                                       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
+//                                                    , @RequestParam(defaultValue = "0") int page
+//                                                    , @RequestParam(defaultValue = "15") int size
+    ) {
+
+        LocalDateTime startDate = LocalDateTime.of(start, LocalTime.of(0, 0, 0));
+        LocalDateTime endDate = LocalDateTime.of(end, LocalTime.of(23, 59, 59));
+
+        //페이지에이블로 받기 . 페이징 인자로 넘기고/ 사이즈, 페이지 받고 -- 전체크기를 알고싶으면 페이지로 받아.
+//        Page<ADMAccountDTO> accountDTOPage = adminService.selectAllAccountForLog(PageRequest.of(page, size));
+
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "사원 접속로그 날짜 검색", adminService.selectSearchMemberDateLog(startDate, endDate)));
+    }
 
 
 }

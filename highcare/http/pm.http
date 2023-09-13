@@ -19,7 +19,7 @@ Content-Type: application/json; boundary=WebAppBoundary
 Accept: */*
 
 {
-  "empName": "구글링딩동",
+  "empName": "테스트중입니다1",
   "empEmail": "secon223d@masda.com",
   "phone": "010-1321-4564",
   "residentNo": "1321546-5464578",
@@ -137,18 +137,32 @@ Accept: */*
 }
 
 
-### 연차 조회
-GET http://localhost:8080/api/pm/annaul
-Content-Type: application/json
-Accept: */*
-
-
-
 ### 회원 상세조회
 GET http://localhost:8080/api/pm/member/detail/10001
 Content-Type: application/json
 Accept: */*
 
+
+### 연차 조회
+GET http://localhost:8080/api/pm/annual?offset=1
+Content-Type: application/json
+Accept: */*
+
+### 개인 연차 조회
+GET http://localhost:8080/api/pm/annual/detail/10001
+Content-Type: application/json
+Accept: */*
+
+
+###  연차 등록
+POST http://localhost:8080/api/pm/addananual?empNo=10001
+Content-Type: application/json
+Accept: */*
+
+### 입사일
+GET http://localhost:8080/api/pm/employee/startDate
+Content-Type: application/json
+Accept: */*
 
 
 

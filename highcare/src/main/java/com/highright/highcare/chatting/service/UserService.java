@@ -18,8 +18,9 @@ public class UserService {
     public void syncUsersFromDatabase() {
         List<ADMAccount> usersFromDatabase = userRepository.findAll(); // 오라클에서 모든 사용자 가져오기
         for (ADMAccount user : usersFromDatabase) {
-            userStorage.addUser(user.getMemberId()); // UserStorage에 사용자 아이디 추가
-            System.out.println("user===============>" + user);
+            userStorage.addUser(user.getMemberId(), user.getEmployee().getName()); // UserStorage에 사용자 아이디 추가
+//            userStorage.addUser(user.getEmployee().getName()); // UserStorage에 사용자 이름 추가
+            System.out.println("user ===============>" + user);
         }
 
         System.out.println("usersFromDatabase===============>" + usersFromDatabase);

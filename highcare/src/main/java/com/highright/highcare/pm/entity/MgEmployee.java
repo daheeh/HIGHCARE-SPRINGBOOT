@@ -65,7 +65,9 @@ public class MgEmployee {
     @JoinColumn(name = "MAN_NO")
     private List<Management> manNo;
 
-
+//    @OneToMany
+//    @JoinColumn(name = "EMP_NO")
+//    private List<AnAnual> anuals;
 
 
 }

@@ -1,23 +1,36 @@
 package com.highright.highcare.pm.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.highright.highcare.mypage.entity.MyApvVation;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name="TBL_ANNUAL")
+@Table(name = "TBL_ANNUAL")
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@SequenceGenerator(
+        name = "PM_SEQ_NO",
+        sequenceName = "SEQ_ANU_NO",
+        initialValue = 1, allocationSize = 1
+)
 @Setter
+@DynamicInsert
 public class AnAnual implements Serializable {
 
     @Id
+    @Column(name = "EMP_NO")
+    private int empNo;
+
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "PM_SEQ_NO"
+    )
     @Column(name = "ANN_NO")
     private int annNo;
 
@@ -39,9 +52,19 @@ public class AnAnual implements Serializable {
     @Column(name = "REASON")
     private String reason;
 
-    @ManyToOne
-    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false)
-    private AnEmployee anEmployee;
 
-    // 기타 필드, 생성자, getter 및 setter 메서드
+    @OneToMany
+    @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
+    private List<ApvVacationPm> vacation;
+
+//    @OneToMany
+//    @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
+//    private List<Pmfoms> pmfoms;
+
+
+    @OneToMany
+    @JoinColumn(name = "EMP_NO", insertable = false, updatable = false,referencedColumnName = "EMP_NO")
+    private List<AnEmployee> AnEmployee;
+
+
 }

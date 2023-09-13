@@ -24,9 +24,9 @@ public class MenuGroup {
     @Column
     private String groupStartUrl;
 
-    @OneToMany
-    @JoinColumn(name="GROUP_CODE", insertable = false, updatable = false)
-    private List<Menu> menulist;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="GROUP_CODE")
+    private List<MenuG> menulist;
 
 
     @Builder

@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class ADMAuthAccountId implements Serializable {
 
     @Column(name ="AUTH_CODE")
-    private String code;
+    private String authCode;
 
     @Column(name="ID")
     private String id;
@@ -23,8 +23,8 @@ public class ADMAuthAccountId implements Serializable {
 
 
     @Builder
-    public ADMAuthAccountId(String code, String id) {
-        this.code = code;
+    public ADMAuthAccountId(String authCode, String id) {
+        this.authCode = authCode;
         this.id = id;
     }
 }

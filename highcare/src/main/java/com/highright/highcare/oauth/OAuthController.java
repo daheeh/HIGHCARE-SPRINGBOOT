@@ -38,6 +38,7 @@ public class OAuthController {
     @GetMapping("/api/oauth/kakao")
     public ResponseEntity<ResponseDTO> selectAuthorize(@ModelAttribute KaKaoResponse kaKaoResponse, HttpServletResponse response){
 
+        log.info("=========================kakao controller====kaKaoResponse {}", kaKaoResponse);
 
         log.info("=========================kakao controller===============code : {}", kaKaoResponse.getCode());
         log.info("=========================kakao controller===============state : id : {}",kaKaoResponse.getState());
@@ -54,6 +55,9 @@ public class OAuthController {
         System.out.println("###nickname#### : " + userInfo.get("nickname"));
         System.out.println("###email#### : " + userInfo.get("email"));
         System.out.println();
+
+        userInfo.put("browser", kaKaoResponse.getBrowser());
+        userInfo.put("device", kaKaoResponse.getDevice());
 
         // 3. 사용자 정보(userInfo)를 바탕으로 db 입력, 서버전용 jwt 토큰 발급, 로그인 인가 처리
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),

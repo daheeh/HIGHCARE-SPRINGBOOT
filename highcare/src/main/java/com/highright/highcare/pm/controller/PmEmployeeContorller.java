@@ -4,20 +4,13 @@ import com.highright.highcare.common.Criteria;
 import com.highright.highcare.common.PageDTO;
 import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
-import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.pm.dto.*;
-import com.highright.highcare.pm.entity.Management;
-import com.highright.highcare.pm.entity.ManagementResult;
-//import com.highright.highcare.pm.entity.MgEmployee;
 import com.highright.highcare.pm.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.description.modifier.Mandate;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/pm")
 @Slf4j
@@ -65,9 +56,7 @@ public class PmEmployeeContorller {
         log.info("offset===================> {}", offset);
         log.info("empName==============> {}", empName);
 
-        int total = employeeService.selectEmployeeTotal(
-
-        ); // 조건을 추가
+        int total = employeeService.selectEmployeeTotal(empName); // 조건을 추가
         Criteria cri = new Criteria(Integer.valueOf(offset), 10);
         cri.setSearchValue(empName);
 
@@ -101,15 +90,15 @@ public class PmEmployeeContorller {
 
     /* 사원 등록 */
     @PostMapping("/member/all")
-    public ResponseEntity<ResponseDTO> insertPmEmployee(@RequestBody EmployeeTotalDTO pmEmployeeDTO){
-        log.info("inserPmEmployee=========================>", pmEmployeeDTO);
+    public ResponseEntity<ResponseDTO> insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO){
+        log.info("inserPmEmployee=========================> {}", pmEmployeeDTO);
+
 
         return ResponseEntity.ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(),"사원 등록 성공",
                         employeeService.insertPmEmployee(pmEmployeeDTO)));
 
     }
-
 
     /* 트리뷰 */
     @GetMapping("selectDept")
@@ -161,14 +150,12 @@ public class PmEmployeeContorller {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공", map));
 
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", employeeService.manageMent()));
     }
 
     /* 출근 */
     @PostMapping("management/insert")
     public ResponseEntity<ResponseDTO> insertmanageMent(@RequestBody ManagementDTO managementDTO){
         log.info("insertmanageMent=========================>", managementDTO);
-        // 데이터베이스에 넣을 날짜형식을 갈라서..만들어요
 
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDate currentDate = currentDateTime.toLocalDate();
@@ -197,9 +184,8 @@ public class PmEmployeeContorller {
         // 출근 여부 확인
         String updateSuccess = employeeService.hasAttendanceRecord(managementDTO);
         System.out.println("updateSuccess ==========================================>>> " + updateSuccess);
-        // 업데이트 수행
-      //  boolean updateSuccess = (boolean) employeeService.updateManageMent(managementDTO);
 
+        // 업데이트 수행
         if (updateSuccess.equals("success")) {
             return ResponseEntity.ok()
                     .body(new ResponseDTO(HttpStatus.OK.value(), "퇴근 등록 및 업데이트 성공",updateSuccess));
@@ -208,28 +194,107 @@ public class PmEmployeeContorller {
                     .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "퇴근 시간 등록 및 업데이트 실패"));
         }
 
-
     }
+
+    /* 연차 */
+    @GetMapping("/annual")
+    public ResponseEntity<ResponseDTO> selectAnnual(@ModelAttribute AnnualDTO annualDTO,
+            @RequestParam(name = "offset", defaultValue = "1") String offset){
+        log.info("start========================================================");
+        log.info("offset=============================== : {}", offset);
+
+        int total = employeeService.selectEmployeeTotal();
+
+        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+
+        List<AnnualDTO> pmAnnuallist = employeeService.selectedAnnaul(cri);
+
+        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+        pagingResponseDTO.setData(pmAnnuallist);
+        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+
+
+        log.info("pmAnnuallist=============================== : {}", pmAnnuallist);
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
+    }
+    /* 개인 연차 조회 */
+    @GetMapping("/annual/detail/{empNo}")
+    public ResponseEntity<ResponseDTO> selectPersonalAnnual (@ModelAttribute AnnualDTO annualDTO,
+                                                             @PathVariable int empNo ){
+
+        List<AnnualDTO> pmAnnual = employeeService.selectedPersonalAnnaul(empNo);
+
+
+        log.info("offset=============================== : {}", pmAnnual);
+
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmAnnual));
+    }
+
+    /* 연차 등록 */
+    @GetMapping("employee/startDate")
+        public ResponseEntity<ResponseDTO> employeeDate(){
+
+        List<PmEmployeeDTO> pmStartDate = employeeService.selectEmployeeStartDate();
+
+
+        System.out.println("pmStartDate = " + pmStartDate);
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pmStartDate));
+    }
+//    @PostMapping("/addananual")
+//    public ResponseEntity<ResponseDTO> calculateAnnualLeaves(@RequestParam int year, @PathVariable int empNo) {
+//        employeeService.Annualadd(year, empNo);
 //
-//    /* 연차 */
-//    @GetMapping("/annaul")
-//    public ResponseEntity<ResponseDTO> selectAnnual(
-//            @RequestParam(name = "offset", defaultValue = "1") String offset){
-//        log.info("start========================================================");
-//        log.info("offset=============================== : {}", offset);
-//
-//        int total = employeeService.selectEmployeeTotal();
-//
-//        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
-//
-//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
-//        pagingResponseDTO.setData(employeeService.selectedAnnaul(cri));
-//        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
+//        return ResponseEntity.ok().body(new ResponseDTO(200, "연차 계산이 완료되었습니다.", null));
 //    }
 
+//    @PostMapping("annual/addAnnual")
+//    public ResponseEntity<ResponseDTO> insertAnnual(@RequestBody AnnualDTO annualDTO, @RequestBody ManagementDTO managementDTO){
+//        log.info("insertmanageMent=========================>", annualDTO);
+//
+////        List<PmEmployeeDTO> employees = annualDTO.getAnEmployee(); // 사원 리스트 가져오기
+////
+////        for(PmEmployeeDTO employee : employees) {
+////            Date startDate = (Date) employee.getStartDate(); // 사원 입사일 가져오기
+////            LocalDate currentDate = LocalDate.now(); // 현재 날짜 가져오기
+////
+////            Period period = Period.between(startDate.toLocalDate(), currentDate);
+////            int years = period.getYears(); // 입사년도로부터 경과한 연수
+////
+////            int annualLeave = (years >= 1) ? 15 : 1; // 1년 이상이면 15개, 그 이하면 1개
+////
+////            employee.setAnnual(annualLeave); // 연차 설정
+////        }
+//
+//        return ResponseEntity.ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(),"연차 등록",
+//                        employeeService.insertAnnual(annualDTO, managementDTO)));
+//    }
+    /* 연차 사용 */
+
+//    @PostMapping("annual/addAnnual")
+//    public ResponseEntity<ResponseDTO> insertAnnual(@ModelAttribute AnnualDTO annualDTO) {
+//
+//        // 결제 신청 보기
+//        String Success = employeeService.addAnual(annualDTO);
+//        System.out.println("updateSuccess ==========================================>>> " + updateSuccess);
+//        // 업데이트 수행
+//        //  boolean updateSuccess = (boolean) employeeService.updateManageMent(managementDTO);
+//
+//        if (Success.equals("success")) {
+//            return ResponseEntity.ok()
+//                    .body(new ResponseDTO(HttpStatus.OK.value(), "퇴근 등록 및 업데이트 성공",updateSuccess));
+//        } else {
+//            return ResponseEntity.badRequest()
+//                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "퇴근 시간 등록 및 업데이트 실패"));
+//        }
+//
+//    }
 
 }

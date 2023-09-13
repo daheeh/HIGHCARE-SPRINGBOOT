@@ -11,4 +11,6 @@ public class KaKaoResponse {
 
     private String code;
     private String state="";
+    private String browser;
+    private String device;
 }

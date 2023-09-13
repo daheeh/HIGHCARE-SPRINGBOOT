@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -38,6 +39,12 @@ public class Military {
 
     @Column(name = "IS_WHETHER")
     private char isWhether;
+
+    @Column(name="START_DATE")
+    private Date startDate;
+
+    @Column(name="END_DATE")
+    private Date endDate;
 
     @ManyToOne
     @JoinColumn(name = "EMP_NO")

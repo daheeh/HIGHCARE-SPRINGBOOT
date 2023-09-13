@@ -1,9 +1,8 @@
 package com.highright.highcare.config;
 
 import com.highright.highcare.auth.service.CustomUserDetailsService;
-import com.highright.highcare.jwt.JwtAccessDeniedHandler;
-import com.highright.highcare.jwt.JwtAuthenticationEntryPoint;
-import com.highright.highcare.jwt.TokenProvider;
+import com.highright.highcare.exception.ExceptionHandlerFilter;
+import com.highright.highcare.jwt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -29,7 +29,9 @@ public class SecurityConfig {
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 403 code
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;            // 401 code
+    private final ExceptionHandlerFilter exceptionHandlerFilter;
 
+//    private final JwtFilter jwtFilter;
 
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -43,7 +45,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -60,11 +62,10 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                .antMatchers("/api/auth/**").permitAll()
-//                .antMatchers("/api/oauth/**").permitAll()
-//                .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
-//                .antMatchers("/api/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
-                .anyRequest().permitAll()   // 테스트 후 삭제
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/oauth/**").permitAll()
+                .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
+                .antMatchers("/api/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
             .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -75,6 +76,9 @@ public class SecurityConfig {
                 .and().apply(new JwtSecurityConfig(tokenProvider))
                 ;
                 // oauth2 추가하기
+
+//        http.addFilterBefore(exceptionHandlerFilter, JwtFilter.class);
+//        http.addFilterBefore(jwtFilter, SpecificUrlFilter.class);
         return http.build();
     }
 

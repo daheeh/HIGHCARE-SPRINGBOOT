@@ -56,6 +56,9 @@ public class PmEmployee {
     @Column(name = "DEPT_CODE")
     private int deptCode;
 
+    @Column(name = "JOB_CODE")
+    private int jobCode;
+
     @Column(name = "ADDRESS")
     private String address;
 
@@ -65,21 +68,26 @@ public class PmEmployee {
     @Column(name = "TELEPHONE")
     private String telephone;
 
-    @ManyToOne
-    @JoinColumn(name="JOB_CODE")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="JOB_CODE", insertable = false, updatable = false)
     private PmJob job;
 
-    @OneToMany(mappedBy = "employees")
+    @OneToMany(mappedBy = "employees", fetch = FetchType.LAZY)
     private List<Military> military;
 
-    @OneToMany(mappedBy = "employees")
+    @OneToMany(mappedBy = "employees", fetch = FetchType.LAZY)
     private List<Career> career;
 
-    @OneToMany(mappedBy = "employees")
+    @OneToMany(mappedBy = "employees", fetch = FetchType.LAZY)
     private List<Certification> certification;
+
+    @ManyToOne
+    @JoinColumn(name="JOB_CODE", insertable = false, updatable = false )
+    private PmDepartment dt;
 
     //    @Column(name="JOB_CODE")
     //    private Integer job;
+
 
 
 

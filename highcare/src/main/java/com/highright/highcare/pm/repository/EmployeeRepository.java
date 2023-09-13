@@ -21,14 +21,12 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
     /* 사원 상세 조회 */
     List<PmEmployee> findByEmpNo(Integer empNo);
 
-   List<PmEmployee> findByIsResignation(char isResignation);
+    List<PmEmployee> findByIsResignation(char isResignation);
 
-    Page<PmEmployee> findByIsResignation(char isResignation,Pageable paging);
+    Page<PmEmployee> findByIsResignation(char isResignation, Pageable paging);
 
     /* 사원 번호 조회 */
     PmEmployee findByEmpNo(int empNo);
-
-//    List<PmEmployee> findByEmpNo(int empNo);
 
 
     /* 사원 상세 조회 및 검색 */
@@ -39,7 +37,5 @@ public interface EmployeeRepository extends JpaRepository<PmEmployee, Integer> {
 
     Page<PmEmployee> findByEmpName(String search, Pageable paging);
 
-    Page<PmEmployee> findByIsResignation(String empNo, Pageable paging);
 
-//    Page<AnEmployee> findByannaul(int empNo, Pageable paging);
 }
