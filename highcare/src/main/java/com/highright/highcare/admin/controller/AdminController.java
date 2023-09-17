@@ -156,17 +156,22 @@ public class AdminController {
     @Operation(summary = "회원 접속이력 이름 검색 요청", description = "회원들의 접속 이력(성공/실패)에서 이름 검색이 진행됩니다.", tags = {"AdminController"})
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/access/search")
-    public ResponseEntity<ResponseDTO> selectSearchMemberLog(@RequestParam String keyword) {
+    public ResponseEntity<ResponseDTO> selectSearchMemberLog(@RequestParam String keyword,
+                                                             @RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "15") int size) {
+
+        Page<ADMAccountDTO> searchPageDTO = adminService.selectSearchMemberLog(keyword, page, size);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "회원 접속로그 검색", adminService.selectSearchMemberLog(keyword)));
+                "회원 접속로그 검색", searchPageDTO));
     }
+
     @Operation(summary = "회원 접속이력 날짜 검색 요청", description = "회원들의 접속 이력(성공/실패)에서 날짜 검색이 진행됩니다.", tags = {"AdminController"})
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/access/date")
     public ResponseEntity<ResponseDTO> selectAccessLog(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
                                                        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
-//                                                    , @RequestParam(defaultValue = "0") int page
-//                                                    , @RequestParam(defaultValue = "15") int size
+            , @RequestParam(defaultValue = "0") int page
+            , @RequestParam(defaultValue = "15") int size
     ) {
 
         LocalDateTime startDate = LocalDateTime.of(start, LocalTime.of(0, 0, 0));
@@ -174,10 +179,11 @@ public class AdminController {
 
         //페이지에이블로 받기 . 페이징 인자로 넘기고/ 사이즈, 페이지 받고 -- 전체크기를 알고싶으면 페이지로 받아.
 //        Page<ADMAccountDTO> accountDTOPage = adminService.selectAllAccountForLog(PageRequest.of(page, size));
+        Page<ADMAccountDTO> accountDTOPage = adminService.selectSearchMemberDateLog(startDate, endDate, page, size);
 
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "사원 접속로그 날짜 검색", adminService.selectSearchMemberDateLog(startDate, endDate)));
+                "사원 접속로그 날짜 검색", accountDTOPage));
     }
 
 

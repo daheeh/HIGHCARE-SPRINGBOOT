@@ -126,14 +126,14 @@ public class AdminServiceImpl implements AdminService {
             log.info("[AdminServiceImpl] insertMember == message ==={}", message);
 
             // 프로필 만들어두기
-            MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
-            myProfileFileRepository.save(MyProfileFile.builder()
-                    .code(profile.getCode())
-                    .name("basicprofile.png")
-                    .chName("basicprofile.png")
-                    .profileImgUrl("http://localhost:8080/images/basicprofile.png")
-                    .date(new Date(System.currentTimeMillis()))
-                    .build());
+//            MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
+//            myProfileFileRepository.save(MyProfileFile.builder()
+//                    .code(profile.getCode())
+//                    .name("basicprofile.png")
+//                    .chName("basicprofile.png")
+//                    .profileImgUrl("http://localhost:8080/images/basicprofile.png")
+//                    .date(new Date(System.currentTimeMillis()))
+//                    .build());
             // accessmanager 0으로 넣어두기
 
 
@@ -382,27 +382,27 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     @Override
-    public Object selectSearchMemberLog(String keyword) {
+    public Page<ADMAccountDTO> selectSearchMemberLog(String keyword, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
 
+        Page<ADMAccount> paging = admAccountRepository.findByEmployee_NameContaining(keyword, pageRequest);
 
-        List<ADMAccount> admAccount = admAccountRepository.findByEmployeeNameContaining(keyword);
-        log.info("[AdminServiceImpl] selectSearchMemberLog admAccount ======================{} ", admAccount);
+        log.info("[AdminServiceImpl] selectSearchMemberLog paging ======================{} ", paging);
 
-        return admAccount.stream().map(acc -> modelMapper.map(acc, ADMAccountDTO.class)).collect(Collectors.toList());
+        return paging.map(p -> modelMapper.map(p, ADMAccountDTO.class));
     }
 
     @Override
-    public Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end) {
+    public Page<ADMAccountDTO> selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end, int page, int size) {
 
-//        List<ADMAccount> admAccountList = admAccountRepository.findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(start, end);
-        List<ADMAccount> admAccountList = admAccountRepository.findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(start, end);
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<ADMAccount> paging = admAccountRepository.findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(start, end, pageRequest);
 
-
-        log.info("[AdminServiceImpl] selectSearchMemberDateLog admAccountList ======================{} ", admAccountList);
+        log.info("[AdminServiceImpl] selectSearchMemberDateLog paging ======================{} ", paging);
 
         //페이지에이블로 받기 . 페이징 인자로 넘기고/ 사이즈, 페이지 받고 -- 전체크기를 알고싶으면 페이지로 받아.
 
-        return admAccountList.stream().map(acc -> modelMapper.map(acc, ADMAccountDTO.class)).collect(Collectors.toList());
+        return paging.map(p -> modelMapper.map(p, ADMAccountDTO.class));
     }
 
     @Override

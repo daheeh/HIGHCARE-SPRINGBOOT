@@ -37,7 +37,8 @@ public class JwtFilter extends OncePerRequestFilter {
         // 2. 추출한 토큰의 유효성 검사
         // 2-1. 만료된 토큰이면 refreshtoken을 추출하여 token을 재발급한다.
         // 2-2. 인증을 위해 Authentication 객체를 SecurityContextHolder에 담는다.
-        if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)){
+
+        if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt) ){
             log.info("[JwtFilter] validateToken 통과 ==== {통과}");
             // 인증
             Authentication authentication = tokenProvider.getAuthentication(jwt);

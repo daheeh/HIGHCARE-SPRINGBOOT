@@ -40,9 +40,9 @@ public class MypageController {
 
     @Operation(summary = "프로필, 프로필파일 조회페이지", description = "프로필페이지에 접속", tags = {"MypageController"})
     @GetMapping ("/profile/{empNo}")
-        public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
+    public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
 
-        MyProfileDTO profilefileList = mypageService.selectProfilefileList(empNo);
+        List<MyProfileDTO> profilefileList = mypageService.selectProfilefileList(empNo);
         log.info("empNo [Controller] ================profilefileList{} ", profilefileList);
 
         if(profilefileList == null ){
@@ -55,7 +55,8 @@ public class MypageController {
 
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "프로필 조회 성공", profilefileList));
-        }
+
+    }
 
     @Operation(summary = "프로필사진 업데이트", description = "프로필페이지에 사진을 등록합니다.", tags = {"MypageController"})
     @PostMapping("/update")
@@ -76,7 +77,7 @@ public class MypageController {
     @GetMapping("/anselect/{empNo}")
     public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo
-                                                 , @RequestParam(name="offset", defaultValue = "1") String offset) {
+            , @RequestParam(name="offset", defaultValue = "1") String offset) {
 
         log.info("offset start===========");
         log.info("offset==== :{}", offset);
@@ -125,7 +126,5 @@ public class MypageController {
 
     }
 
-
 }
-
 

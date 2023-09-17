@@ -274,7 +274,7 @@ public class PmEmployeeContorller {
 
     /* 연차 등록 */
     @Operation(summary = "연차 등록", description = "연차를 등록합니다", tags = {"PmEmployeeContorller"})
-    @GetMapping("employee/startDate")
+    @GetMapping("/employee/startDate")
         public ResponseEntity<ResponseDTO> employeeDate(){
 
         List<PmEmployeeDTO> pmStartDate = employeeService.selectEmployeeStartDate();

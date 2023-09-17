@@ -35,13 +35,15 @@ public interface AdminService {
 
 //    Object selectAccessLog();
 
-//    Object selectAccessLog(int page);
-
-    Object selectSearchMemberLog(String keyword);
-
-    Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end);
-
+    //    Object selectAccessLog(int page);
     Page<ADMAccountDTO> getAccountsByPage(int page, int size);
+
+    //    Object selectSearchMemberLog(String keyword);
+    Page<ADMAccountDTO> selectSearchMemberLog(String keyword, int page, int size);
+
+    //    Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end);
+    Page<ADMAccountDTO> selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end, int page, int size);
+
 
     Object insertAllAccount(String[] ids);
 

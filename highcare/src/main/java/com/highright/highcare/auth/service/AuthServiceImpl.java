@@ -278,13 +278,6 @@ public class AuthServiceImpl implements AuthService {
             LoginMemberDTO setMemberDTO = modelMapper.map(member, LoginMemberDTO.class);
             log.info("[AuthServiceImpl] setMember : setMemberDTO ====== {} ", setMemberDTO);
 
-//             비번 틀린 경우
-            if (!passwordEncoder.matches(loginInfo.getPassword(), member.getPassword())) {
-                accessManager.get().setLoginFailCount(currentFailCount + 1);
-//                accessManagerRepository.save(accessManager.get()); // 엔티티 업데이트
-
-                throw new LoginFailedException(" [PASSWORD INCORRECT] 잘못된 비밀번호입니다.");
-            }
             // 접속관리 데이터 있으면
             // 성공시 token 발급
             // 멤버 dto에 다시 여러 정보 담아서 전달하기
@@ -293,6 +286,19 @@ public class AuthServiceImpl implements AuthService {
             setMemberDTO.setName(member.getEmployee().getName());
             setMemberDTO.setDeptName(member.getEmployee().getDeptCode().getDeptName());
             setMemberDTO.setJobName(member.getEmployee().getJobCode().getJobName());
+
+
+            if(loginInfo.getPassword() == null && loginInfo.getLoginType().matches(SOCIAL_LOGIN_TYPE)){
+
+                return setMemberDTO;
+
+            } else if(!passwordEncoder.matches(loginInfo.getPassword(), member.getPassword())) {
+                accessManager.get().setLoginFailCount(currentFailCount + 1);
+//                accessManagerRepository.save(accessManager.get()); // 엔티티 업데이트
+
+                throw new LoginFailedException(" [PASSWORD INCORRECT] 잘못된 비밀번호입니다.");
+            }
+
 
             return setMemberDTO;
 
