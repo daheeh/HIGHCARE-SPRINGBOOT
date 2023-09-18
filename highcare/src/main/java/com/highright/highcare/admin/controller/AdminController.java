@@ -75,7 +75,7 @@ public class AdminController {
                 "전체 회원 조회", adminService.selectAccountList()));
     }
 
-    @Operation(summary = "회원 계정상태 수정청 요청", description = "회원 계정상태(정상, 임시, 차단, 만료, 탈퇴예정) 업데이트가 진행됩니다.", tags = {"AdminController"})
+    @Operation(summary = "회원 계정상태 수정 요청", description = "회원 계정상태(정상, 임시, 차단, 만료, 탈퇴예정) 업데이트가 진행됩니다.", tags = {"AdminController"})
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("/member/{id}")
     public ResponseEntity<ResponseDTO> updateAccount(@PathVariable String id, @RequestBody UpdateAccountDTO updateAccountDTO) {
@@ -84,7 +84,7 @@ public class AdminController {
         log.info("[AdminController] updateAccount updateAccountDTO===={}", updateAccountDTO);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "회원 계정상태 수정", adminService.updateAccount(id, updateAccountDTO)));
+                "회원 계정상태 수정 완료", adminService.updateAccount(id, updateAccountDTO)));
     }
 
     @Operation(summary = "회원 삭제(계정 삭제) 요청", description = "회원 탈퇴(계정 삭제)가 진행됩니다.", tags = {"AdminController"})
@@ -170,8 +170,13 @@ public class AdminController {
     @GetMapping("/access/date")
     public ResponseEntity<ResponseDTO> selectAccessLog(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
                                                        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
+<<<<<<< HEAD
             , @RequestParam(defaultValue = "0") int page
             , @RequestParam(defaultValue = "15") int size
+=======
+                                                    , @RequestParam(defaultValue = "0") int page
+                                                    , @RequestParam(defaultValue = "15") int size
+>>>>>>> hdhye
     ) {
 
         LocalDateTime startDate = LocalDateTime.of(start, LocalTime.of(0, 0, 0));

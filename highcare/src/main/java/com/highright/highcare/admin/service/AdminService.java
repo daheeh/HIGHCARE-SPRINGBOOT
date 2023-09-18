@@ -35,7 +35,11 @@ public interface AdminService {
 
 //    Object selectAccessLog();
 
+<<<<<<< HEAD
     //    Object selectAccessLog(int page);
+=======
+//    Object selectAccessLog(int page);
+>>>>>>> hdhye
     Page<ADMAccountDTO> getAccountsByPage(int page, int size);
 
     //    Object selectSearchMemberLog(String keyword);

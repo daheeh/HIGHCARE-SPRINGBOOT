@@ -1,4 +1,4 @@
-package com.highright.highcare.oauth;
+package com.highright.highcare.oauth.dto;
 
 import lombok.ToString;
 
@@ -38,4 +38,16 @@ public class GoogleUser implements OAuthUserInfo {
     public String getId() {
         return (String)attribute.get("id");
     }
+
+//    public static interface OAuthUserInfo {
+//
+//        String getProviderId();
+//        String getProvider();
+//        String getEmail();
+//        String getName();
+//        String getId();
+//
+//
+//
+//    }
 }

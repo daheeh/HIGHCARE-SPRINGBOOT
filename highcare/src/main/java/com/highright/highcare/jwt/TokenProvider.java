@@ -85,6 +85,7 @@ public class TokenProvider {
                 .deptName(loginMemberDTO.getDeptName())
                 .jobName(loginMemberDTO.getJobName())
                 .role(loginMemberDTO.getRoleList().toString())
+                .isTempPwd(loginMemberDTO.getIsTempPwd())
                 .accountDTO(AccountDTO.builder().isTempPwd(loginMemberDTO.getIsTempPwd()).pwdExpiredDate(loginMemberDTO.getPwdExpiredDate()).build())
                 .build();
     }
@@ -187,8 +188,7 @@ public class TokenProvider {
         cookie.setHttpOnly(true);             // httponly 옵션 설정
         cookie.setSecure(true);               // https 옵션 설정
         cookie.setPath("/");            // 모든 곳에서 쿠키열람 가능
-//        cookie.setDomain("localhost:3000");
-        cookie.setMaxAge((int) REFRESH_TOKEN_EXPIRE_TIME);         // 쿠키 만료시간 설정 (테스트 10분)
+        cookie.setMaxAge((int) REFRESH_TOKEN_EXPIRE_TIME);         // 쿠키 만료시간 설정
 
         return cookie;
     }
@@ -204,7 +204,6 @@ public class TokenProvider {
         log.info("[TokenProvider] resolveCookie : request === {}",request);
 
         Cookie[] cookies = request.getCookies();
-        log.info("[TokenProvider] resolveCookie : cookies === {}",cookies);
 
         String refreshToken = "";
         String memberId = "";

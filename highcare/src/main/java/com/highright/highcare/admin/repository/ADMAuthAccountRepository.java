@@ -13,9 +13,6 @@ import java.util.Optional;
 
 public interface ADMAuthAccountRepository extends JpaRepository<ADMAuthAccount, ADMAuthAccountId> {
 
-
-//    List<ADMAuthAccount> findByADMAuthAccountId_Id(String id);
-
     List<ADMAuthAccount> findById_Id(String id);
 
     @Modifying

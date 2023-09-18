@@ -26,7 +26,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: hdhye89@gmail.com
-    password: aedelgcwhhiexqpt
+    password:
     properties:
       mail:
         smtp:
@@ -59,13 +59,13 @@ spring:
         registration:
           google:
             client-id: 831001732147-ggsjpv73kps8bchv2s8k85790qm3iv76.apps.googleusercontent.com
-            client-secret: AIzaSyBvmCsalasbBKbJSqyzcTNYc4GNVzlrf6Q
+            client-secret:
             scope:
               - email
               - profile
           kakao:
             client-id: 04a820b4a5fce35c8a4255e9e7fc794f
-            client-secret: oWbV6kSG5RO5inmHsf8qZf4kfrxsze2C
+            client-secret:
             redirect-uri: http://localhost:3000/login/oauth/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST, GET

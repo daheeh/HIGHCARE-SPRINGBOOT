@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
-@Order(1)
+//@Order(1)
 public class ExceptionHandlerFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -56,28 +56,32 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
                 response.setStatus(statusCode);
 //            response.sendError(statusCode);
                 response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
-        } else if (ex instanceof LoginFailedException) {
-            statusCode = 403;
-            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(statusCode,  ex.getMessage());
-            response.setStatus(statusCode);
-            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
-        } else if (ex instanceof IncorrectPasswordExceedException) {
-            statusCode = 1002;
-            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(statusCode,  ex.getMessage());
-            response.setStatus(statusCode);
-            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
-        } else if (ex instanceof MethodArgumentNotValidException) {
-            statusCode = 1003;
-            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(statusCode,  ex.getMessage());
-            response.setStatus(statusCode);
-            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
-        } else {
-            // 기타 예외 처리
-            statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
-            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
-            response.setStatus(statusCode);
-            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
         }
+//            else if (ex instanceof LoginFailedException) {
+//            statusCode = 403;
+//            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(statusCode,  ex.getMessage());
+//            response.setStatus(statusCode);
+//            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
+//        }
+//            else if (ex instanceof IncorrectPasswordExceedException) {
+//            statusCode = 1002;
+//            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(statusCode,  ex.getMessage());
+//            response.setStatus(statusCode);
+//            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
+//        }
+//            else if (ex instanceof MethodArgumentNotValidException) {
+//            statusCode = 1003;
+//            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(statusCode,  ex.getMessage());
+//            response.setStatus(statusCode);
+//            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
+//        }
+//            else {
+//            // 기타 예외 처리
+//            statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+//            ApiExceptionDTO apiExceptionDTO = new ApiExceptionDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+//            response.setStatus(statusCode);
+//            response.getWriter().write(new ObjectMapper().writeValueAsString(apiExceptionDTO));
+//        }
     }
 
 }

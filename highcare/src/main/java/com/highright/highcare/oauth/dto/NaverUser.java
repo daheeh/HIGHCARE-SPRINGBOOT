@@ -1,4 +1,5 @@
-package com.highright.highcare.oauth;
+package com.highright.highcare.oauth.dto;
+
 
 public class NaverUser implements OAuthUserInfo {
     @Override
