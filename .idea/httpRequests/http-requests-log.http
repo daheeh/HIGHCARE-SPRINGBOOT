@@ -1,3 +1,91 @@
+GET http://localhost:8080/api/mypage/profile/10003
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQ.UiZcn1KVBilMA2nsIBGKsP2vTelNxJj3dkuqlbIBKVhyIfJYFZFDZxS8ERYrUAXwktx4SMVr8zuYlxv4xKDcGA
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T084258.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10003
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQ.UiZcn1KVBilMA2nsIBGKsP2vTelNxJj3dkuqlbIBKVhyIfJYFZFDZxS8ERYrUAXwktx4SMVr8zuYlxv4xKDcGA
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T011044.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10003
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQBearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQ.UiZcn1KVBilMA2nsIBGKsP2vTelNxJj3dkuqlbIBKVhyIfJYFZFDZxS8ERYrUAXwktx4SMVr8zuYlxv4xKDcGA
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T011025.500.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10003
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQ
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T010947.500.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003?offset=2
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T010846.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10003
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T010827.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10003
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T010817.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/profile/10112
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-14T010801.403.json
+
+###
+
 GET http://localhost:8080/api/mypage/anselect/10003
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
 Content-Type: application/json
@@ -428,91 +516,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-09-12T101623.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/manselect/10003?offset=2
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-12T101457.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/profile/10003?offset=2
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T212249.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/anselect/10002
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T202502.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/anselect/10002
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T202447.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/anselect/10001
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T200801.500.json
-
-###
-
-GET http://localhost:8080/api/mypage/anselect/10001
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T200752.500.json
-
-###
-
-GET http://localhost:8080/api/mypage/anselect/10001
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T194607.500.json
-
-###
-
-GET http://localhost:8080/api/mypage/manselect/10001
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-11T191352.200.json
 
 ###
 
