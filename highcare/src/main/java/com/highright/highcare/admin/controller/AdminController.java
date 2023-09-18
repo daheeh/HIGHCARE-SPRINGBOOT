@@ -170,13 +170,8 @@ public class AdminController {
     @GetMapping("/access/date")
     public ResponseEntity<ResponseDTO> selectAccessLog(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
                                                        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end
-<<<<<<< HEAD
             , @RequestParam(defaultValue = "0") int page
             , @RequestParam(defaultValue = "15") int size
-=======
-                                                    , @RequestParam(defaultValue = "0") int page
-                                                    , @RequestParam(defaultValue = "15") int size
->>>>>>> hdhye
     ) {
 
         LocalDateTime startDate = LocalDateTime.of(start, LocalTime.of(0, 0, 0));

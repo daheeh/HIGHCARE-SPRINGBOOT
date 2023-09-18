@@ -46,8 +46,8 @@ public class MyProfile {
                 '}';
     }
 
-//    @Builder
-//    public MyProfile(int empNo) {
-//        this.empNo = empNo;
-//    }
+    @Builder
+    public MyProfile(int empNo) {
+        this.empNo = empNo;
+    }
 }

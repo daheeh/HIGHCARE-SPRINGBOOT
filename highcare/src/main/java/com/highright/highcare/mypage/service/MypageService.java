@@ -89,9 +89,9 @@ public List<MyProfileDTO> selectProfilefileList(int empNo) {
 
     return myProfileDTOList;
 }
-
-        return myProfileDTO;
-    }
+//
+//        return myProfileDTO;
+//    }
 
     @Transactional
     public MyProfileFileDTO updateMyProfileFile(MyProfileFileDTO myProfileFileDTO, MultipartFile profileImage) {

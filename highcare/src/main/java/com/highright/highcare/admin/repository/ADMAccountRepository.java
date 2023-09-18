@@ -23,7 +23,7 @@ public interface ADMAccountRepository extends JpaRepository<ADMAccount, String> 
 
     Page<ADMAccount> findAllByOrderByAccessManager_RegistDateDesc(Pageable pageable);
 
-    Page<ADMAccount> findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(LocalDateTime start, LocalDateTime end, Pageable pageable);
+//    Page<ADMAccount> findByAccessManager_RegistDateBetweenOrderByAccessManager_RegistDateDesc(LocalDateTime start, LocalDateTime end, Pageable pageable);
 
 
 
@@ -34,8 +34,7 @@ public interface ADMAccountRepository extends JpaRepository<ADMAccount, String> 
             "JOIN TBL_EMPLOYEE e ON a.EMP_NO = e.EMP_NO " +
             "WHERE e.EMP_NAME LIKE '%' || :keyword || '%'", nativeQuery = true)
     Page<ADMAccount> findByEmployee_NameContaining(@Param("keyword") String keyword, Pageable pageable);
-<<<<<<< HEAD
+
 //    List<ADMAccount> findByEmployeeNameContaining(@Param("keyword") String keyword);
-=======
->>>>>>> hdhye
+
 }
