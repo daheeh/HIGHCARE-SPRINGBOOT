@@ -1,23 +1,23 @@
 ### 로그인 (관리자)
-POST http://localhost:8080/api/auth/login
+POST http://highcare.coffit.today:8080/api/auth/login
 Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
 
 {
   "id": "1111",
-  "password": "1111"
+  "password": "gkdlzpdj!2"
 }
 
 ### 로그인 (매니저)
-POST http://localhost:8080/api/auth/login
+POST http://highcare.coffit.today:8080/api/auth/login
 Content-Type: application/json
 Accept: */*
 Access-Control-Allow-Origin: *
 
 {
-  "id": "user02",
-  "password": "1234"
+  "id": "1111",
+  "password": "gkdlzpdj!2"
 }
 
 #### 관리자페이지 조회

@@ -33,7 +33,7 @@ Content-Type: application/json
 
 
 ### 회원아이디로 근태조회
-GET http://localhost:8080/api/mypage/manselect/10003?offset=2
+GET http://highcare.coffit.today:8080/api/mypage/manselect/10003?offset=2
 Accept: */*
 #Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
 #Content-Type: application/json
