@@ -97,10 +97,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HighcareApplication (1)">
-    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
+    <configuration name="mypage | 프로필파일 인서트 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="2" requestIdentifier="프로필파일 인서트 테스트" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="mypage | 프로필파일 인서트 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="2" requestIdentifier="프로필파일 인서트 테스트" runType="Run single request">
+    <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
@@ -112,7 +112,7 @@
     <configuration name="mypage | 회원아이디로 근태조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="4" requestIdentifier="회원아이디로 근태조회" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
+    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="HighcareApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -131,7 +131,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.HighcareApplication (1)" />
-        <item itemvalue="HTTP Request.mypage | 회원 아이디로 연차조회" />
         <item itemvalue="HTTP Request.mypage | 회원아이디로 근태조회" />
       </list>
     </recent_temporary>
