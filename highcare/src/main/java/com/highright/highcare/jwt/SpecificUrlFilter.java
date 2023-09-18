@@ -101,7 +101,7 @@ public class SpecificUrlFilter implements Filter {
     }
 
     private boolean isAllowedStartUrl(String requestURI) {
-        return allowedStartUrls.stream().anyMatch(url -> requestURI.contains(url));
+        return allowedStartUrls.stream().anyMatch(url -> requestURI.contains(url));   // /api/member/all
     }
 
 
