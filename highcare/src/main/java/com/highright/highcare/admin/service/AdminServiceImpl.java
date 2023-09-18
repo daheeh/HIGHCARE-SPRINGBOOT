@@ -125,29 +125,17 @@ public class AdminServiceImpl implements AdminService {
 
             log.info("[AdminServiceImpl] insertMember == message ==={}", message);
 
-<<<<<<< HEAD
             // 프로필 만들어두기
-//            MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
-//            myProfileFileRepository.save(MyProfileFile.builder()
-//                    .code(profile.getCode())
-//                    .name("basicprofile.png")
-//                    .chName("basicprofile.png")
-//                    .profileImgUrl("http://localhost:8080/images/basicprofile.png")
-//                    .date(new Date(System.currentTimeMillis()))
-//                    .build());
-            // accessmanager 0으로 넣어두기
 
-=======
             // 프로필, 프로필파일 db 초기데이터 삽입
             MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
             myProfileFileRepository.save(MyProfileFile.builder()
                     .code(profile.getCode())
-                    .name("basicprofile.png")
-                    .chName("basicprofile.png")
-                    .profileImgUrl("http://localhost:8080/images/basicprofile.png")
+                    .name("basicprofile.jpg")
+                    .chName("basicprofile.jpg")
+                    .profileImgUrl("file:////profileImages/basicprofile.jpg")
                     .date(new Date(System.currentTimeMillis()))
                     .build());
->>>>>>> hdhye
 
             return "회원 임시등록 성공";
         } catch (Exception e) {
@@ -390,6 +378,18 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+//    @Transactional
+//    @Override
+//    public Object selectAccessLog(int page) {
+//
+//        Page<ADMAccount> paging = admAccountRepository.findAllByOrderByAccessManager_RegistDateDesc(PageRequest.of(page, 15));
+//        log.info("[AdminServiceImpl] selectAccessLog paging ======================{} ", paging);
+//
+//        return paging;
+//
+//        return admAccountRepository.findAllByOrderByAccessManager_RegistDateDesc().stream().map(account ->
+//                modelMapper.map(account, ADMAccountDTO.class)).collect(Collectors.toList());
+//    }
 
     @Override
     public Page<ADMAccountDTO> selectSearchMemberLog(String keyword, int page, int size) {

@@ -4,12 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="merge">
+    <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="swagger modify">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T191352.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T194607.500.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T200752.500.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T200801.500.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T202447.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T202502.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T212249.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-12T101457.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/http/mypage.http" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/http/mypage.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/admin/service/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/ProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/ProfileRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/dto/MyProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/dto/MyProfileDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfileFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfileFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/service/MypageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/service/MypageService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +166,12 @@
       <workItem from="1694531555651" duration="5787000" />
       <workItem from="1694553797320" duration="2572000" />
       <workItem from="1694565221368" duration="7965000" />
+      <workItem from="1694607256323" duration="2621000" />
+      <workItem from="1694614896272" duration="298000" />
+      <workItem from="1694616418262" duration="482000" />
+      <workItem from="1694617146951" duration="16209000" />
+      <workItem from="1694924968275" duration="592000" />
+      <workItem from="1695003175416" duration="2739000" />
     </task>
     <task id="LOCAL-00001" summary="dahee merge">
       <created>1693539950270</created>
@@ -164,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693988494832</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="swagger modify">
+      <created>1694589415559</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694589415559</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +213,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dahee merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="dahee merge" />
+    <MESSAGE value="swagger modify" />
+    <option name="LAST_COMMIT_MESSAGE" value="swagger modify" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -198,5 +229,10 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/highcare$HighcareApplication__1_.ic" NAME="HighcareApplication (1) Coverage Results" MODIFIED="1694649433688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.highright.highcare.*</FILTER>
+    </SUITE>
   </component>
 </project>

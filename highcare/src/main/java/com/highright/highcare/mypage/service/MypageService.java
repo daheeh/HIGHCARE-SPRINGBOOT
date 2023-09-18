@@ -62,7 +62,7 @@ public class MypageService {
     }
 
 
-    //    @Transactional
+//    @Transactional
 //    public MyProfileDTO selectProfilefileList(int empNo) {
 //        log.info("[MypageService] selectProfile Start =============================================");
 //        MyProfile ProfileList = profileRepository.findByEmpNo(empNo);
@@ -75,21 +75,23 @@ public class MypageService {
 //
 //        return myProfileDTOList;
 //    }
-    @Transactional
-    public List<MyProfileDTO> selectProfilefileList(int empNo) {
-        log.info("[MypageService] selectProfile Start =============================================");
-        List<MyProfile> profileList = profileRepository.findByEmpNo(empNo);
+@Transactional
+public List<MyProfileDTO> selectProfilefileList(int empNo) {
+    log.info("[MypageService] selectProfile Start =============================================");
+    List<MyProfile> profileList = profileRepository.findByEmpNo(empNo);
 
-        List<MyProfileDTO> myProfileDTOList = profileList.stream()
-                .map(profile -> modelMapper.map(profile, MyProfileDTO.class))
-                .collect(Collectors.toList());
+    List<MyProfileDTO> myProfileDTOList = profileList.stream()
+            .map(profile -> modelMapper.map(profile, MyProfileDTO.class))
+            .collect(Collectors.toList());
 
-        log.info("[MypageService] selectProfilefileList myProfileDTOList =================={}", myProfileDTOList);
-        log.info("[MypageService] selectProfile End =============================================");
+    log.info("[MypageService] selectProfilefileList myProfileDTOList =================={}", myProfileDTOList);
+    log.info("[MypageService] selectProfile End =============================================");
 
-        return myProfileDTOList;
+    return myProfileDTOList;
+}
+
+        return myProfileDTO;
     }
-
 
     @Transactional
     public MyProfileFileDTO updateMyProfileFile(MyProfileFileDTO myProfileFileDTO, MultipartFile profileImage) {
@@ -180,7 +182,7 @@ public class MypageService {
     public List<MyManegementDTO> selectManList(int empNo) {
         log.info("[MyPageService] empNo%%%%%% {}", empNo);
         List<MyManegement> myManegementList = myManagementRepository.findByEmpNo(empNo);
-        List<MyManegementDTO> mymanagementDTOList = myManegementList.stream().map(item -> modelMapper.map(item, MyManegementDTO.class)).collect(Collectors.toList());
+       List<MyManegementDTO> mymanagementDTOList = myManegementList.stream().map(item -> modelMapper.map(item, MyManegementDTO.class)).collect(Collectors.toList());
 
 
         log.info("[MyPageService] myManegementList ========== {}", myManegementList);
@@ -218,3 +220,4 @@ public class MypageService {
         return result1.stream().map(mymanagement -> modelMapper.map(mymanagement, MyManegementDTO.class)).collect(Collectors.toList());
     }
 }
+

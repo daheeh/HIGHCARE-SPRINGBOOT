@@ -45,7 +45,7 @@ public class MypageController {
         List<MyProfileDTO> profilefileList = mypageService.selectProfilefileList(empNo);
         log.info("empNo [Controller] ================profilefileList{} ", profilefileList);
 
-        if(profilefileList == null ){
+       if(profilefileList == null ){
             return ResponseEntity
                     .ok()
                     .body(new ResponseDTO(HttpStatus.OK.value(),  "조회결과없음"));
