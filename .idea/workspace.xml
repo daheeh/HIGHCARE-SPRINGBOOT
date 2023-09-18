@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ddc10e3-6e49-4fe6-994e-110aa52bb408" name="Changes" comment="swagger modify">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a31f8238-423c-47af-a3bd-49d0373f7f37.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T191352.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T194607.500.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T200752.500.json" beforeDir="false" />
@@ -14,19 +13,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T202502.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-11T212249.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2023-09-12T101457.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/http/mypage.http" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/http/mypage.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/admin/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/admin/service/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/ProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/Repository/ProfileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/dto/MyProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/dto/MyProfileDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfileFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/entity/MyProfileFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/service/MypageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/highcare/src/main/java/com/highright/highcare/mypage/service/MypageService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +54,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="hr" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -114,9 +100,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HighcareApplication (1)">
-    <configuration name="mypage | 프로필파일 인서트 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="2" requestIdentifier="프로필파일 인서트 테스트" runType="Run single request">
-      <method v="2" />
-    </configuration>
     <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -124,12 +107,15 @@
       <method v="2" />
     </configuration>
     <configuration name="mypage | 회원 아이디로 연차조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="3" requestIdentifier="회원 아이디로 연차조회" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="mypage | 회원아이디로 근태조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="4" requestIdentifier="회원아이디로 근태조회" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="mypage | 프로필 회원아이디로 조회" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" requestIdentifier="프로필 회원아이디로 조회" runType="Run single request">
+    <configuration name="mypage | 프로필파일 인서트 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/highcare/http/mypage.http" index="2" requestIdentifier="프로필파일 인서트 테스트" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="HighcareApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
