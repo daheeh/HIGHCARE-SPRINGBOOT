@@ -1,5 +1,4 @@
-package com.highright.highcare.oauth;
-
+package com.highright.highcare.oauth.dto;
 
 public interface OAuthUserInfo {
 
@@ -8,7 +7,6 @@ public interface OAuthUserInfo {
     String getEmail();
     String getName();
     String getId();
-
 
 
 }

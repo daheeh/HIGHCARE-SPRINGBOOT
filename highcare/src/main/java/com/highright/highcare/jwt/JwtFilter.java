@@ -18,7 +18,7 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 //@Component
-@Order(2)
+//@Order(2)
 public class JwtFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,10 +36,10 @@ public class FindAccountService {
 
         Map<String, Object> result = new HashMap<>();
 
-        Optional<AUTHAccount> account = accountRepository.findByEmployee_EmailAndEmployee_Name(
+        AUTHAccount account = accountRepository.findByEmployee_EmailAndEmployee_Name(
                 mailDTO.getMail(), mailDTO.getName());
 
-        if (account.isPresent()) {
+        if (account != null) {
             String authCode = adminCustomBean.randomPassword().substring(0,6);
 
             mailDTO.setTitle("[하이케어] 비밀번호 인증링크 발송 ");
@@ -46,26 +47,18 @@ public class FindAccountService {
 
             /* 레디스에 3분간 인증번호 저장 (인증수단 주소/번호 - 부여 인증번호) */
             findAccountRepository.save(new AUTHFindAccount(mailDTO.getMail(), authCode));
-            log.info("redis authCode save check : {} ", findAccountRepository.findById(mailDTO.getMail()).get());
-
-//            /* 임시비밀번호 부여 y로 설정하여 비밀번호 초기화? */
-//            account.get().setIsTempPwd("Y");
 
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(mailDTO.getMail());
             message.setSubject(mailDTO.getTitle());
             message.setText(mailDTO.getMessage());
-            log.info("MailService message ==={}  : ", message);
             javaMailSender.send(message);
 
             result.put("code", true);
             result.put("message", "입력하신 이메일로 인증번호가 발송되었습니다.");
             result.put("timeout", 180);
-
             return result;
-        }
-
-        else{
+        } else{
             result.put("code", false);
             result.put("message", "회원가입시 등록한 이름과 이메일주소가 일치하지 않습니다.");
             return result;
@@ -89,7 +82,7 @@ public class FindAccountService {
             if(authFindAccount.get().getAuthCode().matches(authFindAccountDTO.getAuthCode())){
                 log.info("FindAccountService selectAuthNumberCheck  matches");
                 // 해당 인증id(이메일/폰번호)로 계정 찾아오기
-                AUTHAccount findAccount = accountRepository.findByEmployee_Email(authFindAccountDTO.getId());
+                AUTHAccount findAccount = accountRepository.findByEmployee_EmailAndEmployee_Name(authFindAccountDTO.getId(), authFindAccountDTO.getName());
 
                 result.put("findId", findAccount.getMemberId());
                 result.put("requestMessage", "correct");

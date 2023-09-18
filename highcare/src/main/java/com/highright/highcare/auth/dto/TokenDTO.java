@@ -22,6 +22,7 @@ public class TokenDTO {
     private String deptName;
     private String jobName;
     private String role;
+    private String isTempPwd;
 
     private AccountDTO accountDTO;
 

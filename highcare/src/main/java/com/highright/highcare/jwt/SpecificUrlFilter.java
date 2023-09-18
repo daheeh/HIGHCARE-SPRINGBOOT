@@ -30,20 +30,18 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 @WebFilter(urlPatterns = "/*")
-@Order(3)
+//@Order(3)
 @RequiredArgsConstructor
 public class SpecificUrlFilter implements Filter {
 
     private final TokenProvider tokenProvider;
     private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
-    private EntityManager entityManager;
-
     private final List<String> allowedStartUrls = Arrays.asList(
-            // 매니저 권한만 접근가능한 api 요청 url
-//                "/approval"
-                    "/admin/"       // 관리자
-                , "/pm/member/detail/"      // 사원등록
+                    // 매니저 권한만 접근가능한 api 요청 url
+                  "/api/admin"                // 관리자
+                , "/api/pm/member/all"      // 사원등록
+//                , "/approval"
 //                , "/reservation"
 //                , "/pm"
 //                , "/bulletin"
@@ -80,19 +78,18 @@ public class SpecificUrlFilter implements Filter {
             log.info("[SpecificUrlFilter] doFilterInternal menuDTOList ======================{} ", menuDTOList);
 
             // 조회해온 url을 돌며 요청 uri가 포함하고 있는 주소인지 체크
-
             boolean isAllowed = menuDTOList.stream()
                     .anyMatch(menu -> requestURI.contains(menu.getMenuGroup().getGroupStartUrl()));
 
             System.out.println(isAllowed);
             if(isAllowed){
+                log.info("[SpecificUrlFilter] doFilterInternal  허용된 시작 URL 중 하나에 해당하는 경우 요청 계속 진행");
                 // 허용된 시작 URL 중 하나에 해당하는 경우 요청 계속 진행
                 chain.doFilter(request, response);
 
             } else {
-                log.info("[SpecificUrlFilter] doFilterInternal 권한 없ㅇㅁ ==================");
-
-                throw new NotAllowedRequestException("해당 url에 대한 요청 권한이 없습니다.");
+                log.info("[SpecificUrlFilter] doFilterInternal 권한 없음 ==================");
+                throw new NotAllowedRequestException("해당 요청에 대한 권한이 없습니다.");
 
             }
         }

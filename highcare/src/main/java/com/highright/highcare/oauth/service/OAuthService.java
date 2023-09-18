@@ -1,8 +1,9 @@
-package com.highright.highcare.oauth;
+package com.highright.highcare.oauth.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.highright.highcare.oauth.dto.KakaoRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -128,4 +129,5 @@ public class OAuthService {
         return userInfo;
 
     }
+
 }

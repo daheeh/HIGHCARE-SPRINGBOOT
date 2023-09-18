@@ -1,4 +1,4 @@
-package com.highright.highcare.oauth;
+package com.highright.highcare.oauth.dto;
 
 import lombok.Getter;
 import lombok.Setter;

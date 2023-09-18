@@ -1,13 +1,14 @@
-package com.highright.highcare.oauth;
+package com.highright.highcare.oauth.controller;
 
 import com.highright.highcare.auth.service.AuthService;
 import com.highright.highcare.common.ResponseDTO;
+import com.highright.highcare.oauth.dto.KaKaoResponse;
+import com.highright.highcare.oauth.service.OAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +24,8 @@ public class OAuthController {
 
     private final OAuthService oAuthService;
 
-    // 소셜로그인 연동 신청
-    @Operation(summary = "소셜로그인 계정연동 요청", description = "회원의 소셜로그인 계정과 연동하는 요청이 진행됩니다.", tags = {"AdminController"})
+    // (구글) 소셜로그인 연동 신청
+    @Operation(summary = "소셜로그인 계정연동 요청", description = "회원의 소셜로그인 계정과 연동하는 요청이 진행됩니다.", tags = {"OAuthController"})
     @PostMapping("/api/oauth/regist")
     public ResponseEntity<ResponseDTO> insertOauthRegist(@RequestBody Map<String, Object> data, HttpServletResponse response){
         log.info("[OAuthController] insertOauthRegist data====  {} ", data);
@@ -36,7 +37,7 @@ public class OAuthController {
     }
 
     // 카카오 소셜로그인 요청
-    @Operation(summary = "소셜로그인 요청", description = "소셜로그인 요청이 진행됩니다.", tags = {"AdminController"})
+    @Operation(summary = "소셜로그인 요청", description = "소셜로그인 요청이 진행됩니다.", tags = {"OAuthController"})
     @GetMapping("/api/oauth/kakao")
     public ResponseEntity<ResponseDTO> selectAuthorize(@ModelAttribute KaKaoResponse kaKaoResponse, HttpServletResponse response){
 

@@ -1,6 +1,7 @@
 package com.highright.highcare.config;
 
 import com.highright.highcare.auth.service.CustomUserDetailsService;
+//import com.highright.highcare.exception.ExceptionHandlerFilter;
 import com.highright.highcare.exception.ExceptionHandlerFilter;
 import com.highright.highcare.jwt.*;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,8 +32,9 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 403 code
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;            // 401 code
     private final ExceptionHandlerFilter exceptionHandlerFilter;
-
+    private final SpecificUrlFilter specificUrlFilter;
 //    private final JwtFilter jwtFilter;
+
 
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -75,10 +78,7 @@ public class SecurityConfig {
                 .logout().logoutSuccessUrl("/")
                 .and().apply(new JwtSecurityConfig(tokenProvider))
                 ;
-                // oauth2 추가하기
 
-//        http.addFilterBefore(exceptionHandlerFilter, JwtFilter.class);
-//        http.addFilterBefore(jwtFilter, SpecificUrlFilter.class);
         return http.build();
     }
 
