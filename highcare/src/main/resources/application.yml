@@ -26,7 +26,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: hdhye89@gmail.com
-    password:
+    password: aedelgcwhhiexqpt
     properties:
       mail:
         smtp:
@@ -59,13 +59,13 @@ spring:
         registration:
           google:
             client-id: 831001732147-ggsjpv73kps8bchv2s8k85790qm3iv76.apps.googleusercontent.com
-            client-secret:
+            client-secret: AIzaSyBvmCsalasbBKbJSqyzcTNYc4GNVzlrf6Q
             scope:
               - email
               - profile
           kakao:
             client-id: 04a820b4a5fce35c8a4255e9e7fc794f
-            client-secret:
+            client-secret: oWbV6kSG5RO5inmHsf8qZf4kfrxsze2C
             redirect-uri: http://localhost:3000/login/oauth/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: POST, GET
@@ -93,16 +93,16 @@ jwt:
     level:
       root: info
 image:
-  add-resource-locations: file:///C:/dev/profileImages/
+  add-resource-locations: file:////profileImages/
   add-resource-handler: /images/**
 
   image-dir: src/main/resources/static/images
-  image-url: http://localhost:8080/images/
+  image-url: http://highcare.coffit.today:8080/images/
 
 file:
-  add-resource-locations: classpath:/static/apvFiles/
+  add-resource-locations: file:////files/
   add-resource-handler: /apvFiles/**
 
   upload-dir: src/main/resources/static/apvFiles
-  base-url: http://localhost:8080/apvFiles/
+  base-url: http://highcare.coffit.today:8080/apvFiles/
 
