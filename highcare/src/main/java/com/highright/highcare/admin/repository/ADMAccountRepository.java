@@ -43,9 +43,4 @@ public interface ADMAccountRepository extends JpaRepository<ADMAccount, String> 
             "WHERE e.EMP_NAME LIKE '%' || :keyword || '%'", nativeQuery = true)
     Page<ADMAccount> findByEmployee_NameContaining(@Param("keyword") String keyword, Pageable pageable);
 
-<<<<<<< HEAD
-//    List<ADMAccount> findByEmployeeNameContaining(@Param("keyword") String keyword);
-=======
->>>>>>> hdhye
-
 }
