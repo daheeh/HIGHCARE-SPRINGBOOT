@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -68,12 +70,12 @@ public class UsersController {
     }
 
     @Operation(summary = "채팅방목록 불러오기", description = "유저들의 채팅방 목록을 로드합니다.", tags = {"UsersController"})
-    @GetMapping("/fetchAllUsers/{userId}")
-    public ResponseEntity<Collection<String>> fetchAll(@PathVariable String userId){
+    @GetMapping("/fetchAllUsers/{empName}")
+    public ResponseEntity<Collection<Conversation>> fetchAll(@PathVariable String empName){
 
         HashOperations<String, String, Conversation> hashOperations = conversationTemplate.opsForHash();
-        logger.info("user id: {}", userId);
-        Set<String> users = hashOperations.keys(userId);
+        logger.info("empName: {}", empName);
+        List<Conversation> users = hashOperations.values(empName);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
