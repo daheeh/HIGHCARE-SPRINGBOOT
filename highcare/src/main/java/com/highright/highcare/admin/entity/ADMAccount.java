@@ -17,7 +17,6 @@ import java.util.List;
 @Table(name="TBL_ACCOUNT")
 @Getter
 @Setter
-@ToString
 public class ADMAccount {
 
     @Id
@@ -43,8 +42,21 @@ public class ADMAccount {
     @JoinColumn(name="EMP_NO", insertable = false, updatable = false)
     private AUTHEmployee employee;
 
-    @OneToOne(mappedBy = "admaAccount", cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "admaAccount", cascade = CascadeType.REMOVE)
     @JoinColumn(name="ID", insertable = false, updatable = false)
     private AccessManager accessManager;
 
+    @Override
+    public String toString() {
+        return "ADMAccount{" +
+                "memberId='" + memberId + '\'' +
+                ", empNo=" + empNo +
+                ", password='" + password + '\'' +
+                ", isTempPwd='" + isTempPwd + '\'' +
+                ", pwdExpiredDate=" + pwdExpiredDate +
+                ", roleList=" + roleList +
+                ", employee=" + employee +
+                ", accessManager=" + accessManager +
+                '}';
+    }
 }

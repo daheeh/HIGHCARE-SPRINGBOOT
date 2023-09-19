@@ -17,7 +17,15 @@ public interface ADMAccountRepository extends JpaRepository<ADMAccount, String> 
 
     ADMAccount findByEmpNo(int empNo);
 
-    List<ADMAccount> findAllByOrderByEmpNoAsc();
+    //    List<ADMAccount> findAllByOrderByEmpNoAsc();
+//    @Query("SELECT a FROM ADMAccount a JOIN AUTHAuthAccount b ON a.memberId = b.id" +
+//            " ORDER BY CASE WHEN b.authCode = 'ROLE_PRE_USER' THEN 0 ELSE 1 END, a.empNo ASC")
+    @Query("SELECT DISTINCT a FROM ADMAccount a " +
+            "LEFT JOIN  a.employee e " +
+            "LEFT JOIN  a.roleList r " +
+            "LEFT JOIN  a.accessManager c " +
+            "ORDER BY CASE WHEN r.authCode = 'ROLE_PRE_USER' THEN 0 ELSE 1 END, a.empNo ASC")
+    Page<ADMAccount> findAllOrderByPreUserOrder(Pageable pageable);
 
     ADMAccount findBymemberId(String id);
 
@@ -35,6 +43,9 @@ public interface ADMAccountRepository extends JpaRepository<ADMAccount, String> 
             "WHERE e.EMP_NAME LIKE '%' || :keyword || '%'", nativeQuery = true)
     Page<ADMAccount> findByEmployee_NameContaining(@Param("keyword") String keyword, Pageable pageable);
 
+<<<<<<< HEAD
 //    List<ADMAccount> findByEmployeeNameContaining(@Param("keyword") String keyword);
+=======
+>>>>>>> hdhye
 
 }

@@ -52,7 +52,6 @@
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="ERROR_FILE" />
-<!--        <appender-ref ref="EMAIL" /> &lt;!&ndash;에러 발생시 이메일 발송 트리거 &ndash;&gt;-->
     </root>
 
 </Configuration>

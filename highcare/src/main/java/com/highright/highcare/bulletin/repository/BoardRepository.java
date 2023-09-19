@@ -30,5 +30,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     List<Board> findByDeleteYnAndBulletinEmployeeAndTitleContains(char n, BulletinEmployee bulletinEmployee, String content);
     Page<Board> findByDeleteYnAndBulletinEmployeeAndTitleContains(char n, BulletinEmployee bulletinEmployee, String content, Pageable paging);
 
-    List<Board> findTop3ByDeleteYnAndBulletinCategoriesOrderByModifiedDateDesc(char n, BulletinCategories bulletinCategories);
+    List<Board> findTop5ByDeleteYnAndBulletinCategoriesOrderByModifiedDateDesc(char n, BulletinCategories bulletinCategories);
 }
