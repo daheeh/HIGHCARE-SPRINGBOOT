@@ -27,7 +27,7 @@ public class ImageController {
 
 
     @Value("${image.image-url}")
-    String URL_PATH; //http://localhost:8080/images/
+    String URL_PATH; //http://highcare.coffit.today:8080/images/
 
 
     @Operation(summary = "이미지 조회", description = "이미지를 조회합니다", tags = {"ImageController"})
@@ -78,7 +78,7 @@ public class ImageController {
             File fileSave = new File(UPLOAD_PATH, fileId + "." +fileExtension);
 
 
-            return new ResponseEntity<Object>( "http://localhost:8080/getImage/"+ fileId + "/" + fileExtension, HttpStatus.OK);
+            return new ResponseEntity<Object>( "http://highcare.coffit.today:8080/getImage/"+ fileId + "/" + fileExtension, HttpStatus.OK);
         } catch(IOException e) {
 
             return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);

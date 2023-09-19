@@ -130,6 +130,8 @@ public class BoardController {
     @Operation(summary = "공지 조회", description = "공지를 조회합니다", tags = {"BoardController"})
     @GetMapping("/notice")
     public ResponseEntity<ResponseDTO> selectnotice(){
+        System.out.println("notice noticenoticenoticenotice = " + boardService);
+
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "공지 조회 성공", boardService.selectNotice()));
 
     }

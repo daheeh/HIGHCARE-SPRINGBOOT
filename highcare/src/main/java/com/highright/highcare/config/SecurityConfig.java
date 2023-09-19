@@ -1,6 +1,7 @@
 package com.highright.highcare.config;
 
 import com.highright.highcare.auth.service.CustomUserDetailsService;
+//import com.highright.highcare.exception.ExceptionHandlerFilter;
 import com.highright.highcare.exception.ExceptionHandlerFilter;
 import com.highright.highcare.jwt.*;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,12 +32,14 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint; // 403 code
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;            // 401 code
     private final ExceptionHandlerFilter exceptionHandlerFilter;
-
+    private final SpecificUrlFilter specificUrlFilter;
 //    private final JwtFilter jwtFilter;
+
 
     private final CustomUserDetailsService customUserDetailsService;
 
-    public static String hostname = "localhost:3000";
+    public static String hostname = "highcare.coffit.today:3000";
+//public static String hostname = "http://localhost:3000";
 
     // 시큐리티 설정무시 정적 리소스 빈 등록
     @Bean
@@ -64,6 +68,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/oauth/**").permitAll()
+                .antMatchers("/bulletin/notice").permitAll()
+                .antMatchers("/bulletin/board?categoryCode=4").permitAll()
                 .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
                 .antMatchers("/api/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
             .and()
@@ -75,10 +81,7 @@ public class SecurityConfig {
                 .logout().logoutSuccessUrl("/")
                 .and().apply(new JwtSecurityConfig(tokenProvider))
                 ;
-                // oauth2 추가하기
 
-//        http.addFilterBefore(exceptionHandlerFilter, JwtFilter.class);
-//        http.addFilterBefore(jwtFilter, SpecificUrlFilter.class);
         return http.build();
     }
 
@@ -89,11 +92,11 @@ public class SecurityConfig {
 
         // 허용할 출처(origin) 목록
         config.setAllowedOrigins(Arrays.asList(
-                "http://localhost:8080",
+                "http://highcare.coffit.today:8080",
                 "https://kauth.kakao.com",
                 "https://kapi.kakao.com",
-                "http://localhost:3000",
-                "https://localhost:3000"
+                "http://highcare.coffit.today:3000",
+                "https://highcare.coffit.today:3000"
         ));
 
         // 허용할 HTTP 메서드 목록

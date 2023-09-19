@@ -35,7 +35,7 @@ public class TokenProvider {
     private final Key key;     // access 토큰 전용 시크릿키
 
 //    @Value("${jwt.expire-time}")
-    public static long ACCESS_TOKEN_EXPIRE_TIME = 3600000*2;   // 2시간
+    public static long ACCESS_TOKEN_EXPIRE_TIME = 3600000*4;   // 4시간
 //    @Value("${jwt.refresh-expire-time}")
     public static long REFRESH_TOKEN_EXPIRE_TIME = 36000000;    // 10시간
 
@@ -85,6 +85,7 @@ public class TokenProvider {
                 .deptName(loginMemberDTO.getDeptName())
                 .jobName(loginMemberDTO.getJobName())
                 .role(loginMemberDTO.getRoleList().toString())
+                .isTempPwd(loginMemberDTO.getIsTempPwd())
                 .accountDTO(AccountDTO.builder().isTempPwd(loginMemberDTO.getIsTempPwd()).pwdExpiredDate(loginMemberDTO.getPwdExpiredDate()).build())
                 .build();
     }
@@ -131,7 +132,6 @@ public class TokenProvider {
 
     /**
      * TokenProvider 토큰 클레임 추출 메소드
-     *
      * @author hdhye
      * 작성일 2023-08-19
      **/
@@ -187,8 +187,7 @@ public class TokenProvider {
         cookie.setHttpOnly(true);             // httponly 옵션 설정
         cookie.setSecure(true);               // https 옵션 설정
         cookie.setPath("/");            // 모든 곳에서 쿠키열람 가능
-//        cookie.setDomain("localhost:3000");
-        cookie.setMaxAge((int) REFRESH_TOKEN_EXPIRE_TIME);         // 쿠키 만료시간 설정 (테스트 10분)
+        cookie.setMaxAge((int) REFRESH_TOKEN_EXPIRE_TIME);         // 쿠키 만료시간 설정
 
         return cookie;
     }
@@ -204,7 +203,6 @@ public class TokenProvider {
         log.info("[TokenProvider] resolveCookie : request === {}",request);
 
         Cookie[] cookies = request.getCookies();
-        log.info("[TokenProvider] resolveCookie : cookies === {}",cookies);
 
         String refreshToken = "";
         String memberId = "";

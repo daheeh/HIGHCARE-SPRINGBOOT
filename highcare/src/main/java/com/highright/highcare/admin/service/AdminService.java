@@ -16,7 +16,7 @@ public interface AdminService {
 
     Object insertAccount(RequestMemberDTO requestMemberDTO);
 
-    Object selectAccountList();
+    Object selectAccountList(int page, int size);
 
 
     Object deleteAccount(String id);
@@ -35,15 +35,19 @@ public interface AdminService {
 
 //    Object selectAccessLog();
 
+    //    Object selectAccessLog(int page);
 //    Object selectAccessLog(int page);
-
-    Object selectSearchMemberLog(String keyword);
-
-    Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end);
 
     Page<ADMAccountDTO> getAccountsByPage(int page, int size);
 
-    Object insertAllAccount(String[] ids);
+    //    Object selectSearchMemberLog(String keyword);
+    Page<ADMAccountDTO> selectSearchMemberLog(String keyword, int page, int size);
+
+    //    Object selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end);
+    Page<ADMAccountDTO> selectSearchMemberDateLog(LocalDateTime start, LocalDateTime end, int page, int size);
+
+
+    Object insertAllUsers(String[] ids);
 
 //    Page<ADMAccountDTO> selectAllAccountForLog(PageRequest of);
 }

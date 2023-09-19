@@ -23,7 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/approval")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://highcare.coffit.today:3000")
 @Slf4j
 @RequiredArgsConstructor
 public class ApprovalController {
@@ -177,7 +177,6 @@ public class ApprovalController {
             updatedResponse = approvalService.updateApvStatusReject(apvNo);
         }
 
-
         if (!updatedResponse) {
             statusCode = HttpStatus.BAD_REQUEST.value();
             responseMessage = "실패";
@@ -242,13 +241,8 @@ public class ApprovalController {
             @RequestPart("apvLineDTOs") List<ApvLineDTO> apvLineDTOs,
             @RequestPart("apvRefLineDTOs") List<ApvLineDTO> apvRefLineDTOs,
             @RequestPart(value = "apvFileDTO", required = false) List<MultipartFile> apvFileDTO) {
-        System.out.println("apvFormDTO = " + apvFormDTO);
-        System.out.println("apvLineDTOs = " + apvLineDTOs);
-        System.out.println("apvLineDTOs = " + apvRefLineDTOs);
-        System.out.println("apvFileDTO = " + apvFileDTO);
 
         Boolean serviceResponse = false;
-        // 서비스 메서드를 호출하여 ApvFormWithLinesDTO 및 파일 정보를 등록
         String title = apvFormRepository.findTitleByApvNo(apvNo);
         System.out.println("title = " + title);
         switch (title) {

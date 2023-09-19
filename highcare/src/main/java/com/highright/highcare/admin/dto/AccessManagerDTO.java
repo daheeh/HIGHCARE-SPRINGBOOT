@@ -14,7 +14,7 @@ public class AccessManagerDTO {
     private String id;
     private String isLock;
     private String isInActive;
-    private String ixExpired;
+    private String isExpired;
     private String isWithDraw;
     private LocalDateTime registDate;
     private int loginFailCount;
@@ -25,11 +25,11 @@ public class AccessManagerDTO {
     private String device;
 
     @Builder
-    public AccessManagerDTO(String id, String isLock, String isInActive, String ixExpired, String isWithDraw, String browser, String device) {
+    public AccessManagerDTO(String id, String isLock, String isInActive, String isExpired, String isWithDraw, String browser, String device) {
         this.id = id;
         this.isLock = isLock;
         this.isInActive = isInActive;
-        this.ixExpired = ixExpired;
+        this.isExpired = isExpired;
         this.isWithDraw = isWithDraw;
         this.browser = browser;
         this.device = device;

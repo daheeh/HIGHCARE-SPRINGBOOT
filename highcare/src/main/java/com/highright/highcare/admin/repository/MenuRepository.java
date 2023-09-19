@@ -15,9 +15,7 @@ public interface MenuRepository<T extends MenuMapping> extends JpaRepository<Men
 
     void deleteByGroupCodeAndId(String groupCode, String id);
 
-//    Optional<List<MenuMapping>> findById(String id);
-
-//    @EntityGraph(attributePaths = "menuGroup")
+    // 제네릭 사용하여 원하는 entity로 반환받기
     List<T> findAllById(@Param("id") String id);
 
     void deleteAllById(@Param("id") String id);

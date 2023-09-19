@@ -50,7 +50,7 @@ public class BoardService {
     }
     public Object selectNotice() {
         BulletinCategories bulletinCategories = boardCategoryRepository.findByCategoryCode(4);
-        List<Board> board = boardRepository.findTop3ByDeleteYnAndBulletinCategoriesOrderByModifiedDateDesc('N',bulletinCategories);
+        List<Board> board = boardRepository.findTop5ByDeleteYnAndBulletinCategoriesOrderByModifiedDateDesc('N',bulletinCategories);
         return board.stream()
                 .map(board1 -> modelMapper.map(board1, BoardDTO.class)).collect(Collectors.toList());
     }

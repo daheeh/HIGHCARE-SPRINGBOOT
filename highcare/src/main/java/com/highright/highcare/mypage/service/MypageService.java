@@ -48,7 +48,7 @@ public class MypageService {
 
     @Value("C:/dev/profileImages/")
     private String IMAGE_DIR;
-    @Value("http://localhost:8080/images/")
+    @Value("http://highcare.coffit.today:8080/images/")
     private String IMAGE_URL;
 
     @Autowired
@@ -62,19 +62,36 @@ public class MypageService {
     }
 
 
-    @Transactional
-    public MyProfileDTO selectProfilefileList(int empNo) {
-        log.info("[MypageService] selectProfile Start =============================================");
-        MyProfile ProfileList = profileRepository.findByEmpNo(empNo);
-        log.info("[MypageService] selectProfilefileList ProfileList =================={}", ProfileList);
-        log.info("[MypageService] selectProfile End =============================================");
+//    @Transactional
+//    public MyProfileDTO selectProfilefileList(int empNo) {
+//        log.info("[MypageService] selectProfile Start =============================================");
+//        MyProfile ProfileList = profileRepository.findByEmpNo(empNo);
+//        log.info("[MypageService] selectProfilefileList ProfileList =================={}", ProfileList);
+//        log.info("[MypageService] selectProfile End =============================================");
+//
+//        MyProfileDTO myProfileDTOList = modelMapper.map(ProfileList, MyProfileDTO.class);
+//        log.info("[MypageService] selectProfilefileList myProfileDTO1111 =================={}", myProfileDTOList);
+//
+//
+//        return myProfileDTOList;
+//    }
+@Transactional
+public List<MyProfileDTO> selectProfilefileList(int empNo) {
+    log.info("[MypageService] selectProfile Start =============================================");
+    List<MyProfile> profileList = profileRepository.findByEmpNo(empNo);
 
-        MyProfileDTO myProfileDTO = modelMapper.map(ProfileList, MyProfileDTO.class);
-        log.info("[MypageService] selectProfilefileList myProfileDTO1111 =================={}", myProfileDTO);
+    List<MyProfileDTO> myProfileDTOList = profileList.stream()
+            .map(profile -> modelMapper.map(profile, MyProfileDTO.class))
+            .collect(Collectors.toList());
 
+    log.info("[MypageService] selectProfilefileList myProfileDTOList =================={}", myProfileDTOList);
+    log.info("[MypageService] selectProfile End =============================================");
 
-        return myProfileDTO;
-    }
+    return myProfileDTOList;
+}
+//
+//        return myProfileDTO;
+//    }
 
     @Transactional
     public MyProfileFileDTO updateMyProfileFile(MyProfileFileDTO myProfileFileDTO, MultipartFile profileImage) {

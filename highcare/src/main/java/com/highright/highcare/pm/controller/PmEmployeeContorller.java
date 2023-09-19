@@ -6,9 +6,11 @@ import com.highright.highcare.common.PagingResponseDTO;
 import com.highright.highcare.common.ResponseDTO;
 import com.highright.highcare.pm.dto.*;
 import com.highright.highcare.pm.service.EmployeeService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -30,6 +32,7 @@ public class PmEmployeeContorller {
     }
 
     /* 사원 전체 조회 */
+    @Operation(summary = "사원 전체 조회", description = "모든 사원을 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("/all")
     public ResponseEntity<ResponseDTO> selectEmployeeAllList(
             @RequestParam(name = "offset", defaultValue = "1") String offset){
@@ -50,6 +53,7 @@ public class PmEmployeeContorller {
     }
 
     /* 사원 검색 */
+
     @GetMapping("/search")
     public ResponseEntity<ResponseDTO> selectEmployeeList(
             @RequestParam(name = "offset",defaultValue = "1", required = false) String offset, @RequestBody String empName){
@@ -73,6 +77,7 @@ public class PmEmployeeContorller {
     }
 
     /* 사원 상세 조회 */
+    @Operation(summary = "사원 상세 조회", description = "사원을 상세 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("/member/detail/{empNo}")
     public ResponseEntity<ResponseDTO> selectEmpDetail(@PathVariable int empNo){
 
@@ -89,6 +94,8 @@ public class PmEmployeeContorller {
 
 
     /* 사원 등록 */
+    @Operation(summary = "사원 등록", description = "사원을 등록합니다", tags = {"PmEmployeeContorller"})
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @PostMapping("/member/all")
     public ResponseEntity<ResponseDTO> insertPmEmployee(@ModelAttribute PmEmployeeDTO pmEmployeeDTO){
         log.info("inserPmEmployee=========================> {}", pmEmployeeDTO);
@@ -101,6 +108,7 @@ public class PmEmployeeContorller {
     }
 
     /* 트리뷰 */
+    @Operation(summary = "트리뷰", description = "조직도를 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("selectDept")
     public ResponseEntity<ResponseDTO> selectDept() {
 
@@ -115,12 +123,14 @@ public class PmEmployeeContorller {
     }
 
     /* 라인 트리뷰 */
+    @Operation(summary = "라인 트리뷰", description = "라인조직도를 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("secondDept")
     public ResponseEntity<ResponseDTO> secondDept() {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),"사원조회성공", employeeService.secondDept()));
     }
 
     /* 출/퇴근 조회 */
+    @Operation(summary = "출 퇴근 조회", description = "출퇴근을 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("management/{empNo}")
     public ResponseEntity<ResponseDTO> manageMent(@RequestParam(name = "offset", defaultValue = "1") String offset,
                                                   @PathVariable String empNo )
@@ -153,6 +163,7 @@ public class PmEmployeeContorller {
     }
 
     /* 출근 */
+    @Operation(summary = "출근", description = "출근을 등록합니다", tags = {"PmEmployeeContorller"})
     @PostMapping("management/insert")
     public ResponseEntity<ResponseDTO> insertmanageMent(@RequestBody ManagementDTO managementDTO){
         log.info("insertmanageMent=========================>", managementDTO);
@@ -177,6 +188,7 @@ public class PmEmployeeContorller {
 
 
     /* 퇴근 */
+    @Operation(summary = "퇴근", description = "퇴근을 등록합니다.", tags = {"PmEmployeeContorller"})
     @PostMapping("management/update")
     public ResponseEntity<ResponseDTO> updateManageMent(@RequestBody ManagementDTO managementDTO) {
         log.info("updateManageMent=========================>", managementDTO);
@@ -197,8 +209,32 @@ public class PmEmployeeContorller {
     }
 
     /* 연차 */
+//    @GetMapping("/annual")
+//    public ResponseEntity<ResponseDTO> selectAnnual(@ModelAttribute AnnualDTO annualDTO,
+//                                                    @RequestParam(name = "offset", defaultValue = "1") String offset){
+//        log.info("start========================================================");
+//        log.info("offset=============================== : {}", offset);
+//
+//        int total = employeeService.selectEmployeeTotal();
+//
+//        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+//
+//        List<AnnualDTO> pmAnnuallist = employeeService.selectedAnnaul(cri);
+//
+//        PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
+//        pagingResponseDTO.setData(pmAnnuallist);
+//        pagingResponseDTO.setPageInfo(new PageDTO(cri, total));
+//
+//
+//        log.info("pmAnnuallist=============================== : {}", pmAnnuallist);
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
+//    }
+    @Operation(summary = "전체 사원 연차 조회", description = "전체 사원 연차를 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("/annual")
-    public ResponseEntity<ResponseDTO> selectAnnual(@ModelAttribute AnnualDTO annualDTO,
+    public ResponseEntity<ResponseDTO> selectAnnual(//@ModelAttribute AnnualDTO annualDTO,
             @RequestParam(name = "offset", defaultValue = "1") String offset){
         log.info("start========================================================");
         log.info("offset=============================== : {}", offset);
@@ -221,6 +257,7 @@ public class PmEmployeeContorller {
                 .body(new ResponseDTO(HttpStatus.OK.value(), "조회 성공",  pagingResponseDTO));
     }
     /* 개인 연차 조회 */
+    @Operation(summary = "개인 연차 조회", description = "개인 사원 연차를 조회합니다", tags = {"PmEmployeeContorller"})
     @GetMapping("/annual/detail/{empNo}")
     public ResponseEntity<ResponseDTO> selectPersonalAnnual (@ModelAttribute AnnualDTO annualDTO,
                                                              @PathVariable int empNo ){
@@ -236,7 +273,8 @@ public class PmEmployeeContorller {
     }
 
     /* 연차 등록 */
-    @GetMapping("employee/startDate")
+    @Operation(summary = "연차 등록", description = "연차를 등록합니다", tags = {"PmEmployeeContorller"})
+    @GetMapping("/employee/startDate")
         public ResponseEntity<ResponseDTO> employeeDate(){
 
         List<PmEmployeeDTO> pmStartDate = employeeService.selectEmployeeStartDate();

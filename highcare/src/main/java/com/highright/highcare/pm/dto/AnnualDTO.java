@@ -23,6 +23,6 @@ public class AnnualDTO {
     private String reason;
 
     private List<ApvPmFormDTO> pmForms;
-    private List<ApvVacationDTO> vacation;
+    private ApvVacationDTO vacation;
     private List<PmEmployeeDTO> AnEmployee;
 }

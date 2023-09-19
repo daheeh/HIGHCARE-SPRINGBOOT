@@ -19,6 +19,7 @@ public class ApiExceptionDTO {
     public ApiExceptionDTO(HttpStatus status, String message) {
         this.status = status.value();
         this.message = message;
+
     }
 
     public ApiExceptionDTO(int status, String message) {
