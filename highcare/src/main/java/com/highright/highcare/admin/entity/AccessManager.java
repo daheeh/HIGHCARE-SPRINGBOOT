@@ -1,5 +1,6 @@
 package com.highright.highcare.admin.entity;
 
+import com.highright.highcare.admin.service.AccessManagerListener;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@EntityListeners(AccessManagerListener.class)
 public class AccessManager {
 
     @Id

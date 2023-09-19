@@ -67,6 +67,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/oauth/**").permitAll()
+                .antMatchers("/bulletin/notice").permitAll()
+                .antMatchers("/bulletin/board?categoryCode=4").permitAll()
                 .antMatchers("/api/admin/**").hasRole("ADMIN")    // 관리자 - 시스템운영담당자만 접근 가능
                 .antMatchers("/api/**").hasAnyRole("USER", "MANAGER", "ADMIN") //일반 회원 이상 접근 가능
             .and()

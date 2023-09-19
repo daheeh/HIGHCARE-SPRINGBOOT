@@ -55,24 +55,28 @@ public class AdminController {
                 "회원 등록 신청", adminService.insertAccount(requestMemberDTO)));
     }
 
-    // 인서트 회원신청
-//    @Operation(summary = "사원 조회 요청", description = "회원 가입을 위한 사원조회 인증이 진행됩니다.", tags = {"AdminController"})
-//    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-//    @PostMapping("/allmemberjoin")
-//    public ResponseEntity<ResponseDTO> insertAllAccount(@RequestBody String[] ids) {
-//        log.info("[AdminController] insertAllAccount ids===={}", ids);
-//
-//        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-//                "회원 등록 신청(일괄)", adminService.insertAllAccount(ids)));
-//    }
+    @Operation(summary = "일반회원 일괄 요청", description = "일반회원으로의 전환을 일괄로 요청합니다.", tags = {"AdminController"})
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
+    @PostMapping("/allusers")
+    public ResponseEntity<ResponseDTO> insertAllUsers(@RequestBody String[] ids) {
+        log.info("[AdminController] insertAllUsers ids===={}", ids);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
+                "일반회원 신청(일괄)", adminService.insertAllUsers(ids)));
+    }
 
     @Operation(summary = "전체 회원 조회 요청", description = "전체 회원 조회 요청이 진행됩니다.", tags = {"AdminController"})
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/memberlist")
-    public ResponseEntity<ResponseDTO> selectAccountList() {
+    public ResponseEntity<ResponseDTO> selectAccountList( @RequestParam(defaultValue = "0") int page
+                                                        , @RequestParam(defaultValue = "15") int size) {
+
+        Page<ADMAccountDTO> accountDTOPage = (Page<ADMAccountDTO>) adminService.selectAccountList(page, size);
+
+        log.info("[AdminServiceImpl] selectAccountList accountDTOPage ==={}", accountDTOPage);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(),
-                "전체 회원 조회", adminService.selectAccountList()));
+                "전체 회원 조회", accountDTOPage));
     }
 
     @Operation(summary = "회원 계정상태 수정 요청", description = "회원 계정상태(정상, 임시, 차단, 만료, 탈퇴예정) 업데이트가 진행됩니다.", tags = {"AdminController"})

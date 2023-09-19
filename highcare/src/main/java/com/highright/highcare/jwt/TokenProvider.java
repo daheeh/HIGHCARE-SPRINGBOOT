@@ -132,7 +132,6 @@ public class TokenProvider {
 
     /**
      * TokenProvider 토큰 클레임 추출 메소드
-     *
      * @author hdhye
      * 작성일 2023-08-19
      **/

@@ -4,6 +4,8 @@ import com.highright.highcare.admin.dto.*;
 import com.highright.highcare.admin.entity.*;
 import com.highright.highcare.admin.repository.*;
 import com.highright.highcare.auth.dto.AccountDTO;
+import com.highright.highcare.auth.entity.AUTHAccount;
+import com.highright.highcare.auth.entity.AUTHAuthAccount;
 import com.highright.highcare.common.AdminCustomBean;
 import com.highright.highcare.common.repository.DeptRespository;
 import com.highright.highcare.common.repository.JobRepository;
@@ -27,6 +29,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,6 +54,8 @@ public class AdminServiceImpl implements AdminService {
     private final ProfileRepository profileRepository;
     private final MyProfileFileRepository myProfileFileRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AccessManagerListener accessManagerListener;
+    private final EntityManager entityManager;
 
 
     private final AdminCustomBean customBean;
@@ -142,16 +147,14 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Object selectAccountList() {
+    public Object selectAccountList(int page, int size) {
 
-        List<ADMAccount> authAccountList = admAccountRepository.findAllByOrderByEmpNoAsc();
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<ADMAccount> authAccountList = admAccountRepository.findAllOrderByPreUserOrder(pageRequest);
 
-        log.info("[AdminServiceImpl] selectMemberList authAccountList ==={}", authAccountList);
-        List<ADMAccountDTO> accountDTOList = authAccountList.stream().map(account -> modelMapper.map(account, ADMAccountDTO.class)).collect(Collectors.toList());
-        log.info("[AdminServiceImpl] selectMemberList accountDTOList ==={}", accountDTOList);
+        log.info("[AdminServiceImpl] selectAccountList authAccountList ==={}", authAccountList);
 
-
-        return accountDTOList;
+        return authAccountList.map(account -> modelMapper.map(account, ADMAccountDTO.class));
     }
 
     @Transactional
@@ -161,8 +164,8 @@ public class AdminServiceImpl implements AdminService {
         List<ADMAuthAccount> authAccountList = admAuthAccountRepository.findById_Id(id); // 중요!!!
         log.info("[AdminServiceImpl] updateAccount authAccountList ==={}", authAccountList);
 
-        try{
-            if(!authAccountList.isEmpty() && updateAccountDTO.getStatus() != null) {
+        try {
+            if (!authAccountList.isEmpty() && updateAccountDTO.getStatus() != null) {
 
                 AccessManager accessManager = accessManagerRepository.findById(id).orElse(null); // ID에 해당하는 AccessManager 조회
                 log.info("[AdminServiceImpl] updateAccount accessManager ==={}", accessManager);
@@ -206,7 +209,7 @@ public class AdminServiceImpl implements AdminService {
                         case "isExpired":
                             log.info("[AdminServiceImpl] updateAccount isExpired ======================");
 
-                            admAuthAccountRepository.save(ADMAuthAccount.builder().id(ADMAuthAccountId.builder().id(id).authCode("ROLE_PRE_USER").build()).build());
+                            admAuthAccountRepository.save(ADMAuthAccount.builder().id(ADMAuthAccountId.builder().id(id).authCode("ROLE_DRAW_USER").build()).build());
                             accessManager.setIsLock("N");
                             accessManager.setIsInActive("N");
                             accessManager.setIsExpired("Y");
@@ -245,7 +248,7 @@ public class AdminServiceImpl implements AdminService {
             }
 
             return "회원정보 수정 성공";
-        } catch (Exception e ){
+        } catch (Exception e) {
             return "회원정보 수정 실패";
         }
     }
@@ -253,8 +256,18 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     @Override
     public Object deleteAccount(String id) {
-        admAccountRepository.deleteById(id);
-        return "계정 삭제 성공";
+
+        try {
+            log.info("[AdminServiceImpl] deleteAccount deleteAccount deleteAccount==={}");
+
+
+                admAccountRepository.deleteById(id);
+
+
+            return "계정 삭제 성공";
+        } catch (Exception e) {
+            return "계정 삭제 실패";
+        }
     }
 
     @Override
@@ -357,10 +370,10 @@ public class AdminServiceImpl implements AdminService {
             for (String id : ids) {
                 Optional<ADMAuthAccount> authAccountOptional = admAuthAccountRepository.findById_IdAndId_AuthCode(id, "ROLE_MANAGER");
                 List<Menu> menus = menuRepository.findById(id);
-                    log.info("[AdminServiceImpl] deleteMenuManagers menus ======================{} ", menus);
+                log.info("[AdminServiceImpl] deleteMenuManagers menus ======================{} ", menus);
 //                    // 관련 메뉴 삭제 (자식테이블)
-                    if(!menus.isEmpty()){
-                        menuRepository.deleteAll(menus);
+                if (!menus.isEmpty()) {
+                    menuRepository.deleteAll(menus);
                 }
 //
                 if (authAccountOptional.isPresent()) {
@@ -401,6 +414,44 @@ public class AdminServiceImpl implements AdminService {
         return paging.map(p -> modelMapper.map(p, ADMAccountDTO.class));
     }
 
+    @Transactional
+    @Override
+    public Object insertAllUsers(String[] ids) {
+
+        try {
+         // authAccountList 기존 권한 삭제 처리
+//            admAuthAccountRepository.deleteAuthAccountBulk(ids);
+            // 일반 회원 권한 넣기
+//            admAuthAccountRepository.insertAuthAccountBulk(ids);
+            // 계정상태 변경
+//            admAuthAccountRepository.updateAccountBulk(ids, 'N');
+//            accessManager.setIsLock("N");
+//            accessManager.setIsInActive("N");
+//            accessManager.setIsExpired("N");
+//            accessManager.setIsWithDraw("N");
+
+            for(String id : ids){
+
+                AccessManager accessManager = entityManager.find(AccessManager.class, id);
+                log.info("[AdminServiceImpl] insertAllUsers accessManager ======================{} ", accessManager);
+
+                accessManager.setIsLock("N");
+                accessManager.setIsInActive("N");
+                accessManager.setIsExpired("N");
+                accessManager.setIsWithDraw("N");
+                entityManager.merge(accessManager);
+
+//                ADMAuthAccount admAuthAccount = (ADMAuthAccount) admAuthAccountRepository.findById_Id(id);
+//                log.info("[AdminServiceImpl] insertAllUsers admAuthAccount ======================{} ", admAuthAccount);
+            }
+
+
+            return "회원정보 수정 성공";
+        } catch (Exception e) {
+            return "회원정보 수정 실패";
+        }
+    }
+
     @Override
     public Page<ADMAccountDTO> getAccountsByPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -412,11 +463,5 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
-    @Override
-    public Object insertAllAccount(String[] ids) {
-        return null;
-    }
 
-
-//         List<ADMAccount> authAccountList = admAccountRepository.findAllByOrderByEmpNoAsc();
 }

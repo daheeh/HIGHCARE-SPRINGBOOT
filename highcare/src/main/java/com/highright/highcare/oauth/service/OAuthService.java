@@ -40,8 +40,8 @@ public class OAuthService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
 
-            sb.append("&client_id=" + kakaoRequest.getClient_id()); //본인이 발급받은 key
-            sb.append("&redirect_uri=" + kakaoRequest.getRedirect_uri()); // 본인이 설정한 주소
+            sb.append("&client_id=" + kakaoRequest.getClient_id()); // 발급받은 key
+            sb.append("&redirect_uri=" + kakaoRequest.getRedirect_uri()); //  설정한 주소
 
             sb.append("&code=" + code);
             bw.write(sb.toString());
