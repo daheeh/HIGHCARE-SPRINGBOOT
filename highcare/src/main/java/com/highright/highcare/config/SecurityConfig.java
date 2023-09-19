@@ -38,8 +38,8 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
 
-//    public static String hostname = "highcare.coffit.today:3000";
-public static String hostname = "http://localhost:3000";
+    public static String hostname = "highcare.coffit.today:3000";
+//public static String hostname = "http://localhost:3000";
 
     // 시큐리티 설정무시 정적 리소스 빈 등록
     @Bean
