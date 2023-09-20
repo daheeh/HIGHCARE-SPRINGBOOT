@@ -24,6 +24,7 @@ import com.highright.highcare.oauth.repository.OAuthRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +73,7 @@ public class AuthServiceImpl implements AuthService {
 
         // 헤더에 쿠키 저장
         response.addCookie(cookie);
+//        response.setHeader("Set-Cookie", cookie.toString());
         try {
             // 리프레시토큰 레디스에 id와 저장
             refreshTokenSave(AUTHRefreshToken.builder().id(setMemberDTO.getId())
@@ -199,6 +201,7 @@ public class AuthServiceImpl implements AuthService {
 
         // 헤더에 쿠키 저장
         response.addCookie(cookie);
+//        response.setHeader("Set-Cookie", cookie.toString());
         try {
             // 리프레시토큰 레디스에 id와 저장
             refreshTokenSave(AUTHRefreshToken.builder().id(setMemberDTO.getId())

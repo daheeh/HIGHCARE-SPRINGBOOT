@@ -23,7 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/approval")
-@CrossOrigin(origins = "http://highcare.coffit.today:3000")
+@CrossOrigin(origins = "http://highcare.coffit.today")
 @Slf4j
 @RequiredArgsConstructor
 public class ApprovalController {

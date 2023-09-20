@@ -12,6 +12,7 @@ import io.jsonwebtoken.io.IOException;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -183,9 +184,16 @@ public class TokenProvider {
 
 
         // cookie = "RefreshToken uuid id"
+//        ResponseCookie cookie = ResponseCookie.from(cookieName, cookieValue)
+//                .httpOnly(true)
+//                .secure(true)
+//                .sameSite(org.springframework.boot.web.server.Cookie.SameSite.NONE.name())
+//                .path("/")
+//                .maxAge(REFRESH_TOKEN_EXPIRE_TIME)
+//                .build();
         Cookie cookie = new Cookie(cookieName, cookieValue);
         cookie.setHttpOnly(true);             // httponly 옵션 설정
-        cookie.setSecure(true);               // https 옵션 설정
+        cookie.setSecure(false);               // https 옵션 설정
         cookie.setPath("/");            // 모든 곳에서 쿠키열람 가능
         cookie.setMaxAge((int) REFRESH_TOKEN_EXPIRE_TIME);         // 쿠키 만료시간 설정
 
