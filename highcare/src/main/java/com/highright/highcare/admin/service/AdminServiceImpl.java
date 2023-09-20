@@ -54,7 +54,6 @@ public class AdminServiceImpl implements AdminService {
     private final ProfileRepository profileRepository;
     private final MyProfileFileRepository myProfileFileRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AccessManagerListener accessManagerListener;
     private final EntityManager entityManager;
 
 
@@ -163,9 +162,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Object updateAccount(String id, UpdateAccountDTO updateAccountDTO) {
 
-        List<ADMAuthAccount> authAccountList = admAuthAccountRepository.findById_Id(id); // 중요!!!
-        log.info("[AdminServiceImpl] updateAccount authAccountList ==={}", authAccountList);
 
+        List<ADMAuthAccount> authAccountList = admAuthAccountRepository.findById_Id(id); // 중요!!!
+        log.info("[AdminServiceImpl] updateAccount authAccountList222 ==={}", authAccountList);
+
+        // 계정정보 수정
         try {
             if (!authAccountList.isEmpty() && updateAccountDTO.getStatus() != null) {
 
@@ -173,16 +174,18 @@ public class AdminServiceImpl implements AdminService {
                 log.info("[AdminServiceImpl] updateAccount accessManager ==={}", accessManager);
 
                 // authAccountList 기존 권한 삭제 처리
-                admAuthAccountRepository.deleteAll(authAccountList);
+                admAuthAccountRepository.deleteByMemberId(id);
 
-                if (accessManager != null) {
+                System.out.println("updateAccountDTO = " + updateAccountDTO);
+                String status = updateAccountDTO.getStatus();
+                System.out.println("updateAccountDTO = " + updateAccountDTO.getStatus());
+                log.info("[AdminServiceImpl] updateAccount status ==={}", status);
+                if (accessManager != null ) {
 
-                    String status = updateAccountDTO.getStatus();
-                    log.info("[AdminServiceImpl] updateAccount status ==={}", status);
                     switch (status) {
                         case "user":
-                            log.info("[AdminServiceImpl] updateAccount user ======================");
 
+                            log.info("[AdminServiceImpl] updateAccount user ======================");
                             // 일반 회원 권한 넣기
                             admAuthAccountRepository.save(ADMAuthAccount.builder().id(ADMAuthAccountId.builder().id(id).authCode("ROLE_USER").build()).build());
                             accessManager.setIsLock("N");
@@ -218,9 +221,12 @@ public class AdminServiceImpl implements AdminService {
                             accessManager.setIsWithDraw("N");
                             break;
                     }
+                    accessManagerRepository.save(accessManager);
+
                 }
             }
 
+            // 사원정보 수정
             ADMEmployee employee = admEmployeeRepository.findByEmpNo(Integer.valueOf(updateAccountDTO.getEmpNo()));
             log.info("[AdminServiceImpl] updateAccount employee ======================{} ", employee);
             log.info("[AdminServiceImpl] updateAccount updateAccountDTO ======================{} ", updateAccountDTO);
