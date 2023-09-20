@@ -41,7 +41,7 @@ public class PmEmployeeContorller {
 
         int total = employeeService.selectEmployeeTotal();
 
-        Criteria cri = new Criteria(Integer.valueOf(offset), 10);
+        Criteria cri = new Criteria(Integer.valueOf(offset), 15);
 
         PagingResponseDTO pagingResponseDTO = new PagingResponseDTO();
         pagingResponseDTO.setData(employeeService.selectEmployeeAllList(cri));

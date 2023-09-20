@@ -97,6 +97,11 @@ public class SecurityConfig {
                 "https://kapi.kakao.com",
                 "http://highcare.coffit.today:3000",
                 "https://highcare.coffit.today:3000"
+//                "http://localhost:8080",
+//                "https://kauth.kakao.com",
+//                "https://kapi.kakao.com",
+//                "http://localhost:3000",
+//                "http://localhost:3000"
         ));
 
         // 허용할 HTTP 메서드 목록

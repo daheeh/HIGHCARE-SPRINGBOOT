@@ -100,7 +100,7 @@ image:
   image-url: http://highcare.coffit.today:8080/images/
 
 file:
-  add-resource-locations: classpath:/static/apvFiles/
+  add-resource-locations: file:////files/
   add-resource-handler: /apvFiles/**
 
   upload-dir: src/main/resources/static/apvFiles
