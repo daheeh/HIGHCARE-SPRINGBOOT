@@ -45,7 +45,8 @@ public class ResService {
     String IMAGE_DIR; // src/main/resources/static/images
 
     @Value("${image.image-url}")
-    String IMAGE_URL; //http://highcare.coffit.today:8080/images/
+    String IMAGE_URL; //http://localhost:8080/images/
+//    String IMAGE_URL; //http://highcare.coffit.today:8080/images/
     public ResService(ResourceCategoryRepository resourceCategoryRepository,
                       ModelMapper modelMapper,
                       ResourceRespository resourceRespository,
@@ -199,7 +200,7 @@ public class ResService {
         Resource resource = resourceRespository.findById(resourceCode).get();
         ResourceDTO resource1 = modelMapper.map(resource, ResourceDTO.class);
         ResourceFile resourceFile = resourceFileRepository.findByResourceCode(resourceCode);
-        resource1.setFileUrl("http://highcare.coffit.today:8080/getImage/"+resourceFile.getChangedFileName()+"/"+resourceFile.getType());
+        resource1.setFileUrl("http://localhost:8080/getImage/"+resourceFile.getChangedFileName()+"/"+resourceFile.getType());
         return resource1;
 
     }

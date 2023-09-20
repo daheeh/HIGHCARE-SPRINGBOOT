@@ -48,7 +48,8 @@ public class MypageService {
 
     @Value("C:/dev/profileImages/")
     private String IMAGE_DIR;
-    @Value("http://highcare.coffit.today:8080/images/")
+//    @Value("http://highcare.coffit.today:8080/images/")
+    @Value("http://localhost:8080/images/")
     private String IMAGE_URL;
 
     @Autowired

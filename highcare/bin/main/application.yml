@@ -41,4 +41,4 @@ image:
   add-resource-handler: /images/**
 
   image-dir: src/main/resources/static/images
-  image-url: http://highcare.coffit.today:8080/images/
+  image-url: http://localhost:8080/images/
