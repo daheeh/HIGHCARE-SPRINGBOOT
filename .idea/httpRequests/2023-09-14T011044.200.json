@@ -1,0 +1,555 @@
+{
+  "status": 200,
+  "message": "프로필 조회 성공",
+  "data": [
+    {
+      "code": 4,
+      "empNo": 10003,
+      "myEmployee": {
+        "empNo": 10003,
+        "name": "가을",
+        "email": "spring0820@gmail.com",
+        "phone": "010-1234-5678",
+        "reNo": "123456-7891011",
+        "dep": {
+          "code": 10,
+          "name": "재무 회계팀"
+        },
+        "job": {
+          "code": 4,
+          "name": "팀장"
+        },
+        "address": "서울시종로구",
+        "tel": "010-1234-5678",
+        "deptName": {
+          "code": 10,
+          "name": "재무 회계팀"
+        },
+        "jobName": {
+          "code": 4,
+          "name": "팀장"
+        },
+        "myAnnual": [
+          {
+            "empNo": 10003,
+            "useAn": 2,
+            "addAn": 0,
+            "totalAn": 13,
+            "annNo": 5,
+            "apvNo": "865",
+            "myApvVation": {
+              "itemNo": "225",
+              "apvNo": "865",
+              "type": "연차",
+              "sdate": "2023-09-18",
+              "edate": "2023-09-20",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          },
+          {
+            "empNo": 10003,
+            "useAn": 3,
+            "addAn": 1,
+            "totalAn": 13,
+            "annNo": 0,
+            "apvNo": "863",
+            "myApvVation": {
+              "itemNo": "224",
+              "apvNo": "863",
+              "type": "연차",
+              "sdate": "2023-09-14",
+              "edate": "2023-09-18",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          },
+          {
+            "empNo": 10003,
+            "useAn": 3,
+            "addAn": 1,
+            "totalAn": 13,
+            "annNo": 1,
+            "apvNo": "843",
+            "myApvVation": {
+              "itemNo": "222",
+              "apvNo": "843",
+              "type": "연차",
+              "sdate": "2023-03-22",
+              "edate": "2023-03-24",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          },
+          {
+            "empNo": 10003,
+            "useAn": 2,
+            "addAn": 0,
+            "totalAn": 13,
+            "annNo": 6,
+            "apvNo": "866",
+            "myApvVation": {
+              "itemNo": "226",
+              "apvNo": "866",
+              "type": "연차",
+              "sdate": "2023-09-25",
+              "edate": "2023-09-27",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          }
+        ],
+        "manegementList": [
+          {
+            "manNo": 277,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 280,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 281,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 282,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 283,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 284,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 285,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 286,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 287,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 288,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 289,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 290,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 291,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 292,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 293,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 294,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          }
+        ],
+        "sdate": "2023-08-23 15:50:43"
+      },
+      "myProfileFile": null
+    },
+    {
+      "code": 3,
+      "empNo": 10003,
+      "myEmployee": {
+        "empNo": 10003,
+        "name": "가을",
+        "email": "spring0820@gmail.com",
+        "phone": "010-1234-5678",
+        "reNo": "123456-7891011",
+        "dep": {
+          "code": 10,
+          "name": "재무 회계팀"
+        },
+        "job": {
+          "code": 4,
+          "name": "팀장"
+        },
+        "address": "서울시종로구",
+        "tel": "010-1234-5678",
+        "deptName": {
+          "code": 10,
+          "name": "재무 회계팀"
+        },
+        "jobName": {
+          "code": 4,
+          "name": "팀장"
+        },
+        "myAnnual": [
+          {
+            "empNo": 10003,
+            "useAn": 2,
+            "addAn": 0,
+            "totalAn": 13,
+            "annNo": 5,
+            "apvNo": "865",
+            "myApvVation": {
+              "itemNo": "225",
+              "apvNo": "865",
+              "type": "연차",
+              "sdate": "2023-09-18",
+              "edate": "2023-09-20",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          },
+          {
+            "empNo": 10003,
+            "useAn": 3,
+            "addAn": 1,
+            "totalAn": 13,
+            "annNo": 0,
+            "apvNo": "863",
+            "myApvVation": {
+              "itemNo": "224",
+              "apvNo": "863",
+              "type": "연차",
+              "sdate": "2023-09-14",
+              "edate": "2023-09-18",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          },
+          {
+            "empNo": 10003,
+            "useAn": 3,
+            "addAn": 1,
+            "totalAn": 13,
+            "annNo": 1,
+            "apvNo": "843",
+            "myApvVation": {
+              "itemNo": "222",
+              "apvNo": "843",
+              "type": "연차",
+              "sdate": "2023-03-22",
+              "edate": "2023-03-24",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          },
+          {
+            "empNo": 10003,
+            "useAn": 2,
+            "addAn": 0,
+            "totalAn": 13,
+            "annNo": 6,
+            "apvNo": "866",
+            "myApvVation": {
+              "itemNo": "226",
+              "apvNo": "866",
+              "type": "연차",
+              "sdate": "2023-09-25",
+              "edate": "2023-09-27",
+              "comment": "연차사용",
+              "off1": null,
+              "off2": null
+            },
+            "ban": 15
+          }
+        ],
+        "manegementList": [
+          {
+            "manNo": 277,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 280,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 281,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 282,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 283,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 284,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 285,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 286,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 287,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 288,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 289,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 290,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 291,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 292,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:22:12",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          },
+          {
+            "manNo": 293,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:05:40"
+          },
+          {
+            "manNo": 294,
+            "manTime": "2023-09-10",
+            "status": "퇴근",
+            "empNo": 10003,
+            "workDate": null,
+            "etime": "00:10:49",
+            "tworkDate": null,
+            "stime": "00:12:02"
+          }
+        ],
+        "sdate": "2023-08-23 15:50:43"
+      },
+      "myProfileFile": {
+        "photoCode": 3,
+        "code": 3,
+        "name": "baf1fc1de79844e69cb3c0de0f1c5446.jpg",
+        "chName": "6553e14ce3e94409b379c6ad4d87f9ca.jpg",
+        "date": "2023-09-13",
+        "profileImgUrl": "http://localhost:8080/images/6553e14ce3e94409b379c6ad4d87f9ca.jpg"
+      }
+    }
+  ]
+}
