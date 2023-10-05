@@ -41,13 +41,12 @@ public class MyProfileFile {
     @Column(name = "CREATION_DATE" ,nullable = true)
     private Date date;
 
-
-//    @Builder
-//    public MyProfileFile(int code, String name, String chName, String profileImgUrl, Date date) {
-//        this.code = code;
-//        this.name = name;
-//        this.chName = chName;
-//        this.profileImgUrl = profileImgUrl;
-//        this.date = date;
-//    }
+    @Builder
+    public MyProfileFile(int code, String name, String chName, String profileImgUrl, Date date) {
+        this.code = code;
+        this.name = name;
+        this.chName = chName;
+        this.profileImgUrl = profileImgUrl;
+        this.date = date;
+    }
 }

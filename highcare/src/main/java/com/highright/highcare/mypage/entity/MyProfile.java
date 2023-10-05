@@ -35,6 +35,7 @@ public class MyProfile {
     @JoinColumn(name = "PROFILE_CODE", referencedColumnName = "PROFILE_CODE")
     private MyProfileFile myProfileFile;
 
+
     @Override
     public String toString() {
         return "MyProfile{" +
@@ -46,8 +47,8 @@ public class MyProfile {
                 '}';
     }
 
-//    @Builder
-//    public MyProfile(int empNo) {
-//        this.empNo = empNo;
-//    }
+    @Builder
+    public MyProfile(int empNo) {
+        this.empNo = empNo;
+    }
 }

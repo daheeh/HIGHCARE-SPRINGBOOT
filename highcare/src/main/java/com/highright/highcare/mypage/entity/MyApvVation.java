@@ -18,12 +18,11 @@ import java.sql.Date;
 @AllArgsConstructor
 @Setter
 @ToString
-public class MyApvVation implements Serializable {  // *******왜 직렬화를 해야하지?******
+public class MyApvVation implements Serializable {
 
     @Id
     @Column(name="ITEMS_NO")
 
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MyAPV_VACATION_NO")
     private String itemNo;
 
     @Column(name="APV_NO")

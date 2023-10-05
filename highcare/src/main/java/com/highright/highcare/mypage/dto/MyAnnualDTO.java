@@ -26,6 +26,7 @@ public class MyAnnualDTO {
     private String apvNo;
 
 
+//    private List<MyApvVationDTO> myApvVation;
     private MyApvVationDTO myApvVation;
 
 

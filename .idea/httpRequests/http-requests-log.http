@@ -1,3 +1,47 @@
+GET http://localhost:8080/api/mypage/manselect/10001?offset=2
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9NQU5BR0VSIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5NTA1MjEyNn0.SzK_9mC0lsbRHa_MY-IJ0uAgRaZc-L2jCWOtypQrCV1T_UVUarv3b6stZy3fiuUX42mEGl7a-qaGuvlkL_0C6A
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-18T233343.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003?offset=2
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9NQU5BR0VSIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5NTA1MjEyNn0.SzK_9mC0lsbRHa_MY-IJ0uAgRaZc-L2jCWOtypQrCV1T_UVUarv3b6stZy3fiuUX42mEGl7a-qaGuvlkL_0C6A
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-18T233336.200.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003?offset=2
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-18T233245.403.json
+
+###
+
+GET http://localhost:8080/api/mypage/manselect/10003?offset=2
+Accept: */*
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-18T233241.403.json
+
+###
+
 GET http://localhost:8080/api/mypage/profile/10003
 Accept: */*
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQ.UiZcn1KVBilMA2nsIBGKsP2vTelNxJj3dkuqlbIBKVhyIfJYFZFDZxS8ERYrUAXwktx4SMVr8zuYlxv4xKDcGA
@@ -476,46 +520,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-09-12T130444.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/manselect/10003?offset=1
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-12T125728.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/manselect/10003?offset=1
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-12T124706.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/manselect/10003?offset=2
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-12T124641.200.json
-
-###
-
-GET http://localhost:8080/api/mypage/manselect/10003?offset=1
-Accept: */*
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-12T101623.200.json
 
 ###
 

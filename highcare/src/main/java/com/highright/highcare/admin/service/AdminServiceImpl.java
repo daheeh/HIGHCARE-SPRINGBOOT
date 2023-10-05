@@ -126,14 +126,14 @@ public class AdminServiceImpl implements AdminService {
             log.info("[AdminServiceImpl] insertMember == message ==={}", message);
 
             // 프로필 만들어두기
-//            MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
-//            myProfileFileRepository.save(MyProfileFile.builder()
-//                    .code(profile.getCode())
-//                    .name("basicprofile.png")
-//                    .chName("basicprofile.png")
-//                    .profileImgUrl("http://localhost:8080/images/basicprofile.png")
-//                    .date(new Date(System.currentTimeMillis()))
-//                    .build());
+            MyProfile profile = profileRepository.save(MyProfile.builder().empNo(joinInfo.getEmpNo()).build());
+            myProfileFileRepository.save(MyProfileFile.builder()
+                    .code(profile.getCode())
+                    .name("basicprofile.jpg")
+                    .chName("basicprofile.jpg")
+                    .profileImgUrl("http://localhost:8080/images/basicprofile.jpg")
+                    .date(new Date(System.currentTimeMillis()))
+                    .build());
             // accessmanager 0으로 넣어두기
 
 

@@ -296,26 +296,26 @@ public class PmEmployeeContorller {
 //    public ResponseEntity<ResponseDTO> insertAnnual(@RequestBody AnnualDTO annualDTO, @RequestBody ManagementDTO managementDTO){
 //        log.info("insertmanageMent=========================>", annualDTO);
 //
-////        List<PmEmployeeDTO> employees = annualDTO.getAnEmployee(); // 사원 리스트 가져오기
-////
-////        for(PmEmployeeDTO employee : employees) {
-////            Date startDate = (Date) employee.getStartDate(); // 사원 입사일 가져오기
-////            LocalDate currentDate = LocalDate.now(); // 현재 날짜 가져오기
-////
-////            Period period = Period.between(startDate.toLocalDate(), currentDate);
-////            int years = period.getYears(); // 입사년도로부터 경과한 연수
-////
-////            int annualLeave = (years >= 1) ? 15 : 1; // 1년 이상이면 15개, 그 이하면 1개
-////
-////            employee.setAnnual(annualLeave); // 연차 설정
-////        }
+//        List<PmEmployeeDTO> employees = annualDTO.getAnEmployee(); // 사원 리스트 가져오기
+//
+//        for(PmEmployeeDTO employee : employees) {
+//            Date startDate = (Date) employee.getStartDate(); // 사원 입사일 가져오기
+//            LocalDate currentDate = LocalDate.now(); // 현재 날짜 가져오기
+//
+//            Period period = Period.between(startDate.toLocalDate(), currentDate);
+//            int years = period.getYears(); // 입사년도로부터 경과한 연수
+//
+//            int annualLeave = (years >= 1) ? 15 : 1; // 1년 이상이면 15개, 그 이하면 1개
+//
+//            employee.setAnnual(annualLeave); // 연차 설정
+//        }
 //
 //        return ResponseEntity.ok()
 //                .body(new ResponseDTO(HttpStatus.OK.value(),"연차 등록",
 //                        employeeService.insertAnnual(annualDTO, managementDTO)));
 //    }
-    /* 연차 사용 */
 
+    /* 연차 사용 */
 //    @PostMapping("annual/addAnnual")
 //    public ResponseEntity<ResponseDTO> insertAnnual(@ModelAttribute AnnualDTO annualDTO) {
 //
@@ -334,5 +334,4 @@ public class PmEmployeeContorller {
 //        }
 //
 //    }
-
 }
