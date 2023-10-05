@@ -35,6 +35,7 @@ public class MyProfile {
     @JoinColumn(name = "PROFILE_CODE", referencedColumnName = "PROFILE_CODE")
     private MyProfileFile myProfileFile;
 
+
     @Override
     public String toString() {
         return "MyProfile{" +

@@ -43,7 +43,8 @@ public class MypageController {
     public ResponseEntity<ResponseDTO> selectProfile(@PathVariable int empNo) {
 
         List<MyProfileDTO> profilefileList = mypageService.selectProfilefileList(empNo);
-        log.info("empNo [Controller] ================profilefileList{} ", profilefileList);
+        log.info("empNo [Controller] ================" +
+                "{} ", profilefileList);
 
        if(profilefileList == null ){
             return ResponseEntity
@@ -75,7 +76,8 @@ public class MypageController {
 
     @Operation(summary = "연자 조회 페이지", description = "개인의 연차를 조회합니다.", tags = {"MypageController"})
     @GetMapping("/anselect/{empNo}")
-    public ResponseEntity<ResponseDTO> annselect(@AuthenticationPrincipal LoginMemberDTO member,
+    public ResponseEntity<ResponseDTO> annselect(
+//            @AuthenticationPrincipal LoginMemberDTO member,
                                                  @PathVariable int empNo
             , @RequestParam(name="offset", defaultValue = "1") String offset) {
 
@@ -121,9 +123,7 @@ public class MypageController {
         log.info("Controller] managementDTO selectManList pagingResponseDTO^^^^^^ {}", pagingResponseDTO);
         log.info("[Controller] manselect end=================");
 
-
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", pagingResponseDTO));
-
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "근태 조회 성공", pagingResponseDTO)); // 리액트에서 부르면 리턴문 띄우는것
     }
 
 }

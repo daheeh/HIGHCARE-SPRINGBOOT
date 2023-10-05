@@ -1,9 +1,7 @@
 package com.highright.highcare.mypage.service;
 
-//import com.highright.highcare.mypage.Repository.AnnRepository;
 import com.highright.highcare.common.Criteria;
 import com.highright.highcare.mypage.Repository.AnnRepository;
-//import com.highright.highcare.mypage.Repository.MyManagementRepository;
 import com.highright.highcare.mypage.Repository.MyManagementRepository;
 import com.highright.highcare.mypage.dto.MyAnnualDTO;
 import com.highright.highcare.mypage.dto.MyManegementDTO;
@@ -15,7 +13,6 @@ import com.highright.highcare.mypage.dto.MyProfileDTO;
 import com.highright.highcare.mypage.dto.MyProfileFileDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -79,16 +76,20 @@ public class MypageService {
 @Transactional
 public List<MyProfileDTO> selectProfilefileList(int empNo) {
     log.info("[MypageService] selectProfile Start =============================================");
-    List<MyProfile> profileList = profileRepository.findByEmpNo(empNo);
+    List<MyProfile> profileList = profileRepository.findByEmpNo(empNo);     // 엔티티조회한것을 profileList에 담음
 
-    List<MyProfileDTO> myProfileDTOList = profileList.stream()
-            .map(profile -> modelMapper.map(profile, MyProfileDTO.class))
+
+    List<MyProfileDTO> myProfileDTOList = profileList.stream()              // proflileList를 stream으로 변환 : stream은 데이터를 순차적으로 처리할 수 있도록 도와주는 자바의 기능
+            .map(profile -> modelMapper.map(profile, MyProfileDTO.class))   //
             .collect(Collectors.toList());
 
     log.info("[MypageService] selectProfilefileList myProfileDTOList =================={}", myProfileDTOList);
     log.info("[MypageService] selectProfile End =============================================");
 
     return myProfileDTOList;
+    /* 일반적으로 엔터티 객체는 데이터베이스의 테이블과 연결된 모델로 사용
+     * DTO객체는 클라이언트 또는 다른 서비스로 데이터를 전송할 때 사용
+     * */
 }
 //
 //        return myProfileDTO;
@@ -108,11 +109,13 @@ public List<MyProfileDTO> selectProfilefileList(int empNo) {
 
                 String imageName = UUID.randomUUID().toString().replace("-", "");
                 String replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, profileImage);
+                /* 이미지파일을 저장하는 폴더 경로 */
 
                 existingProfileFile.setName(profileImage.getOriginalFilename());
                 existingProfileFile.setChName(replaceFileName);
                 existingProfileFile.setDate(new Date(System.currentTimeMillis()));
 
+                /* 이미지파일에 접근하기 위한 URL */
                 String imageUrl = IMAGE_URL + replaceFileName;
                 existingProfileFile.setProfileImgUrl(imageUrl);
 
@@ -135,19 +138,19 @@ public List<MyProfileDTO> selectProfilefileList(int empNo) {
     }
 
 
-    @Transactional
-    public List<MyAnnualDTO> selectAnnList(int empNo) {
-        log.info("[MyPageService] selectAnnList empNo^^^^ {}", empNo);
-
-        List<MyAnnual> myAnnuals = annRepository.findByEmpNo(empNo);
-
-        log.info("[MyPageService] selectAnnList annEmployee^^^^ {}", myAnnuals);
-
-        List<MyAnnualDTO> myAnnualDTOList = myAnnuals.stream().map(item -> modelMapper.map(item, MyAnnualDTO.class)).collect(Collectors.toList());
-        log.info("[MyPageService] MyEmployeeDTO^^^^ {}",myAnnualDTOList);
-
-        return myAnnualDTOList;
-    }
+//    @Transactional
+//    public List<MyAnnualDTO> selectAnnList(int empNo) {
+//        log.info("[MyPageService] selectAnnList empNo^^^^ {}", empNo);
+//
+//        List<MyAnnual> myAnnuals = annRepository.findByEmpNo(empNo);
+//
+//        log.info("[MyPageService] selectAnnList annEmployee^^^^ {}", myAnnuals);
+//
+//        List<MyAnnualDTO> myAnnualDTOList = myAnnuals.stream().map(item -> modelMapper.map(item, MyAnnualDTO.class)).collect(Collectors.toList());
+//        log.info("[MyPageService] MyEmployeeDTO^^^^ {}",myAnnualDTOList);
+//
+//        return myAnnualDTOList;
+//    }
 
     /* 토탈 */
     public int annselectTotal(int empNo) {
@@ -179,18 +182,18 @@ public List<MyProfileDTO> selectProfilefileList(int empNo) {
         return result1.stream().map(MyAnnual -> modelMapper.map(MyAnnual, MyAnnualDTO.class)).collect(Collectors.toList());
     }
 
-
-    public List<MyManegementDTO> selectManList(int empNo) {
-        log.info("[MyPageService] empNo%%%%%% {}", empNo);
-        List<MyManegement> myManegementList = myManagementRepository.findByEmpNo(empNo);
-       List<MyManegementDTO> mymanagementDTOList = myManegementList.stream().map(item -> modelMapper.map(item, MyManegementDTO.class)).collect(Collectors.toList());
-
-
-        log.info("[MyPageService] myManegementList ========== {}", myManegementList);
-        log.info("[MyPageService] managementDTOList =============== {}", mymanagementDTOList);
-
-        return mymanagementDTOList;
-    }
+// 필요없는 코드인것 확인함
+//    public List<MyManegementDTO> selectManList(int empNo) {
+//        log.info("[MyPageService] empNo%%%%%% {}", empNo);
+//        List<MyManegement> myManegementList = myManagementRepository.findByEmpNo(empNo);
+//       List<MyManegementDTO> mymanagementDTOList = myManegementList.stream().map(item -> modelMapper.map(item, MyManegementDTO.class)).collect(Collectors.toList());
+//
+//
+//        log.info("[MyPageService] myManegementList 확인 ========== {}", myManegementList);
+//        log.info("[MyPageService] managementDTOList 확인  =============== {}", mymanagementDTOList);
+//
+//        return mymanagementDTOList;
+//    }
 
     public int manselectTotal(int empNo) {
 
@@ -214,6 +217,7 @@ public List<MyProfileDTO> selectProfilefileList(int empNo) {
 
         Page<MyManegement> result1 = myManagementRepository.findByEmpNo(empNo, paging);
         log.info("[MypageService] selectmanListPaging result1 =>=============" + paging);
+        log.info("[MypageService] selectmanListPaging result1 =>=============" + result1);
 
 
         log.info("[MypageService] selectManListWithPaging => end =======");

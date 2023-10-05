@@ -3,6 +3,7 @@ package com.highright.highcare.mypage.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.List;
 )
 @Setter
 @ToString
-public class MyAnnual {
+public class MyAnnual implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MYANNUAL_SEQ_NO")
     @Column(name = "EMP_NO")
@@ -42,6 +43,7 @@ public class MyAnnual {
 
     @OneToOne
     @JoinColumn(name = "APV_NO", insertable = false, updatable = false, referencedColumnName = "APV_NO")
+//    private List<MyApvVation> myApvVation;
     private MyApvVation myApvVation;
 }
 

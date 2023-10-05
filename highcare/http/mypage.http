@@ -1,7 +1,7 @@
 ### 프로필 회원아이디로 조회
 ###101124564
 #GET http://localhost:8080/api/mypage/profile/10005/10112
-GET http://localhost:8080/api/mypage/profile/10003
+GET http://localhost:8080/api/mypage/profile/10004
 Accept: */*
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjI0MDMzfQ.UiZcn1KVBilMA2nsIBGKsP2vTelNxJj3dkuqlbIBKVhyIfJYFZFDZxS8ERYrUAXwktx4SMVr8zuYlxv4xKDcGA
 Content-Type: application/json
@@ -27,13 +27,13 @@ Authorization: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlO
 }
 
 ###회원 아이디로 연차조회
-GET http://localhost:8080/api/mypage/anselect/10003
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMzMzIiwiYXV0aCI6WyJST0xFX1VTRVIiXSwiZXhwIjoxNjk0NjYzMjM0fQ.vv3fkdkm07pvHm-MBlNkLlCjnBN59rNTycXm2N6mFTZ2GhjB6UbKKcmHiNqrUdjIVrEIS7AWQ53FMgK8xtfStA
+GET http://localhost:8080/api/mypage/anselect/10001
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9NQU5BR0VSIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5NTE3MzIyMn0.GF21b1gNMeKU-5XlNAaJFZNNmKRMo5kuLchOROTVsMsLmtL8wKsJtlWghQ1IaiWXGjkJEdI46GtXveqlfNBGZA
 Content-Type: application/json
 
 
 ### 회원아이디로 근태조회
-GET http://highcare.coffit.today:8080/api/mypage/manselect/10003?offset=2
+GET http://localhost:8080/api/mypage/manselect/10001?offset=2
 Accept: */*
-#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5MzkxNzg3M30.o0M6V2SrwAYA2SP2tGrPqVqS9eVBROIloaRGN7ZiY-GE7UUxTrR2oNu5LmqzDq-HTYDc-H0GrbVpCBFpP0PISQ
-#Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTExIiwiYXV0aCI6WyJST0xFX0FETUlOIiwiUk9MRV9NQU5BR0VSIiwiUk9MRV9VU0VSIl0sImV4cCI6MTY5NTA1MjEyNn0.SzK_9mC0lsbRHa_MY-IJ0uAgRaZc-L2jCWOtypQrCV1T_UVUarv3b6stZy3fiuUX42mEGl7a-qaGuvlkL_0C6A
+Content-Type: application/json
