@@ -1,5 +1,6 @@
 package com.highright.highcare.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,9 +11,10 @@ import java.util.Arrays;
 
 @Aspect
 @Component
+@Slf4j
 public class ControllerAspect {
 
-    @Pointcut(value = "execution(* com.highright.highcare.auth.*.*(..))")
+    @Pointcut("execution(* com.highright.highcare.*.controller.*.*(..))")
     public void executeLoggin(){
 
     }
@@ -22,7 +24,7 @@ public class ControllerAspect {
         Object proceed = joinPoint.proceed();
         String className = "CLASS: [" + joinPoint.getTarget().getClass().getSimpleName() + "],";
         String methodName = " METHOD: [" + joinPoint.getSignature().getName() + "()],";
-        System.out.print(className + methodName + " REQUEST: ");
+        System.out.println(className + methodName + " REQUEST: ");
         if (joinPoint.getArgs().length > 0) {
             Arrays.stream(joinPoint.getArgs()).forEach(System.out::println);
         } else {
