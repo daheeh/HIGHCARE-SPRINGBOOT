@@ -15,22 +15,61 @@ import java.util.Arrays;
 public class ControllerAspect {
 
     @Pointcut("execution(* com.highright.highcare.*.controller.*.*(..))")
-    public void executeLoggin(){
+    public void executeLogging(){
 
     }
 
-    @Around("executeLoggin()")
-    public Object logginAround(ProceedingJoinPoint joinPoint)throws Throwable{
+    @Around("executeLogging()")
+    public Object loggingAround(ProceedingJoinPoint joinPoint) throws Throwable {
         Object proceed = joinPoint.proceed();
         String className = "CLASS: [" + joinPoint.getTarget().getClass().getSimpleName() + "],";
         String methodName = " METHOD: [" + joinPoint.getSignature().getName() + "()],";
-        System.out.println(className + methodName + " REQUEST: ");
-        if (joinPoint.getArgs().length > 0) {
-            Arrays.stream(joinPoint.getArgs()).forEach(System.out::println);
-        } else {
-            System.out.println("[]");
+
+        // DEBUG 레벨 로그
+        if (log.isDebugEnabled()) {
+            log.debug(className + methodName + " REQUEST: ");
+            if (joinPoint.getArgs().length > 0) {
+                Arrays.stream(joinPoint.getArgs()).forEach(arg -> log.debug(arg.toString()));
+            } else {
+                log.debug("[]");
+            }
         }
-        System.out.println(className + methodName + " RESPONSE: " + proceed.toString());
+
+        // INFO 레벨 로그
+        if (log.isInfoEnabled()) {
+            log.info(className + methodName + " REQUEST: ");
+            if (joinPoint.getArgs().length > 0) {
+                Arrays.stream(joinPoint.getArgs()).forEach(arg -> log.info(arg.toString()));
+            } else {
+                log.info("[]");
+            }
+        }
+
+        // WARN 레벨 로그
+        if (log.isWarnEnabled()) {
+            log.warn(className + methodName + " REQUEST: ");
+            if (joinPoint.getArgs().length > 0) {
+                Arrays.stream(joinPoint.getArgs()).forEach(arg -> log.warn(arg.toString()));
+            } else {
+                log.warn("[]");
+            }
+        }
+
+        // ERROR 레벨 로그
+        if (log.isErrorEnabled()) {
+            log.error(className + methodName + " REQUEST: ");
+            if (joinPoint.getArgs().length > 0) {
+                Arrays.stream(joinPoint.getArgs()).forEach(arg -> log.error(arg.toString()));
+            } else {
+                log.error("[]");
+            }
+        }
+
+        // DEBUG 레벨 로그
+        if (log.isDebugEnabled()) {
+            log.debug(className + methodName + " RESPONSE: " + proceed.toString());
+        }
+
         return proceed;
     }
 }
