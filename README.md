@@ -7,6 +7,11 @@
 사내 효율적인 업무소통 및 협업을 위한 그룹웨어 플랫폼
 <br>
 <br>
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/f5e53f43-b07f-45c2-822e-37911e5a7c01" />
+<br>
+<br>
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/7f9704e2-67ca-470b-b697-be22ecdd1e4c" />
+<br>
 
 ## 🕒 개발 기간
 * 23.08. - 23.09.14
@@ -35,9 +40,14 @@
 
 ## 📌 맡은 기능
 #### [실시간 채팅](https://github.com/daheeh/HIGHCARE-SPRINGBOOT/tree/main/highcare/src/main/java/com/highright/highcare/chatting)
-- 사원 간 실시간 채팅
-- WebSocket을 통한 실시간 메세지 송수신
-- Redis를 통한 채팅 데이터 저장 및 캐싱
-- Storage를 통한 데이터 중복 캐싱으로 안정성 확보
+- **WebSocket을 통한 실시간 메세지 송수신**  
+   - WebSocket과 STOMP 프로토콜을 사용해 실시간 메세지 송수신
+- **Redis를 통한 채팅 데이터 저장 및 캐싱**  
+   - Redis의 Pub/Sub 구조로 WebSocket과 연동하여 확장성과 안정성 확보
+- **Storage를 통한 데이터 중복 캐싱으로 안정성 확보**
+  - 사용자와 채팅방 데이터를 관리하는 UserStoage, ConversationStorage로 데이터 중복 방지
+  - 데이터 캐싱을 통해 빠른 응답시간과 안정성 유지
+
+
 
 <br>
